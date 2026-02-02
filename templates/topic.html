@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ topic.title }} - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .topic-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            padding: 40px 20px;
+            margin: -20px 0 40px 0;
+            border-bottom: 3px solid #1e40af;
+        }
+
+        .topic-header h1 {
+            margin: 0 0 10px 0;
+            color: white;
+        }
+
+        .topic-description {
+            color: #dbeafe;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .notes-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .note-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 5px solid #3b82f6;
+            padding: 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: translateX(5px);
+            background: rgba(30, 41, 59, 1);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .note-card h3 {
+            color: #60a5fa;
+            font-size: 1.4em;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .note-content {
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 1.05em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .progress-indicator {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #3b82f6;
+        }
+
+        .progress-bar {
+            background: #1e293b;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            height: 100%;
+            width: 20%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .topic-header {
+                padding: 30px 15px;
+                margin: -15px 0 30px 0;
+            }
+
+            .topic-header h1 {
+                font-size: 1.8em;
+            }
+
+            .note-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link active">Topics</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="back-button">
+            <a href="/topics" class="back-link">← Back to Topics</a>
+        </div>
+
+        <div class="topic-header">
+            <h1>📖 {{ topic.title }}</h1>
+            <p class="topic-description">{{ topic.description }}</p>
+        </div>
+
+        <div class="progress-indicator">
+            <p><strong>Progress:</strong></p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <small>Mark sections complete as you progress through the material</small>
+        </div>
+
+        <div class="notes-section">
+            {% if topic.notes %}
+                {% for note in topic.notes %}
+                <div class="note-card">
+                    <h3>{{ note.section }}</h3>
+                    <div class="note-content">{{ note.content }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No detailed notes available for this topic yet.</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <a href="/topics" class="btn btn-primary">← Back to Topics</a>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CLearn</h4>
+                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="/topics">Cybersecurity Basics</a></li>
+                        <li><a href="/topics">Network Security</a></li>
+                        <li><a href="/topics">Cryptography</a></li>
+                        <li><a href="/topics">Ethical Hacking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </footer>
+    </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Simulate progress tracking
+        document.querySelectorAll('.note-card').forEach((card, index) => {
+            card.addEventListener('click', function() {
+                const totalCards = document.querySelectorAll('.note-card').length;
+                const completedCards = index + 1;
+                const progress = (completedCards / totalCards) * 100;
+                document.querySelector('.progress-fill').style.width = progress + '%';
+            });
+        });
+    </script>
+</body>
+</html>

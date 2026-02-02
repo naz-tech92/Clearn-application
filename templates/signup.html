@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .auth-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .auth-card {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #3b82f6;
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+        }
+
+        .auth-card h2 {
+            color: #60a5fa;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #60a5fa;
+            background: rgba(15, 23, 42, 1);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #64748b;
+        }
+
+        .password-requirements {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            color: #cbd5e1;
+        }
+
+        .password-requirements h4 {
+            color: #60a5fa;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .password-requirements li {
+            margin-bottom: 4px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .password-requirements li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #cbd5e1;
+        }
+
+        .terms-checkbox input {
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .terms-checkbox a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .terms-checkbox a:hover {
+            color: #93c5fd;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        .auth-divider span {
+            flex: 1;
+            height: 1px;
+            background: #334155;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 0.95em;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #93c5fd;
+        }
+
+        .social-auth {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 12px;
+            border: 1px solid #3b82f6;
+            background: transparent;
+            color: #60a5fa;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .social-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #60a5fa;
+        }
+
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+
+            .auth-card h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link active" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION WITH CAROUSEL -->
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
+                    
+                    <div class="carousel-overlay">
+                        <h2>🚀 Join CLearn</h2>
+                        <p>Start your cybersecurity learning journey today</p>
+                    </div>
+                </div>
+
+                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h2>Sign Up</h2>
+                    <p class="auth-subtitle">Create your free account and begin learning</p>
+
+                    <form onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                        </div>
+
+                        <div class="password-requirements">
+                            <h4>Password must contain:</h4>
+                            <ul>
+                                <li>At least 8 characters</li>
+                                <li>One uppercase letter</li>
+                                <li>One number</li>
+                                <li>One special character (!@#$%)</li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                        </div>
+
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Create Account</button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span></span>
+                        <span>OR</span>
+                        <span></span>
+                    </div>
+
+                    <div class="social-auth">
+                        <button class="social-btn" onclick="alert('Google signup coming soon!')">
+                            📧 Google
+                        </button>
+                        <button class="social-btn" onclick="alert('GitHub signup coming soon!')">
+                            🐙 GitHub
+                        </button>
+                    </div>
+
+                    <div class="login-link">
+                        Already have an account? <a href="/login">Sign in here</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CLearn</h4>
+                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="/topics">Cybersecurity Basics</a></li>
+                        <li><a href="/topics">Network Security</a></li>
+                        <li><a href="/topics">Cryptography</a></li>
+                        <li><a href="/topics">Ethical Hacking</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        let currentSlideIndex = 0;
+
+        function changeSlide(n) {
+            showSlide(currentSlideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(currentSlideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            if (n >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (n < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Signup form handler
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const fullname = document.getElementById('fullname').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[A-Za-z\d!@#$%]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                alert('Password does not meet requirements!');
+                return;
+            }
+
+            alert(`Welcome ${fullname}! Account created successfully. Please check your email to verify.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

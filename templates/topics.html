@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topics - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link active">Topics</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION WITH CAROUSEL -->
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
+                    
+                    <div class="carousel-overlay">
+                        <h2>📚 Learning Topics</h2>
+                        <p>Choose a topic and start your cybersecurity learning journey today</p>
+                    </div>
+                </div>
+
+                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <div class="topics-grid">
+                {% if topics %}
+                    {% for topic in topics %}
+                    <div class="topic-card">
+                        <h2>{{ topic.title }}</h2>
+                        <p>{{ topic.description }}</p>
+                        <a href="/topic/{{ topic.id }}" class="btn btn-small btn-primary">Start Learning →</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-topics">No topics available yet.</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CLearn</h4>
+                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="/topics">Cybersecurity Basics</a></li>
+                        <li><a href="/topics">Network Security</a></li>
+                        <li><a href="/topics">Cryptography</a></li>
+                        <li><a href="/topics">Ethical Hacking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        let currentSlideIndex = 0;
+
+        function changeSlide(n) {
+            showSlide(currentSlideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(currentSlideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            if (n >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (n < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

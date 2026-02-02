@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link active">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION WITH CAROUSEL -->
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1512941691920-25bda36dc643?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
+                    
+                    <div class="carousel-overlay">
+                        <h2>📚 Learning Resources</h2>
+                        <p>Tools, Books, and References for Your Learning Journey</p>
+                    </div>
+                </div>
+
+                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Essential Tools</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Nmap</h3>
+                        <p>Network mapper for discovering hosts and services. Essential for network security.</p>
+                        <div class="tool-popup">
+                            <div class="popup-content">
+                                <h4>Download Nmap</h4>
+                                <div class="download-links">
+                                    <a href="https://nmap.org/download.html" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" class="os-logo">
+                                        <span>Linux</span>
+                                    </a>
+                                    <a href="https://nmap.org/download.html" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/WindowsLogo.svg" alt="Windows" class="os-logo">
+                                        <span>Windows</span>
+                                    </a>
+                                    <a href="https://nmap.org/download.html" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="macOS" class="os-logo">
+                                        <span>macOS</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Wireshark</h3>
+                        <p>Network protocol analyzer for capturing and analyzing network traffic.</p>
+                        <div class="tool-popup">
+                            <div class="popup-content">
+                                <h4>Download Wireshark</h4>
+                                <div class="download-links">
+                                    <a href="https://www.wireshark.org/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" class="os-logo">
+                                        <span>Linux</span>
+                                    </a>
+                                    <a href="https://www.wireshark.org/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/WindowsLogo.svg" alt="Windows" class="os-logo">
+                                        <span>Windows</span>
+                                    </a>
+                                    <a href="https://www.wireshark.org/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="macOS" class="os-logo">
+                                        <span>macOS</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Metasploit</h3>
+                        <p>Penetration testing framework with comprehensive exploit database.</p>
+                        <div class="tool-popup">
+                            <div class="popup-content">
+                                <h4>Download Metasploit</h4>
+                                <div class="download-links">
+                                    <a href="https://www.metasploit.com/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" class="os-logo">
+                                        <span>Linux</span>
+                                    </a>
+                                    <a href="https://www.metasploit.com/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/WindowsLogo.svg" alt="Windows" class="os-logo">
+                                        <span>Windows</span>
+                                    </a>
+                                    <a href="https://www.metasploit.com/download/" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="macOS" class="os-logo">
+                                        <span>macOS</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Burp Suite</h3>
+                        <p>Web application security testing platform with automated scanning.</p>
+                        <div class="tool-popup">
+                            <div class="popup-content">
+                                <h4>Download Burp Suite</h4>
+                                <div class="download-links">
+                                    <a href="https://portswigger.net/burp/communitydownload" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" class="os-logo">
+                                        <span>Linux</span>
+                                    </a>
+                                    <a href="https://portswigger.net/burp/communitydownload" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/WindowsLogo.svg" alt="Windows" class="os-logo">
+                                        <span>Windows</span>
+                                    </a>
+                                    <a href="https://portswigger.net/burp/communitydownload" target="_blank" class="os-link">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_logo_grey.svg" alt="macOS" class="os-logo">
+                                        <span>macOS</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Recommended Books</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>The Web Application Hacker's Handbook</h2>
+                        <p>Comprehensive guide to discovering and exploiting web security vulnerabilities.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Cryptography and Network Security</h2>
+                        <p>In-depth exploration of cryptographic concepts and their applications.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Network Security Essentials</h2>
+                        <p>Practical guide to securing modern networks and infrastructure.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>The Art of Intrusion</h2>
+                        <p>Real-world stories and techniques of penetration testing and security breaches.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Useful References</h2>
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
+                    <ul style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
+                        <li>📖 OWASP Top 10 - Most critical web application security risks</li>
+                        <li>📖 NIST Cybersecurity Framework - Guidelines for managing cyber risks</li>
+                        <li>📖 CIS Controls - Best practices for effective cyber defense</li>
+                        <li>📖 SANS Institute - High-quality security training and certifications</li>
+                        <li>📖 MITRE ATT&CK - Knowledge base of adversary tactics and techniques</li>
+                        <li>📖 RFC 3339 - Standard for internet date/time format and security</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CLearn</h4>
+                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="/topics">Cybersecurity Basics</a></li>
+                        <li><a href="/topics">Network Security</a></li>
+                        <li><a href="/topics">Cryptography</a></li>
+                        <li><a href="/topics">Ethical Hacking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        let currentSlideIndex = 0;
+
+        function changeSlide(n) {
+            showSlide(currentSlideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(currentSlideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            if (n >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (n < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

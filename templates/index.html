@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLearn - Cybersecurity Learning Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION WITH CAROUSEL -->
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
+                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
+                    
+                    <div class="carousel-overlay">
+                        <h2>🔐 Welcome to CLearn</h2>
+                        <p>Master Cybersecurity, Networking, Cryptography & More</p>
+                    </div>
+                </div>
+
+                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                    <span class="carousel-dot" onclick="currentSlide(3)"></span>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <section style="text-align: center; padding: 30px 0; margin-bottom: 40px;">
+                <p style="font-size: 1.1em; color: #cbd5e1; margin-bottom: 30px;">A comprehensive learning platform designed to teach you cybersecurity concepts from basics to advanced techniques.</p>
+                <div class="button-group">
+                    <a href="/topics" class="btn btn-primary">Explore Topics</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </section>
+            <section id="about" class="features">
+                <h2>What You'll Learn</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🛡️ Security Fundamentals</h3>
+                        <p>Master the core concepts of cybersecurity and learn how to protect systems from threats.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔗 Network Security</h3>
+                        <p>Learn to secure networks, configure firewalls, and protect infrastructure.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔐 Cryptography</h3>
+                        <p>Understand encryption algorithms, key management, and digital signatures.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎯 Ethical Hacking</h3>
+                        <p>Discover penetration testing techniques and vulnerability assessment methods.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT SECTION -->
+            <section style="margin-bottom: 40px;">
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">Our Mission</h3>
+                    <p style="color: #cbd5e1; line-height: 1.8; font-size: 1.05em;">
+                        At CLearn, we're committed to making cybersecurity education accessible to everyone. Our mission is to empower individuals and organizations with the knowledge and skills needed to protect themselves in the digital world.
+                    </p>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Why Choose CLearn?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Expert Content</h3>
+                        <p>Learn from industry professionals with years of cybersecurity experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Comprehensive Curriculum</h3>
+                        <p>From basics to advanced topics, we cover everything you need to know.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Practical Learning</h3>
+                        <p>Hands-on examples and real-world scenarios to strengthen your skills.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Always Updated</h3>
+                        <p>Our content is regularly updated to reflect the latest security trends.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">Our Vision</h3>
+                    <p style="color: #cbd5e1; line-height: 1.8; font-size: 1.05em;">
+                        We envision a world where cybersecurity knowledge is accessible to all, and where every individual and organization can confidently protect their digital assets against evolving threats.
+                    </p>
+                </div>
+            </section>
+
+            <!-- RESOURCES SECTION -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Essential Tools</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Nmap</h3>
+                        <p>Network mapper for discovering hosts and services. Essential for network security.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Wireshark</h3>
+                        <p>Network protocol analyzer for capturing and analyzing network traffic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Metasploit</h3>
+                        <p>Penetration testing framework with comprehensive exploit database.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Burp Suite</h3>
+                        <p>Web application security testing platform with automated scanning.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Recommended Books</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>The Web Application Hacker's Handbook</h2>
+                        <p>Comprehensive guide to discovering and exploiting web security vulnerabilities.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Cryptography and Network Security</h2>
+                        <p>In-depth exploration of cryptographic concepts and their applications.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Network Security Essentials</h2>
+                        <p>Practical guide to securing modern networks and infrastructure.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>The Art of Intrusion</h2>
+                        <p>Real-world stories and techniques of penetration testing and security breaches.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Useful References</h2>
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
+                    <ul style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
+                        <li>📖 OWASP Top 10 - Most critical web application security risks</li>
+                        <li>📖 NIST Cybersecurity Framework - Guidelines for managing cyber risks</li>
+                        <li>📖 CIS Controls - Best practices for effective cyber defense</li>
+                        <li>📖 SANS Institute - High-quality security training and certifications</li>
+                        <li>📖 MITRE ATT&CK - Knowledge base of adversary tactics and techniques</li>
+                        <li>📖 RFC 3339 - Standard for internet date/time format and security</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About CLearn</h4>
+                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="/topics">Cybersecurity Basics</a></li>
+                        <li><a href="/topics">Network Security</a></li>
+                        <li><a href="/topics">Cryptography</a></li>
+                        <li><a href="/topics">Ethical Hacking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        let currentSlideIndex = 0;
+
+        function changeSlide(n) {
+            showSlide(currentSlideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(currentSlideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            if (n >= slides.length) {
+                currentSlideIndex = 0;
+            }
+            if (n < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        // Auto-advance carousel every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to Cybersecurity",
+    "description": "Learn the fundamentals of cybersecurity and common threats.",
+    "notes": [
+      {
+        "section": "What is Cybersecurity?",
+        "content": "Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information, extorting money from users, or interrupting normal business operations."
+      },
+      {
+        "section": "Core Principles",
+        "content": "The CIA Triad is fundamental to cybersecurity:\n• Confidentiality: Ensuring data is accessible only to authorized persons\n• Integrity: Ensuring data is accurate and hasn't been modified\n• Availability: Ensuring systems and data are accessible when needed"
+      },
+      {
+        "section": "Common Threats",
+        "content": "• Malware: Malicious software designed to harm or exploit systems\n• Phishing: Fraudulent attempts to obtain sensitive information\n• Ransomware: Software that locks your data until you pay\n• DDoS Attacks: Overwhelming a system with traffic to make it unavailable"
+      },
+      {
+        "section": "Best Practices",
+        "content": "• Use strong, unique passwords for each account\n• Keep software updated with latest security patches\n• Enable two-factor authentication (2FA) where possible\n• Regularly backup important data\n• Be cautious with email attachments and links"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Network Security",
+    "description": "Understand networks, firewalls, and secure protocols.",
+    "notes": [
+      {
+        "section": "Network Fundamentals",
+        "content": "A network is a collection of computers and devices connected together to share resources. Network security involves protecting the integrity of a network and the data it contains from unauthorized access and misuse."
+      },
+      {
+        "section": "Firewalls",
+        "content": "A firewall is a network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules. Types include:\n• Packet filtering firewalls\n• Stateful firewalls\n• Application-layer firewalls\n• Next-generation firewalls (NGFW)"
+      },
+      {
+        "section": "VPN (Virtual Private Network)",
+        "content": "A VPN creates a secure, encrypted tunnel for your internet traffic. Benefits include:\n• Privacy from ISPs and networks\n• Encrypted data transmission\n• Access to restricted content\n• Protection on public Wi-Fi networks"
+      },
+      {
+        "section": "Secure Protocols",
+        "content": "• HTTPS: Secure version of HTTP using SSL/TLS encryption\n• SSH: Secure Shell for remote access\n• TLS/SSL: Cryptographic protocols for secure communication\n• IPSec: Suite of protocols for securing IP communications"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Cryptography Basics",
+    "description": "Master encryption, decryption, and digital signatures.",
+    "notes": [
+      {
+        "section": "What is Cryptography?",
+        "content": "Cryptography is the practice of using mathematical algorithms to encrypt and decrypt information. It ensures confidentiality, integrity, and authenticity of data transmission and storage."
+      },
+      {
+        "section": "Symmetric Encryption",
+        "content": "Uses the same key for both encryption and decryption. Examples:\n• AES (Advanced Encryption Standard)\n• DES (Data Encryption Standard)\n• Blowfish\n\nAdvantages: Fast, efficient for large amounts of data\nDisadvantages: Key distribution challenges"
+      },
+      {
+        "section": "Asymmetric Encryption",
+        "content": "Uses a pair of keys: public key (for encryption) and private key (for decryption). Examples:\n• RSA\n• Elliptic Curve Cryptography (ECC)\n• DSA (Digital Signature Algorithm)\n\nAdvantages: Solves key distribution problem\nDisadvantages: Slower than symmetric encryption"
+      },
+      {
+        "section": "Hash Functions & Digital Signatures",
+        "content": "Hash functions produce fixed-size outputs from variable inputs. Common hashes:\n• MD5 (deprecated)\n• SHA-1 (deprecated)\n• SHA-256 (secure)\n• SHA-3\n\nDigital signatures verify authenticity and non-repudiation of messages."
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Ethical Hacking",
+    "description": "Learn penetration testing and vulnerability assessment.",
+    "notes": [
+      {
+        "section": "What is Ethical Hacking?",
+        "content": "Ethical hacking is the authorized practice of testing computer systems, networks, or applications for security vulnerabilities. It follows legal and ethical guidelines with explicit permission from the system owner."
+      },
+      {
+        "section": "Penetration Testing Phases",
+        "content": "1. Reconnaissance: Gathering information about the target\n2. Scanning: Identifying open ports and services\n3. Enumeration: Extracting detailed information\n4. Exploitation: Attempting to gain unauthorized access\n5. Post-Exploitation: Maintaining access and gathering data\n6. Reporting: Documenting findings and recommendations"
+      },
+      {
+        "section": "Common Tools",
+        "content": "• Nmap: Network mapping and port scanning\n• Metasploit: Penetration testing framework\n• Burp Suite: Web application security testing\n• Wireshark: Network packet analyzer\n• Hydra: Brute force tool"
+      },
+      {
+        "section": "Legal & Ethical Considerations",
+        "content": "• Always get written permission before testing\n• Respect rules of engagement\n• Protect confidential information\n• Report vulnerabilities responsibly\n• Follow applicable laws and regulations"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Data Protection",
+    "description": "Best practices for securing and managing data.",
+    "notes": [
+      {
+        "section": "Data Classification",
+        "content": "Classify data based on sensitivity:\n• Public: No damage if disclosed\n• Internal: Limited to organization\n• Confidential: Restricted access, significant damage if disclosed\n• Secret/Top Secret: Highest sensitivity, legal/regulatory implications"
+      },
+      {
+        "section": "Data Encryption",
+        "content": "• Encrypt sensitive data at rest (storage) using AES-256\n• Encrypt data in transit (transmission) using TLS/SSL\n• Encrypt data in use with encrypted databases\n• Key management is crucial for encryption effectiveness"
+      },
+      {
+        "section": "Access Control",
+        "content": "• Principle of Least Privilege: Grant minimum necessary access\n• Role-Based Access Control (RBAC): Access based on job roles\n• Multi-Factor Authentication (MFA): Multiple verification methods\n• Regular access audits to remove unnecessary permissions"
+      },
+      {
+        "section": "Data Backup & Recovery",
+        "content": "• Follow 3-2-1 backup rule: 3 copies, 2 different media, 1 off-site\n• Test backups regularly\n• Use automated backup solutions\n• Plan for disaster recovery scenarios\n• Document recovery procedures"
+      }
+    ]
+  }
+]
+
