@@ -34,116 +34,488 @@
         <section class="hero" style="margin-top: 30px;">
             <div style="text-align: center; padding: 40px 20px;">
                 <h2 style="color: #60a5fa; margin-bottom: 20px;">💻 Software Engineering</h2>
-                <p style="color: #cbd5e1; font-size: 1.1em;">Build robust and scalable software solutions</p>
+                <p style="color: #cbd5e1; font-size: 1.1em;">Design and develop reliable software solutions</p>
             </div>
         </section>
 
         <main>
             <!-- 1. SKILL OVERVIEW -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">📌 1️⃣ Skill Overview</h2>
-                <div class="skill-info-section">
-                    <h3 >What is Software Engineering?</h3>
-                    <p >
-                        Software engineering is the systematic application of engineering approaches to software development. It involves designing, developing, testing, deploying, and maintaining software systems using established principles, methodologies, and best practices to ensure reliability, scalability, and maintainability.
-                    </p>
-                    <h3 >Problems It Solves</h3>
-                    <p >
-                        Creates reliable software systems, manages complex projects, ensures code quality and security, enables scalable architectures, and provides maintainable solutions that can evolve with business needs.
-                    </p>
-                    <h3 >Industries Where It's Used</h3>
-                    <ul >
-                        <li>🏦 Banking & Finance</li>
-                        <li>🏥 Healthcare</li>
-                        <li>🛒 E-commerce</li>
-                        <li>🏭 Manufacturing</li>
-                        <li>🎵 Entertainment</li>
-                        <li>🚗 Automotive</li>
-                    </ul>
+            <section style="margin-bottom: 60px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 50px 0; border-radius: 20px;">
+                <div style="max-width: 800px; margin: 0 auto; padding: 0 30px;">
+                    <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💻 Software Engineering Overview</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                        <div>
+                            <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">What is Software Engineering?</h3>
+                            <p style="color: #64748b; line-height: 1.7; font-size: 1.1em;">
+                                Software Engineering applies systematic principles and practices to design, develop, test, and maintain software applications. It combines programming with project management, quality assurance, and architectural planning to deliver robust solutions.
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 4em; margin-bottom: 20px;">💻</div>
+                            <div style="background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); height: 4px; border-radius: 2px; margin: 0 auto; width: 60px;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">Problems It Solves</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">🏗️</div>
+                                <p style="color: #64748b; margin: 0;">Builds scalable systems</p>
+                            </div>
+                            <div style="background: rgba(34, 197, 94, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">🔧</div>
+                                <p style="color: #64748b; margin: 0;">Ensures code quality</p>
+                            </div>
+                            <div style="background: rgba(251, 191, 36, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">⚡</div>
+                                <p style="color: #64748b; margin: 0;">Optimizes performance</p>
+                            </div>
+                            <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">🔒</div>
+                                <p style="color: #64748b; margin: 0;">Maintains security</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">Industries Where It's Used</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                            <span style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🏦 Finance</span>
+                            <span style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🏥 Healthcare</span>
+                            <span style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🛒 E-commerce</span>
+                            <span style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🎮 Gaming</span>
+                            <span style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🚗 Automotive</span>
+                            <span style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">☁️ Cloud</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- 2. REQUIRED EDUCATION -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🎓 2️⃣ Required Level of Education</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>📘 Certificate (6-12 months)</h3>
-                        <p>Coding bootcamps, online certifications.</p>
+            <section style="margin-bottom: 60px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎓 Education Pathways</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">📘</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Certificate (6-12 months)</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Coding bootcamps, online certifications, and practical programming courses</p>
+                        <div style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🎓 Associate Degree (2 years)</h3>
-                        <p>Associate in Computer Science or Software Development.</p>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎓</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Associate Degree (2 years)</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Associate in Computer Science or Software Development with hands-on programming</p>
+                        <div style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🎓 Bachelor's Degree (4 years)</h3>
-                        <p>Bachelor of Computer Science or Software Engineering.</p>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎓</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Bachelor's Degree (4 years)</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Bachelor of Computer Science or Software Engineering with comprehensive technical foundation</p>
+                        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🎓 Master's Degree</h3>
-                        <p>Master of Software Engineering or Computer Science.</p>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎓</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Master's Degree</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Master of Software Engineering or Computer Science for advanced technical leadership</p>
+                        <div style="background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
                     </div>
                 </div>
-                <div class="skill-info-section">
-                    <h3 >Additional Opportunities</h3>
-                    <ul >
-                        <li>🌍 Visa Pathways: Tech talent visas, skilled worker programs</li>
-                        <li>🎓 Scholarships: CS scholarships from tech companies</li>
-                        <li>🏫 University Recommendations: MIT, Stanford, UC Berkeley</li>
-                        <li>🛠️ Skill Comparison Tool: Match your coding skills with job requirements</li>
-                        <li>🤖 AI Chatbot Career Advisor: Personalized software engineering career guidance</li>
-                    </ul>
+                
+                <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <h3 style="color: #1e293b; margin-bottom: 25px; font-size: 1.4em; text-align: center;">🌍 Additional Opportunities</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🌍</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Visa Pathways</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Tech talent visas, skilled worker programs, and innovation visas in major tech hubs</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🎓</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Scholarships</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">CS scholarships from Google, Microsoft, and major tech companies</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🏫</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Top Universities</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">MIT, Stanford, UC Berkeley, Carnegie Mellon, University of Washington</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🛠️</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Skill Tools</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Match your coding and software engineering skills with job requirements</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- 3. CAREER OPPORTUNITIES -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">💼 3️⃣ Career Opportunities</h2>
-                <div class="topics-grid">
-                    <div class="topic-card">
-                        <h2>Software Engineer</h2>
-                        <p>Design and develop software applications and systems.</p>
-                    </div>
-                    <div class="topic-card">
-                        <h2>Senior Software Engineer</h2>
-                        <p>Lead development teams and architect complex systems.</p>
-                    </div>
-                    <div class="topic-card">
-                        <h2>Full-Stack Developer</h2>
-                        <p>Work on both frontend and backend development.</p>
-                    </div>
-                    <div class="topic-card">
-                        <h3>Software Architect</h3>
-                        <p>Design high-level software system structures.</p>
-                    </div>
-                    <div class="topic-card">
-                        <h2>Engineering Manager</h2>
-                        <p>Lead engineering teams and manage software projects.</p>
+            <section style="margin-bottom: 60px; background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%); padding: 50px 0; border-radius: 20px;">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 30px;">
+                    <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💼 Career Opportunities</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">💻</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Software Engineer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Design and develop software applications and systems using various programming languages and frameworks</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🏗️</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Senior Software Engineer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Lead development teams and architect complex, scalable software systems</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🔄</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Full-Stack Developer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Work on both frontend and backend development with comprehensive web technologies</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🏛️</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Software Architect</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Design high-level software system structures and technical solutions</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">👔</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Engineering Manager</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Lead engineering teams and manage software development projects and processes</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🔬</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Principal Engineer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Provide technical leadership and solve complex engineering challenges</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. COUNTRIES -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🌍 4️⃣ Countries Where It's Highly Demanded</h2>
-                <div class="feature-grid">
-                    <a href="/skill/software_engineering/country/united_states" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
-                        <h3>🇺🇸 United States</h3>
-                        <p><strong>Demand:</strong> Very High<br><strong>Education:</strong> Bachelor's preferred<br><strong>Requirements:</strong> CS degree or equivalent</p>
-                    </a>
-                    <a href="/skill/software_engineering/country/united_kingdom" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
-                        <h3>🇬🇧 United Kingdom</h3>
-                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Degree preferred<br><strong>Requirements:</strong> Strong portfolio</p>
-                    </a>
-                    <a href="/skill/software_engineering/country/singapore" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
-                        <h3>🇸🇬 Singapore</h3>
-                        <p><strong>Demand:</strong> Very High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> Technical skills</p>
-                    </a>
-                    <a href="/skill/software_engineering/country/australia" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
-                        <h3>🇦🇺 Australia</h3>
-                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> 485 visa eligible</p>
-                    </a>
+            <!-- 4. COUNTRIES - EXPANDABLE WITH FULL CONTENT -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🌍 Global Opportunities</h2>
+                
+                <style>
+                    .country-card-wrapper {
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+                        border-radius: 20px;
+                        overflow: hidden;
+                        backdrop-filter: blur(10px);
+                        margin-bottom: 20px;
+                        transition: all 0.3s ease;
+                    }
+                    .country-card-header {
+                        padding: 30px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+                        transition: all 0.3s ease;
+                    }
+                    .country-card-header:hover {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+                    }
+                    .country-card-header.expanded {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+                    }
+                    .country-header-left {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                    }
+                    .country-flag {
+                        font-size: 3em;
+                    }
+                    .country-header-info {
+                        text-align: left;
+                    }
+                    .country-header-info h3 {
+                        color: #1e293b;
+                        margin: 0 0 8px 0;
+                        font-size: 1.4em;
+                    }
+                    .country-demand-badge {
+                        display: inline-block;
+                        padding: 6px 12px;
+                        border-radius: 20px;
+                        font-size: 0.8em;
+                        font-weight: 600;
+                    }
+                    .demand-very-high {
+                        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+                        color: #1e40af;
+                    }
+                    .demand-high {
+                        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+                        color: #166534;
+                    }
+                    .demand-growing {
+                        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+                        color: #92400e;
+                    }
+                    .expand-toggle {
+                        font-size: 1.5em;
+                        transition: transform 0.3s ease;
+                        color: #60a5fa;
+                    }
+                    .expand-toggle.expanded {
+                        transform: rotate(180deg);
+                    }
+                    .country-card-content {
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.3s ease;
+                    }
+                    .country-card-content.expanded {
+                        max-height: 2000px;
+                    }
+                    .content-inner {
+                        padding: 30px;
+                        border-top: 2px solid rgba(96, 165, 250, 0.2);
+                    }
+                    .content-section {
+                        margin-bottom: 25px;
+                    }
+                    .content-section h4 {
+                        color: #60a5fa;
+                        margin: 0 0 12px 0;
+                        font-size: 1.1em;
+                    }
+                    .content-section p {
+                        color: #64748b;
+                        margin: 0 0 10px 0;
+                        line-height: 1.6;
+                    }
+                    .content-list {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 15px;
+                    }
+                    .list-item {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+                        padding: 12px;
+                        border-radius: 10px;
+                        color: #1e293b;
+                        font-size: 0.9em;
+                    }
+                    .advantages-list {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 20px;
+                    }
+                    .advantages-grid {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+                    .advantage-item {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 10px;
+                        color: #64748b;
+                    }
+                    .advantage-item:before {
+                        content: "✓";
+                        color: #10b981;
+                        font-weight: bold;
+                        margin-top: 2px;
+                    }
+                    .limitation-item {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 10px;
+                        color: #64748b;
+                    }
+                    .limitation-item:before {
+                        content: "✗";
+                        color: #ef4444;
+                        font-weight: bold;
+                        margin-top: 2px;
+                    }
+                </style>
+
+                <div id="country-cards-container">
+                    <!-- Country cards will be dynamically generated by JavaScript -->
                 </div>
+
+                <script>
+                    const countryData = {
+                        "united_states": {
+                            "name": "United States",
+                            "flag": "🇺🇸",
+                            "demand": "Very High",
+                            "overview": "Silicon Valley and major tech hubs drive software engineering innovation. FAANG companies and startups create unprecedented demand for skilled developers with competitive compensation and cutting-edge technology adoption.",
+                            "education": "Bachelor's degree in Computer Science, Software Engineering, or related field. Coding bootcamps with strong portfolios are increasingly accepted.",
+                            "certifications": ["AWS Certified Developer", "Google Cloud Professional Developer", "Microsoft Azure Developer", "Certified Scrum Master", "CompTIA Security+", "Docker Certified Associate"],
+                            "advantages": ["Highest salaries globally", "Access to cutting-edge technology", "Strong job market", "Innovation culture", "Professional development opportunities", "Remote work options"],
+                            "limitations": ["High competition", "Rapid technology changes", "Long working hours", "High cost of living in tech hubs", "Visa complexities for international talent"],
+                            "references": ["FAANG Companies", "Silicon Valley", "TechCrunch", "Stack Overflow Developer Survey", "GitHub"],
+                            "study_paths": ["Bachelor's in CS (4 years) → Junior developer", "Coding bootcamp (3-6 months) → Entry-level positions", "Self-taught + portfolio → Freelance opportunities", "Master's in SE (2 years) → Senior engineering roles", "Certifications + experience → Specialized positions"]
+                        },
+                        "united_kingdom": {
+                            "name": "United Kingdom",
+                            "flag": "🇬🇧",
+                            "demand": "High",
+                            "overview": "London's fintech sector and digital transformation initiatives drive strong software engineering demand. Growing tech scenes in Manchester, Edinburgh, and Bristol with emphasis on agile development and cloud technologies.",
+                            "education": "Degree in Computer Science or Software Engineering preferred. Strong practical experience highly valued.",
+                            "certifications": ["AWS Certified Developer", "Microsoft Azure Developer", "Certified Scrum Master", "Prince2", "ISEB/ISTQB Software Testing"],
+                            "advantages": ["Strong financial sector demand", "Work-life balance", "EU and international opportunities", "Professional development", "English language advantage"],
+                            "limitations": ["Moderate salary vs US", "Brexit-related uncertainties", "Competitive market", "Tier 2 visa restrictions"],
+                            "references": ["London Tech Scene", "UK Tech Nation", "Stack Overflow", "Tech Nation Report"],
+                            "study_paths": ["University degree in CS (3-4 years)", "Coding bootcamps", "Apprenticeship programs", "Professional certifications", "Self-taught with strong portfolio"]
+                        },
+                        "singapore": {
+                            "name": "Singapore",
+                            "flag": "🇸🇬",
+                            "demand": "Very High",
+                            "overview": "Smart Nation initiative drives cutting-edge software engineering adoption. Regional tech leadership with multinational company presence and strong government support for digital innovation.",
+                            "education": "Bachelor's degree in Computer Science or Information Technology. Strong technical fundamentals essential.",
+                            "certifications": ["AWS Certified Developer", "Google Cloud Professional Developer", "Microsoft Azure Solutions Architect", "Certified Scrum Master", "Singapore ICT Framework"],
+                            "advantages": ["High salaries in Asia", "Regional tech hub", "Expat-friendly", "Strong infrastructure", "Government digital initiatives", "Quality of life"],
+                            "limitations": ["High cost of living", "Small domestic market", "Competitive hiring", "Work permit requirements"],
+                            "references": ["Singapore Smart Nation", "IMDA", "Stack Overflow", "Singapore Tech Ecosystem"],
+                            "study_paths": ["Local university CS programs", "Coding bootcamps", "Professional certifications", "Corporate training", "Polytechnic diplomas"]
+                        },
+                        "australia": {
+                            "name": "Australia",
+                            "flag": "🇦🇺",
+                            "demand": "High",
+                            "overview": "Sydney and Melbourne tech scenes with strong enterprise software adoption. Growing fintech sector and government cloud migration create opportunities across industries.",
+                            "education": "Bachelor's degree in IT/CS or equivalent trade qualifications. Practical experience highly valued.",
+                            "certifications": ["AWS Certified Developer", "Microsoft Azure Developer", "Certified Scrum Master", "Google Cloud Professional", "Australian Computer Society certifications"],
+                            "advantages": ["Good salaries", "Visa sponsorship (485)", "Quality lifestyle", "Growing tech scene", "Work-life balance"],
+                            "limitations": ["Geographic isolation", "Smaller market", "Visa sponsorship needed", "Client budget constraints"],
+                            "references": ["Australian Tech Scene", "Atlassian", "Canva", "REA Group", "Stack Overflow"],
+                            "study_paths": ["University CS degrees (3-4 years)", "TAFE courses", "Coding bootcamps", "Online certifications", "Apprenticeship programs"]
+                        },
+                        "cameroon": {
+                            "name": "Cameroon",
+                            "flag": "🇨🇲",
+                            "demand": "Growing",
+                            "overview": "Software engineering in Cameroon is emerging as government and private sector organizations adopt digital solutions. Growing tech startup ecosystem and international partnerships create opportunities for skilled developers.",
+                            "education": "Bachelor's degree in Computer Science, Software Engineering, or Information Technology. Self-taught developers with strong portfolios increasingly recognized.",
+                            "certifications": ["AWS Certified Developer", "Google Cloud Professional Developer", "Microsoft Azure Fundamentals", "Certified Scrum Master", "CompTIA A+", "Linux Professional Institute"],
+                            "advantages": ["Growing tech ecosystem", "Lower operational costs", "Regional leadership potential", "International remote opportunities", "Government digital transformation support"],
+                            "limitations": ["Limited local infrastructure", "Power supply and connectivity issues", "Limited local training programs", "Brain drain of skilled professionals", "Smaller domestic market"],
+                            "references": ["Cameroon Tech Community", "Ministry of Posts and Telecommunications", "African Software Developers Community", "Google for Startups", "Microsoft for Startups"],
+                            "study_paths": ["University CS programs (4-5 years)", "Online bootcamps (3-6 months)", "Self-study + portfolio → Freelance opportunities", "Regional training programs → Local companies", "Certifications + projects → International remote work"]
+                        }
+                    };
+
+                    function createCountryCard(countryKey, data) {
+                        const demandColorMap = {
+                            "Very High": "demand-very-high",
+                            "High": "demand-high",
+                            "Growing": "demand-growing"
+                        };
+
+                        return `
+                            <div class="country-card-wrapper">
+                                <div class="country-card-header" onclick="toggleCountry(this)">
+                                    <div class="country-header-left">
+                                        <div class="country-flag">${data.flag}</div>
+                                        <div class="country-header-info">
+                                            <h3>${data.name}</h3>
+                                            <span class="country-demand-badge ${demandColorMap[data.demand]}">${data.demand} Demand</span>
+                                        </div>
+                                    </div>
+                                    <div class="expand-toggle">▼</div>
+                                </div>
+                                <div class="country-card-content">
+                                    <div class="content-inner">
+                                        <div class="content-section">
+                                            <h4>📝 Overview</h4>
+                                            <p>${data.overview}</p>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🎓 Required Education</h4>
+                                            <p>${data.education}</p>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🏆 Certifications</h4>
+                                            <div class="content-list">
+                                                ${data.certifications.map(cert => `<div class="list-item">• ${cert}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>✅ Advantages</h4>
+                                            <div class="advantages-list">
+                                                <div class="advantages-grid">
+                                                    ${data.advantages.map(adv => `<div class="advantage-item">${adv}</div>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>⚠️ Limitations</h4>
+                                            <div class="advantages-list">
+                                                <div class="advantages-grid">
+                                                    ${data.limitations.map(lim => `<div class="limitation-item">${lim}</div>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>📚 References & Resources</h4>
+                                            <div class="content-list">
+                                                ${data.references.map(ref => `<div class="list-item">📖 ${ref}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🛤️ Study Paths</h4>
+                                            <div class="content-list">
+                                                ${data.study_paths.map(path => `<div class="list-item">→ ${path}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid rgba(96, 165, 250, 0.2);">
+                                            <a href="/skill/software_engineering/country/${countryKey}" style="background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
+                                                View Full Country Profile →
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    function toggleCountry(element) {
+                        const header = element;
+                        const content = header.nextElementSibling;
+                        const toggle = header.querySelector('.expand-toggle');
+                        
+                        header.classList.toggle('expanded');
+                        content.classList.toggle('expanded');
+                        toggle.classList.toggle('expanded');
+                    }
+
+                    // Initialize country cards
+                    const container = document.getElementById('country-cards-container');
+                    Object.keys(countryData).forEach(key => {
+                        container.innerHTML += createCountryCard(key, countryData[key]);
+                    });
+                </script>
             </section>
 
             <!-- 5. ADVANTAGES & DISADVANTAGES -->
@@ -177,19 +549,27 @@
                 <div class="topics-grid">
                     <div class="topic-card">
                         <h2>CS50: Introduction to Computer Science</h2>
-                        <p><strong>Type:</strong> University Course<br><strong>Prerequisites:</strong> None<br><strong>Duration:</strong> 12 weeks</p>
+                        <p><strong>Type:</strong> University Course<br><strong>Prerequisites:</strong> None<br><strong>Duration:</strong> 12 weeks<br><strong>Provider:</strong> Harvard University</p>
                     </div>
                     <div class="topic-card">
                         <h2>The Odin Project</h2>
-                        <p><strong>Type:</strong> Free Coding Bootcamp<br><strong>Level:</strong> Beginner to Advanced<br><strong>Focus:</strong> Full-stack development</p>
+                        <p><strong>Type:</strong> Free Coding Bootcamp<br><strong>Level:</strong> Beginner to Advanced<br><strong>Focus:</strong> Full-stack development<br><strong>Duration:</strong> 6-12 months</p>
                     </div>
                     <div class="topic-card">
                         <h2>Bachelor's in Computer Science</h2>
-                        <p><strong>Type:</strong> University<br><strong>Prerequisites:</strong> High school<br><strong>Focus:</strong> Software engineering fundamentals</p>
+                        <p><strong>Type:</strong> University Degree<br><strong>Prerequisites:</strong> High school<br><strong>Duration:</strong> 4 years<br><strong>Focus:</strong> Software engineering fundamentals</p>
                     </div>
                     <div class="topic-card">
                         <h2>LeetCode / HackerRank</h2>
-                        <p><strong>Type:</strong> Coding Practice<br><strong>Level:</strong> Intermediate<br><strong>Skills:</strong> Problem-solving</p>
+                        <p><strong>Type:</strong> Coding Practice Platform<br><strong>Level:</strong> Intermediate<br><strong>Skills:</strong> Problem-solving & algorithms<br><strong>Focus:</strong> Technical interview preparation</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>AWS Certified Developer</h2>
+                        <p><strong>Type:</strong> Professional Certification<br><strong>Prerequisites:</strong> 1 year experience<br><strong>Provider:</strong> Amazon Web Services<br><strong>Focus:</strong> Cloud development</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Google Cloud Professional Developer</h2>
+                        <p><strong>Type:</strong> Professional Certification<br><strong>Prerequisites:</strong> 3 years experience<br><strong>Provider:</strong> Google Cloud<br><strong>Focus:</strong> Cloud-native development</p>
                     </div>
                 </div>
             </section>

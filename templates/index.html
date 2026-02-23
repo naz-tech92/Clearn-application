@@ -29,37 +29,38 @@
         </div>
     </nav>
 
-    <div class="container">
-        <!-- HERO SECTION WITH CAROUSEL -->
-        <section class="hero">
-            <div class="carousel">
-                <div class="carousel-container">
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
-                    
-                    <div class="carousel-overlay">
-                        <h2>🔐 CYBER LEARN – Digital Orientation Platform</h2>
-                        <p>Discover your path in Technology, Health, and Business careers</p>
-                        <div class="button-group" style="margin-top: 20px;">
-                            <a href="/category" class="btn btn-primary">Explore Categories</a>
-                            <a href="/topics" class="btn btn-secondary">Browse Topics</a>
-                        </div>
+    <!-- FULL-WIDTH HERO SECTION -->
+    <section class="hero-fullwidth">
+        <div class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
+                <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
+                
+                <div class="carousel-overlay">
+                    <h2>🔐 CYBER LEARN – Digital Orientation Platform</h2>
+                    <p>Discover your path in Technology, Health, and Business careers</p>
+                    <div class="button-group" style="margin-top: 20px;">
+                        <a href="/category" class="btn btn-primary">Explore Categories</a>
+                        <a href="/topics" class="btn btn-secondary">Browse Topics</a>
                     </div>
                 </div>
-
-                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
-                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
-
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(3)"></span>
-                </div>
             </div>
-        </section>
+
+            <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
+            <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+
+            <div class="carousel-dots">
+                <span class="carousel-dot active" onclick="currentSlide(0)"></span>
+                <span class="carousel-dot" onclick="currentSlide(1)"></span>
+                <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                <span class="carousel-dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
 
         <!-- SEARCH BAR SECTION -->
         <section style="text-align: center; padding: 40px 20px; background: rgba(30, 41, 59, 0.6); margin: 20px 0; border-radius: 12px;">
@@ -116,9 +117,6 @@
                     <p style="color: #cbd5e1; line-height: 1.8; font-size: 1.05em;">
                         At CLearn, we illuminate the path to professional excellence by providing comprehensive digital orientation for career exploration. Our platform empowers individuals to discover their true calling in technology, health, and business fields through detailed guidance, global opportunity insights, and structured learning pathways that transform aspirations into achievements.
                     </p>
-                    <div class="enlightening-quote">
-                        "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle." - Steve Jobs
-                    </div>
                 </div>
             </section>
 
