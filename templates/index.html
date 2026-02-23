@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLearn - Cybersecurity Learning Platform</title>
+    <title>CLearn - Digital Orientation Platform</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -14,6 +14,7 @@
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
                 <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
@@ -39,8 +40,12 @@
                     <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
                     
                     <div class="carousel-overlay">
-                        <h2>🔐 Welcome to CLearn</h2>
-                        <p>Master Cybersecurity, Networking, Cryptography & More</p>
+                        <h2>🔐 CYBER LEARN – Digital Orientation Platform</h2>
+                        <p>Discover your path in Technology, Health, and Business careers</p>
+                        <div class="button-group" style="margin-top: 20px;">
+                            <a href="/category" class="btn btn-primary">Explore Categories</a>
+                            <a href="/topics" class="btn btn-secondary">Browse Topics</a>
+                        </div>
                     </div>
                 </div>
 
@@ -56,43 +61,64 @@
             </div>
         </section>
 
+        <!-- SEARCH BAR SECTION -->
+        <section style="text-align: center; padding: 40px 20px; background: rgba(30, 41, 59, 0.6); margin: 20px 0; border-radius: 12px;">
+            <h3 style="color: #60a5fa; margin-bottom: 20px;">🔍 Find Your Perfect Career Path</h3>
+            <p style="color: #cbd5e1; margin-bottom: 30px;">Search through our comprehensive collection of skills and faculties to discover your ideal career</p>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <input type="text" id="homeSearchInput" placeholder="Search by skill or faculty (e.g., Cybersecurity, Nursing, Accounting)..." style="width: 100%; padding: 15px; border: 2px solid #3b82f6; border-radius: 8px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0; font-size: 1em;">
+                <div id="searchResults" style="display: none; margin-top: 20px; text-align: left; max-height: 300px; overflow-y: auto;"></div>
+            </div>
+        </section>
+
         <main>
             <section style="text-align: center; padding: 30px 0; margin-bottom: 40px;">
-                <p style="font-size: 1.1em; color: #cbd5e1; margin-bottom: 30px;">A comprehensive learning platform designed to teach you cybersecurity concepts from basics to advanced techniques.</p>
+                <p style="font-size: 1.1em; color: #cbd5e1; margin-bottom: 30px;">A comprehensive digital orientation platform helping you discover and plan your career path in technology, health, and business fields with global opportunities and detailed guidance.</p>
                 <div class="button-group">
-                    <a href="/topics" class="btn btn-primary">Explore Topics</a>
+                    <a href="/category" class="btn btn-primary">Explore Skills & Faculties</a>
                     <a href="#about" class="btn btn-secondary">Learn More</a>
                 </div>
             </section>
             <section id="about" class="features">
-                <h2>What You'll Learn</h2>
+                <h2>Explore Career Paths</h2>
                 <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>🛡️ Security Fundamentals</h3>
-                        <p>Master the core concepts of cybersecurity and learn how to protect systems from threats.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🔗 Network Security</h3>
-                        <p>Learn to secure networks, configure firewalls, and protect infrastructure.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🔐 Cryptography</h3>
-                        <p>Understand encryption algorithms, key management, and digital signatures.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>🎯 Ethical Hacking</h3>
-                        <p>Discover penetration testing techniques and vulnerability assessment methods.</p>
-                    </div>
+                    <a href="/topics" class="feature-card-link">
+                        <div class="feature-card">
+                            <h3>🖥️ Technology Skills</h3>
+                            <p>Discover careers in Cybersecurity, Data Science, Cloud Computing, AI/ML, Software Engineering, Networking, and DevOps. Master cutting-edge technologies that shape our digital future.</p>
+                        </div>
+                    </a>
+                    <a href="/topics" class="feature-card-link">
+                        <div class="feature-card">
+                            <h3>🏥 Health Careers</h3>
+                            <p>Explore opportunities in Nursing, Public Health, and Medical Laboratory Science with global demand information. Join the noble profession of healing and healthcare innovation.</p>
+                        </div>
+                    </a>
+                    <a href="/topics" class="feature-card-link">
+                        <div class="feature-card">
+                            <h3>💼 Business Fields</h3>
+                            <p>Learn about Accounting, Digital Marketing, and International Business with comprehensive career guidance. Become a leader in the global business landscape.</p>
+                        </div>
+                    </a>
+                    <a href="/topics" class="feature-card-link">
+                        <div class="feature-card">
+                            <h3>🌍 Global Opportunities</h3>
+                            <p>Get detailed information about international job markets, visa pathways, and country-specific requirements. Your passport to worldwide career success awaits.</p>
+                        </div>
+                    </a>
                 </div>
             </section>
 
-            <!-- ABOUT SECTION -->
+            <!-- ENLIGHTENING MISSION SECTION -->
             <section style="margin-bottom: 40px;">
                 <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
-                    <h3 style="color: #60a5fa; margin-bottom: 15px;">Our Mission</h3>
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">Our Enlightening Mission</h3>
                     <p style="color: #cbd5e1; line-height: 1.8; font-size: 1.05em;">
-                        At CLearn, we're committed to making cybersecurity education accessible to everyone. Our mission is to empower individuals and organizations with the knowledge and skills needed to protect themselves in the digital world.
+                        At CLearn, we illuminate the path to professional excellence by providing comprehensive digital orientation for career exploration. Our platform empowers individuals to discover their true calling in technology, health, and business fields through detailed guidance, global opportunity insights, and structured learning pathways that transform aspirations into achievements.
                     </p>
+                    <div class="enlightening-quote">
+                        "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle." - Steve Jobs
+                    </div>
                 </div>
             </section>
 
@@ -100,88 +126,113 @@
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Why Choose CLearn?</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>Expert Content</h3>
-                        <p>Learn from industry professionals with years of cybersecurity experience.</p>
+                        <h3>Comprehensive Career Guidance</h3>
+                        <p>Get detailed information about careers in technology, health, and business fields.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Comprehensive Curriculum</h3>
-                        <p>From basics to advanced topics, we cover everything you need to know.</p>
+                        <h3>Global Opportunities</h3>
+                        <p>Explore international job markets, visa pathways, and country-specific requirements.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Practical Learning</h3>
-                        <p>Hands-on examples and real-world scenarios to strengthen your skills.</p>
+                        <h3>Structured Learning Paths</h3>
+                        <p>From certificates to advanced degrees, find the right educational path for your goals.</p>
                     </div>
                     <div class="feature-card">
                         <h3>Always Updated</h3>
-                        <p>Our content is regularly updated to reflect the latest security trends.</p>
+                        <p>Our content reflects the latest trends in technology, health, and business careers.</p>
                     </div>
                 </div>
             </section>
 
+            <!-- KNOWLEDGE HUB -->
             <section style="margin-bottom: 40px;">
-                <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
-                    <h3 style="color: #60a5fa; margin-bottom: 15px;">Our Vision</h3>
-                    <p style="color: #cbd5e1; line-height: 1.8; font-size: 1.05em;">
-                        We envision a world where cybersecurity knowledge is accessible to all, and where every individual and organization can confidently protect their digital assets against evolving threats.
-                    </p>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Knowledge Hub - Your Learning Companion</h2>
+                <div class="knowledge-hub">
+                    <h4>🚀 Quick Access Resources</h4>
+                    <ul>
+                        <li><a href="/categories">Explore All Career Categories</a> - Comprehensive career exploration across 10+ fields</li>
+                        <li><a href="/topics">Browse Learning Topics</a> - Curated educational content and skill development</li>
+                        <li><a href="/resources">Professional Resources</a> - Industry insights, certifications, and tools</li>
+                        <li><a href="/about">About Our Platform</a> - Learn about our mission and educational approach</li>
+                        <li><a href="/contact">Get Expert Guidance</a> - Connect with career counselors and mentors</li>
+                        <li><a href="https://www.coursera.org" target="_blank">Coursera Partnerships</a> - Access university-level courses worldwide</li>
+                        <li><a href="https://www.linkedin.com/learning" target="_blank">LinkedIn Learning</a> - Professional development and skill enhancement</li>
+                        <li><a href="https://www.edx.org" target="_blank">edX Platform</a> - Free courses from top universities</li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- RESOURCES SECTION -->
+            <!-- CAREER DEVELOPMENT TOOLS -->
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Essential Tools</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Advanced Career Development Tools</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>Nmap</h3>
-                        <p>Network mapper for discovering hosts and services. Essential for network security.</p>
+                        <h3>🛠️ Skill Comparison Tool</h3>
+                        <p>Compare your current skills with job requirements across different career paths. Identify gaps and create personalized development plans to accelerate your career growth.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Wireshark</h3>
-                        <p>Network protocol analyzer for capturing and analyzing network traffic.</p>
+                        <h3>🤖 AI Career Advisor</h3>
+                        <p>Get personalized career guidance and recommendations based on your interests, skills, and market trends. Our AI analyzes thousands of career paths to find your perfect match.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Metasploit</h3>
-                        <p>Penetration testing framework with comprehensive exploit database.</p>
+                        <h3>🌍 Visa Pathway Guide</h3>
+                        <p>Explore international work opportunities and immigration pathways. Get detailed visa requirements, application processes, and success strategies for global career advancement.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>Burp Suite</h3>
-                        <p>Web application security testing platform with automated scanning.</p>
+                        <h3>📊 Career Assessment</h3>
+                        <p>Take comprehensive assessments to identify your strengths, personality traits, and suitable career fields. Receive detailed reports with actionable recommendations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎯 Goal Setting Framework</h3>
+                        <p>Create SMART career goals with our structured framework. Track progress, celebrate milestones, and stay motivated on your professional journey.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📈 Salary Negotiation Coach</h3>
+                        <p>Learn proven salary negotiation techniques, understand market rates, and develop confidence in discussing compensation packages.</p>
                     </div>
                 </div>
             </section>
 
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Recommended Books</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Enlightening Career Resources</h2>
                 <div class="topics-grid">
                     <div class="topic-card">
-                        <h2>The Web Application Hacker's Handbook</h2>
-                        <p>Comprehensive guide to discovering and exploiting web security vulnerabilities.</p>
+                        <h2>What Color Is Your Parachute?</h2>
+                        <p>Richard Bolles' timeless guide to career exploration and job search strategies. Discover your passion and find meaningful work that fulfills your potential.</p>
                     </div>
                     <div class="topic-card">
-                        <h2>Cryptography and Network Security</h2>
-                        <p>In-depth exploration of cryptographic concepts and their applications.</p>
+                        <h2>The Lean Startup</h2>
+                        <p>Eric Ries' revolutionary approach to entrepreneurship and innovation. Learn to build successful businesses with validated learning and scientific methods.</p>
                     </div>
                     <div class="topic-card">
-                        <h2>Network Security Essentials</h2>
-                        <p>Practical guide to securing modern networks and infrastructure.</p>
+                        <h2>Rich Dad Poor Dad</h2>
+                        <p>Robert Kiyosaki's financial literacy masterpiece. Understand the difference between working for money and having money work for you.</p>
                     </div>
                     <div class="topic-card">
-                        <h2>The Art of Intrusion</h2>
-                        <p>Real-world stories and techniques of penetration testing and security breaches.</p>
+                        <h2>The Innovator's Dilemma</h2>
+                        <p>Clayton Christensen's groundbreaking work on technological change and business strategy. Understand how great companies can fail by doing everything right.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Mindset: The New Psychology of Success</h2>
+                        <p>Carol Dweck's transformative research on growth mindset. Learn how changing your mindset can unlock your potential and achieve greater success.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Atomic Habits</h2>
+                        <p>James Clear's practical guide to building good habits and breaking bad ones. Small changes, remarkable results in your personal and professional life.</p>
                     </div>
                 </div>
             </section>
 
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Useful References</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Career Development Resources</h2>
                 <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
                     <ul style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
-                        <li>📖 OWASP Top 10 - Most critical web application security risks</li>
-                        <li>📖 NIST Cybersecurity Framework - Guidelines for managing cyber risks</li>
-                        <li>📖 CIS Controls - Best practices for effective cyber defense</li>
-                        <li>📖 SANS Institute - High-quality security training and certifications</li>
-                        <li>📖 MITRE ATT&CK - Knowledge base of adversary tactics and techniques</li>
-                        <li>📖 RFC 3339 - Standard for internet date/time format and security</li>
+                        <li>📖 LinkedIn Learning - Professional development courses across all industries</li>
+                        <li>📖 Coursera - University-level courses from top institutions worldwide</li>
+                        <li>📖 Glassdoor - Salary insights and company reviews for career planning</li>
+                        <li>📖 Indeed Career Guide - Comprehensive career advice and job search tools</li>
+                        <li>📖 UNESCO Career Development - International education and career guidance</li>
+                        <li>📖 World Bank Skills Reports - Global labor market trends and opportunities</li>
                     </ul>
                 </div>
             </section>
@@ -193,7 +244,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>About CLearn</h4>
-                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+                    <p>A comprehensive digital orientation platform providing career guidance across technology, health, and business fields with global opportunities and detailed educational pathways.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -205,12 +256,12 @@
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Courses</h4>
+                    <h4>Career Fields</h4>
                     <ul>
-                        <li><a href="/topics">Cybersecurity Basics</a></li>
-                        <li><a href="/topics">Network Security</a></li>
-                        <li><a href="/topics">Cryptography</a></li>
-                        <li><a href="/topics">Ethical Hacking</a></li>
+                        <li><a href="/category">Technology Careers</a></li>
+                        <li><a href="/category">Health Careers</a></li>
+                        <li><a href="/category">Business Careers</a></li>
+                        <li><a href="/category">Global Opportunities</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -222,7 +273,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
             </div>
         </footer>
     </div>
@@ -275,6 +326,68 @@
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
+        });
+
+        // Home page search functionality
+        const skills = [
+            { name: 'Cybersecurity', url: '/skill/cybersecurity', faculty: 'Technology' },
+            { name: 'Data Science', url: '/skill/data_science', faculty: 'Technology' },
+            { name: 'Cloud Computing', url: '/skill/cloud_computing', faculty: 'Technology' },
+            { name: 'AI / Machine Learning', url: '/skill/ai_machine_learning', faculty: 'Technology' },
+            { name: 'Software Engineering', url: '/skill/software_engineering', faculty: 'Technology' },
+            { name: 'Networking', url: '/skill/networking', faculty: 'Technology' },
+            { name: 'DevOps', url: '/skill/devops', faculty: 'Technology' },
+            { name: 'Nursing', url: '/skill/nursing', faculty: 'Health' },
+            { name: 'Public Health', url: '/skill/public_health', faculty: 'Health' },
+            { name: 'Medical Laboratory Science', url: '/skill/medical_laboratory_science', faculty: 'Health' },
+            { name: 'Accounting', url: '/skill/accounting', faculty: 'Business' },
+            { name: 'Digital Marketing', url: '/skill/digital_marketing', faculty: 'Business' },
+            { name: 'International Business', url: '/skill/international_business', faculty: 'Business' }
+        ];
+
+        const homeSearchInput = document.getElementById('homeSearchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        homeSearchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (query.length < 2) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+
+            const filteredSkills = skills.filter(skill => 
+                skill.name.toLowerCase().includes(query) || 
+                skill.faculty.toLowerCase().includes(query)
+            );
+
+            if (filteredSkills.length > 0) {
+                const resultsHtml = filteredSkills.map(skill => `
+                    <div style="background: rgba(30, 41, 59, 0.9); border: 1px solid #3b82f6; border-radius: 8px; padding: 15px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s ease;" onclick="window.location.href='${skill.url}'">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="color: #60a5fa; margin: 0; font-size: 1.1em;">${skill.name}</h4>
+                                <p style="color: #93c5fd; margin: 5px 0 0 0; font-size: 0.9em;">${skill.faculty} Faculty</p>
+                            </div>
+                            <div style="color: #60a5fa; font-size: 1.2em;">→</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                resultsContainer.innerHTML = resultsHtml;
+                resultsContainer.style.display = 'block';
+            } else {
+                resultsContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No skills found matching your search.</p>';
+                resultsContainer.style.display = 'block';
+            }
+        });
+
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!homeSearchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
         });
     </script>
 </body>

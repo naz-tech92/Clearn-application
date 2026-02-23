@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero" style="margin-top: 30px;">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="color: #60a5fa; margin-bottom: 20px;">📊 Data Science</h2>
+                <p style="color: #cbd5e1; font-size: 1.1em;">Extract insights from data to drive informed decision-making</p>
+            </div>
+        </section>
+
+        <main>
+            <!-- 1. SKILL OVERVIEW -->
+            <section style="margin-bottom: 60px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 50px 0; border-radius: 20px;">
+                <div style="max-width: 800px; margin: 0 auto; padding: 0 30px;">
+                    <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📊 Data Science Overview</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                        <div>
+                            <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">What is Data Science?</h3>
+                            <p style="color: #64748b; line-height: 1.7; font-size: 1.1em;">
+                                Data Science combines statistics, programming, and domain expertise to extract meaningful insights from data. It involves collecting, cleaning, analyzing, and interpreting large datasets to inform business decisions and solve complex problems.
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 4em; margin-bottom: 20px;">📊</div>
+                            <div style="background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); height: 4px; border-radius: 2px; margin: 0 auto; width: 60px;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">Problems It Solves</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">📈</div>
+                                <p style="color: #64748b; margin: 0;">Predict business trends</p>
+                            </div>
+                            <div style="background: rgba(34, 197, 94, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">🎯</div>
+                                <p style="color: #64748b; margin: 0;">Optimize operations</p>
+                            </div>
+                            <div style="background: rgba(251, 191, 36, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">🔍</div>
+                                <p style="color: #64748b; margin: 0;">Uncover hidden patterns</p>
+                            </div>
+                            <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <div style="font-size: 1.5em; margin-bottom: 10px;">📊</div>
+                                <p style="color: #64748b; margin: 0;">Drive data-driven decisions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <h3 style="color: #1e293b; margin-bottom: 20px; font-size: 1.4em;">Industries Where It's Used</h3>
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                            <span style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🏦 Finance & Banking</span>
+                            <span style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🏥 Healthcare</span>
+                            <span style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🛒 E-commerce</span>
+                            <span style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">📱 Technology</span>
+                            <span style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">🚗 Automotive</span>
+                            <span style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em;">📈 Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. REQUIRED EDUCATION -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🎓 Education Pathways</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">📜</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Certificate (3-6 months)</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Online courses in Python, R, and basic statistics for entry-level roles</p>
+                        <div style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎓</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Bachelor's Degree (4 years)</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Mathematics, Statistics, Computer Science, or related quantitative fields</p>
+                        <div style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🎓</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Master's Degree</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">Data Science, Analytics, or Machine Learning specialization for advanced roles</p>
+                        <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 30px; border-radius: 16px; text-align: center; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">🏆</div>
+                        <h3 style="color: #1e293b; margin-bottom: 15px;">Professional Certifications</h3>
+                        <p style="color: #64748b; margin-bottom: 20px;">IBM Data Science, Google Data Analytics, AWS ML certifications</p>
+                        <div style="background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); height: 3px; border-radius: 2px; margin: 0 auto; width: 40px;"></div>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px);">
+                    <h3 style="color: #1e293b; margin-bottom: 25px; font-size: 1.4em; text-align: center;">🌍 Additional Opportunities</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🌍</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Visa Pathways</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Data scientist visas in US, Canada, UK, and Singapore</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🎓</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Scholarships</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Available through tech companies and universities</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🏫</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Top Universities</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Stanford, MIT, UC Berkeley, Carnegie Mellon</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🛠️</div>
+                            <div>
+                                <h4 style="color: #1e293b; margin: 0 0 5px 0;">Skill Tools</h4>
+                                <p style="color: #64748b; margin: 0; font-size: 0.9em;">Compare your skills with job requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. CAREER OPPORTUNITIES -->
+            <section style="margin-bottom: 60px; background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%); padding: 50px 0; border-radius: 20px;">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 30px;">
+                    <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💼 Career Opportunities</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">📊</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Data Scientist</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Analyze complex datasets to extract insights and build predictive models</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">📈</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Data Analyst</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Interpret data to help organizations make informed business decisions</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(251, 191, 36, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🤖</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Machine Learning Engineer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Design and implement ML algorithms and production systems</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">🔧</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Data Engineer</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Build and maintain data pipelines and infrastructure</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(147, 51, 234, 0.05) 100%); padding: 30px; border-radius: 16px; backdrop-filter: blur(10px); transition: transform 0.3s ease;">
+                            <div style="font-size: 3em; margin-bottom: 20px; text-align: center;">📊</div>
+                            <h3 style="color: #1e293b; margin-bottom: 15px; text-align: center; font-size: 1.3em;">Business Intelligence Analyst</h3>
+                            <p style="color: #64748b; line-height: 1.6; text-align: center;">Create reports and dashboards for business insights and KPIs</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. COUNTRIES - EXPANDABLE WITH FULL CONTENT -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 40px; font-size: 2.2em; background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🌍 Global Opportunities</h2>
+                
+                <style>
+                    .country-card-wrapper {
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+                        border-radius: 20px;
+                        overflow: hidden;
+                        backdrop-filter: blur(10px);
+                        margin-bottom: 20px;
+                        transition: all 0.3s ease;
+                    }
+                    .country-card-header {
+                        padding: 30px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+                        transition: all 0.3s ease;
+                    }
+                    .country-card-header:hover {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+                    }
+                    .country-card-header.expanded {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+                    }
+                    .country-header-left {
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                    }
+                    .country-flag {
+                        font-size: 3em;
+                    }
+                    .country-header-info {
+                        text-align: left;
+                    }
+                    .country-header-info h3 {
+                        color: #1e293b;
+                        margin: 0 0 8px 0;
+                        font-size: 1.4em;
+                    }
+                    .country-demand-badge {
+                        display: inline-block;
+                        padding: 6px 12px;
+                        border-radius: 20px;
+                        font-size: 0.8em;
+                        font-weight: 600;
+                    }
+                    .demand-very-high {
+                        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+                        color: #1e40af;
+                    }
+                    .demand-high {
+                        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+                        color: #166534;
+                    }
+                    .demand-growing {
+                        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+                        color: #92400e;
+                    }
+                    .expand-toggle {
+                        font-size: 1.5em;
+                        transition: transform 0.3s ease;
+                        color: #60a5fa;
+                    }
+                    .expand-toggle.expanded {
+                        transform: rotate(180deg);
+                    }
+                    .country-card-content {
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.3s ease;
+                    }
+                    .country-card-content.expanded {
+                        max-height: 2000px;
+                    }
+                    .content-inner {
+                        padding: 30px;
+                        border-top: 2px solid rgba(96, 165, 250, 0.2);
+                    }
+                    .content-section {
+                        margin-bottom: 25px;
+                    }
+                    .content-section h4 {
+                        color: #60a5fa;
+                        margin: 0 0 12px 0;
+                        font-size: 1.1em;
+                    }
+                    .content-section p {
+                        color: #64748b;
+                        margin: 0 0 10px 0;
+                        line-height: 1.6;
+                    }
+                    .content-list {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        gap: 15px;
+                    }
+                    .list-item {
+                        background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+                        padding: 12px;
+                        border-radius: 10px;
+                        color: #1e293b;
+                        font-size: 0.9em;
+                    }
+                    .advantages-list {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 20px;
+                    }
+                    .advantages-grid {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+                    .advantage-item {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 10px;
+                        color: #64748b;
+                    }
+                    .advantage-item:before {
+                        content: "✓";
+                        color: #10b981;
+                        font-weight: bold;
+                        margin-top: 2px;
+                    }
+                    .limitation-item {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 10px;
+                        color: #64748b;
+                    }
+                    .limitation-item:before {
+                        content: "✗";
+                        color: #ef4444;
+                        font-weight: bold;
+                        margin-top: 2px;
+                    }
+                </style>
+
+                <div id="country-cards-container">
+                    <!-- Country cards will be dynamically generated by JavaScript -->
+                </div>
+
+                <script>
+                    const countryData = {
+                        "united_states": {
+                            "name": "United States",
+                            "flag": "🇺🇸",
+                            "demand": "Very High",
+                            "overview": "Silicon Valley and major financial centers drive data science innovation. Tech giants and Fortune 500 companies create massive demand for data scientists with strong analytical and machine learning skills.",
+                            "education": "Bachelor's degree in quantitative field. Master's preferred for advanced roles.",
+                            "certifications": ["IBM Data Science Professional Certificate", "Google Data Analytics Professional Certificate", "AWS Machine Learning Specialty", "Microsoft Azure AI Engineer"],
+                            "advantages": ["Highest salaries globally", "Access to cutting-edge technology", "Strong venture capital ecosystem", "Diverse industry applications", "Continuous innovation culture"],
+                            "limitations": ["High competition", "Rapid technological changes", "Expensive cost of living", "Work-life balance challenges", "Visa restrictions for international talent"],
+                            "references": ["Kaggle", "Towards Data Science", "Data Science Central", "Coursera Data Science courses"],
+                            "study_paths": ["Bachelor's in CS/Math (4 years) → Data analyst", "Online certifications (6-12 months) → Junior data scientist", "Master's in Data Science (2 years) → Senior roles", "PhD programs → Research and leadership positions"]
+                        },
+                        "united_kingdom": {
+                            "name": "United Kingdom",
+                            "flag": "🇬🇧",
+                            "demand": "High",
+                            "overview": "London's financial sector and growing tech scene drive demand for data scientists. Strong emphasis on fintech, healthcare analytics, and government data initiatives.",
+                            "education": "Bachelor's degree in quantitative field. Postgraduate qualifications highly valued.",
+                            "certifications": ["MSc Data Science", "Royal Statistical Society qualifications", "Google Cloud Professional Data Engineer", "Microsoft Certified: Azure Data Scientist Associate"],
+                            "advantages": ["Strong job market", "Competitive salaries", "Work-life balance", "Cultural diversity", "EU market access"],
+                            "limitations": ["Brexit uncertainty", "High cost of living in London", "Weather challenges", "Limited venture capital", "Regulatory complexity"],
+                            "references": ["The Royal Statistical Society", "British Computer Society", "Data Science London", "UK Government Data Science initiatives"],
+                            "study_paths": ["Bachelor's degree (3 years) → Graduate programs", "MSc Data Science (1 year) → Professional roles", "Industry certifications (3-6 months) → Specialized positions", "PhD research → Academic and advanced roles"]
+                        },
+                        "canada": {
+                            "name": "Canada",
+                            "flag": "🇨🇦",
+                            "demand": "High",
+                            "overview": "Toronto and Montreal serve as major data science hubs with growing demand in fintech, healthcare, and natural resources. Government initiatives support AI and data science development.",
+                            "education": "Bachelor's degree in Computer Science, Mathematics, or Statistics",
+                            "certifications": ["Google Data Analytics Certificate", "IBM Data Science Professional Certificate", "SAS certifications", "Canadian data science designations"],
+                            "advantages": ["High quality of life", "Multilingual opportunities", "Government support", "Work-life balance", "Immigration-friendly policies"],
+                            "limitations": ["Cold climate", "Smaller market than US", "Provincial variations", "Limited venture capital", "Brain drain concerns"],
+                            "references": ["Canadian Statistical Sciences Institute", "Vector Institute", "Data Science Canada", "Government of Canada AI initiatives"],
+                            "study_paths": ["Bachelor's in quantitative field (4 years) → Entry-level roles", "Graduate certificates (1 year) → Professional positions", "Master's programs (2 years) → Advanced roles", "Industry training → Specialized sectors"]
+                        },
+                        "singapore": {
+                            "name": "Singapore",
+                            "flag": "🇸🇬",
+                            "demand": "Very High",
+                            "overview": "Asia's data science hub with strong government support through Smart Nation initiative. Banking, healthcare, and logistics sectors drive demand for data analytics professionals.",
+                            "education": "Bachelor's degree in Computer Science, Mathematics, or related quantitative field",
+                            "certifications": ["AWS Certified Machine Learning", "Google Cloud Professional Data Engineer", "Microsoft Azure certifications", "Singapore data science programs"],
+                            "advantages": ["High salaries with low taxes", "Strategic location in Asia", "Government initiatives", "Multinational exposure", "Quality of life"],
+                            "limitations": ["High cost of living", "Small domestic market", "Intense competition", "Work culture adaptation", "Limited natural resources"],
+                            "references": ["Singapore Data Science Consortium", "AI Singapore", "Smart Nation initiatives", "National University of Singapore"],
+                            "study_paths": ["Bachelor's degree (3-4 years) → Graduate opportunities", "Professional certifications (6-12 months) → Specialist roles", "Master's in Data Science (1-2 years) → Leadership positions", "Government programs → Public sector opportunities"]
+                        },
+                        "cameroon": {
+                            "name": "Cameroon",
+                            "flag": "🇨🇲",
+                            "demand": "Growing",
+                            "overview": "Growing data science sector with government digital transformation initiatives. Banking, telecommunications, and agriculture sectors increasingly adopt data analytics for decision-making.",
+                            "education": "Bachelor's degree in Computer Science, Mathematics, or Statistics",
+                            "certifications": ["Google Data Analytics Certificate", "IBM Data Science Professional Certificate", "Microsoft Power BI certifications", "International data science programs"],
+                            "advantages": ["Growing market", "Regional leadership potential", "Lower operational costs", "International opportunities", "Government support programs"],
+                            "limitations": ["Limited infrastructure", "Power supply issues", "Brain drain of talent", "Regulatory challenges", "Limited training programs"],
+                            "references": ["African Data Science Community", "Cameroon Ministry of Posts and Telecommunications", "ECOWAS data initiatives", "International data science organizations"],
+                            "study_paths": ["Bachelor's in CS/Math (4 years) → Junior analyst roles", "Online certifications (3-6 months) → Professional positions", "Graduate programs → Advanced roles", "Regional training → African market focus", "International programs → Global opportunities"]
+                        }
+                    };
+
+                    function createCountryCard(countryKey, data) {
+                        const demandColorMap = {
+                            "Very High": "demand-very-high",
+                            "High": "demand-high",
+                            "Growing": "demand-growing"
+                        };
+
+                        return `
+                            <div class="country-card-wrapper">
+                                <div class="country-card-header" onclick="toggleCountry(this)">
+                                    <div class="country-header-left">
+                                        <div class="country-flag">${data.flag}</div>
+                                        <div class="country-header-info">
+                                            <h3>${data.name}</h3>
+                                            <span class="country-demand-badge ${demandColorMap[data.demand]}">${data.demand} Demand</span>
+                                        </div>
+                                    </div>
+                                    <div class="expand-toggle">▼</div>
+                                </div>
+                                <div class="country-card-content">
+                                    <div class="content-inner">
+                                        <div class="content-section">
+                                            <h4>📝 Overview</h4>
+                                            <p>${data.overview}</p>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🎓 Required Education</h4>
+                                            <p>${data.education}</p>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🏆 Certifications</h4>
+                                            <div class="content-list">
+                                                ${data.certifications.map(cert => `<div class="list-item">• ${cert}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>✅ Advantages</h4>
+                                            <div class="advantages-list">
+                                                <div class="advantages-grid">
+                                                    ${data.advantages.map(adv => `<div class="advantage-item">${adv}</div>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>⚠️ Limitations</h4>
+                                            <div class="advantages-list">
+                                                <div class="advantages-grid">
+                                                    ${data.limitations.map(lim => `<div class="limitation-item">${lim}</div>`).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>📚 References & Resources</h4>
+                                            <div class="content-list">
+                                                ${data.references.map(ref => `<div class="list-item">📖 ${ref}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h4>🛤️ Study Paths</h4>
+                                            <div class="content-list">
+                                                ${data.study_paths.map(path => `<div class="list-item">→ ${path}</div>`).join('')}
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid rgba(96, 165, 250, 0.2);">
+                                            <a href="/skill/data_science/country/${countryKey}" style="background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%); color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; display: inline-block; transition: all 0.3s ease;">
+                                                View Full Country Profile →
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    function toggleCountry(element) {
+                        const header = element;
+                        const content = header.nextElementSibling;
+                        const toggle = header.querySelector('.expand-toggle');
+                        
+                        header.classList.toggle('expanded');
+                        content.classList.toggle('expanded');
+                        toggle.classList.toggle('expanded');
+                    }
+
+                    // Initialize country cards
+                    const container = document.getElementById('country-cards-container');
+                    Object.keys(countryData).forEach(key => {
+                        container.innerHTML += createCountryCard(key, countryData[key]);
+                    });
+                </script>
+            </section>
+
+            <!-- 5. ADVANTAGES & DISADVANTAGES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">⚖️ 5️⃣ Advantages & Disadvantages</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #10b981;">
+                        <h3 style="color: #10b981; margin-bottom: 15px;">✅ Advantages</h3>
+                        <ul >
+                            <li>High salary potential and job security</li>
+                            <li>Remote work opportunities</li>
+                            <li>Intellectually stimulating work</li>
+                            <li>Cross-industry applicability</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #ef4444;">
+                        <h3 style="color: #ef4444; margin-bottom: 15px;">❌ Disadvantages</h3>
+                        <ul >
+                            <li>Steep learning curve and technical complexity</li>
+                            <li>High competition for top positions</li>
+                            <li>Constantly evolving field requiring continuous learning</li>
+                            <li>Data privacy and ethical concerns</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. REFERENCES & LEARNING PATH -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">📚 6️⃣ References & Learning Path</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>Python for Data Science</h2>
+                        <p><strong>Type:</strong> Online Course<br><strong>Prerequisites:</strong> Basic programming<br><strong>Recognized in:</strong> Global</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Statistics & Probability</h2>
+                        <p><strong>Type:</strong> University Course<br><strong>Prerequisites:</strong> High school math<br><strong>Recognized:</strong> Globally</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>IBM Data Science Professional Certificate</h2>
+                        <p><strong>Type:</strong> Certification<br><strong>Level:</strong> Intermediate<br><strong>Duration:</strong> 9 months</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Master's in Data Science</h2>
+                        <p><strong>Type:</strong> University<br><strong>Prerequisites:</strong> Bachelor's degree<br><strong>Focus:</strong> Advanced analytics</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/category">Categories</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="/topics">Cybersecurity Basics</a></li>
+                    <li><a href="/topics">Network Security</a></li>
+                    <li><a href="/topics">Cryptography</a></li>
+                    <li><a href="/topics">Ethical Hacking</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

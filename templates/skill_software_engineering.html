@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero" style="margin-top: 30px;">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="color: #60a5fa; margin-bottom: 20px;">💻 Software Engineering</h2>
+                <p style="color: #cbd5e1; font-size: 1.1em;">Build robust and scalable software solutions</p>
+            </div>
+        </section>
+
+        <main>
+            <!-- 1. SKILL OVERVIEW -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">📌 1️⃣ Skill Overview</h2>
+                <div class="skill-info-section">
+                    <h3 >What is Software Engineering?</h3>
+                    <p >
+                        Software engineering is the systematic application of engineering approaches to software development. It involves designing, developing, testing, deploying, and maintaining software systems using established principles, methodologies, and best practices to ensure reliability, scalability, and maintainability.
+                    </p>
+                    <h3 >Problems It Solves</h3>
+                    <p >
+                        Creates reliable software systems, manages complex projects, ensures code quality and security, enables scalable architectures, and provides maintainable solutions that can evolve with business needs.
+                    </p>
+                    <h3 >Industries Where It's Used</h3>
+                    <ul >
+                        <li>🏦 Banking & Finance</li>
+                        <li>🏥 Healthcare</li>
+                        <li>🛒 E-commerce</li>
+                        <li>🏭 Manufacturing</li>
+                        <li>🎵 Entertainment</li>
+                        <li>🚗 Automotive</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. REQUIRED EDUCATION -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🎓 2️⃣ Required Level of Education</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📘 Certificate (6-12 months)</h3>
+                        <p>Coding bootcamps, online certifications.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Associate Degree (2 years)</h3>
+                        <p>Associate in Computer Science or Software Development.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Bachelor's Degree (4 years)</h3>
+                        <p>Bachelor of Computer Science or Software Engineering.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Master's Degree</h3>
+                        <p>Master of Software Engineering or Computer Science.</p>
+                    </div>
+                </div>
+                <div class="skill-info-section">
+                    <h3 >Additional Opportunities</h3>
+                    <ul >
+                        <li>🌍 Visa Pathways: Tech talent visas, skilled worker programs</li>
+                        <li>🎓 Scholarships: CS scholarships from tech companies</li>
+                        <li>🏫 University Recommendations: MIT, Stanford, UC Berkeley</li>
+                        <li>🛠️ Skill Comparison Tool: Match your coding skills with job requirements</li>
+                        <li>🤖 AI Chatbot Career Advisor: Personalized software engineering career guidance</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. CAREER OPPORTUNITIES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">💼 3️⃣ Career Opportunities</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>Software Engineer</h2>
+                        <p>Design and develop software applications and systems.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Senior Software Engineer</h2>
+                        <p>Lead development teams and architect complex systems.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Full-Stack Developer</h2>
+                        <p>Work on both frontend and backend development.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h3>Software Architect</h3>
+                        <p>Design high-level software system structures.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Engineering Manager</h2>
+                        <p>Lead engineering teams and manage software projects.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. COUNTRIES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🌍 4️⃣ Countries Where It's Highly Demanded</h2>
+                <div class="feature-grid">
+                    <a href="/skill/software_engineering/country/united_states" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇺🇸 United States</h3>
+                        <p><strong>Demand:</strong> Very High<br><strong>Education:</strong> Bachelor's preferred<br><strong>Requirements:</strong> CS degree or equivalent</p>
+                    </a>
+                    <a href="/skill/software_engineering/country/united_kingdom" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇬🇧 United Kingdom</h3>
+                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Degree preferred<br><strong>Requirements:</strong> Strong portfolio</p>
+                    </a>
+                    <a href="/skill/software_engineering/country/singapore" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇸🇬 Singapore</h3>
+                        <p><strong>Demand:</strong> Very High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> Technical skills</p>
+                    </a>
+                    <a href="/skill/software_engineering/country/australia" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇦🇺 Australia</h3>
+                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> 485 visa eligible</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 5. ADVANTAGES & DISADVANTAGES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">⚖️ 5️⃣ Advantages & Disadvantages</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #10b981;">
+                        <h3 style="color: #10b981; margin-bottom: 15px;">✅ Advantages</h3>
+                        <ul >
+                            <li>High demand and salaries</li>
+                            <li>Creative problem-solving</li>
+                            <li>Remote work opportunities</li>
+                            <li>Continuous learning</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #ef4444;">
+                        <h3 style="color: #ef4444; margin-bottom: 15px;">❌ Disadvantages</h3>
+                        <ul >
+                            <li>Long working hours</li>
+                            <li>Rapid technology changes</li>
+                            <li>High stress deadlines</li>
+                            <li>Debugging challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. REFERENCES & LEARNING PATH -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">📚 6️⃣ References & Learning Path</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>CS50: Introduction to Computer Science</h2>
+                        <p><strong>Type:</strong> University Course<br><strong>Prerequisites:</strong> None<br><strong>Duration:</strong> 12 weeks</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>The Odin Project</h2>
+                        <p><strong>Type:</strong> Free Coding Bootcamp<br><strong>Level:</strong> Beginner to Advanced<br><strong>Focus:</strong> Full-stack development</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Bachelor's in Computer Science</h2>
+                        <p><strong>Type:</strong> University<br><strong>Prerequisites:</strong> High school<br><strong>Focus:</strong> Software engineering fundamentals</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>LeetCode / HackerRank</h2>
+                        <p><strong>Type:</strong> Coding Practice<br><strong>Level:</strong> Intermediate<br><strong>Skills:</strong> Problem-solving</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/category">Categories</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="/topics">Cybersecurity Basics</a></li>
+                    <li><a href="/topics">Network Security</a></li>
+                    <li><a href="/topics">Cryptography</a></li>
+                    <li><a href="/topics">Ethical Hacking</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

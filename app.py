@@ -13,6 +13,14 @@ def load_topics():
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
+def load_countries():
+    """Load countries from JSON file"""
+    try:
+        with open('data/countries.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"countries": {}}
+
 @app.route("/")
 def home():
     """Home page"""
@@ -21,8 +29,7 @@ def home():
 @app.route("/topics")
 def topics():
     """Topics listing page"""
-    topics_data = load_topics()
-    return render_template("topics.html", topics=topics_data)
+    return render_template("topics.html")
 
 @app.route("/topic/<int:topic_id>")
 def topic_detail(topic_id):
@@ -47,6 +54,77 @@ def resources():
 def contact():
     """Contact page"""
     return render_template("contact.html")
+
+@app.route("/privacy_policy")
+def privacy_policy():
+    """Privacy Policy page"""
+    return render_template("privacy_policy.html")
+    
+
+@app.route("/terms_of_service")
+def terms_of_service():
+    """Terms of Service page"""
+    return render_template("terms_of_service.html")
+
+@app.route("/category")
+def category():
+    """Category page"""
+    return render_template("category.html")
+
+@app.route("/skill/<skill_name>")
+def skill_detail(skill_name):
+    """Individual skill page"""
+    return render_template(f"skill_{skill_name}.html")
+
+@app.route("/skill/<skill_name>/country/<country_name>")
+def country_skill_detail(skill_name, country_name):
+    """Country-specific skill details page"""
+    countries_data = load_countries()
+    country = countries_data.get("countries", {}).get(country_name)
+    if not country or skill_name not in country.get("skills", {}):
+        return render_template("index.html"), 404
+    
+    skill_data = country["skills"][skill_name]
+    return render_template("country_skill_detail.html", 
+                         country=country, 
+                         skill_name=skill_name, 
+                         skill_data=skill_data)
+
+@app.route("/country/<country_name>")
+def country_detail(country_name):
+    """Country page showing all available skills"""
+    countries_data = load_countries()
+    country = countries_data.get("countries", {}).get(country_name)
+    if not country:
+        return render_template("index.html"), 404
+    
+    return render_template("country_detail.html", country=country)
+
+@app.route("/education/<level>")
+def education_level(level):
+    """Educational level page showing skills requiring that level"""
+    countries_data = load_countries()
+    skills_by_level = {}
+    
+    # Map educational levels to skills
+    for country_name, country_data in countries_data.get("countries", {}).items():
+        for skill_name, skill_data in country_data.get("skills", {}).items():
+            education = skill_data.get("required_education", "").lower()
+            if level.lower() in education or level.lower().replace(" ", "") in education.replace(" ", ""):
+                if level not in skills_by_level:
+                    skills_by_level[level] = []
+                skills_by_level[level].append({
+                    "skill_name": skill_name,
+                    "country": country_data,
+                    "skill_data": skill_data
+                })
+    
+    if not skills_by_level.get(level):
+        return render_template("index.html"), 404
+    
+    return render_template("education_level.html", 
+                         level=level, 
+                         skills=skills_by_level[level])
 
 @app.route("/login")
 def login():

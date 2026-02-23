@@ -1,0 +1,2428 @@
+{
+  "countries": {
+    "united_states": {
+      "name": "United States",
+      "flag": "🇺🇸",
+      "skills": {
+        "cybersecurity": {
+          "overview": "The United States leads the world in cybersecurity innovation and has the highest demand for cybersecurity professionals. With major tech hubs in Silicon Valley, Washington DC, and New York, the US offers unparalleled opportunities in this field.",
+          "language_requirements": "English (primary business language). Some government positions may require additional language skills.",
+          "skill_demand_level": "Very High - Critical infrastructure protection, government contracts, and private sector security drive massive demand",
+          "required_education": "Bachelor's degree in Computer Science, Cybersecurity, or related field. Master's degree preferred for advanced positions.",
+          "certifications": [
+            "CompTIA Security+",
+            "CISSP (Certified Information Systems Security Professional)",
+            "CISM (Certified Information Security Manager)",
+            "CEH (Certified Ethical Hacker)",
+            "GIAC certifications"
+          ],
+          "advantages": [
+            "Highest salaries in the industry globally",
+            "Access to cutting-edge technology and research",
+            "Strong job security with government backing",
+            "Extensive professional networks and conferences",
+            "Opportunities for specialization in various sectors"
+          ],
+          "limitations": [
+            "High competition for top positions",
+            "Stringent background checks for government roles",
+            "Rapidly evolving field requires continuous learning",
+            "Work-life balance challenges in high-pressure roles"
+          ],
+          "references": [
+            "US Department of Homeland Security Cybersecurity Resources",
+            "ISC² (International Information System Security Certification Consortium)",
+            "SANS Institute",
+            "NIST Cybersecurity Framework"
+          ],
+          "study_paths": [
+            "Associate Degree (2 years) → Entry-level positions",
+            "Bachelor's Degree (4 years) → Mid-level analyst roles",
+            "Master's Degree (2 years) → Senior security positions",
+            "Certifications + Experience → Specialized roles",
+            "PhD → Research and academic positions"
+          ]
+        },
+        "cloud_computing": {
+          "overview": "Cloud computing in the US drives digital transformation across industries, with major demand from tech giants, enterprises, and startups adopting cloud-native architectures.",
+          "language_requirements": "English proficiency required. Technical documentation and cloud platform interfaces in English.",
+          "skill_demand_level": "Very High - Cloud adoption accelerating across all sectors",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified Solutions Architect",
+            "Microsoft Azure Solutions Architect",
+            "Google Cloud Professional Cloud Architect",
+            "Certified Kubernetes Administrator (CKA)",
+            "CompTIA Cloud+"
+          ],
+          "advantages": [
+            "Highest paying cloud certifications",
+            "Remote work opportunities abundant",
+            "Continuous innovation and learning",
+            "Strong job security with enterprise demand",
+            "Global career mobility"
+          ],
+          "limitations": [
+            "Rapidly evolving technology landscape",
+            "High competition for senior roles",
+            "Complex multi-cloud environments",
+            "Security and compliance challenges",
+            "Vendor lock-in considerations"
+          ],
+          "references": [
+            "AWS Career Guide",
+            "Microsoft Azure Learning Paths",
+            "Google Cloud Training",
+            "Cloud Computing Association",
+            "Gartner Cloud Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → Cloud engineer",
+            "Bachelor's Degree (4 years) → Cloud architect",
+            "Associate Degree (2 years) → Cloud administrator",
+            "Self-study + Labs → Cloud specialist",
+            "Bootcamps → Entry-level cloud roles"
+          ]
+        },
+        "ai_machine_learning": {
+          "overview": "AI and Machine Learning in the US is at the forefront of global innovation, with massive investments from tech giants, research institutions, and government initiatives driving unprecedented demand for AI/ML talent.",
+          "language_requirements": "English proficiency required. Technical documentation and research papers in English.",
+          "skill_demand_level": "Very High - AI/ML is transforming every industry with massive government and private sector investment",
+          "required_education": "Master's degree preferred, PhD for research roles. Bachelor's degree acceptable for entry-level positions with strong portfolio.",
+          "certifications": [
+            "TensorFlow Developer Certificate",
+            "AWS Machine Learning Specialty",
+            "Google Cloud AI/ML Engineer",
+            "Microsoft Azure AI Engineer",
+            "Deep Learning Specialization (Coursera)"
+          ],
+          "advantages": [
+            "Highest salaries in AI/ML globally",
+            "Access to cutting-edge research and technology",
+            "Strong government funding and initiatives",
+            "Extensive professional networks and conferences",
+            "Opportunities in diverse industries"
+          ],
+          "limitations": [
+            "High competition for top research positions",
+            "Rapidly evolving field requires continuous learning",
+            "PhD often required for academic/research roles",
+            "Work-life balance challenges in high-pressure environments"
+          ],
+          "references": [
+            "National AI Initiative (US Government)",
+            "AI Research at Stanford, MIT, Berkeley",
+            "Kaggle competitions and datasets",
+            "NeurIPS, ICML, CVPR conferences",
+            "OpenAI, DeepMind research papers"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Entry-level ML engineer",
+            "Master's Degree (2 years) → ML engineer/researcher",
+            "PhD (4-6 years) → Research scientist",
+            "Bootcamps + Portfolio → ML engineer",
+            "Self-study + Kaggle → Data scientist"
+          ]
+        },
+        "accounting": {
+          "overview": "The US accounting profession is highly regulated and offers excellent career opportunities with strong demand from corporations, government agencies, and public accounting firms. Major hubs in New York, Chicago, and Los Angeles.",
+          "language_requirements": "English proficiency required. Technical accounting terms in English.",
+          "skill_demand_level": "High - Corporate compliance, tax services, and financial reporting drive steady demand",
+          "required_education": "Bachelor's degree in Accounting, Finance, or Business Administration. 150 credit hours for CPA licensure.",
+          "certifications": [
+            "CPA (Certified Public Accountant)",
+            "CMA (Certified Management Accountant)",
+            "CFA (Chartered Financial Analyst)",
+            "CIA (Certified Internal Auditor)",
+            "CFE (Certified Fraud Examiner)"
+          ],
+          "advantages": [
+            "Strong job security and stable demand",
+            "Competitive salaries with excellent benefits",
+            "Clear career progression paths",
+            "Work-life balance in many firms",
+            "Opportunities for specialization"
+          ],
+          "limitations": [
+            "Extensive education requirements (150 credits)",
+            "State-specific licensing requirements",
+            "High competition for Big 4 firms",
+            "Long hours during busy season",
+            "Continuous professional education requirements"
+          ],
+          "references": [
+            "American Institute of CPAs (AICPA)",
+            "US Bureau of Labor Statistics",
+            "Big 4 Accounting Firms",
+            "Financial Accounting Standards Board (FASB)",
+            "Internal Revenue Service (IRS)"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Staff accountant",
+            "Master's Degree (1-2 years) → Senior accountant",
+            "CPA Exam + Experience → CPA designation",
+            "MBA + CPA → Management positions",
+            "Specialized certifications → Expert roles"
+          ]
+        },
+        "devops": {
+          "overview": "DevOps in the US is at the forefront of the cloud-native revolution, with massive demand from tech giants, enterprises, and startups adopting DevOps practices. Major hubs in Silicon Valley, Seattle, and New York.",
+          "language_requirements": "English proficiency required. Technical documentation and tools in English.",
+          "skill_demand_level": "Very High - Cloud migration and digital transformation drive unprecedented demand",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field preferred",
+          "certifications": [
+            "AWS Certified DevOps Engineer",
+            "Microsoft Certified: Azure DevOps Engineer",
+            "Google Cloud Professional DevOps Engineer",
+            "Certified Kubernetes Administrator (CKA)",
+            "Docker Certified Associate"
+          ],
+          "advantages": [
+            "Highest salaries in DevOps globally",
+            "Access to cutting-edge tools and technologies",
+            "Strong job security with enterprise demand",
+            "Remote work opportunities abundant",
+            "Continuous learning and innovation"
+          ],
+          "limitations": [
+            "Rapidly evolving technology landscape",
+            "High competition for senior roles",
+            "On-call responsibilities common",
+            "Complex multi-cloud environments",
+            "Continuous integration requirements"
+          ],
+          "references": [
+            "DevOps Institute",
+            "Cloud Native Computing Foundation (CNCF)",
+            "AWS DevOps Resources",
+            "Microsoft DevOps Documentation",
+            "Google Cloud DevOps Guides"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → DevOps engineer",
+            "Bachelor's Degree (4 years) → Senior DevOps engineer",
+            "Associate Degree (2 years) → DevOps administrator",
+            "Self-study + Labs → DevOps specialist",
+            "Bootcamps → Entry-level DevOps roles"
+          ]
+        },
+        "networking": {
+          "overview": "Computer networking in the US is essential for the digital infrastructure supporting massive data centers, cloud services, and enterprise networks. Major demand from tech giants, telecommunications, and government agencies.",
+          "language_requirements": "English proficiency required. Technical documentation and network standards in English.",
+          "skill_demand_level": "High - Cloud migration, 5G deployment, and cybersecurity drive steady demand",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field preferred",
+          "certifications": [
+            "Cisco Certified Network Associate (CCNA)",
+            "Cisco Certified Network Professional (CCNP)",
+            "CompTIA Network+",
+            "Juniper Networks Certified Associate (JNCIA)",
+            "AWS Certified Advanced Networking Specialty"
+          ],
+          "advantages": [
+            "Stable and essential infrastructure role",
+            "Strong job security with enterprise demand",
+            "Clear career progression paths",
+            "Work-life balance in many organizations",
+            "Opportunities for specialization"
+          ],
+          "limitations": [
+            "Rapidly evolving technology landscape",
+            "On-call responsibilities common",
+            "Complex multi-vendor environments",
+            "Security and compliance challenges",
+            "Physical infrastructure requirements"
+          ],
+          "references": [
+            "Cisco Networking Academy",
+            "CompTIA Network+ Resources",
+            "IEEE Communications Society",
+            "Internet Engineering Task Force (IETF)",
+            "Network and Systems Professionals Association"
+          ],
+          "study_paths": [
+            "Network Certifications (3-6 months) → Network technician",
+            "Associate Degree (2 years) → Network administrator",
+            "Bachelor's Degree (4 years) → Network engineer",
+            "Self-study + Labs → Network specialist",
+            "Vendor-specific training → Expert roles"
+          ]
+        },
+        "medical_laboratory_science": {
+          "overview": "Medical laboratory science in the US is essential for healthcare diagnostics, research, and patient care. With an aging population and advancing medical technologies, demand remains strong across hospitals, research institutions, and diagnostic labs.",
+          "language_requirements": "English proficiency required. Medical terminology and documentation in English.",
+          "skill_demand_level": "High - Aging population, medical research, and diagnostic advancements drive demand",
+          "required_education": "Bachelor's degree in Medical Laboratory Science or related field. Certification required for most positions.",
+          "certifications": [
+            "Medical Laboratory Scientist (MLS) certification",
+            "American Society for Clinical Pathology (ASCP) certification",
+            "Medical Laboratory Technician (MLT) certification",
+            "Specialty certifications in areas like hematology, microbiology",
+            "Molecular diagnostics certification"
+          ],
+          "advantages": [
+            "Essential healthcare role with job security",
+            "Good work-life balance in most settings",
+            "Competitive salaries with benefits",
+            "Opportunities for specialization",
+            "Contributing directly to patient care"
+          ],
+          "limitations": [
+            "Shift work including nights and weekends",
+            "Exposure to infectious materials",
+            "High stress in diagnostic settings",
+            "Continuous education requirements",
+            "Emotional demands of healthcare work"
+          ],
+          "references": [
+            "American Society for Clinical Pathology (ASCP)",
+            "American Society for Clinical Laboratory Science (ASCLS)",
+            "Centers for Disease Control and Prevention (CDC)",
+            "National Institutes of Health (NIH)",
+            "Bureau of Labor Statistics"
+          ],
+          "study_paths": [
+            "Associate Degree (2 years) → Medical laboratory technician",
+            "Bachelor's Degree (4 years) → Medical laboratory scientist",
+            "Master's Degree (2 years) → Advanced specialist roles",
+            "Certification programs → Specialized areas",
+            "On-the-job training → Entry-level positions"
+          ]
+        },
+        "nursing": {
+          "overview": "Nursing in the US is essential for healthcare delivery across hospitals, clinics, and long-term care facilities. With an aging population and healthcare reforms, demand for registered nurses remains consistently high with excellent job security.",
+          "language_requirements": "English proficiency required. Medical terminology and patient communication in English.",
+          "skill_demand_level": "High - Aging population, healthcare reforms, and retirement of baby boomer nurses drive demand",
+          "required_education": "Bachelor of Science in Nursing (BSN) preferred. Associate Degree in Nursing (ADN) acceptable with bridge programs.",
+          "certifications": [
+            "Registered Nurse (RN) license",
+            "NCLEX-RN examination",
+            "Basic Life Support (BLS) certification",
+            "Advanced Cardiac Life Support (ACLS)",
+            "Specialty certifications (CCRN, CEN, etc.)"
+          ],
+          "advantages": [
+            "Excellent job security and demand",
+            "Competitive salaries with benefits",
+            "Meaningful work helping patients",
+            "Flexible scheduling options",
+            "Opportunities for specialization and advancement"
+          ],
+          "limitations": [
+            "Physically demanding work",
+            "Shift work including nights and weekends",
+            "Emotional stress from patient care",
+            "High patient-to-nurse ratios",
+            "Continuous education requirements"
+          ],
+          "references": [
+            "American Nurses Association (ANA)",
+            "National Council of State Boards of Nursing (NCSBN)",
+            "Bureau of Labor Statistics",
+            "Centers for Medicare & Medicaid Services",
+            "American Association of Colleges of Nursing"
+          ],
+          "study_paths": [
+            "Associate Degree (2 years) → Registered nurse",
+            "Bachelor's Degree (4 years) → BSN prepared nurse",
+            "RN to BSN bridge (1-2 years) → Bachelor's degree",
+            "Master's Degree (2 years) → Advanced practice roles",
+            "Doctor of Nursing Practice (3-4 years) → DNP"
+          ]
+        },
+        "public_health": {
+          "overview": "Public health in the US addresses population-level health challenges through prevention, education, and policy. With growing concerns about chronic diseases, infectious diseases, and health equity, demand for public health professionals remains strong in government agencies, NGOs, and research institutions.",
+          "language_requirements": "English proficiency required. Technical health terminology and policy documents in English.",
+          "skill_demand_level": "High - Chronic disease prevention, health equity initiatives, and pandemic preparedness drive demand",
+          "required_education": "Master of Public Health (MPH) preferred. Bachelor's degree acceptable for entry-level positions.",
+          "certifications": [
+            "Certified in Public Health (CPH)",
+            "Certified Health Education Specialist (CHES)",
+            "Epidemiology certifications",
+            "Health policy and management credentials",
+            "Specialty certifications in areas like biostatistics, environmental health"
+          ],
+          "advantages": [
+            "Making a difference in community health",
+            "Diverse career opportunities",
+            "Stable government and NGO jobs",
+            "Global health impact",
+            "Work-life balance in many roles"
+          ],
+          "limitations": [
+            "Lower salaries compared to clinical roles",
+            "Policy and funding uncertainties",
+            "Emotional stress from public health crises",
+            "Complex regulatory environment",
+            "Limited direct patient interaction"
+          ],
+          "references": [
+            "Centers for Disease Control and Prevention (CDC)",
+            "American Public Health Association (APHA)",
+            "Council on Education for Public Health (CEPH)",
+            "National Institutes of Health (NIH)",
+            "World Health Organization (WHO)"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Entry-level positions",
+            "Master of Public Health (2 years) → Public health specialist",
+            "Doctor of Public Health (3-4 years) → Leadership roles",
+            "Certificate programs → Specialized areas",
+            "On-the-job training → Government positions"
+          ]
+        },
+        "international_business": {
+          "overview": "International business in the US drives global trade and commerce through multinational corporations, export-import companies, and international trade organizations. With the US being the world's largest economy, demand for international business professionals remains strong in global companies and trade organizations.",
+          "language_requirements": "English proficiency required. Foreign language skills highly valued for international roles.",
+          "skill_demand_level": "High - Global trade expansion, multinational corporations, and international market development drive demand",
+          "required_education": "Bachelor's degree in International Business, Business Administration, or related field. MBA preferred for management positions.",
+          "certifications": [
+            "Certified Global Business Professional (CGBP)",
+            "International Business Competency Standards",
+            "Foreign language certifications",
+            "International trade and customs certifications",
+            "Cross-cultural communication credentials"
+          ],
+          "advantages": [
+            "Global career opportunities",
+            "Cultural exposure and travel",
+            "Higher earning potential",
+            "Business development opportunities",
+            "Access to international markets"
+          ],
+          "limitations": [
+            "Frequent travel requirements",
+            "Cultural adaptation challenges",
+            "Time zone differences",
+            "Complex international regulations",
+            "Economic and political uncertainties"
+          ],
+          "references": [
+            "US Department of Commerce",
+            "Export-Import Bank of the United States",
+            "World Trade Organization (WTO)",
+            "US Chamber of Commerce",
+            "International Business Education Alliance"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → International business coordinator",
+            "MBA (2 years) → International business manager",
+            "Master's in International Business (1-2 years) → Global manager",
+            "Certificate programs → Specialized areas",
+            "Language immersion → International roles"
+          ]
+        },
+        "digital_marketing": {
+          "overview": "Digital marketing in the US is a booming industry with massive demand from e-commerce companies, tech startups, and traditional businesses transitioning online. Major hubs in Silicon Valley, New York, and Austin drive innovation in digital advertising, social media, and content marketing.",
+          "language_requirements": "English proficiency required. Technical marketing terminology and digital platform interfaces in English.",
+          "skill_demand_level": "Very High - E-commerce growth, social media expansion, and digital transformation drive massive demand",
+          "required_education": "Bachelor's degree in Marketing, Communications, or related field. Digital marketing certifications often preferred over formal education.",
+          "certifications": [
+            "Google Ads Certification",
+            "Facebook Blueprint Certification",
+            "HubSpot Content Marketing Certification",
+            "Google Analytics Certification",
+            "SEO certifications (Moz, SEMrush)"
+          ],
+          "advantages": [
+            "High earning potential with performance bonuses",
+            "Creative and dynamic work environment",
+            "Remote work opportunities",
+            "Fast career advancement",
+            "Access to cutting-edge marketing technology"
+          ],
+          "limitations": [
+            "High competition in major markets",
+            "Rapidly changing algorithms and platforms",
+            "Performance-based pressure",
+            "Work-life balance challenges during campaigns",
+            "Constant need for skill updates"
+          ],
+          "references": [
+            "Google Digital Garage",
+            "HubSpot Academy",
+            "Facebook for Business",
+            "Marketing Science Institute",
+            "Interactive Advertising Bureau (IAB)"
+          ],
+          "study_paths": [
+            "Associate Degree (2 years) → Junior marketing roles",
+            "Bachelor's Degree (4 years) → Digital marketing specialist",
+            "Certifications + Experience → Senior marketing positions",
+            "MBA (2 years) → Marketing management",
+            "Self-taught + Portfolio → Freelance opportunities"
+          ]
+        }
+      }
+    },
+    "canada": {
+      "name": "Canada",
+      "flag": "🇨🇦",
+      "skills": {
+        "cybersecurity": {
+          "overview": "Canada has a growing cybersecurity sector with strong government support and increasing private sector investment. Major hubs in Toronto, Ottawa, and Vancouver.",
+          "language_requirements": "English or French depending on province. Bilingualism is an asset, especially in government roles.",
+          "skill_demand_level": "High - Government initiatives and critical infrastructure protection drive demand",
+          "required_education": "Bachelor's degree in Computer Science or related field. Some positions accept diplomas with experience.",
+          "certifications": [
+            "CompTIA Security+",
+            "CISSP",
+            "CISM",
+            "GIAC certifications",
+            "Canadian cybersecurity certifications"
+          ],
+          "advantages": [
+            "Strong work-life balance culture",
+            "Universal healthcare system",
+            "Government support for tech sector",
+            "Multilingual work environment",
+            "Path to permanent residency through skilled worker programs"
+          ],
+          "limitations": [
+            "Cold climate in many regions",
+            "Smaller job market compared to US",
+            "Language requirements for some positions",
+            "Competitive immigration process"
+          ],
+          "references": [
+            "Canadian Centre for Cyber Security",
+            "Public Safety Canada",
+            "Canadian Cybersecurity Certification Program",
+            "Communications Security Establishment (CSE)"
+          ],
+          "study_paths": [
+            "College Diploma (2-3 years) → Entry-level security roles",
+            "Bachelor's Degree (4 years) → Analyst positions",
+            "Master's Degree (2 years) → Advanced roles",
+            "Apprenticeship programs → Hands-on experience",
+            "Express Entry system for skilled immigration"
+          ]
+        },
+        "data_science": {
+          "overview": "Canada's data science sector is growing rapidly, particularly in Toronto and Montreal, with applications in healthcare, finance, and natural resources.",
+          "language_requirements": "English or French depending on region. Bilingualism is an asset.",
+          "skill_demand_level": "Growing - Healthcare, finance, and resource industries drive demand",
+          "required_education": "Bachelor's degree in Data Science, Statistics, Computer Science, or related field",
+          "certifications": ["IBM Data Science Professional Certificate", "Microsoft Certified: Azure AI Engineer Associate"],
+          "advantages": ["Strong work-life balance", "Universal healthcare", "Multilingual environment"],
+          "limitations": ["Cold climate", "Smaller market than US", "Competitive immigration"],
+          "references": ["Statistics Canada", "Canadian Statistical Society"],
+          "study_paths": ["Bachelor's Degree (4 years) → Analyst roles", "Master's Degree (2 years) → Data scientist positions"]
+        },
+        "ai_machine_learning": {
+          "overview": "Canada's AI and Machine Learning sector is rapidly growing, particularly in Toronto (AI capital of Canada) and Montreal, with strong government investment and world-class research institutions.",
+          "language_requirements": "English or French depending on region. Bilingualism (English/French) is highly valued.",
+          "skill_demand_level": "High - Government AI strategy and research excellence driving demand",
+          "required_education": "Master's degree preferred for most roles. PhD for research and academic positions.",
+          "certifications": [
+            "AWS Machine Learning Specialty",
+            "Google Cloud AI/ML Engineer",
+            "Microsoft Certified: Azure AI Engineer",
+            "Deep Learning Specialization (Coursera)",
+            "Canadian AI certifications"
+          ],
+          "advantages": [
+            "Strong work-life balance culture",
+            "Universal healthcare system",
+            "Government funding for AI research",
+            "Multilingual work environment",
+            "Path to permanent residency"
+          ],
+          "limitations": [
+            "Cold climate in many regions",
+            "Smaller job market compared to US",
+            "High competition for top research positions",
+            "Limited venture capital compared to Silicon Valley",
+            "Brain drain to US tech companies"
+          ],
+          "references": [
+            "Canadian AI Strategy (Government of Canada)",
+            "Vector Institute (Toronto)",
+            "Mila (Montreal AI Institute)",
+            "Canadian Institute for Advanced Research (CIFAR)",
+            "NeurIPS, ICML conferences"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Junior ML engineer",
+            "Master's Degree (2 years) → ML engineer/researcher",
+            "PhD (4-6 years) → Research scientist",
+            "AI bootcamps → Career transition",
+            "College programs → Technical roles"
+          ]
+        },
+        "accounting": {
+          "overview": "Canada's accounting profession is well-established with strong demand from financial services, natural resources, and multinational corporations. Major hubs in Toronto, Vancouver, and Calgary with growing opportunities in Montreal and Ottawa.",
+          "language_requirements": "English or French depending on province. Bilingualism (English/French) is highly valued in federal positions.",
+          "skill_demand_level": "High - Financial services, natural resources, and corporate compliance drive demand",
+          "required_education": "Bachelor's degree in Accounting, Commerce, or Business. Professional designations required for CPA status.",
+          "certifications": [
+            "CPA (Chartered Professional Accountant)",
+            "CMA (Certified Management Accountant)",
+            "CFA (Chartered Financial Analyst)",
+            "CIA (Certified Internal Auditor)",
+            "CFE (Certified Fraud Examiner)"
+          ],
+          "advantages": [
+            "Strong work-life balance culture",
+            "Universal healthcare system",
+            "Multilingual work environment",
+            "Competitive salaries with benefits",
+            "Path to permanent residency"
+          ],
+          "limitations": [
+            "Cold climate in many regions",
+            "Provincial licensing requirements",
+            "Smaller job market compared to US",
+            "High competition for Big 4 firms",
+            "Complex tax regulations"
+          ],
+          "references": [
+            "CPA Canada (Chartered Professional Accountants)",
+            "Canadian Institute of Chartered Accountants",
+            "Canada Revenue Agency",
+            "Office of the Superintendent of Financial Institutions",
+            "Big 4 Accounting Firms"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Junior accountant",
+            "CPA Professional Education Program (1-2 years) → CPA designation",
+            "Master's Degree (1-2 years) → Senior positions",
+            "College Diploma (2-3 years) → Entry-level roles",
+            "Apprenticeship programs → Practical experience"
+          ]
+        },
+        "medical_laboratory_science": {
+          "overview": "Medical laboratory science in Canada is essential for healthcare diagnostics across the universal healthcare system. With an aging population and regional healthcare needs, demand is strong in hospitals, provincial labs, and research institutions.",
+          "language_requirements": "English or French depending on province. Bilingualism is highly valued in healthcare settings.",
+          "skill_demand_level": "High - Universal healthcare system, aging population, and medical research drive demand",
+          "required_education": "Bachelor's degree in Medical Laboratory Science or related field. Provincial certification required.",
+          "certifications": [
+            "Canadian Society for Medical Laboratory Science (CSMLS) certification",
+            "Provincial regulatory body certification",
+            "Specialty certifications in hematology, microbiology, etc.",
+            "Quality management certifications",
+            "Molecular diagnostics certification"
+          ],
+          "advantages": [
+            "Essential healthcare role with job security",
+            "Universal healthcare system benefits",
+            "Good work-life balance in most settings",
+            "Multilingual work environment",
+            "Path to permanent residency"
+          ],
+          "limitations": [
+            "Cold climate in many regions",
+            "Provincial certification requirements",
+            "Shift work including nights and weekends",
+            "Exposure to infectious materials",
+            "Emotional demands of healthcare work"
+          ],
+          "references": [
+            "Canadian Society for Medical Laboratory Science (CSMLS)",
+            "Provincial regulatory colleges",
+            "Canadian Institutes of Health Research (CIHR)",
+            "Public Health Agency of Canada",
+            "Canadian Medical Association"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Medical laboratory technologist",
+            "Graduate Diploma (1 year) → Specialized areas",
+            "Master's Degree (2 years) → Advanced roles",
+            "College Diploma (2-3 years) → Assistant positions",
+            "CSMLS certification → Professional practice"
+          ]
+        },
+        "nursing": {
+          "overview": "Nursing in Canada is essential for healthcare delivery across the universal healthcare system. With an aging population and healthcare needs in rural and remote communities, demand for registered nurses remains consistently high.",
+          "language_requirements": "English or French depending on province. Bilingualism is highly valued in healthcare settings.",
+          "skill_demand_level": "High - Universal healthcare system, aging population, and rural healthcare needs drive demand",
+          "required_education": "Bachelor of Science in Nursing (BSN) required. Collaborative programs available.",
+          "certifications": [
+            "Registered Nurse (RN) license",
+            "Canadian Registered Nurse Examination (CRNE)",
+            "Basic Life Support (BLS) certification",
+            "Advanced Cardiac Life Support (ACLS)",
+            "Canadian Nurses Association certifications"
+          ],
+          "advantages": [
+            "Excellent job security in universal healthcare",
+            "Competitive salaries with benefits",
+            "Universal healthcare system",
+            "Multilingual work environment",
+            "Path to permanent residency"
+          ],
+          "limitations": [
+            "Physically demanding work",
+            "Shift work including nights and weekends",
+            "Cold climate in many regions",
+            "High patient-to-nurse ratios",
+            "Emotional stress from patient care"
+          ],
+          "references": [
+            "Canadian Nurses Association (CNA)",
+            "Canadian Council for Practical Nurse Regulators",
+            "Provincial regulatory bodies",
+            "Canadian Institute for Health Information",
+            "Health Canada"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Registered nurse",
+            "Collaborative nursing programs → BSN",
+            "Master's Degree (2 years) → Advanced practice",
+            "Doctor of Nursing (3-4 years) → DNP",
+            "Provincial licensing → Professional practice"
+          ]
+        },
+        "public_health": {
+          "overview": "Public health in Canada addresses population health challenges through the universal healthcare system and provincial health authorities. With increasing focus on health equity, indigenous health, and chronic disease prevention, demand for public health professionals remains strong.",
+          "language_requirements": "English or French depending on province. Bilingualism is highly valued in healthcare settings.",
+          "skill_demand_level": "High - Health equity initiatives, indigenous health, and chronic disease prevention drive demand",
+          "required_education": "Master of Public Health (MPH) preferred. Bachelor's degree acceptable for entry-level positions.",
+          "certifications": [
+            "Certified in Public Health (CPH)",
+            "Canadian College of Health Leaders credentials",
+            "Epidemiology and biostatistics certifications",
+            "Health policy and management qualifications",
+            "Specialty areas like environmental health, health promotion"
+          ],
+          "advantages": [
+            "Making a difference in community health",
+            "Universal healthcare system benefits",
+            "Stable government and health authority jobs",
+            "Multilingual work environment",
+            "Path to permanent residency"
+          ],
+          "limitations": [
+            "Cold climate in many regions",
+            "Provincial variations in requirements",
+            "Policy and funding uncertainties",
+            "Emotional stress from public health crises",
+            "Complex federal-provincial dynamics"
+          ],
+          "references": [
+            "Public Health Agency of Canada",
+            "Canadian Public Health Association",
+            "Provincial health authorities",
+            "Canadian Institutes of Health Research (CIHR)",
+            "Canadian Medical Association"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Entry-level positions",
+            "Master of Public Health (2 years) → Public health specialist",
+            "Doctor of Public Health (3-4 years) → Leadership roles",
+            "Certificate programs → Specialized areas",
+            "Government training programs → Public sector roles"
+          ]
+        }
+      }
+    },
+    "germany": {
+      "name": "Germany",
+      "flag": "🇩🇪",
+      "skills": {
+        "cybersecurity": {
+          "overview": "Germany's cybersecurity sector is rapidly growing with strong emphasis on data protection and EU regulations. Major opportunities in Berlin, Munich, and Frankfurt.",
+          "language_requirements": "German language skills are often required, especially for government and local company positions. English is common in international companies.",
+          "skill_demand_level": "High - EU GDPR and Industry 4.0 drive demand for cybersecurity experts",
+          "required_education": "Bachelor's or Master's degree in Computer Science or related field. Vocational training is also recognized.",
+          "certifications": [
+            "CompTIA Security+",
+            "CISSP",
+            "CISM",
+            "German IT security certifications",
+            "TeleTrusT certifications"
+          ],
+          "advantages": [
+            "Strong economy and job security",
+            "Excellent work-life balance",
+            "High quality of life",
+            "Strong emphasis on work ethics",
+            "Comprehensive social benefits"
+          ],
+          "limitations": [
+            "German language barrier for non-native speakers",
+            "Bureaucratic processes",
+            "Slower decision-making in some organizations",
+            "Competition from local talent"
+          ],
+          "references": [
+            "German Federal Office for Information Security (BSI)",
+            "ENISA (European Union Agency for Cybersecurity)",
+            "TeleTrusT",
+            "German Cybersecurity Council"
+          ],
+          "study_paths": [
+            "Ausbildung (Vocational training, 3 years) → Practical cybersecurity roles",
+            "Bachelor's Degree (3 years) → Technical positions",
+            "Master's Degree (2 years) → Leadership roles",
+            "Doktor (PhD, 3-4 years) → Research positions",
+            "Job Seeker Visa for skilled professionals"
+          ]
+        }
+      }
+    },
+    "uae": {
+      "name": "United Arab Emirates",
+      "flag": "🇦🇪",
+      "skills": {
+        "cybersecurity": {
+          "overview": "The UAE is rapidly developing its cybersecurity capabilities with significant government investment. Dubai and Abu Dhabi are emerging as regional tech hubs.",
+          "language_requirements": "English is the primary business language. Arabic is beneficial for government positions.",
+          "skill_demand_level": "Very High - Government Vision 2030 and digital transformation initiatives",
+          "required_education": "Bachelor's degree in Computer Science or related field. Experience often valued over formal education.",
+          "certifications": [
+            "CompTIA Security+",
+            "CISSP",
+            "CISM",
+            "UAE-specific cybersecurity certifications",
+            "GIAC certifications"
+          ],
+          "advantages": [
+            "Tax-free income",
+            "High quality of life",
+            "Modern infrastructure",
+            "Multicultural work environment",
+            "Strategic location connecting East and West"
+          ],
+          "limitations": [
+            "Hot climate year-round",
+            "Cultural adaptation required",
+            "Work visa sponsorship requirements",
+            "Limited local talent pool"
+          ],
+          "references": [
+            "UAE National Electronic Security Authority (NESA)",
+            "Dubai Future Foundation",
+            "Abu Dhabi Department of Culture and Tourism",
+            "UAE Cybersecurity Council"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → Entry-level positions",
+            "Master's Degree (1-2 years) → Advanced roles",
+            "Professional certifications → Specialized positions",
+            "Experience-based entry → Senior roles",
+            "Golden Visa program for skilled professionals"
+          ]
+        },
+        "international_business": {
+          "overview": "International business in the UAE drives global trade and commerce through Dubai and Abu Dhabi as major business hubs. As a strategic gateway between East and West, the UAE offers excellent opportunities for international business professionals in multinational corporations, trade organizations, and emerging markets.",
+          "language_requirements": "English is the primary business language. Arabic is beneficial for local business and government positions.",
+          "skill_demand_level": "Very High - Strategic location, free zones, and Vision 2030 initiatives drive demand",
+          "required_education": "Bachelor's degree in International Business, Business Administration, or related field. MBA preferred for senior positions.",
+          "certifications": [
+            "UAE Chamber of Commerce certifications",
+            "International Business Competency Standards",
+            "Foreign language certifications",
+            "International trade and customs qualifications",
+            "Cross-cultural business credentials"
+          ],
+          "advantages": [
+            "Tax-free income",
+            "Strategic location connecting continents",
+            "Modern infrastructure and lifestyle",
+            "Multicultural work environment",
+            "Growing business hub status"
+          ],
+          "limitations": [
+            "Hot climate year-round",
+            "Cultural adaptation required",
+            "Work visa sponsorship requirements",
+            "Competition from global talent",
+            "Economic dependence on oil sector"
+          ],
+          "references": [
+            "Dubai Chamber of Commerce",
+            "Abu Dhabi Chamber of Commerce",
+            "Department of Economic Development (DED)",
+            "Dubai Future Foundation",
+            "UAE Ministry of Economy"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → International business coordinator",
+            "Master's Degree (1-2 years) → International business manager",
+            "MBA (1-2 years) → Global business leader",
+            "Certificate programs → Specialized areas",
+            "Golden Visa program → Skilled professional entry"
+          ]
+        }
+      }
+    },
+    "united_kingdom": {
+      "name": "United Kingdom",
+      "flag": "🇬🇧",
+      "skills": {
+        "software_engineering": {
+          "overview": "The UK software engineering sector is known for its strong tech ecosystem, particularly in London and Edinburgh, with growing opportunities in fintech, gaming, and AI.",
+          "language_requirements": "English is the primary language. Technical terms are in English.",
+          "skill_demand_level": "High - Digital transformation and tech innovation drive demand",
+          "required_education": "Bachelor's degree in Computer Science or related field preferred",
+          "certifications": ["AWS Certified Developer", "Microsoft Certified: Azure Developer Associate"],
+          "advantages": ["Competitive salaries with good work-life balance", "Strong presence of global tech companies"],
+          "limitations": ["High cost of living in London", "Brexit-related uncertainties"],
+          "references": ["Tech Nation Report", "Office for National Statistics"],
+          "study_paths": ["Foundation Degree (2 years) → Junior developer", "Bachelor's Degree (3 years) → Graduate developer"]
+        },
+        "data_science": {
+          "overview": "The UK's data science sector is rapidly growing with applications in fintech, healthcare, and government.",
+          "language_requirements": "English proficiency required.",
+          "skill_demand_level": "High - Financial services and government digital transformation",
+          "required_education": "Bachelor's or Master's degree in Mathematics, Statistics, or related field",
+          "certifications": ["IBM Data Science Professional Certificate", "Microsoft Certified: Azure AI Engineer Associate"],
+          "advantages": ["Strong presence in financial services", "Good work-life balance culture"],
+          "limitations": ["High cost of living in major cities", "Brexit uncertainty"],
+          "references": ["The Alan Turing Institute", "Office for National Statistics"],
+          "study_paths": ["BSc Mathematics/Statistics (3 years) → Analyst roles", "MSc Data Science (1 year) → Data scientist positions"]
+        },
+        "cloud_computing": {
+          "overview": "The UK's cloud computing sector is rapidly growing with strong adoption in financial services, government digital transformation, and enterprise migration to cloud platforms.",
+          "language_requirements": "English is the primary language. Technical documentation and cloud services in English.",
+          "skill_demand_level": "High - Government cloud-first policy and enterprise digital transformation",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified Solutions Architect",
+            "Microsoft Certified: Azure Solutions Architect",
+            "Google Cloud Professional Cloud Architect",
+            "Certified Kubernetes Administrator (CKA)",
+            "ITIL Foundation"
+          ],
+          "advantages": [
+            "Strong demand in financial services",
+            "Government cloud initiatives",
+            "Competitive salaries with benefits",
+            "Work-life balance culture",
+            "Access to European cloud market"
+          ],
+          "limitations": [
+            "Brexit-related uncertainties",
+            "Weather-dependent work culture",
+            "Competition from global talent",
+            "Slower adoption in some traditional sectors",
+            "Data sovereignty regulations"
+          ],
+          "references": [
+            "UK Government Cloud First Policy",
+            "Cloud Industry Forum",
+            "British Computing Society",
+            "Gartner UK Cloud Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → Cloud engineer",
+            "Bachelor's Degree (3 years) → Cloud architect",
+            "Apprenticeship programs → Practical experience",
+            "Self-study + Labs → Cloud specialist",
+            "Postgraduate courses → Advanced roles"
+          ]
+        },
+        "ai_machine_learning": {
+          "overview": "The UK's AI and Machine Learning sector is rapidly growing with strong applications in fintech, healthcare, autonomous vehicles, and government AI initiatives. London is emerging as a major AI hub in Europe.",
+          "language_requirements": "English is the primary language. Technical documentation and research in English.",
+          "skill_demand_level": "High - Government AI strategy and fintech innovation driving demand",
+          "required_education": "Master's degree preferred for most roles. PhD for research positions.",
+          "certifications": [
+            "AWS Machine Learning Specialty",
+            "Microsoft Certified: Azure AI Engineer",
+            "Google Cloud AI/ML Engineer",
+            "Deep Learning Specialization (Coursera)",
+            "IBM AI Engineering Professional Certificate"
+          ],
+          "advantages": [
+            "Strong presence in financial technology",
+            "Government AI initiatives and funding",
+            "Competitive salaries with benefits",
+            "Access to European AI research",
+            "Growing startup ecosystem"
+          ],
+          "limitations": [
+            "High cost of living in London",
+            "Brexit-related uncertainties",
+            "Competition from global AI talent",
+            "Limited local AI research scale compared to US",
+            "Weather-dependent work culture"
+          ],
+          "references": [
+            "UK AI Council",
+            "Alan Turing Institute",
+            "Government AI Strategy",
+            "FinTech London",
+            "NeurIPS and ICML conferences"
+          ],
+          "study_paths": [
+            "BSc Computer Science (3 years) → Junior ML engineer",
+            "MSc AI/ML (1 year) → ML engineer",
+            "PhD (3-4 years) → Research scientist",
+            "Data Science bootcamps → Analyst roles",
+            "Self-study + Kaggle → Portfolio projects"
+          ]
+        },
+        "accounting": {
+          "overview": "The UK accounting profession is well-established with strong demand from financial services, multinational corporations, and public sector organizations. London is the primary hub with growing opportunities in Edinburgh and Manchester.",
+          "language_requirements": "English is the primary language. Technical accounting terms in English.",
+          "skill_demand_level": "High - Financial services, corporate compliance, and Brexit-related services drive demand",
+          "required_education": "Bachelor's degree in Accounting, Finance, or Business. Professional qualifications required for chartered status.",
+          "certifications": [
+            "ACA (Associate Chartered Accountant)",
+            "ACCA (Association of Chartered Certified Accountants)",
+            "CIMA (Chartered Institute of Management Accountants)",
+            "ICAEW qualifications",
+            "CFE (Certified Fraud Examiner)"
+          ],
+          "advantages": [
+            "Strong presence in global financial services",
+            "Competitive salaries with benefits",
+            "Clear professional progression",
+            "Work-life balance culture",
+            "International mobility opportunities"
+          ],
+          "limitations": [
+            "High cost of living in London",
+            "Brexit-related uncertainties",
+            "Weather-dependent work culture",
+            "Competition from global accounting talent",
+            "Complex tax regulations"
+          ],
+          "references": [
+            "Institute of Chartered Accountants in England and Wales (ICAEW)",
+            "Association of Chartered Certified Accountants (ACCA)",
+            "Financial Reporting Council (FRC)",
+            "Office for National Statistics",
+            "Big 4 Accounting Firms"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3 years) → Trainee accountant",
+            "ACA/ACCA Qualification (3 years) → Chartered accountant",
+            "Master's Degree (1 year) → Senior positions",
+            "Apprenticeship programs → Practical experience",
+            "Professional conversion → Career changers"
+          ]
+        },
+        "devops": {
+          "overview": "The UK's DevOps sector is rapidly growing with strong adoption in financial services, government digital transformation, and enterprise cloud migration. London is the primary hub with growing opportunities in Manchester and Edinburgh.",
+          "language_requirements": "English is the primary language. Technical documentation and tools in English.",
+          "skill_demand_level": "High - Government cloud-first policy and financial services digital transformation",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified DevOps Engineer",
+            "Microsoft Certified: Azure DevOps Engineer",
+            "Google Cloud Professional DevOps Engineer",
+            "Certified Kubernetes Administrator (CKA)",
+            "Docker Certified Associate"
+          ],
+          "advantages": [
+            "Strong demand in financial services",
+            "Government cloud initiatives",
+            "Competitive salaries with benefits",
+            "Work-life balance culture",
+            "Access to European DevOps market"
+          ],
+          "limitations": [
+            "Brexit-related uncertainties",
+            "Weather-dependent work culture",
+            "Competition from global DevOps talent",
+            "Slower adoption in some traditional sectors",
+            "Data sovereignty regulations"
+          ],
+          "references": [
+            "UK Government Cloud First Policy",
+            "DevOps Institute UK",
+            "Cloud Industry Forum",
+            "British Computing Society",
+            "Gartner UK DevOps Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → DevOps engineer",
+            "Bachelor's Degree (3 years) → Senior DevOps engineer",
+            "Apprenticeship programs → Practical experience",
+            "Self-study + Labs → DevOps specialist",
+            "Postgraduate courses → Advanced roles"
+          ]
+        },
+        "networking": {
+          "overview": "Computer networking in the UK is crucial for financial services, government digital transformation, and telecommunications infrastructure. London is the primary hub with growing opportunities in Manchester and Edinburgh.",
+          "language_requirements": "English is the primary language. Technical documentation and network standards in English.",
+          "skill_demand_level": "High - Government digital transformation and financial services infrastructure",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "Cisco Certified Network Associate (CCNA)",
+            "Cisco Certified Network Professional (CCNP)",
+            "CompTIA Network+",
+            "Juniper Networks Certified Associate (JNCIA)",
+            "Microsoft Certified: Azure Network Engineer"
+          ],
+          "advantages": [
+            "Strong presence in financial services",
+            "Government digital initiatives",
+            "Competitive salaries with benefits",
+            "Work-life balance culture",
+            "Access to European networking market"
+          ],
+          "limitations": [
+            "Brexit-related uncertainties",
+            "Weather-dependent work culture",
+            "Competition from global networking talent",
+            "Slower adoption in some traditional sectors",
+            "Data sovereignty regulations"
+          ],
+          "references": [
+            "British Computing Society",
+            "Cisco Networking Academy UK",
+            "Juniper Networks UK",
+            "Internet Engineering Task Force (IETF)",
+            "Gartner UK Network Reports"
+          ],
+          "study_paths": [
+            "Network Certifications (3-6 months) → Network technician",
+            "Bachelor's Degree (3 years) → Network engineer",
+            "Apprenticeship programs → Practical experience",
+            "Self-study + Labs → Network specialist",
+            "Postgraduate courses → Advanced roles"
+          ]
+        },
+        "medical_laboratory_science": {
+          "overview": "Medical laboratory science in the UK is vital for the National Health Service (NHS), private healthcare, and research institutions. With an aging population and increasing emphasis on diagnostics, demand remains strong across hospital and research settings.",
+          "language_requirements": "English is the primary language. Medical terminology and documentation in English.",
+          "skill_demand_level": "High - NHS modernization, aging population, and medical research drive demand",
+          "required_education": "Bachelor's degree in Biomedical Science or related field. HCPC registration required for most positions.",
+          "certifications": [
+            "Health and Care Professions Council (HCPC) registration",
+            "Institute of Biomedical Science (IBMS) certification",
+            "Specialty portfolios in hematology, microbiology, etc.",
+            "Advanced practitioner status",
+            "Quality management certifications"
+          ],
+          "advantages": [
+            "Essential NHS role with job security",
+            "Good work-life balance in most settings",
+            "Competitive salaries with benefits",
+            "Opportunities for specialization",
+            "Contributing to national healthcare"
+          ],
+          "limitations": [
+            "Shift work including nights and weekends",
+            "Exposure to infectious materials",
+            "High stress in diagnostic settings",
+            "Continuous professional development",
+            "Emotional demands of healthcare work"
+          ],
+          "references": [
+            "Health and Care Professions Council (HCPC)",
+            "Institute of Biomedical Science (IBMS)",
+            "National Health Service (NHS)",
+            "Public Health England",
+            "Medical Research Council"
+          ],
+          "study_paths": [
+            "Foundation Degree (2 years) → Assistant practitioner",
+            "Bachelor's Degree (3 years) → Biomedical scientist",
+            "Master's Degree (1 year) → Specialist roles",
+            "HCPC registration → Professional practice",
+            "Apprenticeship programs → Practical experience"
+          ]
+        },
+        "nursing": {
+          "overview": "Nursing in the UK is essential for the National Health Service (NHS) and private healthcare sectors. With an aging population and healthcare reforms, demand for registered nurses remains consistently high with excellent job security.",
+          "language_requirements": "English is the primary language. Medical terminology and patient communication in English.",
+          "skill_demand_level": "High - NHS modernization, aging population, and healthcare reforms drive demand",
+          "required_education": "Bachelor of Nursing degree required. Degree-level entry since 2013.",
+          "certifications": [
+            "Registered Nurse (RN) license",
+            "Nursing and Midwifery Council (NMC) registration",
+            "Basic Life Support (BLS) certification",
+            "Advanced Life Support certifications",
+            "Specialty nursing qualifications"
+          ],
+          "advantages": [
+            "Excellent job security in NHS",
+            "Competitive salaries with benefits",
+            "Good work-life balance culture",
+            "Opportunities for specialization",
+            "Contributing to national healthcare"
+          ],
+          "limitations": [
+            "Physically demanding work",
+            "Shift work including nights and weekends",
+            "High stress from NHS targets",
+            "Emotional stress from patient care",
+            "Continuous professional development"
+          ],
+          "references": [
+            "Nursing and Midwifery Council (NMC)",
+            "Royal College of Nursing (RCN)",
+            "National Health Service (NHS)",
+            "Department of Health and Social Care",
+            "Health Education England"
+          ],
+          "study_paths": [
+            "Bachelor of Nursing (3 years) → Registered nurse",
+            "Master's Degree (2 years) → Advanced practice",
+            "Doctor of Nursing (3-4 years) → Research roles",
+            "NMC registration → Professional practice",
+            "Apprenticeship programs → Practical experience"
+          ]
+        },
+        "public_health": {
+          "overview": "Public health in the UK addresses population health challenges through the National Health Service and local government. With increasing focus on health inequalities, chronic disease prevention, and pandemic preparedness, demand for public health professionals remains strong.",
+          "language_requirements": "English is the primary language. Technical health terminology and policy documents in English.",
+          "skill_demand_level": "High - Health inequalities, chronic disease prevention, and NHS reforms drive demand",
+          "required_education": "Master of Public Health (MPH) preferred. Bachelor's degree acceptable for entry-level positions.",
+          "certifications": [
+            "UK Public Health Register (UKPHR)",
+            "Faculty of Public Health qualifications",
+            "Epidemiology and health protection credentials",
+            "Health policy and management certifications",
+            "Specialty areas like health promotion, environmental health"
+          ],
+          "advantages": [
+            "Making a difference in community health",
+            "Stable NHS and local government jobs",
+            "Good work-life balance culture",
+            "Opportunities for specialization",
+            "Contributing to national health policy"
+          ],
+          "limitations": [
+            "Policy and funding uncertainties",
+            "Emotional stress from public health crises",
+            "Complex regulatory environment",
+            "Limited direct patient interaction",
+            "Weather-dependent work culture"
+          ],
+          "references": [
+            "Faculty of Public Health",
+            "Public Health England",
+            "National Health Service (NHS)",
+            "Department of Health and Social Care",
+            "Local Government Association"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3 years) → Entry-level positions",
+            "Master of Public Health (1 year) → Public health specialist",
+            "Doctor of Public Health (3-4 years) → Leadership roles",
+            "Certificate programs → Specialized areas",
+            "Apprenticeship programs → Practical experience"
+          ]
+        },
+        "international_business": {
+          "overview": "International business in the UK drives global trade and commerce through financial services, multinational corporations, and export-import companies. As a major European business hub, the UK offers excellent opportunities for international business professionals in London and other major cities.",
+          "language_requirements": "English is the primary language. Foreign language skills highly valued for European and global markets.",
+          "skill_demand_level": "High - Brexit transition, European market access, and global trade expansion drive demand",
+          "required_education": "Bachelor's degree in International Business, Business Administration, or related field. Master's degree preferred for senior positions.",
+          "certifications": [
+            "Chartered Institute of Procurement & Supply (CIPS)",
+            "Institute of Export & International Trade qualifications",
+            "Foreign language certifications",
+            "International trade law credentials",
+            "Cross-cultural business certifications"
+          ],
+          "advantages": [
+            "Access to European and global markets",
+            "Strong financial services sector",
+            "Cultural exposure and business travel",
+            "Competitive salaries with benefits",
+            "International business hub status"
+          ],
+          "limitations": [
+            "Brexit-related uncertainties",
+            "Weather-dependent work culture",
+            "High cost of living in London",
+            "Competition from global talent",
+            "Complex post-Brexit regulations"
+          ],
+          "references": [
+            "Department for International Trade (DIT)",
+            "UK Trade & Investment",
+            "Confederation of British Industry (CBI)",
+            "Institute of Directors",
+            "British Chambers of Commerce"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3 years) → International business coordinator",
+            "Master's Degree (1 year) → International business manager",
+            "MBA (1-2 years) → Global business leader",
+            "Certificate programs → Specialized areas",
+            "Apprenticeship programs → Practical experience"
+          ]
+        },
+        "digital_marketing": {
+          "overview": "Digital marketing in the UK is a thriving industry with strong demand from e-commerce companies, tech startups, and traditional businesses. London is a major hub for digital advertising, with growing opportunities in Manchester, Edinburgh, and Birmingham.",
+          "language_requirements": "English is the primary language. Technical marketing terminology and digital platform interfaces in English.",
+          "skill_demand_level": "High - E-commerce growth, digital transformation, and Brexit adaptation drive demand",
+          "required_education": "Bachelor's degree in Marketing, Communications, or related field. Digital marketing certifications often preferred over formal education.",
+          "certifications": [
+            "Google Ads Certification",
+            "Facebook Blueprint Certification",
+            "Institute of Data & Marketing (IDM) qualifications",
+            "Google Analytics Certification",
+            "SEO certifications (Moz, SEMrush)"
+          ],
+          "advantages": [
+            "Competitive salaries with bonuses",
+            "Creative and dynamic work environment",
+            "Strong digital advertising industry",
+            "Good work-life balance culture",
+            "Access to European market"
+          ],
+          "limitations": [
+            "High cost of living in London",
+            "Brexit-related market uncertainties",
+            "Rapidly changing algorithms and platforms",
+            "Performance-based pressure",
+            "Competition from global talent"
+          ],
+          "references": [
+            "Institute of Practitioners in Advertising (IPA)",
+            "Marketing Society",
+            "Google Digital Garage",
+            "Facebook for Business",
+            "Interactive Advertising Bureau (IAB) UK"
+          ],
+          "study_paths": [
+            "Foundation Degree (2 years) → Junior marketing roles",
+            "Bachelor's Degree (3 years) → Digital marketing specialist",
+            "Certifications + Experience → Senior marketing positions",
+            "Master's Degree (1 year) → Marketing management",
+            "Apprenticeship programs → Practical experience"
+          ]
+        }
+      }
+    },
+    "singapore": {
+      "name": "Singapore",
+      "flag": "🇸🇬",
+      "skills": {
+        "software_engineering": {
+          "overview": "Singapore is a leading tech hub in Asia with world-class infrastructure and strong government support.",
+          "language_requirements": "English is the primary business language.",
+          "skill_demand_level": "Very High - Government Smart Nation initiative",
+          "required_education": "Bachelor's degree in Computer Science or related field",
+          "certifications": ["AWS Certified Solutions Architect", "Microsoft Azure certifications"],
+          "advantages": ["High salaries with low tax rates", "World-class infrastructure"],
+          "limitations": ["High cost of living", "Intense work culture"],
+          "references": ["Infocomm Media Development Authority (IMDA)", "Singapore Workforce Development Agency"],
+          "study_paths": ["Diploma (3 years) → Polytechnic graduate", "Bachelor's Degree (3-4 years) → University graduate"]
+        },
+        "data_science": {
+          "overview": "Singapore's data science sector is growing rapidly with applications in finance, healthcare, and smart city initiatives.",
+          "language_requirements": "English proficiency required.",
+          "skill_demand_level": "High - Smart Nation and digital economy initiatives",
+          "required_education": "Bachelor's degree in Data Science, Statistics, or related field",
+          "certifications": ["AWS Certified Machine Learning - Specialty", "Google Cloud Professional Data Engineer"],
+          "advantages": ["Strategic location in Asia-Pacific", "Strong government support"],
+          "limitations": ["High cost of living", "Competition from regional talent"],
+          "references": ["Smart Nation Singapore", "Singapore Computer Society"],
+          "study_paths": ["Bachelor's Degree (3-4 years) → Analyst roles", "Master's Degree (1-2 years) → Data scientist positions"]
+        },
+        "cloud_computing": {
+          "overview": "Singapore leads Asia in cloud computing adoption with world-class infrastructure, strong government support, and strategic location connecting East and West.",
+          "language_requirements": "English is the primary business language. Technical documentation in English.",
+          "skill_demand_level": "Very High - Smart Nation initiative and regional cloud hub status",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified Solutions Architect",
+            "Microsoft Certified: Azure Solutions Architect",
+            "Google Cloud Professional Cloud Architect",
+            "Certified Kubernetes Administrator (CKA)",
+            "Singapore ICT certifications"
+          ],
+          "advantages": [
+            "Strategic location in Asia-Pacific",
+            "World-class infrastructure and connectivity",
+            "Government support and incentives",
+            "High salaries with low taxes",
+            "Regional cloud services hub"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global tech talent",
+            "Small domestic market",
+            "Data residency regulations"
+          ],
+          "references": [
+            "Infocomm Media Development Authority (IMDA)",
+            "Smart Nation Singapore",
+            "Singapore Cloud Industry Group",
+            "Gartner Asia Cloud Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → Cloud engineer",
+            "Bachelor's Degree (3-4 years) → Cloud architect",
+            "Polytechnic Diploma (3 years) → Cloud administrator",
+            "Professional conversion programs → Career switchers",
+            "SkillsFuture credits → Continuous learning"
+          ]
+        },
+        "ai_machine_learning": {
+          "overview": "Singapore is rapidly becoming a major AI and Machine Learning hub in Asia, with strong government investment, world-class research institutions, and strategic location connecting global AI innovation.",
+          "language_requirements": "English is the primary business and technical language. Mandarin may be useful for regional business.",
+          "skill_demand_level": "Very High - Government AI initiatives and regional AI leadership",
+          "required_education": "Bachelor's degree minimum, Master's preferred for most roles. PhD for research positions.",
+          "certifications": [
+            "AWS Machine Learning Specialty",
+            "Google Cloud AI/ML Engineer",
+            "Microsoft Certified: Azure AI Engineer",
+            "NVIDIA Deep Learning Institute",
+            "Singapore AI certifications"
+          ],
+          "advantages": [
+            "Strategic location in Asia-Pacific",
+            "Government AI initiatives and funding",
+            "High salaries with low taxes",
+            "World-class research institutions",
+            "Regional AI leadership position"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global AI talent",
+            "Small domestic market",
+            "Limited local AI research scale"
+          ],
+          "references": [
+            "Smart Nation Singapore AI Strategy",
+            "National Research Foundation (NRF)",
+            "AI Singapore",
+            "Nanyang Technological University AI Research",
+            "NeurIPS Asia, ICML conferences"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3-4 years) → Junior ML engineer",
+            "Master's Degree (1-2 years) → ML engineer",
+            "PhD (4-5 years) → Research scientist",
+            "AI bootcamps → Career transition",
+            "SkillsFuture AI courses → Upskilling"
+          ]
+        },
+        "devops": {
+          "overview": "Singapore leads Asia in DevOps adoption with world-class infrastructure, strong government support, and strategic location as a regional tech hub connecting East and West.",
+          "language_requirements": "English is the primary business and technical language. Mandarin may be useful for regional business.",
+          "skill_demand_level": "Very High - Smart Nation initiative and regional DevOps leadership",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified DevOps Engineer",
+            "Google Cloud Professional DevOps Engineer",
+            "Microsoft Certified: Azure DevOps Engineer",
+            "Certified Kubernetes Administrator (CKA)",
+            "Docker Certified Associate"
+          ],
+          "advantages": [
+            "Strategic location in Asia-Pacific",
+            "World-class infrastructure and connectivity",
+            "Government support and incentives",
+            "High salaries with low taxes",
+            "Regional DevOps services hub"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global DevOps talent",
+            "Small domestic market",
+            "Data residency regulations"
+          ],
+          "references": [
+            "Infocomm Media Development Authority (IMDA)",
+            "Smart Nation Singapore",
+            "Singapore DevOps Community",
+            "Gartner Asia DevOps Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → DevOps engineer",
+            "Bachelor's Degree (3-4 years) → Senior DevOps engineer",
+            "Polytechnic Diploma (3 years) → DevOps administrator",
+            "Professional conversion programs → Career switchers",
+            "SkillsFuture DevOps courses → Continuous learning"
+          ]
+        },
+        "networking": {
+          "overview": "Computer networking in Singapore is critical for the Smart Nation initiative, with world-class infrastructure supporting regional connectivity and digital transformation across Southeast Asia.",
+          "language_requirements": "English is the primary business and technical language. Mandarin may be useful for regional business.",
+          "skill_demand_level": "Very High - Smart Nation initiative and regional connectivity hub",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "Cisco Certified Network Associate (CCNA)",
+            "Cisco Certified Network Professional (CCNP)",
+            "Juniper Networks Certified Associate (JNCIA)",
+            "Huawei Certified Network Associate (HCNA)",
+            "CompTIA Network+"
+          ],
+          "advantages": [
+            "Strategic location in Asia-Pacific",
+            "World-class infrastructure and connectivity",
+            "Government support and incentives",
+            "High salaries with low taxes",
+            "Regional networking services hub"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global networking talent",
+            "Small domestic market",
+            "Data residency regulations"
+          ],
+          "references": [
+            "Infocomm Media Development Authority (IMDA)",
+            "Smart Nation Singapore",
+            "Singapore Network Engineering Community",
+            "Gartner Asia Network Reports"
+          ],
+          "study_paths": [
+            "Network Certifications (3-6 months) → Network technician",
+            "Bachelor's Degree (3-4 years) → Network engineer",
+            "Polytechnic Diploma (3 years) → Network administrator",
+            "Professional conversion programs → Career switchers",
+            "SkillsFuture Network courses → Continuous learning"
+          ]
+        },
+        "international_business": {
+          "overview": "International business in Singapore drives global trade and commerce through its strategic location as Asia's business hub. As a major financial center and trading nation, Singapore offers unparalleled opportunities for international business professionals in multinational corporations and trade organizations.",
+          "language_requirements": "English is the primary business language. Mandarin, Malay, or Tamil highly valued for regional business.",
+          "skill_demand_level": "Very High - Strategic location, free trade agreements, and regional business hub status drive demand",
+          "required_education": "Bachelor's degree in International Business, Business Administration, or related field. MBA preferred for senior positions.",
+          "certifications": [
+            "Singapore Institute of Management certifications",
+            "International Business Competency Standards",
+            "Foreign language certifications",
+            "International trade and customs qualifications",
+            "Cross-cultural business credentials"
+          ],
+          "advantages": [
+            "Strategic location in Asia-Pacific",
+            "World-class infrastructure and connectivity",
+            "High salaries with low taxes",
+            "Regional business hub status",
+            "Access to Asian and global markets"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global talent",
+            "Small domestic market",
+            "Complex regional regulations"
+          ],
+          "references": [
+            "Singapore Department of Trade and Industry",
+            "International Enterprise Singapore",
+            "Singapore Business Federation",
+            "Asia-Pacific Economic Cooperation (APEC)",
+            "World Trade Organization (WTO)"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3-4 years) → International business coordinator",
+            "Master's Degree (1-2 years) → International business manager",
+            "MBA (1-2 years) → Global business leader",
+            "Certificate programs → Specialized areas",
+            "SkillsFuture courses → Continuous learning"
+          ]
+        },
+        "digital_marketing": {
+          "overview": "Digital marketing in Singapore is a booming industry with massive demand from e-commerce companies, tech startups, and multinational corporations. As Asia's business hub, Singapore offers unparalleled opportunities in digital advertising, social media, and content marketing.",
+          "language_requirements": "English is the primary business language. Mandarin may be useful for regional markets. Technical marketing terminology in English.",
+          "skill_demand_level": "Very High - E-commerce growth, digital transformation, and regional business hub status drive massive demand",
+          "required_education": "Bachelor's degree in Marketing, Communications, or related field. Digital marketing certifications often preferred over formal education.",
+          "certifications": [
+            "Google Ads Certification",
+            "Facebook Blueprint Certification",
+            "HubSpot Content Marketing Certification",
+            "Google Analytics Certification",
+            "SEO certifications (Moz, SEMrush)"
+          ],
+          "advantages": [
+            "High earning potential with performance bonuses",
+            "Strategic location in Asia-Pacific",
+            "World-class infrastructure and connectivity",
+            "Creative and dynamic work environment",
+            "Access to Asian and global markets"
+          ],
+          "limitations": [
+            "High cost of living",
+            "Intense work culture",
+            "Competition from global talent",
+            "Rapidly changing algorithms and platforms",
+            "Performance-based pressure"
+          ],
+          "references": [
+            "Infocomm Media Development Authority (IMDA)",
+            "Singapore Marketing Institute",
+            "Google Digital Garage",
+            "Facebook for Business",
+            "Interactive Advertising Bureau (IAB) Asia"
+          ],
+          "study_paths": [
+            "Diploma (2-3 years) → Junior marketing roles",
+            "Bachelor's Degree (3-4 years) → Digital marketing specialist",
+            "Certifications + Experience → Senior marketing positions",
+            "SkillsFuture Marketing courses → Continuous learning",
+            "Professional conversion programs → Career switchers"
+          ]
+        }
+      }
+    },
+    "australia": {
+      "name": "Australia",
+      "flag": "🇦🇺",
+      "skills": {
+        "software_engineering": {
+          "overview": "Australia's software engineering industry is thriving with strong demand in mining tech, fintech, and government services.",
+          "language_requirements": "English proficiency required.",
+          "skill_demand_level": "High - Mining industry digitalization and government initiatives",
+          "required_education": "Bachelor's degree in Information Technology or Computer Science",
+          "certifications": ["AWS Certified Developer", "Microsoft Certified: Azure Developer Associate"],
+          "advantages": ["High quality of life", "Competitive salaries", "Good work-life balance"],
+          "limitations": ["Long distances between cities", "Skills assessment requirements"],
+          "references": ["Australian Computer Society", "Department of Education, Skills and Employment"],
+          "study_paths": ["Diploma (1-2 years) → Entry-level positions", "Bachelor's Degree (3 years) → Graduate roles"]
+        },
+        "cloud_computing": {
+          "overview": "Australia's cloud computing sector is rapidly growing with strong adoption in mining, government, and enterprise sectors, particularly in Perth and Melbourne.",
+          "language_requirements": "English proficiency required. Technical documentation in English.",
+          "skill_demand_level": "High - Mining industry digitalization and government cloud adoption",
+          "required_education": "Bachelor's degree in Information Technology, Computer Science, or related field",
+          "certifications": [
+            "AWS Certified Solutions Architect",
+            "Microsoft Certified: Azure Solutions Architect",
+            "Google Cloud Professional Cloud Architect",
+            "Certified Kubernetes Administrator (CKA)",
+            "Australian cloud certifications"
+          ],
+          "advantages": [
+            "Strong demand in mining and resources",
+            "Government cloud initiatives",
+            "High quality of life",
+            "Competitive salaries with benefits",
+            "Regional cloud services market"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Competition from international talent",
+            "Data sovereignty requirements",
+            "Weather-dependent infrastructure"
+          ],
+          "references": [
+            "Australian Government Cloud Strategy",
+            "Cloud Computing Association Australia",
+            "Australian Computer Society",
+            "Gartner Australia Cloud Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → Cloud engineer",
+            "Bachelor's Degree (3 years) → Cloud architect",
+            "Diploma (1-2 years) → Cloud administrator",
+            "TAFE courses → Practical skills",
+            "Postgraduate programs → Advanced roles"
+          ]
+        },
+        "accounting": {
+          "overview": "Australia's accounting profession is well-established with strong demand from mining, financial services, and multinational corporations. Major hubs in Sydney, Melbourne, and Perth with growing opportunities in Brisbane and Adelaide.",
+          "language_requirements": "English proficiency required. Technical accounting terms in English.",
+          "skill_demand_level": "High - Mining industry, financial services, and corporate compliance drive demand",
+          "required_education": "Bachelor's degree in Accounting, Commerce, or Business. Professional qualifications required for chartered status.",
+          "certifications": [
+            "CPA Australia",
+            "CA ANZ (Chartered Accountants Australia and New Zealand)",
+            "ACCA (Association of Chartered Certified Accountants)",
+            "CMA (Certified Management Accountant)",
+            "CFE (Certified Fraud Examiner)"
+          ],
+          "advantages": [
+            "High quality of life and work-life balance",
+            "Competitive salaries with excellent benefits",
+            "Strong presence in mining and resources",
+            "Clear professional progression",
+            "International recognition of qualifications"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment requirements for migration",
+            "Weather-dependent work culture",
+            "Competition from international talent",
+            "Complex tax regulations"
+          ],
+          "references": [
+            "CPA Australia",
+            "Chartered Accountants Australia and New Zealand",
+            "Australian Prudential Regulation Authority (APRA)",
+            "Australian Taxation Office (ATO)",
+            "Big 4 Accounting Firms"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3 years) → Graduate accountant",
+            "CPA/CA Qualification (3 years) → Chartered accountant",
+            "Master's Degree (1-2 years) → Senior positions",
+            "TAFE Diploma (1-2 years) → Entry-level roles",
+            "Professional year programs → Practical experience"
+          ]
+        },
+        "devops": {
+          "overview": "Australia's DevOps sector is rapidly growing with strong adoption in mining, government, and enterprise sectors, particularly in Perth, Melbourne, and Sydney.",
+          "language_requirements": "English proficiency required. Technical documentation and tools in English.",
+          "skill_demand_level": "High - Mining industry digitalization and government cloud adoption",
+          "required_education": "Bachelor's degree in Information Technology, Computer Science, or related field",
+          "certifications": [
+            "AWS Certified DevOps Engineer",
+            "Microsoft Certified: Azure DevOps Engineer",
+            "Google Cloud Professional DevOps Engineer",
+            "Certified Kubernetes Administrator (CKA)",
+            "Docker Certified Associate"
+          ],
+          "advantages": [
+            "Strong demand in mining and resources",
+            "Government cloud initiatives",
+            "High quality of life",
+            "Competitive salaries with benefits",
+            "Regional DevOps services market"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Competition from international talent",
+            "Data sovereignty requirements",
+            "Weather-dependent infrastructure"
+          ],
+          "references": [
+            "Australian Government Cloud Strategy",
+            "DevOps Institute Australia",
+            "Australian Computer Society",
+            "Gartner Australia DevOps Reports"
+          ],
+          "study_paths": [
+            "Cloud Certifications (3-6 months) → DevOps engineer",
+            "Bachelor's Degree (3 years) → Senior DevOps engineer",
+            "Diploma (1-2 years) → DevOps administrator",
+            "TAFE courses → Practical skills",
+            "Postgraduate programs → Advanced roles"
+          ]
+        },
+        "networking": {
+          "overview": "Computer networking in Australia is essential for mining operations, government services, and enterprise connectivity across vast distances. Major hubs in Sydney, Melbourne, Perth, and Brisbane.",
+          "language_requirements": "English proficiency required. Technical documentation and network standards in English.",
+          "skill_demand_level": "High - Mining industry digitalization and government infrastructure",
+          "required_education": "Bachelor's degree in Information Technology, Computer Science, or related field",
+          "certifications": [
+            "Cisco Certified Network Associate (CCNA)",
+            "Cisco Certified Network Professional (CCNP)",
+            "CompTIA Network+",
+            "Juniper Networks Certified Associate (JNCIA)",
+            "Australian Computer Society certifications"
+          ],
+          "advantages": [
+            "Strong demand in mining and resources",
+            "Government infrastructure initiatives",
+            "High quality of life",
+            "Competitive salaries with benefits",
+            "Regional networking services market"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Competition from international talent",
+            "Data sovereignty requirements",
+            "Weather-dependent infrastructure"
+          ],
+          "references": [
+            "Australian Government Digital Strategy",
+            "Australian Computer Society",
+            "Cisco Networking Academy Australia",
+            "Gartner Australia Network Reports"
+          ],
+          "study_paths": [
+            "Network Certifications (3-6 months) → Network technician",
+            "Bachelor's Degree (3 years) → Network engineer",
+            "Diploma (1-2 years) → Network administrator",
+            "TAFE courses → Practical skills",
+            "Postgraduate programs → Advanced roles"
+          ]
+        },
+        "medical_laboratory_science": {
+          "overview": "Medical laboratory science in Australia is essential for healthcare diagnostics across the public and private sectors. With an aging population and remote communities, demand is strong in hospitals, pathology labs, and research institutions.",
+          "language_requirements": "English proficiency required. Medical terminology and documentation in English.",
+          "skill_demand_level": "High - Aging population, regional healthcare needs, and medical research drive demand",
+          "required_education": "Bachelor's degree in Medical Laboratory Science or related field. Professional accreditation required.",
+          "certifications": [
+            "Medical Laboratory Scientist accreditation",
+            "Australian Institute of Medical and Clinical Scientists (AIMS) membership",
+            "Specialty certifications in hematology, microbiology, etc.",
+            "Quality assurance certifications",
+            "Molecular diagnostics certification"
+          ],
+          "advantages": [
+            "Essential healthcare role with job security",
+            "Good work-life balance in most settings",
+            "Competitive salaries with benefits",
+            "Opportunities for specialization",
+            "High quality of life"
+          ],
+          "limitations": [
+            "Shift work including nights and weekends",
+            "Exposure to infectious materials",
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Emotional demands of healthcare work"
+          ],
+          "references": [
+            "Australian Institute of Medical and Clinical Scientists (AIMS)",
+            "Medical Laboratory Science Council of Australia",
+            "Australian Government Department of Health",
+            "Royal College of Pathologists of Australasia",
+            "Australian Medical Association"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3-4 years) → Medical laboratory scientist",
+            "Graduate Diploma (1 year) → Specialized areas",
+            "Master's Degree (1-2 years) → Advanced roles",
+            "TAFE courses → Assistant positions",
+            "Professional accreditation → Full practice"
+          ]
+        },
+        "nursing": {
+          "overview": "Nursing in Australia is essential for healthcare delivery across the public and private sectors. With an aging population and regional healthcare needs, demand for registered nurses is strong in hospitals, aged care, and community health.",
+          "language_requirements": "English proficiency required. Medical terminology and patient communication in English.",
+          "skill_demand_level": "High - Aging population, regional healthcare needs, and aged care sector drive demand",
+          "required_education": "Bachelor of Nursing degree required. Graduate entry programs available.",
+          "certifications": [
+            "Registered Nurse (RN) license",
+            "Nursing and Midwifery Board of Australia registration",
+            "Basic Life Support (BLS) certification",
+            "Advanced Life Support certifications",
+            "Specialty nursing certifications"
+          ],
+          "advantages": [
+            "Excellent job security and demand",
+            "Competitive salaries with benefits",
+            "High quality of life",
+            "Opportunities for specialization",
+            "Work-life balance options"
+          ],
+          "limitations": [
+            "Physically demanding work",
+            "Shift work including nights and weekends",
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Emotional stress from patient care"
+          ],
+          "references": [
+            "Nursing and Midwifery Board of Australia",
+            "Australian College of Nursing",
+            "Australian Government Department of Health",
+            "Australian Institute of Health and Welfare",
+            "Royal College of Nursing Australia"
+          ],
+          "study_paths": [
+            "Bachelor of Nursing (3 years) → Registered nurse",
+            "Graduate entry (2 years) → Accelerated program",
+            "Master's Degree (2 years) → Advanced practice",
+            "Doctor of Nursing (3-4 years) → Research roles",
+            "AHPRA registration → Professional practice"
+          ]
+        },
+        "public_health": {
+          "overview": "Public health in Australia addresses population health challenges through federal and state health systems. With increasing focus on indigenous health, chronic disease prevention, and regional healthcare, demand for public health professionals remains strong in government agencies and research institutions.",
+          "language_requirements": "English proficiency required. Technical health terminology and policy documents in English.",
+          "skill_demand_level": "High - Indigenous health, chronic disease prevention, and regional healthcare needs drive demand",
+          "required_education": "Master of Public Health (MPH) preferred. Bachelor's degree acceptable for entry-level positions.",
+          "certifications": [
+            "Certified in Public Health (CPH)",
+            "Australasian Faculty of Public Health Medicine qualifications",
+            "Epidemiology and biostatistics credentials",
+            "Health policy and management certifications",
+            "Specialty areas like environmental health, health promotion"
+          ],
+          "advantages": [
+            "Making a difference in community health",
+            "High quality of life",
+            "Stable government and health authority jobs",
+            "Opportunities for specialization",
+            "Focus on indigenous and regional health"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Policy and funding uncertainties",
+            "Emotional stress from public health crises",
+            "Complex federal-state dynamics"
+          ],
+          "references": [
+            "Australian Government Department of Health",
+            "Australian Institute of Health and Welfare",
+            "Public Health Association of Australia",
+            "Australasian Faculty of Public Health Medicine",
+            "State and Territory health departments"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3-4 years) → Entry-level positions",
+            "Master of Public Health (1-2 years) → Public health specialist",
+            "Doctor of Public Health (3-4 years) → Leadership roles",
+            "Certificate programs → Specialized areas",
+            "Government graduate programs → Public sector roles"
+          ]
+        },
+        "digital_marketing": {
+          "overview": "Digital marketing in Australia is a rapidly growing industry with strong demand from e-commerce companies, tech startups, and traditional businesses transitioning online. Major hubs in Sydney, Melbourne, and Brisbane with growing opportunities in Perth and Adelaide.",
+          "language_requirements": "English proficiency required. Technical marketing terminology and digital platform interfaces in English.",
+          "skill_demand_level": "High - E-commerce growth, digital transformation, and regional business expansion drive demand",
+          "required_education": "Bachelor's degree in Marketing, Communications, or related field. Digital marketing certifications often preferred over formal education.",
+          "certifications": [
+            "Google Ads Certification",
+            "Facebook Blueprint Certification",
+            "Australian Marketing Institute qualifications",
+            "Google Analytics Certification",
+            "SEO certifications (Moz, SEMrush)"
+          ],
+          "advantages": [
+            "High quality of life and work-life balance",
+            "Competitive salaries with benefits",
+            "Growing digital advertising industry",
+            "Regional market opportunities",
+            "Access to Asia-Pacific markets"
+          ],
+          "limitations": [
+            "Long distances between major cities",
+            "Skills assessment for migration",
+            "Competition from international talent",
+            "Rapidly changing algorithms and platforms",
+            "Weather-dependent work culture"
+          ],
+          "references": [
+            "Australian Marketing Institute",
+            "Interactive Advertising Bureau (IAB) Australia",
+            "Google Digital Garage",
+            "Facebook for Business",
+            "Australian Government Digital Transformation Agency"
+          ],
+          "study_paths": [
+            "Diploma (1-2 years) → Junior marketing roles",
+            "Bachelor's Degree (3 years) → Digital marketing specialist",
+            "Certifications + Experience → Senior marketing positions",
+            "TAFE courses → Practical skills",
+            "Postgraduate programs → Marketing management"
+          ]
+        }
+      }
+    },
+    "cameroon": {
+      "name": "Cameroon",
+      "flag": "🇨🇲",
+      "skills": {
+        "cybersecurity": {
+          "overview": "Cameroon's cybersecurity sector is emerging with growing demand from government, banking, and telecommunications sectors. Major opportunities in Yaoundé and Douala.",
+          "language_requirements": "French is the primary language for business and education. English is also official in some regions. Technical documentation often in English.",
+          "skill_demand_level": "Growing - Government digital transformation and increasing cyber threats drive demand",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "CompTIA Security+",
+            "CISSP",
+            "CISM",
+            "CEH (Certified Ethical Hacker)",
+            "EC-Council certifications"
+          ],
+          "advantages": [
+            "Growing market with less competition",
+            "Government support for tech sector",
+            "Strategic location in Central Africa",
+            "Lower cost of living compared to Western countries",
+            "Opportunities in regional cybersecurity initiatives"
+          ],
+          "limitations": [
+            "Limited local infrastructure",
+            "Political and economic instability",
+            "Brain drain to developed countries",
+            "Limited access to advanced training",
+            "Currency fluctuations"
+          ],
+          "references": [
+            "Agence de Régulation des Télécommunications (ART)",
+            "Ministry of Posts and Telecommunications Cameroon",
+            "African Union Cybersecurity Framework",
+            "Cameroon National Cybersecurity Strategy"
+          ],
+          "study_paths": [
+            "Licence (3 years) → Entry-level security roles",
+            "Master's Degree (2 years) → Analyst positions",
+            "Professional certifications → Specialized roles",
+            "Government training programs → Public sector positions",
+            "Regional cybersecurity initiatives → International opportunities"
+          ]
+        },
+        "software_engineering": {
+          "overview": "Cameroon's software engineering sector is developing with focus on mobile applications, fintech, and government digitization. Growing startup ecosystem in major cities.",
+          "language_requirements": "French primary, English secondary. Technical skills often require English proficiency.",
+          "skill_demand_level": "Growing - Mobile technology adoption and digital transformation",
+          "required_education": "Bachelor's degree in Computer Science, Software Engineering, or related field",
+          "certifications": [
+            "Oracle Certified Java Programmer",
+            "Microsoft Certified: Azure Developer Associate",
+            "AWS Certified Developer",
+            "Google Associate Android Developer",
+            "Certified ScrumMaster (CSM)"
+          ],
+          "advantages": [
+            "Growing mobile and fintech markets",
+            "Lower operational costs",
+            "Young, tech-savvy population",
+            "Government support for startups",
+            "Regional market access"
+          ],
+          "limitations": [
+            "Limited internet infrastructure",
+            "Power supply issues",
+            "Brain drain of skilled professionals",
+            "Limited access to global tech conferences",
+            "Currency and economic instability"
+          ],
+          "references": [
+            "Ministry of Posts and Telecommunications",
+            "Cameroon Software Engineering Association",
+            "African Technology Innovation Hub",
+            "World Bank Digital Cameroon"
+          ],
+          "study_paths": [
+            "Licence Informatique (3 years) → Junior developer",
+            "Master's in Software Engineering (2 years) → Senior roles",
+            "Coding bootcamps → Practical skills",
+            "Self-taught + portfolio → Freelance opportunities",
+            "Government ICT training → Public sector"
+          ]
+        },
+        "data_science": {
+          "overview": "Data science in Cameroon is emerging with applications in agriculture, healthcare, and resource management. Growing demand from research institutions and private sector.",
+          "language_requirements": "French primary for local work, English for international collaboration and technical documentation.",
+          "skill_demand_level": "Emerging - Agriculture, healthcare, and natural resource sectors",
+          "required_education": "Bachelor's degree in Mathematics, Statistics, Computer Science, or related quantitative field",
+          "certifications": [
+            "IBM Data Science Professional Certificate",
+            "Google Data Analytics Professional Certificate",
+            "Microsoft Certified: Azure AI Engineer Associate",
+            "SAS Certified Data Scientist",
+            "TensorFlow Developer Certificate"
+          ],
+          "advantages": [
+            "Rich data sources in agriculture and resources",
+            "Growing research partnerships",
+            "Lower competition in the field",
+            "Government data initiatives",
+            "Regional leadership potential"
+          ],
+          "limitations": [
+            "Limited computational resources",
+            "Data privacy and infrastructure challenges",
+            "Limited local training programs",
+            "Brain drain to better-funded opportunities",
+            "Economic and political instability"
+          ],
+          "references": [
+            "Cameroon National Institute of Statistics",
+            "African Institute for Mathematical Sciences (AIMS)",
+            "World Bank Open Data Cameroon",
+            "United Nations Development Programme"
+          ],
+          "study_paths": [
+            "Licence Mathématiques/Statistiques (3 years) → Analyst roles",
+            "Master's in Data Science (2 years) → Data scientist positions",
+            "Online certifications → Skill development",
+            "Research assistantships → Academic experience",
+            "International partnerships → Advanced training"
+          ]
+        },
+        "medical_laboratory_science": {
+          "overview": "Medical laboratory science in Cameroon is crucial for healthcare delivery with growing demand in hospitals, research institutions, and diagnostic centers.",
+          "language_requirements": "French primary, English for international standards and research publications.",
+          "skill_demand_level": "High - Healthcare expansion and disease surveillance needs",
+          "required_education": "Bachelor's degree in Medical Laboratory Science or related biomedical field",
+          "certifications": [
+            "American Society for Clinical Pathology (ASCP)",
+            "International Medical Laboratory Scientist (IMLS)",
+            "WHO Laboratory Biosafety certification",
+            "ISO 15189 accreditation",
+            "Cameroon Medical Council certification"
+          ],
+          "advantages": [
+            "Critical role in healthcare system",
+            "Growing private healthcare sector",
+            "International NGO opportunities",
+            "Research and academic positions",
+            "Regional expertise development"
+          ],
+          "limitations": [
+            "Limited laboratory infrastructure",
+            "Shortage of equipment and supplies",
+            "Low salaries in public sector",
+            "Limited continuing education",
+            "Brain drain to better-paying countries"
+          ],
+          "references": [
+            "Ministry of Public Health Cameroon",
+            "World Health Organization Cameroon",
+            "African Society for Laboratory Medicine",
+            "Cameroon Medical Council",
+            "Centers for Disease Control and Prevention"
+          ],
+          "study_paths": [
+            "Licence Biologie Médicale (3 years) → Laboratory technician",
+            "Master's in Laboratory Science (2 years) → Senior positions",
+            "Specialization training → Advanced roles",
+            "WHO/CDC fellowships → International experience",
+            "Professional certification → Career advancement"
+          ]
+        },
+        "nursing": {
+          "overview": "Nursing in Cameroon is essential for healthcare delivery with opportunities in hospitals, clinics, and community health programs.",
+          "language_requirements": "French primary, English for international organizations and advanced training.",
+          "skill_demand_level": "Very High - Healthcare expansion and population growth",
+          "required_education": "Bachelor's degree in Nursing or related healthcare field",
+          "certifications": [
+            "International Council of Nurses certification",
+            "Cameroon Nursing Council license",
+            "WHO Nursing competencies",
+            "Advanced Life Support (ALS)",
+            "Specialty nursing certifications"
+          ],
+          "advantages": [
+            "Essential healthcare role",
+            "Growing private healthcare sector",
+            "International NGO opportunities",
+            "Community health programs",
+            "Career stability and purpose"
+          ],
+          "limitations": [
+            "Low salaries in public sector",
+            "Limited resources and equipment",
+            "High patient-to-nurse ratios",
+            "Limited continuing education",
+            "Workplace safety concerns"
+          ],
+          "references": [
+            "Ministry of Public Health Cameroon",
+            "World Health Organization",
+            "International Council of Nurses",
+            "Cameroon Nursing Council",
+            "United Nations Population Fund"
+          ],
+          "study_paths": [
+            "Licence en Sciences Infirmières (3 years) → Registered nurse",
+            "Master's in Nursing (2 years) → Advanced practice",
+            "Specialty training → Specialized roles",
+            "International programs → Global opportunities",
+            "Continuing education → Career advancement"
+          ]
+        },
+        "cloud_computing": {
+          "overview": "Cloud computing in Cameroon is emerging with growing adoption in government, banking, and telecommunications sectors, supported by regional connectivity improvements.",
+          "language_requirements": "French primary for local work, English for international cloud platforms and technical documentation.",
+          "skill_demand_level": "Growing - Government digital transformation and regional connectivity",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified Cloud Practitioner",
+            "Microsoft Certified: Azure Fundamentals",
+            "Google Cloud Professional Cloud Architect",
+            "CompTIA Cloud+",
+            "Cisco cloud certifications"
+          ],
+          "advantages": [
+            "Growing market with less competition",
+            "Government support for digital transformation",
+            "Regional cloud services potential",
+            "Lower operational costs",
+            "International cloud platform access"
+          ],
+          "limitations": [
+            "Limited local infrastructure",
+            "Power supply and connectivity issues",
+            "Limited local training programs",
+            "Brain drain of skilled professionals",
+            "Currency and economic instability"
+          ],
+          "references": [
+            "Ministry of Posts and Telecommunications Cameroon",
+            "African Union Digital Transformation Strategy",
+            "Cloud Africa Alliance",
+            "ITU Regional Cybersecurity Center"
+          ],
+          "study_paths": [
+            "Licence Informatique (3 years) → Cloud administrator",
+            "Cloud Certifications (3-6 months) → Cloud engineer",
+            "Master's in IT (2 years) → Cloud architect",
+            "Online platforms → Self-taught skills",
+            "Regional training programs → Practical experience"
+          ]
+        },
+        "devops": {
+          "overview": "DevOps in Cameroon is emerging as government and private sector organizations adopt cloud-native practices and digital transformation initiatives.",
+          "language_requirements": "French primary for local work, English for international DevOps platforms and technical documentation.",
+          "skill_demand_level": "Emerging - Digital transformation and cloud adoption initiatives",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "AWS Certified DevOps Engineer",
+            "Docker Certified Associate",
+            "Kubernetes for Developers",
+            "Microsoft Azure DevOps certifications",
+            "Linux Foundation certifications"
+          ],
+          "advantages": [
+            "Growing market with emerging opportunities",
+            "Government digital transformation support",
+            "Lower operational costs",
+            "International career opportunities",
+            "Regional leadership potential"
+          ],
+          "limitations": [
+            "Limited local infrastructure",
+            "Power supply and connectivity issues",
+            "Limited local training programs",
+            "Brain drain of skilled professionals",
+            "Currency and economic instability"
+          ],
+          "references": [
+            "Ministry of Posts and Telecommunications Cameroon",
+            "African DevOps Community",
+            "Cloud Africa Alliance",
+            "DevOps Institute"
+          ],
+          "study_paths": [
+            "Online certifications (3-6 months) → DevOps technician",
+            "Bachelor's Degree (4 years) → DevOps engineer",
+            "Master's in IT (2 years) → Senior DevOps roles",
+            "Self-study + portfolio → Freelance opportunities",
+            "Regional training programs → Practical experience"
+          ]
+        },
+        "accounting": {
+          "overview": "Accounting in Cameroon is growing with demand from financial institutions, multinational corporations, and government organizations undergoing financial digitalization.",
+          "language_requirements": "French primary, English for international accounting standards and corporate work.",
+          "skill_demand_level": "Growing - Financial services expansion and corporate compliance",
+          "required_education": "Bachelor's degree in Accounting, Finance, or Business Administration",
+          "certifications": [
+            "ACCA (Association of Chartered Certified Accountants)",
+            "CIA (Certified Internal Auditor)",
+            "CMA (Certified Management Accountant)",
+            "International accounting standards certifications",
+            "Tax and audit specializations"
+          ],
+          "advantages": [
+            "Growing financial services sector",
+            "Multinational corporation opportunities",
+            "Government support for business sector",
+            "International recognition of qualifications",
+            "Lower operational costs"
+          ],
+          "limitations": [
+            "Limited local training programs",
+            "Brain drain to developed countries",
+            "Currency and economic instability",
+            "Limited access to advanced software",
+            "Regulatory changes and uncertainty"
+          ],
+          "references": [
+            "Ministry of Finance Cameroon",
+            "Cameroon Bank of Central Africa",
+            "ACCA International",
+            "International Accounting Standards Board"
+          ],
+          "study_paths": [
+            "Licence Comptabilité (3 years) → Junior accountant",
+            "Master's in Accounting (2 years) → Senior accountant",
+            "ACCA Qualification (3 years) → Chartered accountant",
+            "Professional certifications → Specialized roles",
+            "On-the-job training → Entry-level positions"
+          ]
+        },
+        "ai_machine_learning": {
+          "overview": "AI and Machine Learning in Cameroon is emerging with applications in agriculture, healthcare, finance, and government digital services.",
+          "language_requirements": "French primary for local work, English for AI/ML research and international platforms.",
+          "skill_demand_level": "Emerging - Digital transformation and innovation initiatives",
+          "required_education": "Bachelor's degree in Computer Science, Mathematics, or related field; Master's preferred",
+          "certifications": [
+            "TensorFlow Developer Certificate",
+            "AWS Machine Learning Specialty",
+            "Google Cloud AI/ML Engineer",
+            "Microsoft Azure AI Engineer",
+            "IBM AI Engineering Certificate"
+          ],
+          "advantages": [
+            "Growing market with less competition",
+            "Agriculture and healthcare applications",
+            "Government AI initiatives",
+            "International research partnerships",
+            "Regional leadership opportunities"
+          ],
+          "limitations": [
+            "Limited computational resources",
+            "Brain drain to research centers",
+            "Limited local training programs",
+            "Currency and economic instability",
+            "Data availability challenges"
+          ],
+          "references": [
+            "African Institute for Mathematical Sciences (AIMS)",
+            "Ministry of Higher Education Cameroon",
+            "Cameroon Computer Science Association",
+            "International Machine Learning Community"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (4 years) → ML engineer",
+            "Master's in AI/ML (2 years) → Senior positions",
+            "Online certifications → Skill development",
+            "Research assistantships → Academic experience",
+            "International fellowships → Advanced training"
+          ]
+        },
+        "networking": {
+          "overview": "Computer networking in Cameroon is crucial for government digital transformation, telecommunications infrastructure expansion, and private sector connectivity.",
+          "language_requirements": "French primary for local work, English for international networking standards and technical documentation.",
+          "skill_demand_level": "Growing - Infrastructure expansion and digital transformation",
+          "required_education": "Bachelor's degree in Computer Science, Information Technology, or related field",
+          "certifications": [
+            "Cisco CCNA (Cisco Certified Network Associate)",
+            "CompTIA Network+",
+            "Juniper JNCIA (Juniper Networks Certified Associate)",
+            "Huawei HCNA certifications",
+            "Linux Foundation network certifications"
+          ],
+          "advantages": [
+            "Growing telecommunications sector",
+            "Government infrastructure initiatives",
+            "Regional connectivity expansion",
+            "Lower operational costs",
+            "Multinational corporation opportunities"
+          ],
+          "limitations": [
+            "Limited local infrastructure",
+            "Brain drain of skilled professionals",
+            "Limited training resources",
+            "Currency and economic instability",
+            "Power supply challenges"
+          ],
+          "references": [
+            "Agence de Régulation des Télécommunications (ART)",
+            "Ministry of Posts and Telecommunications",
+            "Cameroon Telecommunications Association",
+            "African Telecommunications Union"
+          ],
+          "study_paths": [
+            "Licence Informatique (3 years) → Network technician",
+            "Bachelor's Degree (4 years) → Network engineer",
+            "Professional certifications (3-6 months) → Specialized roles",
+            "Vendor training programs → Expert certification",
+            "On-the-job training → Entry-level positions"
+          ]
+        },
+        "international_business": {
+          "overview": "International business in Cameroon is growing with opportunities in regional trade, multinational corporations, and pan-African business initiatives.",
+          "language_requirements": "French primary, English essential, and other African languages beneficial for regional business.",
+          "skill_demand_level": "Growing - Regional trade expansion and pan-African initiatives",
+          "required_education": "Bachelor's degree in International Business, Business Administration, or related field",
+          "certifications": [
+            "International Business Competency Standards",
+            "UNEP Capability Development",
+            "Pan-African Business Network certifications",
+            "International Trade certifications",
+            "Cross-cultural business credentials"
+          ],
+          "advantages": [
+            "Regional trade hub potential",
+            "Pan-African business opportunities",
+            "Government support for business sector",
+            "Lower operational costs",
+            "Growing logistics and export markets"
+          ],
+          "limitations": [
+            "Limited international business infrastructure",
+            "Currency fluctuations",
+            "Limited access to global markets",
+            "Brain drain to developed countries",
+            "Economic and political instability"
+          ],
+          "references": [
+            "Ministry of Commerce Cameroon",
+            "Cameroon Chamber of Commerce",
+            "ASEAN and Pan-African Trade Organizations",
+            "World Trade Organization"
+          ],
+          "study_paths": [
+            "Bachelor's Degree (3-4 years) → Business coordinator",
+            "Master's in International Business (2 years) → Business manager",
+            "MBA (1-2 years) → Senior management",
+            "Professional certifications → Specialized areas",
+            "On-the-job training → Entry-level roles"
+          ]
+        },
+        "digital_marketing": {
+          "overview": "Digital marketing in Cameroon is growing rapidly with e-commerce expansion and businesses shifting to online platforms for domestic and regional markets.",
+          "language_requirements": "French primary for local work, English for international digital platforms and technical tools.",
+          "skill_demand_level": "Growing - E-commerce expansion and digital transformation",
+          "required_education": "Bachelor's degree in Marketing, Communications, or Business; digital certifications highly valued",
+          "certifications": [
+            "Google Ads Certification",
+            "Google Analytics Certification",
+            "Facebook Blueprint Certification",
+            "HubSpot Marketing Certification",
+            "SEO and content marketing certifications"
+          ],
+          "advantages": [
+            "Growing e-commerce market",
+            "Social media adoption surge",
+            "Lower operational costs",
+            "Government digital initiatives",
+            "Regional market opportunities"
+          ],
+          "limitations": [
+            "Limited internet infrastructure",
+            "Power supply issues",
+            "Limited access to premium tools",
+            "Currency and economic instability",
+            "Brain drain to global opportunities"
+          ],
+          "references": [
+            "Ministry of Posts and Telecommunications",
+            "Cameroon E-commerce Association",
+            "Google Digital Garage",
+            "Meta for Business"
+          ],
+          "study_paths": [
+            "Diploma (2 years) → Junior marketing roles",
+            "Bachelor's Degree (3-4 years) → Digital marketing specialist",
+            "Online certifications (1-3 months) → Skill development",
+            "Professional training programs → Practical skills",
+            "Self-taught + portfolio → Freelance opportunities"
+          ]
+        },
+        "public_health": {
+          "overview": "Public health in Cameroon addresses healthcare challenges through government development programs and international health initiatives working on disease prevention and community health.",
+          "language_requirements": "French primary for local work, English for international organizations and research publications.",
+          "skill_demand_level": "High - Healthcare expansion and disease prevention initiatives",
+          "required_education": "Bachelor's degree in Public Health, Health Sciences, or related field; Master's preferred",
+          "certifications": [
+            "Master of Public Health (MPH)",
+            "WHO Health Management certifications",
+            "Epidemiology and disease surveillance credentials",
+            "Health promotion and education certifications",
+            "Maternal and child health specializations"
+          ],
+          "advantages": [
+            "Critical role in healthcare system",
+            "International NGO opportunities",
+            "Government health programs",
+            "Regional leadership potential",
+            "Making meaningful community impact"
+          ],
+          "limitations": [
+            "Low government sector salaries",
+            "Limited resources and infrastructure",
+            "Brain drain to international organizations",
+            "Complex health challenges",
+            "Funding uncertainties"
+          ],
+          "references": [
+            "Ministry of Public Health Cameroon",
+            "World Health Organization",
+            "Pan American Health Organization",
+            "UNICEF Health Programs"
+          ],
+          "study_paths": [
+            "Licence Santé Publique (3 years) → Public health officer",
+            "Master's in Public Health (2 years) → Public health specialist",
+            "PhD (4 years) → Research and leadership",
+            "WHO/CDC fellowships → International experience",
+            "Certification programs → Specialized areas"
+          ]
+        }
+      }
+    }
+  }
+}

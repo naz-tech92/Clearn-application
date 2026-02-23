@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero" style="margin-top: 30px;">
+            <div style="text-align: center; padding: 40px 20px;">
+                <h2 style="color: #60a5fa; margin-bottom: 20px;">🏥 Nursing</h2>
+                <p style="color: #cbd5e1; font-size: 1.1em;">Provide compassionate care and make a difference in people's lives</p>
+            </div>
+        </section>
+
+        <main>
+            <!-- SKILL CONTENT WITH HIERARCHICAL LAYOUT -->
+            <div class="skill-content">
+                <div class="skill-main-content">
+                    <!-- 1. SKILL OVERVIEW -->
+                    <div class="skill-info-section">
+                        <h3>📌 1️⃣ Skill Overview</h3>
+                    <p >
+                        Nursing is a healthcare profession focused on the care of individuals, families, and communities to attain, maintain, or recover optimal health and quality of life. Nurses work in various settings providing direct patient care, health education, and emotional support.
+                    </p>
+                    <h3 >Problems It Solves</h3>
+                    <p >
+                        Addresses patient care needs, health promotion, disease prevention, and recovery support. Nurses play crucial roles in emergency response, chronic disease management, and community health initiatives.
+                    </p>
+                    <h3 >Industries Where It's Used</h3>
+                    <ul >
+                        <li>🏥 Hospitals & Clinics</li>
+                        <li>🏠 Home Healthcare</li>
+                        <li>🏫 Schools & Universities</li>
+                        <li>🏛️ Government Health Agencies</li>
+                        <li>🧓 Long-term Care Facilities</li>
+                        <li>🚁 Emergency Services</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. REQUIRED EDUCATION -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🎓 2️⃣ Required Level of Education</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>📘 Certificate (1-2 years)</h3>
+                        <p>Licensed Practical Nurse (LPN) programs for entry-level care.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Associate Degree (2 years)</h3>
+                        <p>Associate Degree in Nursing (ADN) for registered nursing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Bachelor's Degree (4 years)</h3>
+                        <p>Bachelor of Science in Nursing (BSN) for comprehensive preparation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎓 Master's Degree</h3>
+                        <p>Advanced practice nursing specialties like Nurse Practitioner.</p>
+                    </div>
+                </div>
+                <div class="skill-info-section">
+                    <h3 >Additional Opportunities</h3>
+                    <ul >
+                        <li>🌍 Visa Pathways: Healthcare worker visas in multiple countries</li>
+                        <li>🎓 Scholarships: Nursing scholarships from hospitals and foundations</li>
+                        <li>🏫 University Recommendations: Johns Hopkins, University of Pennsylvania, Duke</li>
+                        <li>🛠️ Skill Comparison Tool: Match your qualifications with job requirements</li>
+                        <li>🤖 AI Chatbot Career Advisor: Personalized nursing career guidance</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. CAREER OPPORTUNITIES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">💼 3️⃣ Career Opportunities</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>Registered Nurse (RN)</h2>
+                        <p>Provide direct patient care in various healthcare settings.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Nurse Practitioner</h2>
+                        <p>Advanced practice nurses with prescribing authority.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Critical Care Nurse</h2>
+                        <p>Specialize in intensive care and emergency situations.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Pediatric Nurse</h2>
+                        <p>Care for infants, children, and adolescents.</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Public Health Nurse</h2>
+                        <p>Focus on community health and disease prevention.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. COUNTRIES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🌍 4️⃣ Countries Where It's Highly Demanded</h2>
+                <div class="feature-grid">
+                    <a href="/skill/nursing/country/united_states" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇺🇸 United States</h3>
+                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> BSN preferred<br><strong>Requirements:</strong> NCLEX-RN exam</p>
+                    </a>
+                    <a href="/skill/nursing/country/canada" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇨🇦 Canada</h3>
+                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> Provincial licensing</p>
+                    </a>
+                    <a href="/skill/nursing/country/australia" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇦🇺 Australia</h3>
+                        <p><strong>Demand:</strong> High<br><strong>Education:</strong> Bachelor's degree<br><strong>Requirements:</strong> AHPRA registration</p>
+                    </a>
+                    <a href="/skill/nursing/country/united_kingdom" class="feature-card" style="text-decoration: none; color: inherit; display: block;">
+                        <h3>🇬🇧 United Kingdom</h3>
+                        <p><strong>Demand:</strong> Growing<br><strong>Education:</strong> Degree-level entry<br><strong>Requirements:</strong> NMC registration</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 5. ADVANTAGES & DISADVANTAGES -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">⚖️ 5️⃣ Advantages & Disadvantages</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #10b981;">
+                        <h3 style="color: #10b981; margin-bottom: 15px;">✅ Advantages</h3>
+                        <ul >
+                            <li>Job security and demand</li>
+                            <li>Competitive salary</li>
+                            <li>Meaningful work helping others</li>
+                            <li>Flexible scheduling options</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #ef4444;">
+                        <h3 style="color: #ef4444; margin-bottom: 15px;">❌ Disadvantages</h3>
+                        <ul >
+                            <li>Physically demanding work</li>
+                            <li>Emotional stress</li>
+                            <li>Shift work and long hours</li>
+                            <li>Exposure to illness</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. REFERENCES & LEARNING PATH -->
+            <section style="margin-bottom: 40px;">
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">📚 6️⃣ References & Learning Path</h2>
+                <div class="topics-grid">
+                    <div class="topic-card">
+                        <h2>BSN Degree</h2>
+                        <p><strong>Type:</strong> University<br><strong>Duration:</strong> 4 years<br><strong>Recognized:</strong> Globally</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>NCLEX-RN Exam</h2>
+                        <p><strong>Type:</strong> Licensure Exam<br><strong>Prerequisites:</strong> Nursing degree<br><strong>Recognized in:</strong> US, Canada</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>CPR Certification</h2>
+                        <p><strong>Type:</strong> Certification<br><strong>Level:</strong> Basic<br><strong>Renewal:</strong> Every 2 years</p>
+                    </div>
+                    <div class="topic-card">
+                        <h2>Master's in Nursing</h2>
+                        <p><strong>Type:</strong> University<br><strong>Prerequisites:</strong> BSN degree<br><strong>Focus:</strong> Advanced practice</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/category">Categories</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="/topics">Cybersecurity Basics</a></li>
+                    <li><a href="/topics">Network Security</a></li>
+                    <li><a href="/topics">Cryptography</a></li>
+                    <li><a href="/topics">Ethical Hacking</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
