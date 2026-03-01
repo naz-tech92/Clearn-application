@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification - CLearn</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .auth-container {
+            max-width: 460px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .auth-card {
+            background: rgba(30, 41, 59, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #3b82f6;
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+        }
+
+        .auth-card h2 {
+            color: #60a5fa;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            font-size: 0.95em;
+        }
+
+        .otp-note {
+            color: #cbd5e1;
+            text-align: center;
+            font-size: 0.9em;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-align: center;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #60a5fa;
+            background: rgba(15, 23, 42, 1);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #64748b;
+            letter-spacing: normal;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .resend-btn {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #3b82f6;
+            background: transparent;
+            color: #60a5fa;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .resend-btn:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+
+            .auth-card h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
+                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link active" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <div class="carousel-overlay">
+                <h2>Verify Account</h2>
+                <p>Enter the OTP sent to your email to finish signup.</p>
+            </div>
+        </section>
+
+        <main>
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h2>OTP Verification</h2>
+                    <p class="auth-subtitle">Use the 6-character code from your email</p>
+                    <p class="otp-note" id="otp-email-note"></p>
+
+                    <form onsubmit="handleOtpVerification(event)">
+                        <div class="form-group">
+                            <label for="otp-code">OTP Code</label>
+                            <input type="text" id="otp-code" name="otp-code" maxlength="6" placeholder="A1B2C3" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Verify OTP</button>
+                    </form>
+
+                    <button type="button" class="resend-btn" onclick="resendOtp()">Resend OTP</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Services</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="/topics">Cybersecurity Basics</a></li>
+                    <li><a href="/topics">Network Security</a></li>
+                    <li><a href="/topics">Cryptography</a></li>
+                    <li><a href="/topics">Ethical Hacking</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        function isValidOtpFormat(code) {
+            return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$/.test(code);
+        }
+
+        function getEmailFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            return (params.get('email') || '').trim();
+        }
+
+        async function parseApiResponse(response) {
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+                return response.json();
+            }
+
+            await response.text();
+            throw new Error(`Server returned non-JSON response (${response.status}).`);
+        }
+
+        async function resendOtp() {
+            const email = getEmailFromQuery();
+
+            if (!email) {
+                alert('Missing signup email. Please return to signup and submit your details.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/signup/resend-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'Unable to resend OTP.');
+                    return;
+                }
+                alert(`A new OTP has been sent to ${email}.`);
+            } catch (error) {
+                alert('Unable to resend OTP right now. Please try again.');
+            }
+        }
+
+        async function handleOtpVerification(event) {
+            event.preventDefault();
+
+            const email = getEmailFromQuery();
+            const otpInput = document.getElementById('otp-code');
+            const enteredCode = otpInput.value.trim().toUpperCase();
+
+            otpInput.setCustomValidity('');
+
+            if (!email) {
+                alert('Missing signup email. Please return to signup and request a new OTP.');
+                return;
+            }
+
+            if (!isValidOtpFormat(enteredCode)) {
+                otpInput.setCustomValidity('OTP must be exactly 6 characters and contain both letters and numbers.');
+                otpInput.reportValidity();
+                otpInput.focus();
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/signup/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp: enteredCode })
+                });
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'OTP verification failed.');
+                    return;
+                }
+
+                alert('OTP verified successfully. Your account is now active.');
+                window.location.href = '/login';
+            } catch (error) {
+                alert('Unable to verify OTP right now. Please try again.');
+            }
+        }
+
+        const email = getEmailFromQuery();
+        const emailNote = document.getElementById('otp-email-note');
+        const otpInput = document.getElementById('otp-code');
+        otpInput.addEventListener('input', () => {
+            otpInput.value = otpInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+            otpInput.setCustomValidity('');
+        });
+        emailNote.textContent = email
+            ? `A 6-character OTP has been sent to ${email}. Check the inbox on the device where this email account is active.`
+            : 'A 6-character OTP has been sent to your email address.';
+    </script>
+</body>
+</html>

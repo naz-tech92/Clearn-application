@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -252,7 +252,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -271,7 +271,7 @@
     <div class="container">
         <!-- HERO SECTION -->
         <section class="education-hero">
-            <h1 style="font-size: 3em; margin-bottom: 20px;">🎓 {{ level|title }} Level Skills</h1>
+            <h1 style="font-size: 3em; margin-bottom: 20px;"> {{ level|title }} Level Skills</h1>
             <p style="font-size: 1.2em; opacity: 0.9;">Explore career opportunities requiring {{ level.lower() }} level education</p>
         </section>
 
@@ -281,37 +281,37 @@
             <div class="education-levels">
                 <div class="level-card{% if level.lower() == 'bachelor' or 'bachelor' in level.lower() %} active{% endif %}">
                     <a href="/education/bachelor">
-                        <div class="level-number">🎓</div>
+                        <div class="level-number"></div>
                         <div class="level-name">Bachelor's</div>
                     </a>
                 </div>
                 <div class="level-card{% if level.lower() == 'master' or 'master' in level.lower() %} active{% endif %}">
                     <a href="/education/master">
-                        <div class="level-number">🎓</div>
+                        <div class="level-number"></div>
                         <div class="level-name">Master's</div>
                     </a>
                 </div>
                 <div class="level-card{% if level.lower() == 'diploma' or 'diploma' in level.lower() %} active{% endif %}">
                     <a href="/education/diploma">
-                        <div class="level-number">📜</div>
+                        <div class="level-number"></div>
                         <div class="level-name">Diploma</div>
                     </a>
                 </div>
                 <div class="level-card{% if level.lower() == 'certificate' or 'certificate' in level.lower() %} active{% endif %}">
                     <a href="/education/certificate">
-                        <div class="level-number">🏆</div>
+                        <div class="level-number"></div>
                         <div class="level-name">Certificate</div>
                     </a>
                 </div>
                 <div class="level-card{% if level.lower() == 'phd' or 'phd' in level.lower() %} active{% endif %}">
                     <a href="/education/phd">
-                        <div class="level-number">🎓</div>
+                        <div class="level-number"></div>
                         <div class="level-name">PhD</div>
                     </a>
                 </div>
                 <div class="level-card{% if level.lower() == 'associate' or 'associate' in level.lower() %} active{% endif %}">
                     <a href="/education/associate">
-                        <div class="level-number">📚</div>
+                        <div class="level-number"></div>
                         <div class="level-name">Associate</div>
                     </a>
                 </div>
@@ -325,15 +325,15 @@
                 <div class="stat-label">Skills Found</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">{{ skills|map(attribute='country.name')|list|unique|length }}</div>
+                <div class="stat-number">{{ skills|map(attribute='country.name')|unique|list|length }}</div>
                 <div class="stat-label">Countries</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">🌍</div>
+                <div class="stat-number"></div>
                 <div class="stat-label">Global Access</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">📈</div>
+                <div class="stat-number"></div>
                 <div class="stat-label">Career Paths</div>
             </div>
         </div>
@@ -366,19 +366,19 @@
                     
                     <div class="skill-details">
                         <div class="detail-item">
-                            <i>🌍</i>
+                            <i></i>
                             <span>{{ skill_info.country.name }}</span>
                         </div>
                         <div class="detail-item">
-                            <i>📜</i>
+                            <i></i>
                             <span>{{ skill_info.skill_data.certifications|length }} Certifications</span>
                         </div>
                         <div class="detail-item">
-                            <i>💼</i>
+                            <i></i>
                             <span>{{ skill_info.skill_data.advantages|length }} Advantages</span>
                         </div>
                         <div class="detail-item">
-                            <i>📚</i>
+                            <i></i>
                             <span>{{ skill_info.skill_data.study_paths|length }} Study Paths</span>
                         </div>
                     </div>
@@ -407,7 +407,7 @@
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/topics">Services</a></li>
                     <li><a href="/category">Categories</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
@@ -417,7 +417,7 @@
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="/resources">Learning Resources</a></li>
-                    <li><a href="/topics">Study Topics</a></li>
+                    <li><a href="/topics">Services</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -427,6 +427,15 @@
                     <li><a href="/signup">Sign Up</a></li>
                 </ul>
             </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>

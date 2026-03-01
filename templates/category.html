@@ -1,10 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - CLearn</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .skill-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #3b82f6;
+            margin-bottom: 14px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -13,7 +24,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link active">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -33,7 +44,7 @@
         <!-- HERO SECTION -->
         <section class="hero" style="margin-top: 30px;">
             <div style="text-align: center; padding: 40px 20px;">
-                <h2 style="color: #60a5fa; margin-bottom: 20px;">CYBER LEARN – Digital Orientation Platform</h2>
+                <h2 style="color: #60a5fa; margin-bottom: 20px;">CYBER LEARN  Digital Orientation Platform</h2>
                 <p style="color: #cbd5e1; font-size: 1.1em; margin-bottom: 30px;">Discover your path in technology, health, and business fields</p>
                 
                 <!-- SEARCH BAR -->
@@ -46,20 +57,20 @@
         <!-- NAVIGATION HUB -->
         <section class="explore-views-section" style="margin-bottom: 40px;">
             <div class="explore-views-card" style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 12px; border: 1px solid #3b82f6;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">🧭 Explore by Different Views</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;"> Explore by Different Views</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;">🌍 By Country</h3>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> By Country</h3>
                         <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Explore skills available in specific countries</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
-                            <a href="/country/united_states" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">🇺🇸 US</a>
-                            <a href="/country/canada" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">🇨🇦 Canada</a>
-                            <a href="/country/germany" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">🇩🇪 Germany</a>
-                            <a href="/country/cameroon" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">🇨🇲 Cameroon</a>
+                            <a href="/country/united_states" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> US</a>
+                            <a href="/country/canada" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> Canada</a>
+                            <a href="/country/germany" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> Germany</a>
+                            <a href="/country/cameroon" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> Cameroon</a>
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;">🎓 By Education Level</h3>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> By Education Level</h3>
                         <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Find skills matching your educational background</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                             <a href="/education/bachelor" style="background: rgba(245, 87, 108, 0.2); color: #f5576c; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">Bachelor's</a>
@@ -69,7 +80,7 @@
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;">📊 Quick Stats</h3>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> Quick Stats</h3>
                         <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Platform overview</p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                             <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; font-size: 0.8em;">13 Skills</span>
@@ -84,7 +95,7 @@
         <main>
             <!-- TECH SKILLS -->
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">🖥️ Technology Skills - Shape the Future</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;"> Technology Skills - Shape the Future</h2>
                 <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Master in-demand tech skills and unlock unlimited career opportunities in the digital age</p>
                 <div class="knowledge-hub" style="margin-bottom: 20px;">
                     <h4>Why Technology Careers?</h4>
@@ -98,42 +109,49 @@
                 <div class="topics-grid" id="techSkills">
                     <a href="/skill/cybersecurity" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-cybersecurity.jpg" alt="Cybersecurity technology visual">
                             <h2>Cybersecurity</h2>
                             <p>Protect digital assets and systems from cyber threats. Be a guardian of information security.</p>
                         </div>
                     </a>
                     <a href="/skill/data_science" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-data-science.jpg" alt="Data science visual">
                             <h2>Data Science</h2>
                             <p>Analyze and interpret complex data to drive insights and transformative business decisions.</p>
                         </div>
                     </a>
                     <a href="/skill/cloud_computing" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-cloud-computing.png" alt="Cloud computing visual">
                             <h2>Cloud Computing</h2>
                             <p>Design and manage cloud-based infrastructure that powers global digital transformation.</p>
                         </div>
                     </a>
                     <a href="/skill/ai_machine_learning" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-ai-ml.jpg" alt="AI and machine learning visual">
                             <h2>AI / Machine Learning</h2>
                             <p>Build intelligent systems that learn and adapt. Shape the future of automation.</p>
                         </div>
                     </a>
                     <a href="/skill/software_engineering" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-software-engineering.jpg" alt="Software engineering visual">
                             <h2>Software Engineering</h2>
                             <p>Develop robust software solutions that solve real-world problems for millions.</p>
                         </div>
                     </a>
                     <a href="/skill/networking" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-networking.jpg" alt="Networking technology visual">
                             <h2>Networking</h2>
                             <p>Design and maintain the backbone of digital communication networks worldwide.</p>
                         </div>
                     </a>
                     <a href="/skill/devops" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/tech-devops.jpg" alt="DevOps workflow visual">
                             <h2>DevOps</h2>
                             <p>Streamline development and operations to enable continuous innovation and delivery.</p>
                         </div>
@@ -143,7 +161,7 @@
 
             <!-- HEALTH -->
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">🏥 Healthcare Professionals - Make a Difference</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;"> Healthcare Professionals - Make a Difference</h2>
                 <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Dedicate your career to healing, helping, and improving lives globally</p>
                 <div class="knowledge-hub" style="margin-bottom: 20px;">
                     <h4>Why Healthcare Careers?</h4>
@@ -157,18 +175,21 @@
                 <div class="topics-grid" id="healthSkills">
                     <a href="/skill/nursing" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/health-nursing.jpg" alt="Nursing healthcare visual">
                             <h2>Nursing</h2>
                             <p>Provide compassionate patient care and support. Lead healthcare teams with empathy and excellence.</p>
                         </div>
                     </a>
                     <a href="/skill/public_health" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/health-public-health.jpeg" alt="Public health visual">
                             <h2>Public Health</h2>
                             <p>Promote community health and prevent diseases on a population level. Shape public policy.</p>
                         </div>
                     </a>
                     <a href="/skill/medical_laboratory_science" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/health-med-lab.jpg" alt="Medical laboratory science visual">
                             <h2>Medical Laboratory Science</h2>
                             <p>Perform diagnostic tests and analyze samples. Provide crucial data for patient diagnosis and treatment.</p>
                         </div>
@@ -178,7 +199,7 @@
 
             <!-- BUSINESS -->
             <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">💼 Business Leaders - Drive Success</h2>
+                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;"> Business Leaders - Drive Success</h2>
                 <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Lead organizations, manage finances, and create entrepreneurial impact worldwide</p>
                 <div class="knowledge-hub" style="margin-bottom: 20px;">
                     <h4>Why Business Careers?</h4>
@@ -192,18 +213,21 @@
                 <div class="topics-grid" id="businessSkills">
                     <a href="/skill/accounting" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/business-accounting.jpg" alt="Accounting business visual">
                             <h2>Accounting</h2>
                             <p>Manage financial records and ensure compliance. Become the financial backbone of organizations.</p>
                         </div>
                     </a>
                     <a href="/skill/digital_marketing" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/business-digital-marketing.jpg" alt="Digital marketing visual">
                             <h2>Digital Marketing</h2>
                             <p>Promote brands through digital channels. Master the art of connecting with global audiences.</p>
                         </div>
                     </a>
                     <a href="/skill/international_business" class="topic-card-link">
                         <div class="topic-card">
+                            <img class="skill-image" src="/static/images/skills/business-international-business.jpg" alt="International business visual">
                             <h2>International Business</h2>
                             <p>Navigate global markets and cross-cultural commerce. Build bridges between continents and cultures.</p>
                         </div>
@@ -224,7 +248,7 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/topics">Services</a></li>
                     <li><a href="/category">Categories</a></li>
                     <li><a href="/contact">Contact</a></li>
                 </ul>
@@ -245,13 +269,22 @@
                     <li><a href="/signup">Sign Up</a></li>
                 </ul>
             </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="/static/js/script.js"></script>
     <script>
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', function() {
@@ -287,3 +320,5 @@
     </script>
 </body>
 </html>
+
+

@@ -1,10 +1,144 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLearn - Digital Orientation Platform</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .home-skill-image {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #3b82f6;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .universal-search-shell {
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .universal-search-input-wrap {
+            position: relative;
+        }
+
+        .universal-search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #93c5fd;
+            pointer-events: none;
+            font-size: 1.1rem;
+        }
+
+        .universal-search-input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            font-size: 1em;
+        }
+
+        .search-suggestions {
+            display: none;
+            margin-top: 8px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .search-suggestion-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            color: #dbeafe;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .search-suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-suggestion-item:hover {
+            background: rgba(37, 99, 235, 0.3);
+        }
+
+        .search-filters {
+            display: none;
+            margin-top: 16px;
+            text-align: left;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .search-filter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .search-filters select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.95);
+            color: #e2e8f0;
+            font-size: 0.9em;
+        }
+
+        .search-results-list {
+            display: none;
+            margin-top: 14px;
+            text-align: left;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .search-result-card {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+        }
+
+        .search-result-meta {
+            color: #cbd5e1;
+            font-size: 0.87rem;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .search-filter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .search-filter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -13,7 +147,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -39,17 +173,17 @@
                 <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
                 
                 <div class="carousel-overlay">
-                    <h2>🔐 CYBER LEARN – Digital Orientation Platform</h2>
+                    <h2> CYBER LEARN  Digital Orientation Platform</h2>
                     <p>Discover your path in Technology, Health, and Business careers</p>
                     <div class="button-group" style="margin-top: 20px;">
                         <a href="/category" class="btn btn-primary">Explore Categories</a>
-                        <a href="/topics" class="btn btn-secondary">Browse Topics</a>
+                        <a href="/topics" class="btn btn-secondary">Browse Services</a>
                     </div>
                 </div>
             </div>
 
-            <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
-            <button class="carousel-next" onclick="changeSlide(1)">❯</button>
+            <button class="carousel-prev" onclick="changeSlide(-1)"></button>
+            <button class="carousel-next" onclick="changeSlide(1)"></button>
 
             <div class="carousel-dots">
                 <span class="carousel-dot active" onclick="currentSlide(0)"></span>
@@ -63,47 +197,57 @@
     <div class="container">
 
         <!-- SEARCH BAR SECTION -->
-        <section style="text-align: center; padding: 40px 20px; background: rgba(30, 41, 59, 0.6); margin: 20px 0; border-radius: 12px;">
-            <h3 style="color: #60a5fa; margin-bottom: 20px;">🔍 Find Your Perfect Career Path</h3>
+        <section style="text-align: center; padding: 40px 20px; background: #1e293b; margin: 20px 0; border-radius: 12px;">
+            <h3 style="color: #60a5fa; margin-bottom: 20px;"> Find Your Perfect Career Path</h3>
             <p style="color: #cbd5e1; margin-bottom: 30px;">Search through our comprehensive collection of skills and faculties to discover your ideal career</p>
-            <div style="max-width: 600px; margin: 0 auto;">
-                <input type="text" id="homeSearchInput" placeholder="Search by skill or faculty (e.g., Cybersecurity, Nursing, Accounting)..." style="width: 100%; padding: 15px; border: 2px solid #3b82f6; border-radius: 8px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0; font-size: 1em;">
-                <div id="searchResults" style="display: none; margin-top: 20px; text-align: left; max-height: 300px; overflow-y: auto;"></div>
+            <div class="universal-search-shell">
+                <div class="universal-search-input-wrap">
+                    <span class="universal-search-icon">&#128269;</span>
+                    <input type="text" id="homeSearchInput" class="universal-search-input" placeholder="Universal search: skill, country, degree, salary, demand, university...">
+                </div>
+                <div id="searchSuggestions" class="search-suggestions"></div>
+                <div id="searchResults" class="search-results-list"></div>
+                <div id="searchFilters" class="search-filters">
+                    <div class="search-filter-grid">
+                        <select id="filterCountry"><option value="">Country (All)</option></select>
+                        <select id="filterDegree"><option value="">Degree (All)</option></select>
+                        <select id="filterDemand"><option value="">Demand (All)</option></select>
+                        <select id="filterSalary"><option value="">Salary Range (All)</option></select>
+                        <select id="filterUniversity"><option value="">University (All)</option></select>
+                    </div>
+                </div>
             </div>
         </section>
 
         <main>
-            <section style="text-align: center; padding: 30px 0; margin-bottom: 40px;">
-                <p style="font-size: 1.1em; color: #cbd5e1; margin-bottom: 30px;">A comprehensive digital orientation platform helping you discover and plan your career path in technology, health, and business fields with global opportunities and detailed guidance.</p>
-                <div class="button-group">
-                    <a href="/category" class="btn btn-primary">Explore Skills & Faculties</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
-                </div>
-            </section>
             <section id="about" class="features">
                 <h2>Explore Career Paths</h2>
                 <div class="feature-grid">
                     <a href="/topics" class="feature-card-link">
                         <div class="feature-card">
-                            <h3>🖥️ Technology Skills</h3>
+                            <img class="home-skill-image" src="/static/images/skills/tech-cybersecurity.jpg" alt="Technology skills">
+                            <h3> Technology Skills</h3>
                             <p>Discover careers in Cybersecurity, Data Science, Cloud Computing, AI/ML, Software Engineering, Networking, and DevOps. Master cutting-edge technologies that shape our digital future.</p>
                         </div>
                     </a>
                     <a href="/topics" class="feature-card-link">
                         <div class="feature-card">
-                            <h3>🏥 Health Careers</h3>
+                            <img class="home-skill-image" src="/static/images/skills/health-nursing.jpg" alt="Health careers">
+                            <h3> Health Careers</h3>
                             <p>Explore opportunities in Nursing, Public Health, and Medical Laboratory Science with global demand information. Join the noble profession of healing and healthcare innovation.</p>
                         </div>
                     </a>
                     <a href="/topics" class="feature-card-link">
                         <div class="feature-card">
-                            <h3>💼 Business Fields</h3>
+                            <img class="home-skill-image" src="/static/images/skills/business-accounting.jpg" alt="Business fields">
+                            <h3> Business Fields</h3>
                             <p>Learn about Accounting, Digital Marketing, and International Business with comprehensive career guidance. Become a leader in the global business landscape.</p>
                         </div>
                     </a>
                     <a href="/topics" class="feature-card-link">
                         <div class="feature-card">
-                            <h3>🌍 Global Opportunities</h3>
+                            <img class="home-skill-image" src="/static/images/skills/business-international-business.jpg" alt="Global opportunities">
+                            <h3> Global Opportunities</h3>
                             <p>Get detailed information about international job markets, visa pathways, and country-specific requirements. Your passport to worldwide career success awaits.</p>
                         </div>
                     </a>
@@ -146,7 +290,7 @@
             <section style="margin-bottom: 40px;">
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Knowledge Hub - Your Learning Companion</h2>
                 <div class="knowledge-hub">
-                    <h4>🚀 Quick Access Resources</h4>
+                    <h4> Quick Access Resources</h4>
                     <ul>
                         <li><a href="/categories">Explore All Career Categories</a> - Comprehensive career exploration across 10+ fields</li>
                         <li><a href="/topics">Browse Learning Topics</a> - Curated educational content and skill development</li>
@@ -165,58 +309,102 @@
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Advanced Career Development Tools</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>🛠️ Skill Comparison Tool</h3>
+                        <h3> Skill Comparison Tool</h3>
                         <p>Compare your current skills with job requirements across different career paths. Identify gaps and create personalized development plans to accelerate your career growth.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🤖 AI Career Advisor</h3>
+                        <h3> AI Career Advisor</h3>
                         <p>Get personalized career guidance and recommendations based on your interests, skills, and market trends. Our AI analyzes thousands of career paths to find your perfect match.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🌍 Visa Pathway Guide</h3>
+                        <h3> Visa Pathway Guide</h3>
                         <p>Explore international work opportunities and immigration pathways. Get detailed visa requirements, application processes, and success strategies for global career advancement.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>📊 Career Assessment</h3>
+                        <h3> Career Assessment</h3>
                         <p>Take comprehensive assessments to identify your strengths, personality traits, and suitable career fields. Receive detailed reports with actionable recommendations.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🎯 Goal Setting Framework</h3>
+                        <h3> Goal Setting Framework</h3>
                         <p>Create SMART career goals with our structured framework. Track progress, celebrate milestones, and stay motivated on your professional journey.</p>
                     </div>
                     <div class="feature-card">
-                        <h3>📈 Salary Negotiation Coach</h3>
+                        <h3> Salary Negotiation Coach</h3>
                         <p>Learn proven salary negotiation techniques, understand market rates, and develop confidence in discussing compensation packages.</p>
                     </div>
                 </div>
             </section>
 
             <section class="enlightening-resources-section" style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Enlightening Career Resources</h2>
+                <div class="enlightening-title-banner">
+                    <h2>Enlightening Career Resources</h2>
+                </div>
                 <div class="topics-grid">
-                    <div class="topic-card">
-                        <h2>What Color Is Your Parachute?</h2>
-                        <p>Richard Bolles' timeless guide to career exploration and job search strategies. Discover your passion and find meaningful work that fulfills your potential.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9781984861202-L.jpg" alt="What Color Is Your Parachute? book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>What Color Is Your Parachute?</h2>
+                                <p>Richard Bolles' timeless guide to career exploration and job search strategies. Discover your passion and find meaningful work that fulfills your potential.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="topic-card">
-                        <h2>The Lean Startup</h2>
-                        <p>Eric Ries' revolutionary approach to entrepreneurship and innovation. Learn to build successful businesses with validated learning and scientific methods.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg" alt="The Lean Startup book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>The Lean Startup</h2>
+                                <p>Eric Ries' revolutionary approach to entrepreneurship and innovation. Learn to build successful businesses with validated learning and scientific methods.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="topic-card">
-                        <h2>Rich Dad Poor Dad</h2>
-                        <p>Robert Kiyosaki's financial literacy masterpiece. Understand the difference between working for money and having money work for you.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg" alt="Rich Dad Poor Dad book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>Rich Dad Poor Dad</h2>
+                                <p>Robert Kiyosaki's financial literacy masterpiece. Understand the difference between working for money and having money work for you.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="topic-card">
-                        <h2>The Innovator's Dilemma</h2>
-                        <p>Clayton Christensen's groundbreaking work on technological change and business strategy. Understand how great companies can fail by doing everything right.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9781633691785-L.jpg" alt="The Innovator's Dilemma book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>The Innovator's Dilemma</h2>
+                                <p>Clayton Christensen's groundbreaking work on technological change and business strategy. Understand how great companies can fail by doing everything right.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="topic-card">
-                        <h2>Mindset: The New Psychology of Success</h2>
-                        <p>Carol Dweck's transformative research on growth mindset. Learn how changing your mindset can unlock your potential and achieve greater success.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9780345472328-L.jpg" alt="Mindset: The New Psychology of Success book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>Mindset: The New Psychology of Success</h2>
+                                <p>Carol Dweck's transformative research on growth mindset. Learn how changing your mindset can unlock your potential and achieve greater success.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="topic-card">
-                        <h2>Atomic Habits</h2>
-                        <p>James Clear's practical guide to building good habits and breaking bad ones. Small changes, remarkable results in your personal and professional life.</p>
+                    <div class="topic-card book-flip-card">
+                        <div class="book-flip-inner">
+                            <div class="book-flip-face book-flip-front">
+                                <img src="https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg" alt="Atomic Habits book cover">
+                            </div>
+                            <div class="book-flip-face book-flip-back">
+                                <h2>Atomic Habits</h2>
+                                <p>James Clear's practical guide to building good habits and breaking bad ones. Small changes, remarkable results in your personal and professional life.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -225,12 +413,12 @@
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Career Development Resources</h2>
                 <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
                     <ul style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
-                        <li>📖 LinkedIn Learning - Professional development courses across all industries</li>
-                        <li>📖 Coursera - University-level courses from top institutions worldwide</li>
-                        <li>📖 Glassdoor - Salary insights and company reviews for career planning</li>
-                        <li>📖 Indeed Career Guide - Comprehensive career advice and job search tools</li>
-                        <li>📖 UNESCO Career Development - International education and career guidance</li>
-                        <li>📖 World Bank Skills Reports - Global labor market trends and opportunities</li>
+                        <li> LinkedIn Learning - Professional development courses across all industries</li>
+                        <li> Coursera - University-level courses from top institutions worldwide</li>
+                        <li> Glassdoor - Salary insights and company reviews for career planning</li>
+                        <li> Indeed Career Guide - Comprehensive career advice and job search tools</li>
+                        <li> UNESCO Career Development - International education and career guidance</li>
+                        <li> World Bank Skills Reports - Global labor market trends and opportunities</li>
                     </ul>
                 </div>
             </section>
@@ -248,7 +436,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/topics">Services</a></li>
                         <li><a href="/about">About Us</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
@@ -267,6 +455,14 @@
                     <ul>
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                     </ul>
                 </div>
             </div>
@@ -326,67 +522,272 @@
             });
         });
 
-        // Home page search functionality
-        const skills = [
-            { name: 'Cybersecurity', url: '/skill/cybersecurity', faculty: 'Technology' },
-            { name: 'Data Science', url: '/skill/data_science', faculty: 'Technology' },
-            { name: 'Cloud Computing', url: '/skill/cloud_computing', faculty: 'Technology' },
-            { name: 'AI / Machine Learning', url: '/skill/ai_machine_learning', faculty: 'Technology' },
-            { name: 'Software Engineering', url: '/skill/software_engineering', faculty: 'Technology' },
-            { name: 'Networking', url: '/skill/networking', faculty: 'Technology' },
-            { name: 'DevOps', url: '/skill/devops', faculty: 'Technology' },
-            { name: 'Nursing', url: '/skill/nursing', faculty: 'Health' },
-            { name: 'Public Health', url: '/skill/public_health', faculty: 'Health' },
-            { name: 'Medical Laboratory Science', url: '/skill/medical_laboratory_science', faculty: 'Health' },
-            { name: 'Accounting', url: '/skill/accounting', faculty: 'Business' },
-            { name: 'Digital Marketing', url: '/skill/digital_marketing', faculty: 'Business' },
-            { name: 'International Business', url: '/skill/international_business', faculty: 'Business' }
-        ];
-
+        // Universal Home Search (MVP): Fuzzy + Synonyms + Intent + Filters + Suggestions
         const homeSearchInput = document.getElementById('homeSearchInput');
         const searchResults = document.getElementById('searchResults');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const searchFilters = document.getElementById('searchFilters');
+        const filterCountry = document.getElementById('filterCountry');
+        const filterDegree = document.getElementById('filterDegree');
+        const filterDemand = document.getElementById('filterDemand');
+        const filterSalary = document.getElementById('filterSalary');
+        const filterUniversity = document.getElementById('filterUniversity');
 
-        homeSearchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            const resultsContainer = document.getElementById('searchResults');
-            
-            if (query.length < 2) {
-                resultsContainer.style.display = 'none';
+        let searchIndex = [];
+        let rankedResults = [];
+        let suggestionPool = [];
+
+        const synonymMap = {
+            'cyber': ['cybersecurity', 'security'],
+            'ai': ['artificial intelligence', 'machine learning', 'ml'],
+            'ml': ['machine learning', 'ai'],
+            'nurse': ['nursing'],
+            'marketing': ['digital marketing'],
+            'software': ['software engineering', 'devops'],
+            'cloud': ['cloud computing'],
+            'network': ['networking'],
+            'biz': ['business', 'international business'],
+            'accountant': ['accounting'],
+            'uni': ['university', 'college', 'institute'],
+            'salary': ['pay', 'income', 'compensation'],
+            'degree': ['education', 'bachelor', 'masters', 'phd'],
+            'demand': ['job market', 'hiring']
+        };
+
+        function normalize(text) {
+            return (text || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function levenshtein(a, b) {
+            const s = normalize(a);
+            const t = normalize(b);
+            if (!s.length) return t.length;
+            if (!t.length) return s.length;
+            const dp = Array.from({ length: s.length + 1 }, (_, i) => [i]);
+            for (let j = 1; j <= t.length; j += 1) dp[0][j] = j;
+            for (let i = 1; i <= s.length; i += 1) {
+                for (let j = 1; j <= t.length; j += 1) {
+                    const cost = s[i - 1] === t[j - 1] ? 0 : 1;
+                    dp[i][j] = Math.min(
+                        dp[i - 1][j] + 1,
+                        dp[i][j - 1] + 1,
+                        dp[i - 1][j - 1] + cost
+                    );
+                }
+            }
+            return dp[s.length][t.length];
+        }
+
+        function fuzzyScore(query, candidate) {
+            const q = normalize(query);
+            const c = normalize(candidate);
+            if (!q || !c) return 0;
+            if (c.includes(q)) return 1;
+            const distance = levenshtein(q, c.slice(0, Math.max(q.length, 3)));
+            const maxLen = Math.max(q.length, c.length, 1);
+            return Math.max(0, 1 - distance / maxLen);
+        }
+
+        function expandQuery(rawQuery) {
+            const tokens = normalize(rawQuery).split(' ').filter(Boolean);
+            const expanded = new Set(tokens);
+            tokens.forEach(token => {
+                (synonymMap[token] || []).forEach(s => expanded.add(normalize(s)));
+            });
+            return Array.from(expanded);
+        }
+
+        function detectIntent(rawQuery) {
+            const q = normalize(rawQuery);
+            return {
+                country: /(country|usa|uk|canada|singapore|australia|germany|cameroon)/.test(q),
+                degree: /(degree|bachelor|masters|phd|diploma|education)/.test(q),
+                demand: /(demand|job market|hiring|opportunity)/.test(q),
+                salary: /(salary|pay|income|compensation)/.test(q),
+                university: /(university|college|institute|school|campus)/.test(q),
+            };
+        }
+
+        function rowText(row) {
+            return [
+                row.skillName,
+                row.countryName,
+                row.demandLevel,
+                row.degree,
+                row.requiredEducation,
+                row.salaryRange,
+                ...(row.universities || [])
+            ].join(' ');
+        }
+
+        function rankResults(rawQuery) {
+            const expanded = expandQuery(rawQuery);
+            const intent = detectIntent(rawQuery);
+            return searchIndex
+                .map(row => {
+                    const corpus = rowText(row);
+                    let score = 0;
+                    expanded.forEach(term => {
+                        score += fuzzyScore(term, row.skillName) * 4;
+                        score += fuzzyScore(term, row.countryName) * 2;
+                        score += fuzzyScore(term, corpus);
+                    });
+                    if (intent.country) score += fuzzyScore(rawQuery, row.countryName) * 2.5;
+                    if (intent.degree) score += fuzzyScore(rawQuery, row.degree + ' ' + row.requiredEducation) * 2.2;
+                    if (intent.demand) score += fuzzyScore(rawQuery, row.demandLevel) * 2.2;
+                    if (intent.salary) score += fuzzyScore(rawQuery, row.salaryRange) * 2.2;
+                    if (intent.university) score += fuzzyScore(rawQuery, (row.universities || []).join(' ')) * 2.2;
+                    return { ...row, _score: score };
+                })
+                .filter(row => row._score > 0.25)
+                .sort((a, b) => b._score - a._score)
+                .slice(0, 120);
+        }
+
+        function shortlistResults(rows) {
+            if (!rows.length) return [];
+            const topScore = rows[0]._score || 0;
+            const minScore = Math.max(0.5, topScore * 0.55);
+            return rows.filter(row => row._score >= minScore).slice(0, 10);
+        }
+
+        function applyFilters(rows) {
+            return rows.filter(row => {
+                if (filterCountry.value && row.countryName !== filterCountry.value) return false;
+                if (filterDegree.value && row.degree !== filterDegree.value) return false;
+                if (filterDemand.value && row.demandLevel !== filterDemand.value) return false;
+                if (filterSalary.value && row.salaryRange !== filterSalary.value) return false;
+                if (filterUniversity.value && !(row.universities || []).includes(filterUniversity.value)) return false;
+                return true;
+            });
+        }
+
+        function renderResults(rows) {
+            if (!rows.length) {
+                searchResults.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No matches found for this query and filters.</p>';
+                searchResults.style.display = 'block';
                 return;
             }
 
-            const filteredSkills = skills.filter(skill => 
-                skill.name.toLowerCase().includes(query) || 
-                skill.faculty.toLowerCase().includes(query)
-            );
-
-            if (filteredSkills.length > 0) {
-                const resultsHtml = filteredSkills.map(skill => `
-                    <div style="background: rgba(30, 41, 59, 0.9); border: 1px solid #3b82f6; border-radius: 8px; padding: 15px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s ease;" onclick="window.location.href='${skill.url}'">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h4 style="color: #60a5fa; margin: 0; font-size: 1.1em;">${skill.name}</h4>
-                                <p style="color: #93c5fd; margin: 5px 0 0 0; font-size: 0.9em;">${skill.faculty} Faculty</p>
-                            </div>
-                            <div style="color: #60a5fa; font-size: 1.2em;">→</div>
-                        </div>
+            searchResults.innerHTML = `
+                <div style="color:#bfdbfe; margin-bottom:10px; font-size:0.9rem;">Top ${rows.length} direct matches</div>
+                ${rows.map(row => `
+                <div class="search-result-card" onclick="window.location.href='${row.url}'">
+                    <h4 style="color: #60a5fa; margin: 0;">${row.skillName}</h4>
+                    <div class="search-result-meta">
+                        ${row.countryName} | ${row.demandLevel}<br>
+                        ${row.salaryRange} | ${row.degree}
                     </div>
-                `).join('');
-                
-                resultsContainer.innerHTML = resultsHtml;
-                resultsContainer.style.display = 'block';
-            } else {
-                resultsContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">No skills found matching your search.</p>';
-                resultsContainer.style.display = 'block';
+                </div>
+            `).join('')}
+            `;
+            searchResults.style.display = 'block';
+        }
+
+        function setFilterOptions(selectEl, values, label) {
+            const options = ['<option value="">'+label+' (All)</option>']
+                .concat(values.map(value => `<option value="${value}">${value}</option>`));
+            selectEl.innerHTML = options.join('');
+        }
+
+        function refreshFilterOptions(rows) {
+            const countries = [...new Set(rows.map(r => r.countryName))].sort();
+            const degrees = [...new Set(rows.map(r => r.degree))].sort();
+            const demands = [...new Set(rows.map(r => r.demandLevel))].sort();
+            const salaries = [...new Set(rows.map(r => r.salaryRange))].sort();
+            const universities = [...new Set(rows.flatMap(r => r.universities || []))].sort();
+
+            setFilterOptions(filterCountry, countries, 'Country');
+            setFilterOptions(filterDegree, degrees, 'Degree');
+            setFilterOptions(filterDemand, demands, 'Demand');
+            setFilterOptions(filterSalary, salaries, 'Salary Range');
+            setFilterOptions(filterUniversity, universities, 'University');
+        }
+
+        function showSuggestions(query) {
+            const q = normalize(query);
+            if (q.length < 2) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+            const picks = suggestionPool
+                .filter(item => normalize(item).includes(q))
+                .slice(0, 8);
+            if (!picks.length) {
+                searchSuggestions.style.display = 'none';
+                return;
+            }
+            searchSuggestions.innerHTML = picks.map(item => `<div class="search-suggestion-item">${item}</div>`).join('');
+            searchSuggestions.style.display = 'block';
+            searchSuggestions.querySelectorAll('.search-suggestion-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    homeSearchInput.value = el.textContent;
+                    searchSuggestions.style.display = 'none';
+                    runSearch();
+                });
+            });
+        }
+
+        function runSearch() {
+            const query = homeSearchInput.value.trim();
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                searchFilters.style.display = 'none';
+                return;
+            }
+
+            rankedResults = rankResults(query);
+            refreshFilterOptions(rankedResults);
+            searchFilters.style.display = 'block';
+            const filtered = applyFilters(rankedResults);
+            renderResults(shortlistResults(filtered));
+        }
+
+        async function loadUniversalSearchData() {
+            try {
+                const response = await fetch('/api/search-index');
+                const payload = await response.json();
+                if (!response.ok || !payload.ok) {
+                    throw new Error('Unable to load search index.');
+                }
+                searchIndex = payload.items || [];
+                suggestionPool = [...new Set(searchIndex.flatMap(item => [
+                    item.skillName,
+                    item.countryName,
+                    item.degree,
+                    item.demandLevel,
+                    item.salaryRange,
+                    ...(item.universities || [])
+                ]))];
+            } catch (error) {
+                searchIndex = [];
+                suggestionPool = [];
+            }
+        }
+
+        homeSearchInput.addEventListener('input', () => {
+            showSuggestions(homeSearchInput.value);
+            runSearch();
+        });
+
+        [filterCountry, filterDegree, filterDemand, filterSalary, filterUniversity].forEach(filterEl => {
+            filterEl.addEventListener('change', () => {
+                const filtered = applyFilters(rankedResults);
+                renderResults(shortlistResults(filtered));
+            });
+        });
+
+        // Hide search overlays when clicking outside
+        document.addEventListener('click', function(e) {
+            const inside = e.target.closest('.universal-search-shell');
+            if (!inside) {
+                searchSuggestions.style.display = 'none';
+                searchResults.style.display = 'none';
+                searchFilters.style.display = 'none';
             }
         });
 
-        // Hide search results when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!homeSearchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.style.display = 'none';
-            }
-        });
+        loadUniversalSearchData();
     </script>
 </body>
 </html>

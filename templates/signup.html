@@ -7,9 +7,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
         .auth-container {
-            max-width: 500px;
+            max-width: 760px;
             margin: 0 auto;
             padding: 40px 0;
+        }
+
+        .auth-hero {
+            min-height: 300px !important;
+            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=700&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #3b82f6 !important;
+            overflow: hidden;
+        }
+
+        .auth-hero .carousel-overlay {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
         .auth-card {
@@ -36,6 +51,16 @@
 
         .form-group {
             margin-bottom: 18px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 16px;
+        }
+
+        .form-group.span-2 {
+            grid-column: 1 / -1;
         }
 
         .form-group label {
@@ -93,15 +118,27 @@
 
         .password-requirements li {
             margin-bottom: 4px;
-            padding-left: 20px;
+            padding-left: 32px;
             position: relative;
+            color: #94a3b8;
+            transition: color 0.2s ease;
         }
 
         .password-requirements li:before {
-            content: "✓";
+            content: "[ ]";
             position: absolute;
             left: 0;
             color: #60a5fa;
+            font-weight: 700;
+        }
+
+        .password-requirements li.valid {
+            color: #4ade80;
+        }
+
+        .password-requirements li.valid:before {
+            content: "[x]";
+            color: #4ade80;
         }
 
         .terms-checkbox {
@@ -202,6 +239,80 @@
             border-color: #60a5fa;
         }
 
+        .otp-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.78);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .otp-overlay.hidden {
+            display: none;
+        }
+
+        .otp-modal {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px solid #3b82f6;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.6);
+            padding: 24px;
+        }
+
+        .otp-modal h3 {
+            margin: 0 0 8px;
+            color: #60a5fa;
+            text-align: center;
+        }
+
+        .otp-modal p {
+            margin: 0 0 16px;
+            color: #cbd5e1;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .otp-modal input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e2e8f0;
+            font-size: 1em;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+        }
+
+        .otp-modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .otp-btn {
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #3b82f6;
+            background: transparent;
+            color: #60a5fa;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .otp-btn.primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: none;
+            color: #fff;
+        }
+
         @media (max-width: 768px) {
             .auth-card {
                 padding: 30px 20px;
@@ -209,6 +320,10 @@
 
             .auth-card h2 {
                 font-size: 1.6em;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -220,7 +335,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -237,28 +352,11 @@
     </nav>
 
     <div class="container">
-        <!-- HERO SECTION WITH CAROUSEL -->
-        <section class="hero">
-            <div class="carousel">
-                <div class="carousel-container">
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
-                    
-                    <div class="carousel-overlay">
-                        <h2>🚀 Join CLearn</h2>
-                        <p>Start your cybersecurity learning journey today</p>
-                    </div>
-                </div>
-
-                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
-                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
-
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
-                </div>
+                <!-- HERO SECTION -->
+        <section class="hero auth-hero">
+            <div class="carousel-overlay">
+                <h2>Join</h2>
+                <p>Create your CLearn account and start your learning journey.</p>
             </div>
         </section>
 
@@ -269,6 +367,7 @@
                     <p class="auth-subtitle">Create your free account and begin learning</p>
 
                     <form onsubmit="handleSignup(event)">
+                        <div class="form-grid">
                         <div class="form-group">
                             <label for="fullname">Full Name</label>
                             <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
@@ -280,18 +379,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                            <label for="present-skill-career">Present Skill/Career</label>
+                            <input type="text" id="present-skill-career" name="present-skill-career" placeholder="Cybersecurity Analyst" required>
                         </div>
 
-                        <div class="password-requirements">
-                            <h4>Password must contain:</h4>
-                            <ul>
-                                <li>At least 8 characters</li>
-                                <li>One uppercase letter</li>
-                                <li>One number</li>
-                                <li>One special character (!@#$%)</li>
-                            </ul>
+                        <div class="form-group">
+                            <label for="school">School</label>
+                            <input type="text" id="school" name="school" placeholder="University / Institution name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" placeholder="Country of residence" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input type="tel" id="phone-number" name="phone-number" placeholder="+1234567890" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
                         </div>
 
                         <div class="form-group">
@@ -299,9 +408,21 @@
                             <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
                         </div>
 
-                        <div class="terms-checkbox">
+                        <div class="password-requirements form-group span-2">
+                            <h4>Password must contain:</h4>
+                            <ul>
+                                <li id="req-length">At least 8 characters</li>
+                                <li id="req-uppercase">One uppercase letter</li>
+                                <li id="req-number">One number</li>
+                                <li id="req-special">One special character (!@#$%)</li>
+                                <li id="req-match">Confirm password matches</li>
+                            </ul>
+                        </div>
+
+                        <div class="terms-checkbox form-group span-2">
                             <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                            <label for="terms">I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a></label>
+                        </div>
                         </div>
 
                         <button type="submit" class="submit-btn">Create Account</button>
@@ -315,10 +436,10 @@
 
                     <div class="social-auth">
                         <button class="social-btn" onclick="alert('Google signup coming soon!')">
-                            📧 Google
+                            Google
                         </button>
                         <button class="social-btn" onclick="alert('GitHub signup coming soon!')">
-                            🐙 GitHub
+                            GitHub
                         </button>
                     </div>
 
@@ -328,6 +449,18 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="otp-overlay" class="otp-overlay hidden">
+        <div class="otp-modal">
+            <h3>Email Verification</h3>
+            <p id="otp-modal-text">Enter the 6-character OTP sent to your email inbox.</p>
+            <input type="text" id="otp-code-input" maxlength="6" placeholder="A1B2C3">
+            <div class="otp-modal-actions">
+                <button type="button" id="verify-otp-btn" class="otp-btn primary">Verify OTP</button>
+                <button type="button" id="resend-otp-btn" class="otp-btn">Resend OTP</button>
+            </div>
+        </div>
     </div>
 
     <!-- FOOTER -->
@@ -341,7 +474,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/topics">Services</a></li>
                         <li><a href="/about">About Us</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
@@ -355,6 +488,14 @@
                         <li><a href="/topics">Ethical Hacking</a></li>
                     </ul>
                 </div>
+                <div class="footer-section">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
@@ -364,38 +505,6 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        let currentSlideIndex = 0;
-
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            if (n >= slides.length) {
-                currentSlideIndex = 0;
-            }
-            if (n < 0) {
-                currentSlideIndex = slides.length - 1;
-            }
-
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -410,28 +519,301 @@
             });
         });
 
+        // Signup validation rules
+        const fullnameInput = document.getElementById('fullname');
+        const emailInput = document.getElementById('email');
+        const presentSkillCareerInput = document.getElementById('present-skill-career');
+        const schoolInput = document.getElementById('school');
+        const countryInput = document.getElementById('country');
+        const phoneNumberInput = document.getElementById('phone-number');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const signupForm = document.querySelector('form[onsubmit="handleSignup(event)"]');
+
+        const passwordRequirementItems = {
+            length: document.getElementById('req-length'),
+            uppercase: document.getElementById('req-uppercase'),
+            number: document.getElementById('req-number'),
+            special: document.getElementById('req-special'),
+            match: document.getElementById('req-match')
+        };
+
+        function isValidFullName(value) {
+            const trimmed = value.trim();
+            return /^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$/.test(trimmed);
+        }
+
+        function isValidEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+        }
+
+        function getPasswordChecks(password, confirmPassword) {
+            return {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                number: /\d/.test(password),
+                special: /[!@#$%]/.test(password),
+                match: confirmPassword.length > 0 && confirmPassword === password
+            };
+        }
+
+        function updatePasswordRequirementUI() {
+            const checks = getPasswordChecks(passwordInput.value, confirmPasswordInput.value);
+            Object.keys(passwordRequirementItems).forEach((rule) => {
+                passwordRequirementItems[rule].classList.toggle('valid', checks[rule]);
+            });
+            return checks;
+        }
+
+        function clearFieldValidity() {
+            fullnameInput.setCustomValidity('');
+            emailInput.setCustomValidity('');
+            presentSkillCareerInput.setCustomValidity('');
+            schoolInput.setCustomValidity('');
+            countryInput.setCustomValidity('');
+            phoneNumberInput.setCustomValidity('');
+            passwordInput.setCustomValidity('');
+            confirmPasswordInput.setCustomValidity('');
+        }
+
+        function isValidPhoneNumber(value) {
+            return /^\+?[0-9]{7,15}$/.test(value.trim());
+        }
+
+        function validateConfirmPassword() {
+            if (confirmPasswordInput.value && confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity('Confirm password must match the password entered above.');
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+            }
+            updatePasswordRequirementUI();
+        }
+
+        const otpOverlay = document.getElementById('otp-overlay');
+        const otpCodeInput = document.getElementById('otp-code-input');
+        const otpModalText = document.getElementById('otp-modal-text');
+        const verifyOtpBtn = document.getElementById('verify-otp-btn');
+        const resendOtpBtn = document.getElementById('resend-otp-btn');
+
+        let pendingSignupPayload = null;
+
+        function openOtpModal(email) {
+            otpModalText.textContent = `Enter the 6-character OTP sent to ${email}. Check the inbox on the device where this email is logged in.`;
+            otpCodeInput.value = '';
+            otpCodeInput.setCustomValidity('');
+            otpOverlay.classList.remove('hidden');
+            otpCodeInput.focus();
+        }
+
+        function normalizeOtpInput() {
+            otpCodeInput.value = otpCodeInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+        }
+
+        async function parseApiResponse(response) {
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+                return response.json();
+            }
+
+            const rawText = await response.text();
+            throw new Error(`Server returned non-JSON response (${response.status}).`);
+        }
+
+        async function requestOtp(payload) {
+            const response = await fetch('/api/signup/request-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await parseApiResponse(response);
+            if (!response.ok || !result.ok) {
+                throw new Error(result.message || 'Unable to send OTP. Please try again.');
+            }
+
+            return result;
+        }
+
+        async function verifyOtp() {
+            if (!pendingSignupPayload) {
+                alert('Signup session expired. Please submit your details again.');
+                otpOverlay.classList.add('hidden');
+                return;
+            }
+
+            normalizeOtpInput();
+            const otp = otpCodeInput.value;
+            const otpFormatRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$/;
+            if (!otpFormatRegex.test(otp)) {
+                otpCodeInput.setCustomValidity('OTP must be 6 characters with letters and numbers.');
+                otpCodeInput.reportValidity();
+                return;
+            }
+
+            otpCodeInput.setCustomValidity('');
+
+            try {
+                const response = await fetch('/api/signup/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingSignupPayload.email, otp })
+                });
+
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'OTP verification failed.');
+                    return;
+                }
+
+                alert('OTP verified successfully. Your account has been created.');
+                signupForm.reset();
+                updatePasswordRequirementUI();
+                clearFieldValidity();
+                otpOverlay.classList.add('hidden');
+                pendingSignupPayload = null;
+                window.location.href = '/login';
+            } catch (error) {
+                alert('Unable to verify OTP right now. Please try again.');
+            }
+        }
+
+        fullnameInput.addEventListener('input', () => fullnameInput.setCustomValidity(''));
+        emailInput.addEventListener('input', () => emailInput.setCustomValidity(''));
+        presentSkillCareerInput.addEventListener('input', () => presentSkillCareerInput.setCustomValidity(''));
+        schoolInput.addEventListener('input', () => schoolInput.setCustomValidity(''));
+        countryInput.addEventListener('input', () => countryInput.setCustomValidity(''));
+        phoneNumberInput.addEventListener('input', () => phoneNumberInput.setCustomValidity(''));
+        passwordInput.addEventListener('input', () => {
+            passwordInput.setCustomValidity('');
+            updatePasswordRequirementUI();
+            validateConfirmPassword();
+        });
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+        otpCodeInput.addEventListener('input', normalizeOtpInput);
+        verifyOtpBtn.addEventListener('click', verifyOtp);
+        resendOtpBtn.addEventListener('click', async () => {
+            if (!pendingSignupPayload) {
+                alert('No pending signup found. Submit your details first.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/signup/resend-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingSignupPayload.email })
+                });
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'Unable to resend OTP right now.');
+                    return;
+                }
+                alert(`A new OTP has been sent to ${pendingSignupPayload.email}.`);
+            } catch (error) {
+                alert('Unable to resend OTP right now.');
+            }
+        });
+        updatePasswordRequirementUI();
+
+        // Clear any prefilled values when the signup page is opened.
+        signupForm.reset();
+        pendingSignupPayload = null;
+        otpOverlay.classList.add('hidden');
+
         // Signup form handler
-        function handleSignup(event) {
+        async function handleSignup(event) {
             event.preventDefault();
-            
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const fullname = document.getElementById('fullname').value;
-            
+            clearFieldValidity();
+
+            const fullname = fullnameInput.value.trim();
+            const email = emailInput.value.trim();
+            const presentSkillCareer = presentSkillCareerInput.value.trim();
+            const school = schoolInput.value.trim();
+            const country = countryInput.value.trim();
+            const phoneNumber = phoneNumberInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (!isValidFullName(fullname)) {
+                fullnameInput.setCustomValidity('Enter at least two names, each starting with a capital letter (e.g. John Doe).');
+                fullnameInput.reportValidity();
+                fullnameInput.focus();
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                emailInput.setCustomValidity('Enter a valid email address in the format name@example.com.');
+                emailInput.reportValidity();
+                emailInput.focus();
+                return;
+            }
+
+            if (presentSkillCareer.length < 2) {
+                presentSkillCareerInput.setCustomValidity('Enter your present skill or career.');
+                presentSkillCareerInput.reportValidity();
+                presentSkillCareerInput.focus();
+                return;
+            }
+
+            if (school.length < 2) {
+                schoolInput.setCustomValidity('Enter your school or institution.');
+                schoolInput.reportValidity();
+                schoolInput.focus();
+                return;
+            }
+
+            if (country.length < 2) {
+                countryInput.setCustomValidity('Enter your country.');
+                countryInput.reportValidity();
+                countryInput.focus();
+                return;
+            }
+
+            if (!isValidPhoneNumber(phoneNumber)) {
+                phoneNumberInput.setCustomValidity('Enter a valid phone number (7-15 digits, optional +).');
+                phoneNumberInput.reportValidity();
+                phoneNumberInput.focus();
+                return;
+            }
+
+            const passwordChecks = updatePasswordRequirementUI();
+            const allPasswordChecksPassed = Object.values(passwordChecks).every(Boolean);
+            if (!allPasswordChecksPassed) {
+                passwordInput.setCustomValidity('Password does not meet all listed requirements.');
+                passwordInput.reportValidity();
+                passwordInput.focus();
+                return;
+            }
+
             if (password !== confirmPassword) {
-                alert('Passwords do not match!');
+                confirmPasswordInput.setCustomValidity('Confirm password must match the password entered above.');
+                confirmPasswordInput.reportValidity();
+                confirmPasswordInput.focus();
                 return;
             }
 
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[A-Za-z\d!@#$%]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                alert('Password does not meet requirements!');
-                return;
-            }
+            pendingSignupPayload = {
+                fullname,
+                email,
+                presentSkillCareer,
+                school,
+                country,
+                phoneNumber,
+                password,
+                confirmPassword
+            };
 
-            alert(`Welcome ${fullname}! Account created successfully. Please check your email to verify.`);
-            event.target.reset();
+            try {
+                await requestOtp(pendingSignupPayload);
+                openOtpModal(email);
+            } catch (error) {
+                alert(error.message);
+            }
         }
     </script>
 </body>
 </html>
+
+
+
+

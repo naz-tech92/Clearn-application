@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -36,7 +36,7 @@
                 <h2 style="color: #60a5fa; margin-bottom: 20px;">{{ country.flag }} {{ skill_name|title|replace('_', ' ') }} in {{ country.name }}</h2>
                 <p style="color: #cbd5e1; font-size: 1.1em;">Detailed career guide for {{ skill_name|replace('_', ' ') }} professionals in {{ country.name }}</p>
                 <div style="margin-top: 20px;">
-                    <a href="/skill/{{ skill_name }}" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">← Back to {{ skill_name|title|replace('_', ' ') }}</a>
+                    <a href="/skill/{{ skill_name }}" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;"> Back to {{ skill_name|title|replace('_', ' ') }}</a>
                     <a href="/country/{{ country.name.lower().replace(' ', '_').replace('united_', '').replace('arab_emirates', 'uae') }}" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-left: 10px;">View All Skills in {{ country.name }}</a>
                 </div>
             </div>
@@ -48,31 +48,31 @@
                 <div class="skill-main-content">
                     <!-- 1. OVERVIEW -->
                     <div class="skill-info-section">
-                        <h3>📌 1️⃣ Country Overview</h3>
+                        <h3> 1 Country Overview</h3>
                         <p>{{ skill_data.overview }}</p>
                     </div>
 
                     <!-- 2. LANGUAGE REQUIREMENTS -->
                     <div class="skill-info-section">
-                        <h3>🗣️ 2️⃣ Language Requirements</h3>
+                        <h3> 2 Language Requirements</h3>
                         <p>{{ skill_data.language_requirements }}</p>
                     </div>
 
                     <!-- 3. SKILL DEMAND -->
                     <div class="skill-info-section">
-                        <h3>📈 3️⃣ Skill Demand & Level</h3>
+                        <h3> 3 Skill Demand & Level</h3>
                         <p>{{ skill_data.skill_demand_level }}</p>
                     </div>
 
                     <!-- 4. EDUCATION REQUIREMENTS -->
                     <div class="skill-info-section">
-                        <h3>🎓 4️⃣ Required Education</h3>
+                        <h3> 4 Required Education</h3>
                         <p>{{ skill_data.required_education }}</p>
                     </div>
 
                     <!-- 5. CERTIFICATIONS -->
                     <div class="skill-info-section">
-                        <h3>🏆 5️⃣ Recommended Certifications</h3>
+                        <h3> 5 Recommended Certifications</h3>
                         <ul>
                         {% for cert in skill_data.certifications %}
                             <li>{{ cert }}</li>
@@ -82,7 +82,7 @@
 
                     <!-- 6. ADVANTAGES -->
                     <div class="skill-info-section">
-                        <h3>✅ 6️⃣ Advantages</h3>
+                        <h3> 6 Advantages</h3>
                         <ul>
                         {% for advantage in skill_data.advantages %}
                             <li>{{ advantage }}</li>
@@ -92,7 +92,7 @@
 
                     <!-- 7. LIMITATIONS -->
                     <div class="skill-info-section">
-                        <h3>❌ 7️⃣ Limitations</h3>
+                        <h3> 7 Limitations</h3>
                         <ul>
                         {% for limitation in skill_data.limitations %}
                             <li>{{ limitation }}</li>
@@ -102,7 +102,7 @@
 
                     <!-- 8. REFERENCES -->
                     <div class="skill-info-section">
-                        <h3>📚 8️⃣ References & Resources</h3>
+                        <h3> 8 References & Resources</h3>
                         <ul>
                         {% for ref in skill_data.references %}
                             <li>{{ ref }}</li>
@@ -112,7 +112,7 @@
 
                     <!-- 9. STUDY PATHS -->
                     <div class="skill-info-section">
-                        <h3>🛤️ 9️⃣ Study Paths & Career Progression</h3>
+                        <h3> 9 Study Paths & Career Progression</h3>
                         <ul>
                         {% for path in skill_data.study_paths %}
                             <li>{{ path }}</li>
@@ -166,7 +166,7 @@
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="/topics">Topics</a></li>
+                    <li><a href="/topics">Services</a></li>
                     <li><a href="/category">Categories</a></li>
                     <li><a href="/about">About</a></li>
                     <li><a href="/contact">Contact</a></li>
@@ -176,7 +176,7 @@
                 <h4>Resources</h4>
                 <ul>
                     <li><a href="/resources">Learning Resources</a></li>
-                    <li><a href="/topics">Study Topics</a></li>
+                    <li><a href="/topics">Services</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -186,6 +186,15 @@
                     <li><a href="/signup">Sign Up</a></li>
                 </ul>
             </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 CLearn. All rights reserved. | Privacy Policy | Terms of Service</p>
@@ -211,3 +220,4 @@
     </script>
 </body>
 </html>
+

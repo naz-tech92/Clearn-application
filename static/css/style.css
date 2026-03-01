@@ -150,13 +150,18 @@ main {
     margin-bottom: 40px;
     margin-top: 30px;
     border: 2px solid #3b82f6;
-    border-left: none;
-    border-right: none;
+    border-left: 2px solid #3b82f6;
+    border-right: 2px solid #3b82f6;
     overflow: hidden;
     min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+main section {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* CAROUSEL/SLIDER STYLES */
@@ -513,6 +518,100 @@ footer {
 .footer-bottom {
     border-top: 1px solid #3b82f6;
     padding-top: 20px;
+}
+
+.account-social-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.account-social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: #cbd5e1;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.account-social-icons a:hover {
+    color: #60a5fa;
+    transform: translateY(-1px);
+    margin-left: 0;
+}
+
+.account-social-icons svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+.legal-page {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.legal-header {
+    margin: 30px 0 26px;
+    padding: 28px 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(96, 165, 250, 0.32);
+    background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.85));
+    text-align: center;
+}
+
+.legal-header h1 {
+    margin: 0 0 10px;
+    color: #dbeafe;
+}
+
+.legal-header p {
+    margin: 0;
+    color: #bfdbfe;
+}
+
+.legal-content {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.legal-block {
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(96, 165, 250, 0.22);
+    background: rgba(15, 23, 42, 0.55);
+}
+
+.legal-block h2 {
+    color: #93c5fd;
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+}
+
+.legal-block h3 {
+    color: #bfdbfe;
+    margin: 12px 0 8px;
+    font-size: 1rem;
+}
+
+.legal-block p,
+.legal-block li {
+    color: #d1d5db;
+    line-height: 1.7;
+}
+
+.legal-block ul {
+    margin: 8px 0 0 20px;
+}
+
+.legal-note {
+    margin-top: 12px;
+    color: #94a3b8;
+    font-size: 0.92rem;
 }
 
 /* Tool Popup Styles */
@@ -1159,12 +1258,25 @@ body.light-theme .container {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+body.light-theme a {
+    color: #1d4ed8;
+}
+
+body.light-theme a:hover {
+    color: #1e40af;
+}
+
+body.light-theme input,
+body.light-theme textarea,
+body.light-theme select {
+    color: #0f172a;
+}
+
 body.light-theme .feature-card,
 body.light-theme .topic-card {
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid #e5e7eb;
     color: #0f172a;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .feature-card h3,
@@ -1379,6 +1491,26 @@ body.light-theme .knowledge-hub li a:hover {
     font-size: 0.65em;
     font-weight: 500;
     font-style: normal;
+}
+
+/* Keep quote strip appearance consistent in light mode (same as original view) */
+body.light-theme .quote-slideshow {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+    border-top: 1px solid rgba(59, 130, 246, 0.3);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+body.light-theme .quote-content {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+body.light-theme .quote-text {
+    color: #cbd5e1;
+}
+
+body.light-theme .quote-author {
+    color: #60a5fa;
 }
 
 @keyframes slideQuotesRightToLeft {
@@ -1953,8 +2085,94 @@ body.light-theme .why-choose-section .feature-card:hover {
 }
 
 /* ENLIGHTENING CAREER RESOURCES SECTION */
+.enlightening-title-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    min-height: 260px;
+    padding: 60px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    text-align: center;
+    border: 1px solid rgba(147, 197, 253, 0.35);
+    background-image:
+        linear-gradient(rgba(2, 6, 23, 0.52), rgba(2, 6, 23, 0.52)),
+        url('/static/images/skills/tech-ai-ml.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.enlightening-title-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+.enlightening-title-banner h2 {
+    position: relative;
+    z-index: 1;
+    color: #dbeafe;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(15, 23, 42, 0.7);
+}
+
 .enlightening-resources-section .topics-grid {
     gap: 24px;
+}
+
+.enlightening-resources-section .book-flip-card {
+    padding: 0;
+    height: 360px;
+    perspective: 1200px;
+    overflow: visible;
+}
+
+.enlightening-resources-section .book-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+}
+
+.enlightening-resources-section .book-flip-card:hover .book-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.enlightening-resources-section .book-flip-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.enlightening-resources-section .book-flip-front {
+    background: linear-gradient(160deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.88));
+}
+
+.enlightening-resources-section .book-flip-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.enlightening-resources-section .book-flip-back {
+    transform: rotateY(180deg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .enlightening-resources-section .topic-card {
@@ -2017,6 +2235,30 @@ body.light-theme .enlightening-resources-section .topic-card:hover {
     box-shadow:
         0 18px 36px rgba(37, 99, 235, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+}
+
+body.light-theme .enlightening-title-banner {
+    border-color: rgba(37, 99, 235, 0.35);
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
+        url('/static/images/skills/tech-ai-ml.jpg');
+}
+
+body.light-theme .enlightening-title-banner h2 {
+    color: #0f172a;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 768px) {
+    .enlightening-title-banner {
+        background-attachment: scroll;
+        min-height: 200px;
+        padding: 34px 16px;
+    }
+
+    .enlightening-resources-section .book-flip-card {
+        height: 300px;
+    }
 }
 
 /* CONTACT INFORMATION SECTION */
