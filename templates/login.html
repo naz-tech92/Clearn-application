@@ -12,6 +12,21 @@
             padding: 40px 0;
         }
 
+        .auth-hero {
+            min-height: 300px !important;
+            background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1600&h=700&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #3b82f6 !important;
+            overflow: hidden;
+        }
+
+        .auth-hero .carousel-overlay {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
         .auth-card {
             background: rgba(30, 41, 59, 0.9);
             padding: 40px;
@@ -195,7 +210,7 @@
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
@@ -212,26 +227,11 @@
     </nav>
 
     <div class="container">
-        <!-- HERO SECTION WITH CAROUSEL -->
-        <section class="hero">
-            <div class="carousel">
-                <div class="carousel-container">
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
-                    
-                    <div class="carousel-overlay">
-                        <h2>🔐 Welcome Back</h2>
-                        <p>Sign in to your CLearn account</p>
-                    </div>
-                </div>
-
-                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
-                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
-
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
-                </div>
+                <!-- HERO SECTION -->
+        <section class="hero auth-hero">
+            <div class="carousel-overlay">
+                <h2>Welcome</h2>
+                <p>Access your CLearn account to continue learning.</p>
             </div>
         </section>
 
@@ -270,10 +270,10 @@
 
                     <div class="social-auth">
                         <button class="social-btn" onclick="alert('Google login coming soon!')">
-                            📧 Google
+                            Google
                         </button>
                         <button class="social-btn" onclick="alert('GitHub login coming soon!')">
-                            🐙 GitHub
+                            GitHub
                         </button>
                     </div>
 
@@ -296,7 +296,7 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/topics">Topics</a></li>
+                        <li><a href="/topics">Services</a></li>
                         <li><a href="/about">About Us</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
@@ -317,6 +317,14 @@
                         <li><a href="/signup">Sign Up</a></li>
                     </ul>
                 </div>
+                <div class="footer-section">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
@@ -326,38 +334,6 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        let currentSlideIndex = 0;
-
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            if (n >= slides.length) {
-                currentSlideIndex = 0;
-            }
-            if (n < 0) {
-                currentSlideIndex = slides.length - 1;
-            }
-
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -372,13 +348,72 @@
             });
         });
 
+        function isValidEmail(value) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+        }
+
+        const loginForm = document.querySelector('form[onsubmit="handleLogin(event)"]');
+        loginForm.reset();
+
+        async function parseApiResponse(response) {
+            const contentType = response.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+                return response.json();
+            }
+
+            await response.text();
+            throw new Error(`Server returned non-JSON response (${response.status}).`);
+        }
+
         // Login form handler
-        function handleLogin(event) {
+        async function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('email').value;
-            alert(`Welcome back! Login successful for ${email}`);
-            event.target.reset();
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            emailInput.setCustomValidity('');
+            passwordInput.setCustomValidity('');
+
+            if (!isValidEmail(email)) {
+                emailInput.setCustomValidity('Enter a valid email address in the format name@example.com.');
+                emailInput.reportValidity();
+                emailInput.focus();
+                return;
+            }
+
+            if (!passwordInput.value.trim()) {
+                passwordInput.setCustomValidity('Password is required to log in.');
+                passwordInput.reportValidity();
+                passwordInput.focus();
+                return;
+            }
+
+            try {
+                const response = await fetch('{{ url_for("api_login") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'Login failed. Please try again.');
+                    return;
+                }
+
+                alert(result.message || `Welcome back! Login successful for ${email}`);
+                event.target.reset();
+                window.location.href = result.redirectTo || '/';
+            } catch (error) {
+                alert('Unable to reach login service. Please try again.');
+            }
         }
     </script>
 </body>
 </html>
+
+
+
+

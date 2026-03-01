@@ -60,7 +60,7 @@ function setupBrightnessToggle() {
     // Create brightness toggle button
     const toggleButton = document.createElement('button');
     toggleButton.className = 'brightness-toggle';
-    toggleButton.innerHTML = '☀️';
+    toggleButton.innerHTML = '☾';
     toggleButton.title = 'Toggle Brightness Theme';
     document.body.appendChild(toggleButton);
 
@@ -69,7 +69,7 @@ function setupBrightnessToggle() {
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
         toggleButton.classList.add('active');
-        toggleButton.innerHTML = '🌙';
+        toggleButton.innerHTML = '☀';
     }
 
     // Toggle theme on click
@@ -78,10 +78,10 @@ function setupBrightnessToggle() {
         this.classList.toggle('active');
 
         if (document.body.classList.contains('light-theme')) {
-            this.innerHTML = '🌙';
+            this.innerHTML = '☀';
             localStorage.setItem('clearn-theme', 'light');
         } else {
-            this.innerHTML = '☀️';
+            this.innerHTML = '☾';
             localStorage.setItem('clearn-theme', 'dark');
         }
     });
@@ -94,7 +94,7 @@ function setupFontSizeToggle() {
     // Create font size toggle button
     const fontSizeButton = document.createElement('button');
     fontSizeButton.className = 'font-size-toggle';
-    fontSizeButton.innerHTML = '🔤';
+    fontSizeButton.innerHTML = 'A+';
     fontSizeButton.title = 'Toggle Font Size';
     document.body.appendChild(fontSizeButton);
 
@@ -255,7 +255,7 @@ function getAIResponse(message) {
 function setupAutoScrollIndicator() {
     const scrollIndicator = document.createElement('button');
     scrollIndicator.className = 'scroll-indicator';
-    scrollIndicator.innerHTML = '⬇️ Scroll to Explore';
+    scrollIndicator.innerHTML = ' Scroll to Explore';
     document.body.appendChild(scrollIndicator);
 
     // Show/hide based on scroll position
@@ -350,7 +350,7 @@ function setupEnlighteningFeatures() {
                     <div class="quote-slide-item">
                         <div class="quote-content">
                             <div class="quote-text">"${quote.text}"</div>
-                            <div class="quote-author">— ${quote.author}</div>
+                            <div class="quote-author"> ${quote.author}</div>
                         </div>
                     </div>
                 `).join('')}
@@ -358,7 +358,7 @@ function setupEnlighteningFeatures() {
                     <div class="quote-slide-item">
                         <div class="quote-content">
                             <div class="quote-text">"${quote.text}"</div>
-                            <div class="quote-author">— ${quote.author}</div>
+                            <div class="quote-author"> ${quote.author}</div>
                         </div>
                     </div>
                 `).join('')}
@@ -377,7 +377,7 @@ function setupEnlighteningFeatures() {
     infoElements.forEach(element => {
         const tooltip = document.createElement('span');
         tooltip.className = 'info-tooltip';
-        tooltip.innerHTML = 'ℹ️<span class="tooltip-text">Click to explore more about this topic and discover related resources.</span>';
+        tooltip.innerHTML = '<span class="tooltip-text">Click to explore more about this topic and discover related resources.</span>';
         element.appendChild(tooltip);
     });
 }
@@ -413,4 +413,3 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-

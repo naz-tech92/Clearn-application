@@ -1,25 +1,193 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topics - CLearn</title>
+    <title>Services - CLearn</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .services-hero {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 44px 28px;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.9);
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            color: #93c5fd;
+            font-size: 2.2em;
+            margin-bottom: 12px;
+        }
+
+        .services-hero p {
+            color: #cbd5e1;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .services-search {
+            margin: 0 auto 26px;
+            max-width: 760px;
+        }
+
+        .services-search input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #3b82f6;
+            background: rgba(15, 23, 42, 0.92);
+            color: #e2e8f0;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .service-row.reverse {
+            grid-template-columns: 1fr 300px;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 100%;
+            min-height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .service-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .service-content h2 {
+            color: #93c5fd;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .service-content p {
+            color: #cbd5e1;
+            margin: 0;
+        }
+
+        .service-points {
+            margin: 0;
+            padding-left: 20px;
+            color: #e2e8f0;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .service-link {
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: 6px;
+            border: 1px solid #3b82f6;
+            color: #bfdbfe;
+            background: rgba(15, 23, 42, 0.85);
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .service-link.primary {
+            color: #ffffff;
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .services-summary {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .services-summary h3 {
+            color: #93c5fd;
+            margin-bottom: 12px;
+        }
+
+        .services-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .summary-item {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            color: #cbd5e1;
+        }
+
+        .summary-item strong {
+            display: block;
+            color: #93c5fd;
+            font-size: 1.2em;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .service-row,
+            .service-row.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .service-image {
+                min-height: 200px;
+            }
+
+            .services-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-hero h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav>
         <div class="nav-container">
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/topics" class="nav-link active">Topics</a></li>
+                <li class="nav-item"><a href="/topics" class="nav-link active">Services</a></li>
                 <li class="nav-item"><a href="/category" class="nav-link">Categories</a></li>
                 <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/resources" class="nav-link">Resources</a></li>
                 <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
                 <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="/signup" class="nav-link" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
+                <li class="nav-item"><a href="/signup" class="nav-link" style="background: #1d4ed8; color: white; padding: 8px 16px; border-radius: 5px;">Sign Up</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -30,241 +198,206 @@
     </nav>
 
     <div class="container">
-        <!-- HERO SECTION WITH CAROUSEL -->
-        <section class="hero">
-            <div class="carousel">
-                <div class="carousel-container">
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');"></div>
-                    
-                    <div class="carousel-overlay">
-                        <h2>🎯 Career Exploration Hub</h2>
-                        <p>Discover your path in Technology, Healthcare, and Business - explore all career opportunities</p>
-                    </div>
-                </div>
-
-                <button class="carousel-prev" onclick="changeSlide(-1)">❮</button>
-                <button class="carousel-next" onclick="changeSlide(1)">❯</button>
-
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(2)"></span>
-                </div>
-            </div>
+        <section class="services-hero">
+            <h1>CLearn Services</h1>
+            <p>CLearn provides practical guidance, skill pathways, and country-ready career orientation for learners in technology, healthcare, and business.</p>
         </section>
 
         <main>
-            <!-- SEARCH BAR -->
-            <div style="max-width: 600px; margin: 0 auto; margin-bottom: 40px;">
-                <input type="text" id="searchInput" placeholder="Search by skill or faculty..." style="width: 100%; padding: 15px; border: 2px solid #3b82f6; border-radius: 8px; background: rgba(30, 41, 59, 0.8); color: #e2e8f0; font-size: 1em;">
+            <div class="services-search">
+                <input type="text" id="serviceSearch" placeholder="Search services by name or description">
             </div>
 
-            <!-- TECH SKILLS -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">🖥️ Technology Skills - Shape the Future</h2>
-                <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Master in-demand tech skills and unlock unlimited career opportunities in the digital age</p>
-                <div class="knowledge-hub" style="margin-bottom: 20px;">
-                    <h4>Why Technology Careers?</h4>
-                    <ul>
-                        <li>Highest average salaries across all industries</li>
-                        <li>Remote work and flexible arrangements widely available</li>
-                        <li>Continuous learning and innovation opportunities</li>
-                        <li>Strong global demand with excellent work-life balance</li>
-                    </ul>
-                </div>
-                <div class="topics-grid" id="techSkills">
-                    <a href="/skill/cybersecurity" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Cybersecurity</h2>
-                            <p>Protect digital assets and systems from cyber threats. Be a guardian of information security.</p>
+            <section class="services-list" id="servicesList">
+                <article class="service-row" data-service="career orientation planning guidance profile">
+                    <img class="service-image" src="/static/images/skills/tech-software-engineering.jpg" alt="Career orientation service">
+                    <div class="service-content">
+                        <h2>Career Orientation and Planning</h2>
+                        <p>Structured orientation to help learners choose strong career paths based on interests, opportunities, and market realities.</p>
+                        <ul class="service-points">
+                            <li>Career discovery by domain</li>
+                            <li>Guided direction for next learning steps</li>
+                            <li>Roadmaps aligned to practical outcomes</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/category">Explore Categories</a>
+                            <a class="service-link" href="/about">How It Works</a>
                         </div>
-                    </a>
-                    <a href="/skill/data_science" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Data Science</h2>
-                            <p>Analyze and interpret complex data to drive insights and transformative business decisions.</p>
+                    </div>
+                </article>
+
+                <article class="service-row reverse" data-service="technology healthcare business skills tracks learning">
+                    <div class="service-content">
+                        <h2>Skill Track Access</h2>
+                        <p>Access to curated learning tracks in technology, healthcare, and business with focused skill pages.</p>
+                        <ul class="service-points">
+                            <li>Technology tracks for modern digital roles</li>
+                            <li>Healthcare tracks for impact-driven careers</li>
+                            <li>Business tracks for leadership and growth</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/category">View Skill Tracks</a>
+                            <a class="service-link" href="/topics">Browse Services</a>
                         </div>
-                    </a>
-                    <a href="/skill/cloud_computing" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Cloud Computing</h2>
-                            <p>Design and manage cloud-based infrastructure that powers global digital transformation.</p>
+                    </div>
+                    <img class="service-image" src="/static/images/skills/tech-data-science.jpg" alt="Skill track service">
+                </article>
+
+                <article class="service-row" data-service="country specific global opportunities requirements">
+                    <img class="service-image" src="/static/images/skills/business-international-business.jpg" alt="Country insights service">
+                    <div class="service-content">
+                        <h2>Country-Based Career Insights</h2>
+                        <p>Country-specific guidance to understand demand, opportunities, and differences in skill expectations.</p>
+                        <ul class="service-points">
+                            <li>Country-level skill availability</li>
+                            <li>Localized career exploration</li>
+                            <li>Global mobility perspective</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/country/united_states">Explore by Country</a>
+                            <a class="service-link" href="/category">All Views</a>
                         </div>
-                    </a>
-                    <a href="/skill/ai_machine_learning" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>AI / Machine Learning</h2>
-                            <p>Build intelligent systems that learn and adapt. Shape the future of automation.</p>
+                    </div>
+                </article>
+
+                <article class="service-row reverse" data-service="education level bachelor master diploma certificate pathways">
+                    <div class="service-content">
+                        <h2>Education-Level Pathway Matching</h2>
+                        <p>Services that map career options to your current educational level for realistic progression planning.</p>
+                        <ul class="service-points">
+                            <li>Bachelor, master, diploma, and certificate pathways</li>
+                            <li>Skill filters by education readiness</li>
+                            <li>Clear next-step learning direction</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/education/bachelor">Start by Education</a>
+                            <a class="service-link" href="/category">Compare Paths</a>
                         </div>
-                    </a>
-                    <a href="/skill/software_engineering" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Software Engineering</h2>
-                            <p>Develop robust software solutions that solve real-world problems for millions.</p>
+                    </div>
+                    <img class="service-image" src="/static/images/skills/health-public-health.jpeg" alt="Education matching service">
+                </article>
+
+                <article class="service-row" data-service="resources tools references learning support">
+                    <img class="service-image" src="/static/images/skills/tech-cloud-computing.png" alt="Learning resources service">
+                    <div class="service-content">
+                        <h2>Learning Resources and Practical Support</h2>
+                        <p>Access resources designed to support consistent learning progress and informed decision-making.</p>
+                        <ul class="service-points">
+                            <li>Practical resource recommendations</li>
+                            <li>Supportive learning references</li>
+                            <li>Continuous growth support</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/resources">Open Resources</a>
+                            <a class="service-link" href="/contact">Request Support</a>
                         </div>
-                    </a>
-                    <a href="/skill/networking" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Networking</h2>
-                            <p>Design and maintain the backbone of digital communication networks worldwide.</p>
+                    </div>
+                </article>
+
+                <article class="service-row reverse" data-service="account signup login dashboard personalized journey">
+                    <div class="service-content">
+                        <h2>Account and Guided Journey Access</h2>
+                        <p>Sign up to organize your learning journey, revisit pathways, and stay consistent in your career preparation.</p>
+                        <ul class="service-points">
+                            <li>Secure account access</li>
+                            <li>Personalized journey continuity</li>
+                            <li>Faster return to selected pathways</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a class="service-link primary" href="/signup">Create Account</a>
+                            <a class="service-link" href="/login">Login</a>
                         </div>
-                    </a>
-                    <a href="/skill/devops" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>DevOps</h2>
-                            <p>Streamline development and operations to enable continuous innovation and delivery.</p>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                    <img class="service-image" src="/static/images/skills/business-accounting.jpg" alt="Account service">
+                </article>
             </section>
 
-            <!-- HEALTH -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">🏥 Healthcare Professionals - Make a Difference</h2>
-                <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Dedicate your career to healing, helping, and improving lives globally</p>
-                <div class="knowledge-hub" style="margin-bottom: 20px;">
-                    <h4>Why Healthcare Careers?</h4>
-                    <ul>
-                        <li>Direct impact on improving human lives and health outcomes</li>
-                        <li>Job security with strong global demand</li>
-                        <li>Meaningful work with excellent benefits and stability</li>
-                        <li>Diverse opportunities across multiple healthcare settings worldwide</li>
-                    </ul>
-                </div>
-                <div class="topics-grid" id="healthSkills">
-                    <a href="/skill/nursing" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Nursing</h2>
-                            <p>Provide compassionate patient care and support. Lead healthcare teams with empathy and excellence.</p>
-                        </div>
-                    </a>
-                    <a href="/skill/public_health" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Public Health</h2>
-                            <p>Promote community health and prevent diseases on a population level. Shape public policy.</p>
-                        </div>
-                    </a>
-                    <a href="/skill/medical_laboratory_science" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Medical Laboratory Science</h2>
-                            <p>Perform diagnostic tests and analyze samples. Provide crucial data for patient diagnosis and treatment.</p>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-            <!-- BUSINESS -->
-            <section style="margin-bottom: 40px;">
-                <h2 style="color: #60a5fa; text-align: center; margin-bottom: 15px;">💼 Business Leaders - Drive Success</h2>
-                <p style="text-align: center; color: #93c5fd; margin-bottom: 30px; font-style: italic;">Lead organizations, manage finances, and create entrepreneurial impact worldwide</p>
-                <div class="knowledge-hub" style="margin-bottom: 20px;">
-                    <h4>Why Business Careers?</h4>
-                    <ul>
-                        <li>Substantial earning potential and advancement opportunities</li>
-                        <li>Leadership roles with influence on organizational strategy</li>
-                        <li>Global mobility and international career paths</li>
-                        <li>Entrepreneurial opportunities and business ownership potential</li>
-                    </ul>
-                </div>
-                <div class="topics-grid" id="businessSkills">
-                    <a href="/skill/accounting" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Accounting</h2>
-                            <p>Manage financial records and ensure compliance. Become the financial backbone of organizations.</p>
-                        </div>
-                    </a>
-                    <a href="/skill/digital_marketing" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>Digital Marketing</h2>
-                            <p>Promote brands through digital channels. Master the art of connecting with global audiences.</p>
-                        </div>
-                    </a>
-                    <a href="/skill/international_business" class="topic-card-link">
-                        <div class="topic-card">
-                            <h2>International Business</h2>
-                            <p>Navigate global markets and cross-cultural commerce. Build bridges between continents and cultures.</p>
-                        </div>
-                    </a>
+            <section class="services-summary">
+                <h3>Service Coverage Overview</h3>
+                <div class="services-summary-grid">
+                    <div class="summary-item"><strong>13</strong> Core skill tracks</div>
+                    <div class="summary-item"><strong>3</strong> Main service domains</div>
+                    <div class="summary-item"><strong>Global</strong> Country and education views</div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- FOOTER -->
     <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About CLearn</h4>
-                    <p>A comprehensive digital orientation platform providing career guidance across technology, healthcare, and business fields with global opportunities and education pathways.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/topics">Topics</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Courses</h4>
-                    <ul>
-                        <li><a href="/skill/cybersecurity">Cybersecurity</a></li>
-                        <li><a href="/skill/data_science">Data Science</a></li>
-                        <li><a href="/skill/software_engineering">Software Engineering</a></li>
-                        <li><a href="/skill/nursing">Nursing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Account</h4>
-                    <ul>
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/signup">Sign Up</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A digital orientation platform delivering career-focused services across technology, healthcare, and business.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Services</a></li>
+                    <li><a href="/category">Categories</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
             </div>
-        </footer>
-    </div>
+            <div class="footer-section">
+                <h4>Top Services</h4>
+                <ul>
+                    <li><a href="/category">Skill Track Access</a></li>
+                    <li><a href="/resources">Learning Resources</a></li>
+                    <li><a href="/country/united_states">Country Insights</a></li>
+                    <li><a href="/education/bachelor">Education Pathways</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.topic-card-link');
-            
-            cards.forEach(card => {
-                const title = card.querySelector('h2').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                
-                if (title.includes(query) || desc.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when link is clicked
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
         });
+
+        const serviceSearch = document.getElementById('serviceSearch');
+        const serviceRows = document.querySelectorAll('.service-row');
+
+        serviceSearch.addEventListener('input', function () {
+            const query = this.value.trim().toLowerCase();
+
+            serviceRows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                const tags = (row.getAttribute('data-service') || '').toLowerCase();
+                row.style.display = (text.includes(query) || tags.includes(query)) ? 'grid' : 'none';
+            });
+        });
     </script>
 </body>
 </html>
+
 
