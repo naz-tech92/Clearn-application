@@ -28,20 +28,6 @@
             margin: 0 auto;
         }
 
-        .services-search {
-            margin: 0 auto 26px;
-            max-width: 760px;
-        }
-
-        .services-search input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid #3b82f6;
-            background: rgba(15, 23, 42, 0.92);
-            color: #e2e8f0;
-        }
-
         .services-list {
             display: flex;
             flex-direction: column;
@@ -204,10 +190,6 @@
         </section>
 
         <main>
-            <div class="services-search">
-                <input type="text" id="serviceSearch" placeholder="Search services by name or description">
-            </div>
-
             <section class="services-list" id="servicesList">
                 <article class="service-row" data-service="career orientation planning guidance profile">
                     <img class="service-image" src="/static/images/skills/tech-software-engineering.jpg" alt="Career orientation service">
@@ -384,20 +366,7 @@
             });
         });
 
-        const serviceSearch = document.getElementById('serviceSearch');
-        const serviceRows = document.querySelectorAll('.service-row');
-
-        serviceSearch.addEventListener('input', function () {
-            const query = this.value.trim().toLowerCase();
-
-            serviceRows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                const tags = (row.getAttribute('data-service') || '').toLowerCase();
-                row.style.display = (text.includes(query) || tags.includes(query)) ? 'grid' : 'none';
-            });
-        });
     </script>
 </body>
 </html>
-
 

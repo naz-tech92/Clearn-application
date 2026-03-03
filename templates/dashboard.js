@@ -61,7 +61,7 @@ function Dashboard() {
           <div className="welcome">
             <div className="ai-pill">AI</div>
             <div>
-              <div style={{fontWeight: 600, marginBottom: 6}}>Hello! I’m NAZZ.ai, your intelligent study assistant.</div>
+              <div style={{fontWeight: 600, marginBottom: 6}}>Hello! Iï¿½m NAZZ.ai, your intelligent study assistant.</div>
               <div style={{color: "var(--muted)", lineHeight: 1.5}}>
                 I can help you with questions, provide study materials, make predictions, and much more.
                 How can I assist you today?
@@ -100,3 +100,5 @@ function Dashboard() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Dashboard />);
+
+

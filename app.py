@@ -7,6 +7,7 @@ import smtplib
 from datetime import datetime, timedelta, timezone
 from email.mime.text import MIMEText
 from werkzeug.security import generate_password_hash, check_password_hash
+from firebase_config import create_firebase_user, verify_firebase_token
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -14,10 +15,87 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
 
+@app.route("/protected", methods=["POST"])
+def protected():
+    id_token = request.headers.get("Authorization")
+
+    if not id_token:
+        return jsonify({"error": "Missing token"}), 401
+
+    decoded_token = verify_firebase_token(id_token)
+
+    if not decoded_token:
+        return jsonify({"error": "Invalid token"}), 401
+
+    if not decoded_token.get("email_verified"):
+        return jsonify({"error": "Email not verified"}), 403
+
+    return jsonify({
+        "message": "Access granted",
+        "email": decoded_token["email"]
+    })
+
+
+@app.route("/api/firebase/web-config")
+def firebase_web_config():
+    """Expose Firebase Web SDK config from environment variables."""
+    config = {
+        "apiKey": get_config_var("FIREBASE_WEB_API_KEY", "FIREBASE_API_KEY"),
+        "authDomain": get_config_var("FIREBASE_WEB_AUTH_DOMAIN", "FIREBASE_AUTH_DOMAIN"),
+        "projectId": get_config_var("FIREBASE_WEB_PROJECT_ID", "FIREBASE_PROJECT_ID"),
+        "storageBucket": get_config_var("FIREBASE_WEB_STORAGE_BUCKET", "FIREBASE_STORAGE_BUCKET"),
+        "messagingSenderId": get_config_var("FIREBASE_WEB_MESSAGING_SENDER_ID", "FIREBASE_MESSAGING_SENDER_ID"),
+        "appId": get_config_var("FIREBASE_WEB_APP_ID", "FIREBASE_APP_ID"),
+    }
+    missing = [k for k, v in config.items() if not v and k in ("apiKey", "authDomain", "projectId", "appId")]
+    if missing:
+        return jsonify({"ok": False, "message": f"Missing Firebase web config values: {', '.join(missing)}"}), 500
+    return jsonify({"ok": True, "config": config})
+
+
+@app.route("/api/auth/firebase-session", methods=["POST"])
+def firebase_session_login():
+    """Create server session from Firebase ID token."""
+    auth_header = (request.headers.get("Authorization") or "").strip()
+    token = ""
+    if auth_header.lower().startswith("bearer "):
+        token = auth_header[7:].strip()
+    if not token:
+        data = request.get_json(silent=True) or {}
+        token = (data.get("idToken") or "").strip()
+
+    if not token:
+        return jsonify({"ok": False, "message": "Missing Firebase ID token."}), 401
+
+    decoded = verify_firebase_token(token)
+    if not decoded:
+        return jsonify({"ok": False, "message": "Invalid Firebase ID token."}), 401
+
+    email = (decoded.get("email") or "").strip().lower()
+    if not email:
+        return jsonify({"ok": False, "message": "Firebase account has no email."}), 400
+
+    if not decoded.get("email_verified"):
+        return jsonify({"ok": False, "message": "Email is not verified yet. Please verify your email first."}), 403
+
+    profile = USERS.get(email, {})
+    session["user_email"] = email
+    session["user_fullname"] = profile.get("fullname") or decoded.get("name") or email.split("@")[0]
+    return jsonify({"ok": True, "message": f"Welcome back, {session['user_fullname']}.", "redirectTo": "/"})
+
+
+
+
+
+    
+
 # In-memory stores for local development.
 # Replace with a database in production.
 PENDING_SIGNUPS = {}
 USERS = {}
+# Explicitly clear runtime signup data on startup for a clean session.
+PENDING_SIGNUPS.clear()
+USERS.clear()
 
 FULL_NAME_REGEX = re.compile(r"^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$")
 EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
@@ -97,6 +175,166 @@ def load_countries():
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         return {"countries": {}}
+
+
+TECH_SKILLS = {
+    "cybersecurity",
+    "data_science",
+    "cloud_computing",
+    "ai_machine_learning",
+    "software_engineering",
+    "networking",
+    "devops",
+}
+HEALTH_SKILLS = {"nursing", "public_health", "medical_laboratory_science"}
+BUSINESS_SKILLS = {"accounting", "digital_marketing", "international_business"}
+
+RECOMMENDED_SCHOOL_CATALOG = {
+    "default": {
+        "technology": [
+            {
+                "name": "Massachusetts Institute of Technology (MIT)",
+                "brief_details": "Leading engineering and computing institution with strong AI, systems, and security labs.",
+                "year_founded": "1861",
+                "founded_by": "William Barton Rogers and the Commonwealth of Massachusetts",
+                "goals_focus": "Research-led technology education, innovation, and entrepreneurship.",
+                "location": "Cambridge, Massachusetts, USA",
+                "website": "https://web.mit.edu/",
+            },
+            {
+                "name": "Stanford University",
+                "brief_details": "Top university with deep strengths in software, data, startups, and applied research.",
+                "year_founded": "1885",
+                "founded_by": "Leland and Jane Stanford",
+                "goals_focus": "Advanced research, product innovation, and leadership in technology.",
+                "location": "Stanford, California, USA",
+                "website": "https://www.stanford.edu/",
+            },
+        ],
+        "health": [
+            {
+                "name": "Johns Hopkins University",
+                "brief_details": "Globally recognized for medicine, nursing, and public health training.",
+                "year_founded": "1876",
+                "founded_by": "Johns Hopkins (philanthropist)",
+                "goals_focus": "Evidence-based healthcare education, research, and patient outcomes.",
+                "location": "Baltimore, Maryland, USA",
+                "website": "https://www.jhu.edu/",
+            },
+            {
+                "name": "Karolinska Institute",
+                "brief_details": "Major medical university known for biomedical research and clinical science.",
+                "year_founded": "1810",
+                "founded_by": "King Karl XIII of Sweden",
+                "goals_focus": "Medical discovery, professional training, and public health advancement.",
+                "location": "Stockholm, Sweden",
+                "website": "https://ki.se/en",
+            },
+        ],
+        "business": [
+            {
+                "name": "The Wharton School, University of Pennsylvania",
+                "brief_details": "Premier business school for finance, strategy, and leadership development.",
+                "year_founded": "1881",
+                "founded_by": "Joseph Wharton",
+                "goals_focus": "Business analytics, executive leadership, and global management.",
+                "location": "Philadelphia, Pennsylvania, USA",
+                "website": "https://www.wharton.upenn.edu/",
+            },
+            {
+                "name": "London Business School",
+                "brief_details": "Top global business school with strong international management orientation.",
+                "year_founded": "1964",
+                "founded_by": "University of London",
+                "goals_focus": "Global leadership, entrepreneurship, and data-driven business practice.",
+                "location": "London, United Kingdom",
+                "website": "https://www.london.edu/",
+            },
+        ],
+    },
+    "cameroon": {
+        "technology": [
+            {
+                "name": "University of Buea",
+                "brief_details": "Strong ICT and computer science programs with industry-oriented training.",
+                "year_founded": "1993",
+                "founded_by": "Government of Cameroon (state university reform)",
+                "goals_focus": "Applied technology education and professional skills for national development.",
+                "location": "Buea, South West Region, Cameroon",
+                "website": "https://www.ubuea.cm/",
+            },
+            {
+                "name": "University of Yaounde I",
+                "brief_details": "Major science and engineering institution with broad computing pathways.",
+                "year_founded": "1993",
+                "founded_by": "Government of Cameroon (from the former University of Yaounde)",
+                "goals_focus": "Research, digital skills capacity, and innovation in science and technology.",
+                "location": "Yaounde, Centre Region, Cameroon",
+                "website": "https://www.uy1.uninet.cm/",
+            },
+        ],
+        "health": [
+            {
+                "name": "University of Yaounde I - Faculty of Medicine and Biomedical Sciences",
+                "brief_details": "Core center for medical and biomedical training in Cameroon.",
+                "year_founded": "1969 (faculty roots), modern university structure from 1993",
+                "founded_by": "Government of Cameroon",
+                "goals_focus": "Medical training, diagnostics, biomedical research, and public health impact.",
+                "location": "Yaounde, Centre Region, Cameroon",
+                "website": "https://www.uy1.uninet.cm/",
+            },
+            {
+                "name": "University of Buea - Faculty of Health Sciences",
+                "brief_details": "Offers programs in nursing, public health, and allied health fields.",
+                "year_founded": "1993",
+                "founded_by": "Government of Cameroon",
+                "goals_focus": "Healthcare workforce development and community health improvement.",
+                "location": "Buea, South West Region, Cameroon",
+                "website": "https://www.ubuea.cm/",
+            },
+        ],
+        "business": [
+            {
+                "name": "University of Douala",
+                "brief_details": "Key institution for management, accounting, and business practice training.",
+                "year_founded": "1993",
+                "founded_by": "Government of Cameroon",
+                "goals_focus": "Professional business education, entrepreneurship, and economic development.",
+                "location": "Douala, Littoral Region, Cameroon",
+                "website": "https://www.univ-douala.com/",
+            },
+            {
+                "name": "Catholic University of Central Africa (UCAC)",
+                "brief_details": "Private higher institution with recognized business and management programs.",
+                "year_founded": "1989",
+                "founded_by": "Episcopal Conference of Cameroon",
+                "goals_focus": "Ethical leadership, managerial excellence, and responsible enterprise.",
+                "location": "Yaounde, Centre Region, Cameroon",
+                "website": "https://www.ucac-icy.net/",
+            },
+        ],
+    },
+}
+
+
+def infer_skill_family(skill_name):
+    if skill_name in TECH_SKILLS:
+        return "technology"
+    if skill_name in HEALTH_SKILLS:
+        return "health"
+    if skill_name in BUSINESS_SKILLS:
+        return "business"
+    return "technology"
+
+
+def get_recommended_schools(skill_name, country_key):
+    """Return curated schools by country and skill family for country skill detail pages."""
+    family = infer_skill_family(skill_name)
+    country_catalog = RECOMMENDED_SCHOOL_CATALOG.get(country_key, {})
+    schools = country_catalog.get(family)
+    if schools:
+        return schools
+    return RECOMMENDED_SCHOOL_CATALOG["default"].get(family, [])
 
 
 def format_skill_name(skill_key):
@@ -381,11 +619,13 @@ def country_skill_detail(skill_name, country_name):
         return render_template("index.html"), 404
 
     skill_data = country["skills"][skill_name]
+    recommended_schools = get_recommended_schools(skill_name, country_name)
     return render_template(
         "country_skill_detail.html",
         country=country,
         skill_name=skill_name,
         skill_data=skill_data,
+        recommended_schools=recommended_schools,
     )
 
 
@@ -480,6 +720,7 @@ def request_signup_otp():
     expires_at = datetime.now(timezone.utc) + timedelta(minutes=10)
     PENDING_SIGNUPS[email] = {
         "fullname": fullname,
+        "raw_password": password,
         "password_hash": generate_password_hash(password),
         "present_skill_career": present_skill,
         "school": school,
@@ -497,15 +738,15 @@ def request_signup_otp():
     )
     sent, error = send_email(email, "CLearn OTP Verification Code", body)
     if not sent:
-        if allow_dev_otp_fallback():
-            return jsonify(
-                {
-                    "ok": True,
-                    "message": "Email service is not configured. Using development OTP fallback.",
-                    "devOtp": otp_code,
-                }
-            )
-        return jsonify({"ok": False, "message": error}), 500
+        return jsonify(
+            {
+                "ok": True,
+                "message": "Email service is unavailable. Use the displayed OTP fallback to continue signup.",
+                "devOtp": otp_code,
+                "delivery": "onscreen_fallback",
+                "emailError": error,
+            }
+        )
 
     return jsonify({"ok": True, "message": "OTP sent to your email."})
 
@@ -535,15 +776,15 @@ def resend_signup_otp():
     )
     sent, error = send_email(email, "CLearn OTP Verification Code (Resent)", body)
     if not sent:
-        if allow_dev_otp_fallback():
-            return jsonify(
-                {
-                    "ok": True,
-                    "message": "Email service is not configured. Using development OTP fallback.",
-                    "devOtp": otp_code,
-                }
-            )
-        return jsonify({"ok": False, "message": error}), 500
+        return jsonify(
+            {
+                "ok": True,
+                "message": "Email service is unavailable. Use the displayed OTP fallback.",
+                "devOtp": otp_code,
+                "delivery": "onscreen_fallback",
+                "emailError": error,
+            }
+        )
 
     return jsonify({"ok": True, "message": "A new OTP has been sent to your registered email."})
 
@@ -571,6 +812,17 @@ def verify_signup_otp():
     if otp_code != pending["otp_code"]:
         return jsonify({"ok": False, "message": "Invalid OTP code."}), 400
 
+    firebase_result = create_firebase_user(
+        email,
+        pending.get("raw_password", ""),
+        pending["fullname"],
+        pending["phone_number"],
+    )
+    if not firebase_result.get("ok"):
+        message = firebase_result.get("error") or "Unable to create Firebase account."
+        status = 409 if "already exists" in message.lower() else 500
+        return jsonify({"ok": False, "message": message}), status
+
     USERS[email] = {
         "fullname": pending["fullname"],
         "password_hash": pending["password_hash"],
@@ -578,11 +830,12 @@ def verify_signup_otp():
         "school": pending["school"],
         "country": pending["country"],
         "phone_number": pending["phone_number"],
+        "firebase_uid": firebase_result.get("uid"),
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
     PENDING_SIGNUPS.pop(email, None)
 
-    return jsonify({"ok": True, "message": "Account verified and created successfully."})
+    return jsonify({"ok": True, "message": "Account verified and created successfully in Firebase Authentication."})
 
 
 @app.route("/api/login", methods=["POST"])
@@ -607,6 +860,16 @@ def api_login():
     # Best-effort login alert email.
     send_email(email, "CLearn Login Alert", "A login to your CLearn account was just detected.")
     return jsonify({"ok": True, "message": f"Welcome back, {user['fullname']}.", "redirectTo": "/"})
+
+
+@app.route("/api/admin/clear-signup-data", methods=["POST"])
+def clear_signup_data():
+    """Clear all in-memory signup data stores."""
+    PENDING_SIGNUPS.clear()
+    USERS.clear()
+    session.pop("user_email", None)
+    session.pop("user_fullname", None)
+    return jsonify({"ok": True, "message": "All signup data has been cleared."})
 
 
 @app.route("/api/topics")

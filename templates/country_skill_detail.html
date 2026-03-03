@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ country.flag }} {{ country.name }} - {{ skill_name|title|replace('_', ' ') }} - CLearn</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .school-recommend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 14px;
+        }
+
+        .school-recommend-card {
+            background: rgba(30, 41, 59, 0.62);
+            border: 1px solid rgba(96, 165, 250, 0.32);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .school-recommend-card h4 {
+            color: #93c5fd;
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
+
+        .school-recommend-card p {
+            margin: 0 0 8px 0;
+            color: #d1d5db;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .school-recommend-card a {
+            display: inline-block;
+            margin-top: 8px;
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .school-recommend-card a:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -119,6 +160,28 @@
                         {% endfor %}
                         </ul>
                     </div>
+
+                    <!-- 10. RECOMMENDED SCHOOLS -->
+                    <div class="skill-info-section" id="recommended-schools">
+                        <h3> 10 Recommended Schools for this Career</h3>
+                        {% if recommended_schools %}
+                        <div class="school-recommend-grid">
+                            {% for school in recommended_schools %}
+                            <article class="school-recommend-card">
+                                <h4>{{ school.name }}</h4>
+                                <p>{{ school.brief_details }}</p>
+                                <p><strong>Year founded:</strong> {{ school.year_founded }}</p>
+                                <p><strong>Founded by:</strong> {{ school.founded_by }}</p>
+                                <p><strong>Main goals and focus:</strong> {{ school.goals_focus }}</p>
+                                <p><strong>Location:</strong> {{ school.location }}</p>
+                                <a href="{{ school.website }}" target="_blank" rel="noopener noreferrer">Visit official website</a>
+                            </article>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p>No school recommendations available yet for this skill-country combination.</p>
+                        {% endif %}
+                    </div>
                 </div>
 
                 <!-- SIDEBAR -->
@@ -135,6 +198,7 @@
                             <li><a href="#limitations">Limitations</a></li>
                             <li><a href="#references">References</a></li>
                             <li><a href="#study-paths">Study Paths</a></li>
+                            <li><a href="#recommended-schools">Recommended Schools</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
@@ -220,4 +284,3 @@
     </script>
 </body>
 </html>
-

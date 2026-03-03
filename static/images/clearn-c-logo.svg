@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CLearn logo C">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#53d8ff"/>
+      <stop offset="60%" stop-color="#1d74d8"/>
+      <stop offset="100%" stop-color="#103e9e"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#50e3e6"/>
+      <stop offset="100%" stop-color="#1b7fd8"/>
+    </linearGradient>
+  </defs>
+  <path d="M346 116c-35-20-84-17-127 9-58 35-90 101-77 159 14 63 76 106 151 106 42 0 80-13 112-38 11-9 21-3 10 8-39 40-96 65-159 65-106 0-191-68-191-153 0-97 103-181 219-181 39 0 75 10 105 28 16 10 7 17-7 9-12-7-24-12-36-12z" fill="url(#g1)"/>
+  <path d="M83 274c31 47 97 80 173 80 67 0 127-24 163-61 10-10 19-3 10 7-43 50-114 82-194 82-91 0-170-42-209-104-7-12 3-20 13-4z" fill="url(#g2)"/>
+  <circle cx="104" cy="185" r="13" fill="#31b5eb"/>
+  <circle cx="88" cy="322" r="9" fill="#31b5eb"/>
+  <circle cx="114" cy="356" r="16" fill="#31b5eb"/>
+  <path d="M370 110l9 19 19 9-19 9-9 19-9-19-19-9 19-9z" fill="#54d8ff"/>
+  <path d="M396 153l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#54d8ff"/>
+</svg>

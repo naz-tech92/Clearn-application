@@ -47,6 +47,13 @@ nav {
     color: #93c5fd;
 }
 
+.nav-logo-icon {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    display: inline-block;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -55,6 +62,26 @@ nav {
 
 .nav-item {
     position: relative;
+}
+
+.nav-language-wrap {
+    display: flex;
+    align-items: center;
+    margin-left: 14px;
+}
+
+.nav-language-select {
+    background: transparent;
+    color: #e2e8f0;
+    border: none;
+    outline: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.light-theme .nav-language-select {
+    color: #1f2937;
 }
 
 .nav-link {
@@ -2389,4 +2416,166 @@ body.light-theme .explore-views-section .explore-views-card h3 {
 
 body.light-theme .explore-views-section .explore-views-card p {
     color: #334155 !important;
+}
+
+/* ABOUT PAGE MISSION LAYOUT */
+.about-mission-section {
+    margin: 36px 0 40px;
+}
+
+.about-mission-box {
+    display: grid;
+    grid-template-columns: 1.05fr 1.15fr;
+    gap: 24px;
+    align-items: stretch;
+    min-height: 360px;
+    background: linear-gradient(160deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    border-radius: 14px;
+    padding: 24px;
+}
+
+.about-mission-text {
+    padding: 10px 6px;
+    align-self: center;
+}
+
+.about-mission-text h2 {
+    color: #93c5fd;
+    margin: 0 0 12px;
+}
+
+.about-mission-text p {
+    color: #dbeafe;
+    line-height: 1.8;
+}
+
+.about-mission-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(147, 197, 253, 0.45);
+    box-shadow: 0 14px 30px rgba(2, 6, 23, 0.45);
+    display: block;
+}
+
+/* HIGHER CONTRAST LEGAL PAGES */
+.legal-page .legal-header {
+    background: linear-gradient(160deg, rgba(2, 6, 23, 0.98), rgba(30, 41, 59, 0.95)) !important;
+    border: 1px solid rgba(147, 197, 253, 0.55) !important;
+}
+
+.legal-page .legal-header h1 {
+    color: #eff6ff !important;
+}
+
+.legal-page .legal-header p {
+    color: #dbeafe !important;
+}
+
+.legal-page .legal-block {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.78)) !important;
+    border: 1px solid rgba(147, 197, 253, 0.38) !important;
+}
+
+.legal-page .legal-block h2,
+.legal-page .legal-block h3 {
+    color: #bfdbfe !important;
+}
+
+.legal-page .legal-block p,
+.legal-page .legal-block li,
+.legal-page .legal-note {
+    color: #e2e8f0 !important;
+}
+
+.legal-page .legal-block a {
+    color: #93c5fd;
+    font-weight: 600;
+}
+
+/* RIGHT-SIDE ACCESSIBILITY CONTROLS */
+.brightness-toggle,
+.font-size-toggle,
+.ai-chat-toggle {
+    cursor: pointer;
+    touch-action: auto;
+}
+
+@media (max-width: 900px) {
+    .about-mission-box {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        padding: 18px;
+    }
+
+    .about-mission-image img {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        max-width: 100%;
+        padding: 0 16px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+    }
+
+    .topics-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    .brightness-toggle {
+        top: auto;
+        bottom: 18px;
+        right: 14px;
+        transform: none;
+    }
+
+    .font-size-toggle {
+        top: auto;
+        bottom: 78px;
+        right: 14px;
+    }
+
+    .ai-chat-toggle {
+        top: auto;
+        bottom: 138px;
+        right: 14px;
+    }
+
+    .ai-chat-panel {
+        top: auto;
+        right: 14px;
+        bottom: 198px;
+        transform: none;
+        width: min(92vw, 340px);
+        max-height: 62vh;
+    }
+}
+
+@media (max-width: 640px) {
+    .nav-container {
+        padding: 0 14px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .topic-card,
+    .feature-card {
+        padding: 20px;
+    }
 }

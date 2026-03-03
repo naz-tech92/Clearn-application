@@ -333,7 +333,10 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -354,6 +357,28 @@
 
         const loginForm = document.querySelector('form[onsubmit="handleLogin(event)"]');
         loginForm.reset();
+        let firebaseAuth = null;
+        let firebaseInitError = '';
+
+        async function ensureFirebaseAuth() {
+            if (firebaseAuth) {
+                return firebaseAuth;
+            }
+            if (firebaseInitError) {
+                throw new Error(firebaseInitError);
+            }
+
+            const response = await fetch('/api/firebase/web-config');
+            const payload = await parseApiResponse(response);
+            if (!response.ok || !payload.ok) {
+                firebaseInitError = payload.message || 'Firebase configuration is unavailable.';
+                throw new Error(firebaseInitError);
+            }
+
+            const app = initializeApp(payload.config);
+            firebaseAuth = getAuth(app);
+            return firebaseAuth;
+        }
 
         async function parseApiResponse(response) {
             const contentType = response.headers.get('content-type') || '';
@@ -366,7 +391,7 @@
         }
 
         // Login form handler
-        async function handleLogin(event) {
+        window.handleLogin = async function handleLogin(event) {
             event.preventDefault();
             const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
@@ -391,10 +416,21 @@
             }
 
             try {
-                const response = await fetch('{{ url_for("api_login") }}', {
+                const auth = await ensureFirebaseAuth();
+                const credential = await signInWithEmailAndPassword(auth, email, password);
+                if (!credential.user.emailVerified) {
+                    alert('Please verify your email before logging in.');
+                    return;
+                }
+
+                const idToken = await credential.user.getIdToken();
+                const response = await fetch('/api/auth/firebase-session', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${idToken}`
+                    },
+                    body: JSON.stringify({ idToken })
                 });
 
                 const result = await parseApiResponse(response);
@@ -407,9 +443,9 @@
                 event.target.reset();
                 window.location.href = result.redirectTo || '/';
             } catch (error) {
-                alert('Unable to reach login service. Please try again.');
+                alert(error.message || 'Unable to log in right now. Please try again.');
             }
-        }
+        };
     </script>
 </body>
 </html>

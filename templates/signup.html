@@ -597,9 +597,14 @@
 
         let pendingSignupPayload = null;
 
-        function openOtpModal(email) {
-            otpModalText.textContent = `Enter the 6-character OTP sent to ${email}. Check the inbox on the device where this email is logged in.`;
-            otpCodeInput.value = '';
+        function openOtpModal(email, fallbackOtp = '') {
+            if (fallbackOtp) {
+                otpModalText.textContent = `Email delivery is unavailable. Use this OTP fallback: ${fallbackOtp}`;
+                otpCodeInput.value = fallbackOtp;
+            } else {
+                otpModalText.textContent = `Enter the 6-character OTP sent to ${email}. Check the inbox on the device where this email is logged in.`;
+                otpCodeInput.value = '';
+            }
             otpCodeInput.setCustomValidity('');
             otpOverlay.classList.remove('hidden');
             otpCodeInput.focus();
@@ -708,7 +713,13 @@
                     alert(result.message || 'Unable to resend OTP right now.');
                     return;
                 }
-                alert(`A new OTP has been sent to ${pendingSignupPayload.email}.`);
+                if (result.devOtp) {
+                    otpModalText.textContent = `Email delivery is unavailable. Use this OTP fallback: ${result.devOtp}`;
+                    otpCodeInput.value = result.devOtp;
+                    alert(`Email service unavailable. New OTP fallback: ${result.devOtp}`);
+                } else {
+                    alert(`A new OTP has been sent to ${pendingSignupPayload.email}.`);
+                }
             } catch (error) {
                 alert('Unable to resend OTP right now.');
             }
@@ -804,8 +815,12 @@
             };
 
             try {
-                await requestOtp(pendingSignupPayload);
-                openOtpModal(email);
+                const otpResult = await requestOtp(pendingSignupPayload);
+                const fallbackOtp = otpResult.devOtp || '';
+                if (fallbackOtp) {
+                    alert(`Email service unavailable. Use this OTP fallback to continue: ${fallbackOtp}`);
+                }
+                openOtpModal(email, fallbackOtp);
             } catch (error) {
                 alert(error.message);
             }

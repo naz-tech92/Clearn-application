@@ -1,9 +1,12 @@
 // CLearn JavaScript - Main Application Logic
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('CLearn application loaded successfully');
 
     // Initialize all features
+    setupGlobalNavbarBrandAndLanguage();
     setupSmoothScrolling();
     setupScrollAnimations();
     setupBrightnessToggle();
@@ -13,7 +16,37 @@ document.addEventListener('DOMContentLoaded', function() {
     setupAutoRefresh();
     setupKnowledgeHub();
     setupEnlighteningFeatures();
+    setupSiteLanguageTranslation();
 });
+
+function setupGlobalNavbarBrandAndLanguage() {
+    const logos = document.querySelectorAll('.nav-logo');
+    logos.forEach((logo) => {
+        if (!logo.querySelector('.nav-logo-icon')) {
+            const labelText = (logo.textContent || '').replace(/\s+/g, ' ').trim();
+            const suffix = labelText.toLowerCase().endsWith('learn') ? 'Learn' : labelText || 'Learn';
+            logo.innerHTML = `<img src="/static/images/clearn-c-logo.svg" alt="CLearn logo" class="nav-logo-icon">${suffix}`;
+        }
+    });
+
+    const navMenus = document.querySelectorAll('.nav-menu');
+    navMenus.forEach((menu) => {
+        if (menu.querySelector('#languageSelector')) {
+            return;
+        }
+        const item = document.createElement('li');
+        item.className = 'nav-item nav-language-wrap';
+        item.innerHTML = `
+            <select id="languageSelector" class="nav-language-select" aria-label="Select site language">
+                <option value="en">English</option>
+                <option value="fr">Francais</option>
+                <option value="es">Espanol</option>
+                <option value="de">Deutsch</option>
+            </select>
+        `;
+        menu.appendChild(item);
+    });
+}
 
 /**
  * Setup smooth scrolling for anchor links
@@ -166,6 +199,7 @@ function setupAIChatToggle() {
 
     // Toggle chat panel on button click
     aiChatButton.addEventListener('click', function() {
+        positionChatPanelNearToggle(aiChatButton, chatPanel);
         chatPanel.classList.toggle('active');
         this.classList.toggle('active');
     });
@@ -214,39 +248,159 @@ function setupAIChatToggle() {
             sendMessage();
         }
     });
+
+    window.addEventListener('resize', function() {
+        if (chatPanel.classList.contains('active')) {
+            positionChatPanelNearToggle(aiChatButton, chatPanel);
+        }
+    });
+}
+
+/**
+ * Position chat panel above the AI toggle button.
+ */
+function positionChatPanelNearToggle(toggle, panel) {
+    const rect = toggle.getBoundingClientRect();
+    const panelWidth = panel.offsetWidth || 300;
+    const leftPos = Math.min(
+        window.innerWidth - panelWidth - 12,
+        Math.max(12, rect.right - panelWidth)
+    );
+
+    let topPos = rect.top - panel.offsetHeight - 12;
+    if (topPos < 12) {
+        topPos = Math.min(window.innerHeight - panel.offsetHeight - 12, rect.bottom + 12);
+    }
+
+    panel.style.left = leftPos + 'px';
+    panel.style.right = 'auto';
+    panel.style.top = topPos + 'px';
+    panel.style.transform = 'none';
+}
+
+/**
+ * Make floating control elements draggable and persist their position.
+ */
+function makeElementMovable(element, storageKey, onMove) {
+    let isDragging = false;
+    let moved = false;
+    let startX = 0;
+    let startY = 0;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+        try {
+            const parsed = JSON.parse(saved);
+            if (typeof parsed.left === 'number' && typeof parsed.top === 'number') {
+                element.style.left = parsed.left + 'px';
+                element.style.top = parsed.top + 'px';
+                element.style.right = 'auto';
+                element.style.transform = 'none';
+            }
+        } catch (err) {
+            localStorage.removeItem(storageKey);
+        }
+    }
+
+    element.addEventListener('pointerdown', function(e) {
+        if (e.button !== 0) {
+            return;
+        }
+        isDragging = true;
+        moved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = element.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+        element.classList.add('dragging');
+        element.setPointerCapture(e.pointerId);
+    });
+
+    element.addEventListener('pointermove', function(e) {
+        if (!isDragging) {
+            return;
+        }
+
+        const deltaX = Math.abs(e.clientX - startX);
+        const deltaY = Math.abs(e.clientY - startY);
+        if (deltaX > 3 || deltaY > 3) {
+            moved = true;
+        }
+
+        const maxLeft = window.innerWidth - element.offsetWidth - 6;
+        const maxTop = window.innerHeight - element.offsetHeight - 6;
+        const nextLeft = Math.min(Math.max(6, e.clientX - offsetX), maxLeft);
+        const nextTop = Math.min(Math.max(6, e.clientY - offsetY), maxTop);
+
+        element.style.left = nextLeft + 'px';
+        element.style.top = nextTop + 'px';
+        element.style.right = 'auto';
+        element.style.transform = 'none';
+
+        if (typeof onMove === 'function') {
+            onMove();
+        }
+    });
+
+    element.addEventListener('pointerup', function(e) {
+        if (!isDragging) {
+            return;
+        }
+        isDragging = false;
+        element.classList.remove('dragging');
+        element.releasePointerCapture(e.pointerId);
+
+        const left = parseFloat(element.style.left);
+        const top = parseFloat(element.style.top);
+        if (!Number.isNaN(left) && !Number.isNaN(top)) {
+            localStorage.setItem(storageKey, JSON.stringify({ left, top }));
+        }
+
+        if (moved) {
+            element.dataset.dragging = 'true';
+            setTimeout(() => {
+                element.dataset.dragging = 'false';
+            }, 0);
+        }
+    });
 }
 
 /**
  * Get AI response based on user message
  */
 function getAIResponse(message) {
-    const responses = [
-        "That's a great question! Let me help you understand that concept better.",
-        "I can assist you with that. Here's what you need to know:",
-        "Excellent choice! This topic is fundamental to your learning path.",
-        "I'm here to help you succeed. Let's break this down step by step.",
-        "That's an interesting point. Here's some additional context:",
-        "Great observation! This connects to several important concepts.",
-        "I understand your concern. Let me provide some clarification:",
-        "Perfect timing! This is a key concept you'll use throughout your studies.",
-        "That's a common question. Here's the explanation:",
-        "I'm glad you asked! This is actually quite straightforward once you see it this way."
-    ];
-
-    // Simple keyword-based responses
     const lowerMessage = message.toLowerCase();
+    const sitePaths = "Useful site pages: /category, /topics, /resources, /about, /contact.";
+    const externalBlock = "External resources you can check: Coursera, edX, LinkedIn Learning, Cisco Skills for All, Google Career Certificates.";
 
-    if (lowerMessage.includes('help') || lowerMessage.includes('assist')) {
-        return "I'm here to help! I can answer questions about cybersecurity, provide learning tips, explain concepts, or guide you through your studies.";
-    } else if (lowerMessage.includes('course') || lowerMessage.includes('learn')) {
-        return "CLearn offers comprehensive courses in cybersecurity, networking, programming, and more. What specific area interests you most?";
-    } else if (lowerMessage.includes('difficult') || lowerMessage.includes('hard')) {
-        return "Don't worry! Every expert was once a beginner. Break complex topics into smaller parts, practice regularly, and don't hesitate to ask questions.";
-    } else if (lowerMessage.includes('career') || lowerMessage.includes('job')) {
-        return "Cybersecurity offers excellent career opportunities! Roles like security analyst, penetration tester, and security engineer are in high demand.";
+    if (/(category|categories|skill|skills|career path|which skill|choose)/.test(lowerMessage)) {
+        return "Start from /category to compare Technology, Health, and Business paths. Then open a skill and check the country cards for demand and education requirements. Suggested search: 'cybersecurity vs data science beginner path'.";
     }
 
-    return responses[Math.floor(Math.random() * responses.length)];
+    if (/(country|cameroon|usa|canada|germany|uk|singapore|australia|uae|abroad)/.test(lowerMessage)) {
+        return "Use the country detail pages from each skill to compare requirements, demand level, and study paths by location. " + sitePaths + " Suggested search: 'best country for [your skill] entry-level jobs'.";
+    }
+
+    if (/(school|university|college|recommended school|study)/.test(lowerMessage)) {
+        return "Open a skill country page and review 'Recommended Schools for this Career' for founding year, focus, and official links. " + externalBlock + " Suggested search: 'accredited [skill] programs in [country]'.";
+    }
+
+    if (/(resource|book|course|certificate|certification|training)/.test(lowerMessage)) {
+        return "For on-site learning, check /resources and each skill page references. For off-site learning, use Coursera, edX, and vendor tracks like AWS, Microsoft Learn, and Cisco. Suggested search: '[skill] certification roadmap 2026'.";
+    }
+
+    if (/(job|salary|demand|market|opportunity)/.test(lowerMessage)) {
+        return "You can compare demand and study pathways on skill-country pages, then validate with external labor reports. Suggested search: '[skill] salary trend [country]' and '[skill] hiring demand 2026'.";
+    }
+
+    if (/(how to use|navigate|where to start|new here|beginner)/.test(lowerMessage)) {
+        return "Quick start: 1) /category 2) select one skill 3) open country cards 4) compare education and certifications 5) check /resources for deeper learning.";
+    }
+
+    return "I can answer using this site content and suggest off-site learning resources. Ask me about a skill, a country, certifications, schools, or job demand. " + sitePaths;
 }
 
 /**
@@ -282,6 +436,100 @@ function setupAutoScrollIndicator() {
 function setupAutoRefresh() {
     // Auto-refresh button removed as requested
     // This function is kept for future use if needed
+}
+
+/**
+ * Setup language selector to translate the whole site.
+ * Uses Google Translate element with persisted language preference.
+ */
+function setupSiteLanguageTranslation() {
+    const selector = document.getElementById('languageSelector');
+    const savedLanguage = localStorage.getItem('clearn-language') || 'en';
+    const supported = ['en', 'fr', 'es', 'de'];
+
+    if (selector && supported.includes(savedLanguage)) {
+        selector.value = savedLanguage;
+    }
+    document.documentElement.lang = savedLanguage;
+
+    ensureTranslateElementLoaded(function() {
+        if (savedLanguage !== 'en') {
+            applySiteLanguage(savedLanguage);
+        }
+    });
+
+    if (!selector) {
+        return;
+    }
+
+    selector.addEventListener('change', function(e) {
+        const language = e.target.value;
+        localStorage.setItem('clearn-language', language);
+        document.documentElement.lang = language;
+        applySiteLanguage(language);
+    });
+}
+
+function ensureTranslateElementLoaded(onReady) {
+    if (!document.getElementById('google_translate_element')) {
+        const holder = document.createElement('div');
+        holder.id = 'google_translate_element';
+        holder.style.display = 'none';
+        document.body.appendChild(holder);
+    }
+
+    window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement(
+            { pageLanguage: 'en', autoDisplay: false },
+            'google_translate_element'
+        );
+        if (typeof onReady === 'function') {
+            onReady();
+        }
+    };
+
+    if (window.google && window.google.translate) {
+        window.googleTranslateElementInit();
+        return;
+    }
+
+    if (!document.getElementById('google-translate-script')) {
+        const script = document.createElement('script');
+        script.id = 'google-translate-script';
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        script.async = true;
+        document.head.appendChild(script);
+    }
+}
+
+function setGoogleTranslateCookie(language) {
+    const value = language === 'en' ? '/en/en' : '/en/' + language;
+    document.cookie = 'googtrans=' + value + ';path=/';
+}
+
+function applySiteLanguage(language) {
+    setGoogleTranslateCookie(language);
+
+    // Returning to English requires resetting translated DOM.
+    if (language === 'en') {
+        window.location.reload();
+        return;
+    }
+
+    let tries = 0;
+    const timer = setInterval(function() {
+        const combo = document.querySelector('.goog-te-combo');
+        if (combo) {
+            combo.value = language;
+            combo.dispatchEvent(new Event('change'));
+            clearInterval(timer);
+            return;
+        }
+        tries += 1;
+        if (tries > 25) {
+            clearInterval(timer);
+        }
+    }, 200);
 }
 
 /**
