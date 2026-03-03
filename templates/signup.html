@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
         }
 
         .auth-hero .carousel-overlay {
-            background: rgba(15, 23, 42, 0.45);
+            background: transparent;
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
@@ -160,10 +160,6 @@
             text-decoration: none;
         }
 
-        .terms-checkbox a:hover {
-            color: #93c5fd;
-        }
-
         .submit-btn {
             width: 100%;
             padding: 14px;
@@ -183,21 +179,6 @@
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         }
 
-        .auth-divider {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 25px 0;
-            color: #64748b;
-            font-size: 0.9em;
-        }
-
-        .auth-divider span {
-            flex: 1;
-            height: 1px;
-            background: #334155;
-        }
-
         .login-link {
             text-align: center;
             color: #cbd5e1;
@@ -209,108 +190,6 @@
             color: #60a5fa;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .login-link a:hover {
-            color: #93c5fd;
-        }
-
-        .social-auth {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .social-btn {
-            padding: 12px;
-            border: 1px solid #3b82f6;
-            background: transparent;
-            color: #60a5fa;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-
-        .social-btn:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: #60a5fa;
-        }
-
-        .otp-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(2, 6, 23, 0.78);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-
-        .otp-overlay.hidden {
-            display: none;
-        }
-
-        .otp-modal {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(15, 23, 42, 0.98);
-            border: 1px solid #3b82f6;
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.6);
-            padding: 24px;
-        }
-
-        .otp-modal h3 {
-            margin: 0 0 8px;
-            color: #60a5fa;
-            text-align: center;
-        }
-
-        .otp-modal p {
-            margin: 0 0 16px;
-            color: #cbd5e1;
-            font-size: 0.9em;
-            text-align: center;
-        }
-
-        .otp-modal input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #3b82f6;
-            border-radius: 6px;
-            background: rgba(15, 23, 42, 0.9);
-            color: #e2e8f0;
-            font-size: 1em;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 0.12em;
-            margin-bottom: 12px;
-        }
-
-        .otp-modal-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .otp-btn {
-            padding: 10px 12px;
-            border-radius: 6px;
-            border: 1px solid #3b82f6;
-            background: transparent;
-            color: #60a5fa;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .otp-btn.primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: none;
-            color: #fff;
         }
 
         @media (max-width: 768px) {
@@ -329,7 +208,6 @@
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
     <nav>
         <div class="nav-container">
             <a href="/" class="nav-logo"><span style="font-size: 1.8em; font-weight: bold; background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">C</span>Learn</a>
@@ -352,9 +230,8 @@
     </nav>
 
     <div class="container">
-                <!-- HERO SECTION -->
         <section class="hero auth-hero">
-            <div class="carousel-overlay">
+            <div class="carousel-overlay no-blur">
                 <h2>Join</h2>
                 <p>Create your CLearn account and start your learning journey.</p>
             </div>
@@ -368,80 +245,58 @@
 
                     <form onsubmit="handleSignup(event)">
                         <div class="form-grid">
-                        <div class="form-group">
-                            <label for="fullname">Full Name</label>
-                            <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
-                        </div>
+                            <div class="form-group">
+                                <label for="fullname">Full Name</label>
+                                <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="present-skill-career">Present Skill/Career</label>
+                                <input type="text" id="present-skill-career" name="present-skill-career" placeholder="Cybersecurity Analyst" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="school">School</label>
+                                <input type="text" id="school" name="school" placeholder="University / Institution name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" id="country" name="country" placeholder="Country of residence" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="tel" id="phone-number" name="phone-number" placeholder="+1234567890" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                        </div>
+                            <div class="password-requirements form-group span-2">
+                                <h4>Password must contain:</h4>
+                                <ul>
+                                    <li id="req-length">At least 8 characters</li>
+                                    <li id="req-uppercase">One uppercase letter</li>
+                                    <li id="req-number">One number</li>
+                                    <li id="req-special">One special character (!@#$%)</li>
+                                    <li id="req-match">Confirm password matches</li>
+                                </ul>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="present-skill-career">Present Skill/Career</label>
-                            <input type="text" id="present-skill-career" name="present-skill-career" placeholder="Cybersecurity Analyst" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="school">School</label>
-                            <input type="text" id="school" name="school" placeholder="University / Institution name" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            <input type="text" id="country" name="country" placeholder="Country of residence" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone-number">Phone Number</label>
-                            <input type="tel" id="phone-number" name="phone-number" placeholder="+1234567890" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-                        </div>
-
-                        <div class="password-requirements form-group span-2">
-                            <h4>Password must contain:</h4>
-                            <ul>
-                                <li id="req-length">At least 8 characters</li>
-                                <li id="req-uppercase">One uppercase letter</li>
-                                <li id="req-number">One number</li>
-                                <li id="req-special">One special character (!@#$%)</li>
-                                <li id="req-match">Confirm password matches</li>
-                            </ul>
-                        </div>
-
-                        <div class="terms-checkbox form-group span-2">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms">I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a></label>
-                        </div>
+                            <div class="terms-checkbox form-group span-2">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree to the <a href="/terms_of_service">Terms of Service</a> and <a href="/privacy_policy">Privacy Policy</a></label>
+                            </div>
                         </div>
 
                         <button type="submit" class="submit-btn">Create Account</button>
                     </form>
-
-                    <div class="auth-divider">
-                        <span></span>
-                        <span>OR</span>
-                        <span></span>
-                    </div>
-
-                    <div class="social-auth">
-                        <button class="social-btn" onclick="alert('Google signup coming soon!')">
-                            Google
-                        </button>
-                        <button class="social-btn" onclick="alert('GitHub signup coming soon!')">
-                            GitHub
-                        </button>
-                    </div>
 
                     <div class="login-link">
                         Already have an account? <a href="/login">Sign in here</a>
@@ -451,75 +306,53 @@
         </main>
     </div>
 
-    <div id="otp-overlay" class="otp-overlay hidden">
-        <div class="otp-modal">
-            <h3>Email Verification</h3>
-            <p id="otp-modal-text">Enter the 6-character OTP sent to your email inbox.</p>
-            <input type="text" id="otp-code-input" maxlength="6" placeholder="A1B2C3">
-            <div class="otp-modal-actions">
-                <button type="button" id="verify-otp-btn" class="otp-btn primary">Verify OTP</button>
-                <button type="button" id="resend-otp-btn" class="otp-btn">Resend OTP</button>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About CLearn</h4>
+                <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/topics">Services</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Courses</h4>
+                <ul>
+                    <li><a href="/topics">Cybersecurity Basics</a></li>
+                    <li><a href="/topics">Network Security</a></li>
+                    <li><a href="/topics">Cryptography</a></li>
+                    <li><a href="/topics">Ethical Hacking</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About CLearn</h4>
-                    <p>A leading platform for cybersecurity education and training. Learn from industry experts and build your security career.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/topics">Services</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Courses</h4>
-                    <ul>
-                        <li><a href="/topics">Cybersecurity Basics</a></li>
-                        <li><a href="/topics">Network Security</a></li>
-                        <li><a href="/topics">Cryptography</a></li>
-                        <li><a href="/topics">Ethical Hacking</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <li><a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
-            </div>
-        </footer>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CLearn. All rights reserved. | <a href="/privacy_policy" style="color: #60a5fa; text-decoration: none;">Privacy Policy</a> | <a href="/terms_of_service" style="color: #60a5fa; text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-        
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
         });
 
-        // Signup validation rules
         const fullnameInput = document.getElementById('fullname');
         const emailInput = document.getElementById('email');
         const presentSkillCareerInput = document.getElementById('present-skill-career');
@@ -539,12 +372,15 @@
         };
 
         function isValidFullName(value) {
-            const trimmed = value.trim();
-            return /^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$/.test(trimmed);
+            return /^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$/.test(value.trim());
         }
 
         function isValidEmail(value) {
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+        }
+
+        function isValidPhoneNumber(value) {
+            return /^\+?[0-9]{7,15}$/.test(value.trim());
         }
 
         function getPasswordChecks(password, confirmPassword) {
@@ -576,10 +412,6 @@
             confirmPasswordInput.setCustomValidity('');
         }
 
-        function isValidPhoneNumber(value) {
-            return /^\+?[0-9]{7,15}$/.test(value.trim());
-        }
-
         function validateConfirmPassword() {
             if (confirmPasswordInput.value && confirmPasswordInput.value !== passwordInput.value) {
                 confirmPasswordInput.setCustomValidity('Confirm password must match the password entered above.');
@@ -589,98 +421,17 @@
             updatePasswordRequirementUI();
         }
 
-        const otpOverlay = document.getElementById('otp-overlay');
-        const otpCodeInput = document.getElementById('otp-code-input');
-        const otpModalText = document.getElementById('otp-modal-text');
-        const verifyOtpBtn = document.getElementById('verify-otp-btn');
-        const resendOtpBtn = document.getElementById('resend-otp-btn');
-
-        let pendingSignupPayload = null;
-
-        function openOtpModal(email, fallbackOtp = '') {
-            if (fallbackOtp) {
-                otpModalText.textContent = `Email delivery is unavailable. Use this OTP fallback: ${fallbackOtp}`;
-                otpCodeInput.value = fallbackOtp;
-            } else {
-                otpModalText.textContent = `Enter the 6-character OTP sent to ${email}. Check the inbox on the device where this email is logged in.`;
-                otpCodeInput.value = '';
-            }
-            otpCodeInput.setCustomValidity('');
-            otpOverlay.classList.remove('hidden');
-            otpCodeInput.focus();
-        }
-
-        function normalizeOtpInput() {
-            otpCodeInput.value = otpCodeInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
-        }
-
         async function parseApiResponse(response) {
             const contentType = response.headers.get('content-type') || '';
             if (contentType.includes('application/json')) {
                 return response.json();
             }
-
-            const rawText = await response.text();
+            await response.text();
             throw new Error(`Server returned non-JSON response (${response.status}).`);
         }
 
-        async function requestOtp(payload) {
-            const response = await fetch('/api/signup/request-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const result = await parseApiResponse(response);
-            if (!response.ok || !result.ok) {
-                throw new Error(result.message || 'Unable to send OTP. Please try again.');
-            }
-
-            return result;
-        }
-
-        async function verifyOtp() {
-            if (!pendingSignupPayload) {
-                alert('Signup session expired. Please submit your details again.');
-                otpOverlay.classList.add('hidden');
-                return;
-            }
-
-            normalizeOtpInput();
-            const otp = otpCodeInput.value;
-            const otpFormatRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$/;
-            if (!otpFormatRegex.test(otp)) {
-                otpCodeInput.setCustomValidity('OTP must be 6 characters with letters and numbers.');
-                otpCodeInput.reportValidity();
-                return;
-            }
-
-            otpCodeInput.setCustomValidity('');
-
-            try {
-                const response = await fetch('/api/signup/verify-otp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: pendingSignupPayload.email, otp })
-                });
-
-                const result = await parseApiResponse(response);
-                if (!response.ok || !result.ok) {
-                    alert(result.message || 'OTP verification failed.');
-                    return;
-                }
-
-                alert('OTP verified successfully. Your account has been created.');
-                signupForm.reset();
-                updatePasswordRequirementUI();
-                clearFieldValidity();
-                otpOverlay.classList.add('hidden');
-                pendingSignupPayload = null;
-                window.location.href = '/login';
-            } catch (error) {
-                alert('Unable to verify OTP right now. Please try again.');
-            }
-        }
+        signupForm.reset();
+        updatePasswordRequirementUI();
 
         fullnameInput.addEventListener('input', () => fullnameInput.setCustomValidity(''));
         emailInput.addEventListener('input', () => emailInput.setCustomValidity(''));
@@ -694,44 +445,7 @@
             validateConfirmPassword();
         });
         confirmPasswordInput.addEventListener('input', validateConfirmPassword);
-        otpCodeInput.addEventListener('input', normalizeOtpInput);
-        verifyOtpBtn.addEventListener('click', verifyOtp);
-        resendOtpBtn.addEventListener('click', async () => {
-            if (!pendingSignupPayload) {
-                alert('No pending signup found. Submit your details first.');
-                return;
-            }
 
-            try {
-                const response = await fetch('/api/signup/resend-otp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: pendingSignupPayload.email })
-                });
-                const result = await parseApiResponse(response);
-                if (!response.ok || !result.ok) {
-                    alert(result.message || 'Unable to resend OTP right now.');
-                    return;
-                }
-                if (result.devOtp) {
-                    otpModalText.textContent = `Email delivery is unavailable. Use this OTP fallback: ${result.devOtp}`;
-                    otpCodeInput.value = result.devOtp;
-                    alert(`Email service unavailable. New OTP fallback: ${result.devOtp}`);
-                } else {
-                    alert(`A new OTP has been sent to ${pendingSignupPayload.email}.`);
-                }
-            } catch (error) {
-                alert('Unable to resend OTP right now.');
-            }
-        });
-        updatePasswordRequirementUI();
-
-        // Clear any prefilled values when the signup page is opened.
-        signupForm.reset();
-        pendingSignupPayload = null;
-        otpOverlay.classList.add('hidden');
-
-        // Signup form handler
         async function handleSignup(event) {
             event.preventDefault();
             clearFieldValidity();
@@ -751,35 +465,30 @@
                 fullnameInput.focus();
                 return;
             }
-
             if (!isValidEmail(email)) {
                 emailInput.setCustomValidity('Enter a valid email address in the format name@example.com.');
                 emailInput.reportValidity();
                 emailInput.focus();
                 return;
             }
-
             if (presentSkillCareer.length < 2) {
                 presentSkillCareerInput.setCustomValidity('Enter your present skill or career.');
                 presentSkillCareerInput.reportValidity();
                 presentSkillCareerInput.focus();
                 return;
             }
-
             if (school.length < 2) {
                 schoolInput.setCustomValidity('Enter your school or institution.');
                 schoolInput.reportValidity();
                 schoolInput.focus();
                 return;
             }
-
             if (country.length < 2) {
                 countryInput.setCustomValidity('Enter your country.');
                 countryInput.reportValidity();
                 countryInput.focus();
                 return;
             }
-
             if (!isValidPhoneNumber(phoneNumber)) {
                 phoneNumberInput.setCustomValidity('Enter a valid phone number (7-15 digits, optional +).');
                 phoneNumberInput.reportValidity();
@@ -788,22 +497,14 @@
             }
 
             const passwordChecks = updatePasswordRequirementUI();
-            const allPasswordChecksPassed = Object.values(passwordChecks).every(Boolean);
-            if (!allPasswordChecksPassed) {
+            if (!Object.values(passwordChecks).every(Boolean)) {
                 passwordInput.setCustomValidity('Password does not meet all listed requirements.');
                 passwordInput.reportValidity();
                 passwordInput.focus();
                 return;
             }
 
-            if (password !== confirmPassword) {
-                confirmPasswordInput.setCustomValidity('Confirm password must match the password entered above.');
-                confirmPasswordInput.reportValidity();
-                confirmPasswordInput.focus();
-                return;
-            }
-
-            pendingSignupPayload = {
+            const payload = {
                 fullname,
                 email,
                 presentSkillCareer,
@@ -815,20 +516,25 @@
             };
 
             try {
-                const otpResult = await requestOtp(pendingSignupPayload);
-                const fallbackOtp = otpResult.devOtp || '';
-                if (fallbackOtp) {
-                    alert(`Email service unavailable. Use this OTP fallback to continue: ${fallbackOtp}`);
+                const response = await fetch('/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'Unable to create account right now.');
+                    return;
                 }
-                openOtpModal(email, fallbackOtp);
+
+                alert(result.message || 'Account created successfully.');
+                signupForm.reset();
+                updatePasswordRequirementUI();
+                window.location.href = result.redirectTo || '/login';
             } catch (error) {
-                alert(error.message);
+                alert(error.message || 'Unable to create account right now.');
             }
         }
     </script>
 </body>
 </html>
-
-
-
-

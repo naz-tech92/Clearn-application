@@ -36,7 +36,11 @@
             transform: translateY(-50%);
             color: #93c5fd;
             pointer-events: none;
-            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
         }
 
         .universal-search-input {
@@ -47,6 +51,82 @@
             background: rgba(30, 41, 59, 0.8);
             color: #e2e8f0;
             font-size: 1em;
+        }
+
+        .welcome-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.74);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2100;
+            padding: 18px;
+        }
+
+        .welcome-modal-overlay.active {
+            display: flex;
+        }
+
+        .welcome-modal {
+            width: min(520px, 96vw);
+            background:
+                radial-gradient(circle at top right, rgba(96, 165, 250, 0.2), transparent 42%),
+                linear-gradient(160deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(96, 165, 250, 0.45);
+            border-radius: 16px;
+            box-shadow: 0 24px 48px rgba(2, 6, 23, 0.6);
+            padding: 28px 24px;
+            position: relative;
+            text-align: center;
+        }
+
+        .welcome-modal h2 {
+            color: #93c5fd;
+            margin: 0 0 10px;
+            font-size: 1.9rem;
+        }
+
+        .welcome-modal p {
+            color: #dbeafe;
+            margin: 0 0 18px;
+            line-height: 1.6;
+        }
+
+        .welcome-modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: transparent;
+            color: #bfdbfe;
+            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        body.light-theme .welcome-modal {
+            background:
+                radial-gradient(circle at top right, rgba(96, 165, 250, 0.16), transparent 42%),
+                linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.95));
+            border-color: rgba(37, 99, 235, 0.28);
+            box-shadow: 0 22px 40px rgba(15, 23, 42, 0.18);
+        }
+
+        body.light-theme .welcome-modal h2 {
+            color: #1d4ed8;
+        }
+
+        body.light-theme .welcome-modal p {
+            color: #334155;
         }
 
         .search-suggestions {
@@ -342,6 +422,41 @@
             display: block;
         }
 
+        .hero-fullwidth .carousel-prev,
+        .hero-fullwidth .carousel-next {
+            top: auto;
+            bottom: 18px;
+            transform: none;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 2.4rem;
+            padding: 0 8px;
+            line-height: 1;
+        }
+
+        .hero-fullwidth .carousel-prev:hover,
+        .hero-fullwidth .carousel-next:hover {
+            background: transparent;
+            transform: none;
+            color: #bfdbfe;
+        }
+
+        .hero-fullwidth .carousel-dots {
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-fullwidth .carousel-prev {
+            left: calc(50% - 86px);
+        }
+
+        .hero-fullwidth .carousel-next {
+            left: calc(50% + 68px);
+            right: auto;
+        }
+
         @media (max-width: 900px) {
             .hero-fullwidth {
                 min-height: 640px;
@@ -376,6 +491,14 @@
                 max-width: 360px;
                 width: 100%;
             }
+
+            .hero-fullwidth .carousel-prev {
+                left: calc(50% - 74px);
+            }
+
+            .hero-fullwidth .carousel-next {
+                left: calc(50% + 58px);
+            }
         }
     </style>
 </head>
@@ -409,6 +532,18 @@
             </div>
         </div>
     </nav>
+
+    <div id="welcomeModal" class="welcome-modal-overlay" role="dialog" aria-modal="true" aria-label="Welcome to CLearn">
+        <div class="welcome-modal">
+            <button class="welcome-modal-close" type="button" id="welcomeModalClose">&times;</button>
+            <h2>Welcome to CLearn</h2>
+            <p>Knowledge to another level.</p>
+            <div class="welcome-modal-actions">
+                <a href="/signup" class="btn btn-primary">Get Started</a>
+                <a href="/login" class="btn btn-secondary">Signin</a>
+            </div>
+        </div>
+    </div>
 
     <!-- FULL-WIDTH HERO SECTION -->
     <section class="hero-fullwidth">
@@ -462,7 +597,12 @@
             <p style="color: #cbd5e1; margin-bottom: 30px;">Search through our comprehensive collection of skills and faculties to discover your ideal career</p>
             <div class="universal-search-shell">
                 <div class="universal-search-input-wrap">
-                    <span class="universal-search-icon">&#128269;</span>
+                    <span class="universal-search-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <line x1="20" y1="20" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </span>
                     <input type="text" id="homeSearchInput" class="universal-search-input" placeholder="Universal search: skill, country, degree, salary, demand, university...">
                 </div>
                 <div id="searchSuggestions" class="search-suggestions"></div>
@@ -552,7 +692,7 @@
                 <div class="knowledge-hub">
                     <h4> Quick Access Resources</h4>
                     <ul>
-                        <li><a href="/categories">Explore All Career Categories</a> - Comprehensive career exploration across 10+ fields</li>
+                        <li><a href="/category">Explore All Career Categories</a> - Comprehensive career exploration across 10+ fields</li>
                         <li><a href="/topics">Browse Learning Topics</a> - Curated educational content and skill development</li>
                         <li><a href="/resources">Professional Resources</a> - Industry insights, certifications, and tools</li>
                         <li><a href="/about">About Our Platform</a> - Learn about our mission and educational approach</li>
@@ -806,6 +946,33 @@
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
             });
+        });
+
+        const welcomeModal = document.getElementById('welcomeModal');
+        const welcomeModalClose = document.getElementById('welcomeModalClose');
+        const welcomeActionButtons = document.querySelectorAll('.welcome-modal-actions a');
+        const WELCOME_SEEN_KEY = 'clearn_welcome_seen_session';
+        if (!sessionStorage.getItem(WELCOME_SEEN_KEY)) {
+            setTimeout(() => {
+                welcomeModal.classList.add('active');
+            }, 220);
+        }
+
+        function closeWelcomeModal() {
+            welcomeModal.classList.remove('active');
+            sessionStorage.setItem(WELCOME_SEEN_KEY, '1');
+        }
+
+        welcomeModalClose.addEventListener('click', closeWelcomeModal);
+        welcomeActionButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                sessionStorage.setItem(WELCOME_SEEN_KEY, '1');
+            });
+        });
+        welcomeModal.addEventListener('click', (event) => {
+            if (event.target === welcomeModal) {
+                closeWelcomeModal();
+            }
         });
 
         // Universal Home Search (MVP): Fuzzy + Synonyms + Intent + Filters + Suggestions
@@ -1082,26 +1249,47 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-};
+let firebaseAuth = null;
+let firebaseReady = false;
+let firebaseInitError = "";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+async function ensureFirebase() {
+  if (firebaseReady && firebaseAuth) {
+    return firebaseAuth;
+  }
+  if (firebaseInitError) {
+    throw new Error(firebaseInitError);
+  }
 
-window.registerUser = function(email, password) {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      sendEmailVerification(userCredential.user);
-      alert("Verification email sent!");
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
+  const response = await fetch('/api/firebase/web-config');
+  const payload = await response.json();
+  if (!response.ok || !payload.ok || !payload.config) {
+    firebaseInitError = payload.message || 'Firebase web config unavailable.';
+    throw new Error(firebaseInitError);
+  }
+
+  const app = initializeApp(payload.config);
+  firebaseAuth = getAuth(app);
+  if (payload.config.measurementId) {
+    getAnalytics(app);
+  }
+  firebaseReady = true;
+  return firebaseAuth;
+}
+
+window.registerUser = async function(email, password) {
+  try {
+    const auth = await ensureFirebase();
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    await sendEmailVerification(userCredential.user);
+    alert("Verification email sent!");
+  } catch (error) {
+    alert(error.message || "Unable to create account.");
+  }
 };
 </script>
 </body>

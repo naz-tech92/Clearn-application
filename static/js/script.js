@@ -1,4 +1,4 @@
-// CLearn JavaScript - Main Application Logic
+﻿// CLearn JavaScript - Main Application Logic
 
 
 
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupKnowledgeHub();
     setupEnlighteningFeatures();
     setupSiteLanguageTranslation();
+    setupSkillAdvantageCardStyling();
 });
 
 function setupGlobalNavbarBrandAndLanguage() {
@@ -93,7 +94,7 @@ function setupBrightnessToggle() {
     // Create brightness toggle button
     const toggleButton = document.createElement('button');
     toggleButton.className = 'brightness-toggle';
-    toggleButton.innerHTML = '☾';
+    toggleButton.innerHTML = '&#9789;';
     toggleButton.title = 'Toggle Brightness Theme';
     document.body.appendChild(toggleButton);
 
@@ -102,7 +103,7 @@ function setupBrightnessToggle() {
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
         toggleButton.classList.add('active');
-        toggleButton.innerHTML = '☀';
+        toggleButton.innerHTML = '&#9728;';
     }
 
     // Toggle theme on click
@@ -111,10 +112,10 @@ function setupBrightnessToggle() {
         this.classList.toggle('active');
 
         if (document.body.classList.contains('light-theme')) {
-            this.innerHTML = '☀';
+            this.innerHTML = '&#9728;';
             localStorage.setItem('clearn-theme', 'light');
         } else {
-            this.innerHTML = '☾';
+            this.innerHTML = '&#9789;';
             localStorage.setItem('clearn-theme', 'dark');
         }
     });
@@ -175,7 +176,7 @@ function setupAIChatToggle() {
     // Create AI chat toggle button
     const aiChatButton = document.createElement('button');
     aiChatButton.className = 'ai-chat-toggle';
-    aiChatButton.innerHTML = '💬';
+    aiChatButton.innerHTML = '&#128172;';
     aiChatButton.title = 'AI Assistant Chat';
     document.body.appendChild(aiChatButton);
 
@@ -188,7 +189,7 @@ function setupAIChatToggle() {
             <button class="ai-chat-close" title="Close Chat">&times;</button>
         </div>
         <div class="ai-chat-messages">
-            <div class="ai-message">Hello! I'm your AI assistant. How can I help you with your learning journey today?</div>
+            <div class="ai-message">Hello! I'm your AI assistant. Ask me about CLearn skills, countries, education paths, resources, and navigation.</div>
         </div>
         <div class="ai-chat-input">
             <textarea placeholder="Type your message..." rows="2"></textarea>
@@ -198,7 +199,8 @@ function setupAIChatToggle() {
     document.body.appendChild(chatPanel);
 
     // Toggle chat panel on button click
-    aiChatButton.addEventListener('click', function() {
+    aiChatButton.addEventListener('click', function(e) {
+        e.stopPropagation();
         positionChatPanelNearToggle(aiChatButton, chatPanel);
         chatPanel.classList.toggle('active');
         this.classList.toggle('active');
@@ -206,39 +208,41 @@ function setupAIChatToggle() {
 
     // Close chat panel
     const closeButton = chatPanel.querySelector('.ai-chat-close');
-    closeButton.addEventListener('click', function() {
+    closeButton.addEventListener('click', function(e) {
+        e.stopPropagation();
         chatPanel.classList.remove('active');
         aiChatButton.classList.remove('active');
     });
 
     // Handle message sending
-    const sendButton = chatPanel.querySelector('button');
+    const sendButton = chatPanel.querySelector('.ai-chat-input button');
     const textarea = chatPanel.querySelector('textarea');
     const messagesContainer = chatPanel.querySelector('.ai-chat-messages');
 
-    function sendMessage() {
+    async function sendMessage() {
         const message = textarea.value.trim();
-        if (message) {
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'user-message';
-            userMessage.textContent = message;
-            messagesContainer.appendChild(userMessage);
-
-            // Clear textarea
-            textarea.value = '';
-
-            // Simulate AI response (you can replace this with actual AI integration)
-            setTimeout(() => {
-                const aiResponse = document.createElement('div');
-                aiResponse.className = 'ai-message';
-                aiResponse.textContent = getAIResponse(message);
-                messagesContainer.appendChild(aiResponse);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 1000);
-
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        if (!message) {
+            return;
         }
+
+        const userMessage = document.createElement('div');
+        userMessage.className = 'user-message';
+        userMessage.textContent = message;
+        messagesContainer.appendChild(userMessage);
+
+        textarea.value = '';
+        sendButton.disabled = true;
+        sendButton.textContent = '...';
+
+        const aiResponseText = await requestAIResponseFromServer(message);
+        const aiResponse = document.createElement('div');
+        aiResponse.className = 'ai-message';
+        aiResponse.textContent = aiResponseText;
+        messagesContainer.appendChild(aiResponse);
+
+        sendButton.disabled = false;
+        sendButton.textContent = 'Send';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     sendButton.addEventListener('click', sendMessage);
@@ -249,6 +253,24 @@ function setupAIChatToggle() {
         }
     });
 
+    chatPanel.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!chatPanel.classList.contains('active')) {
+            return;
+        }
+        if (e.target === aiChatButton || aiChatButton.contains(e.target)) {
+            return;
+        }
+        if (chatPanel.contains(e.target)) {
+            return;
+        }
+        chatPanel.classList.remove('active');
+        aiChatButton.classList.remove('active');
+    });
+
     window.addEventListener('resize', function() {
         if (chatPanel.classList.contains('active')) {
             positionChatPanelNearToggle(aiChatButton, chatPanel);
@@ -257,20 +279,21 @@ function setupAIChatToggle() {
 }
 
 /**
- * Position chat panel above the AI toggle button.
+ * Position chat panel beside the AI toggle button.
  */
 function positionChatPanelNearToggle(toggle, panel) {
     const rect = toggle.getBoundingClientRect();
     const panelWidth = panel.offsetWidth || 300;
-    const leftPos = Math.min(
-        window.innerWidth - panelWidth - 12,
-        Math.max(12, rect.right - panelWidth)
-    );
+    const panelHeight = panel.offsetHeight || 400;
 
-    let topPos = rect.top - panel.offsetHeight - 12;
-    if (topPos < 12) {
-        topPos = Math.min(window.innerHeight - panel.offsetHeight - 12, rect.bottom + 12);
+    let leftPos = rect.left - panelWidth - 12;
+    if (leftPos < 12) {
+        leftPos = rect.right + 12;
     }
+    leftPos = Math.min(leftPos, window.innerWidth - panelWidth - 12);
+
+    let topPos = rect.top + (rect.height / 2) - (panelHeight / 2);
+    topPos = Math.max(12, Math.min(topPos, window.innerHeight - panelHeight - 12));
 
     panel.style.left = leftPos + 'px';
     panel.style.right = 'auto';
@@ -278,6 +301,22 @@ function positionChatPanelNearToggle(toggle, panel) {
     panel.style.transform = 'none';
 }
 
+async function requestAIResponseFromServer(message) {
+    try {
+        const response = await fetch('/api/ai-assist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) {
+            throw new Error(payload.message || 'AI service unavailable');
+        }
+        return payload.reply || getAIResponse(message);
+    } catch (error) {
+        return getAIResponse(message);
+    }
+}
 /**
  * Make floating control elements draggable and persist their position.
  */
@@ -467,6 +506,43 @@ function setupSiteLanguageTranslation() {
         localStorage.setItem('clearn-language', language);
         document.documentElement.lang = language;
         applySiteLanguage(language);
+    });
+}
+
+function setupSkillAdvantageCardStyling() {
+    const sectionHeadings = document.querySelectorAll('section h2');
+    sectionHeadings.forEach((heading) => {
+        const label = (heading.textContent || '').toLowerCase();
+        if (!label.includes('advantages & disadvantages')) {
+            return;
+        }
+
+        const section = heading.closest('section');
+        if (!section) {
+            return;
+        }
+
+        const grid = section.querySelector('div[style*="grid-template-columns"]');
+        if (!grid) {
+            return;
+        }
+        grid.classList.add('skill-ad-grid');
+
+        const cards = Array.from(grid.children).filter((el) => el.tagName === 'DIV');
+        cards.forEach((card, index) => {
+            card.classList.add('skill-ad-card');
+            card.classList.add(index === 0 ? 'skill-adv-card' : 'skill-disadv-card');
+
+            const title = card.querySelector('h3');
+            if (title) {
+                title.classList.add('skill-ad-title');
+                title.classList.add(index === 0 ? 'skill-adv-title' : 'skill-disadv-title');
+            }
+
+            card.querySelectorAll('p, li').forEach((node) => {
+                node.classList.add('skill-ad-text');
+            });
+        });
     });
 }
 
@@ -661,3 +737,4 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+

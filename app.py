@@ -1,11 +1,12 @@
-from flask import Flask, render_template, jsonify, request, session
+﻿from flask import Flask, render_template, jsonify, request, session
 import json
 import os
-import random
 import re
 import smtplib
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from email.mime.text import MIMEText
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 from werkzeug.security import generate_password_hash, check_password_hash
 from firebase_config import create_firebase_user, verify_firebase_token
 
@@ -14,6 +15,16 @@ app.config['JSON_SORT_KEYS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
+
+FIREBASE_WEB_CONFIG = {
+    "apiKey": "AIzaSyClwTmYQaeHZv79EklocgR7xuBd1aixfU8",
+    "authDomain": "clearn-application.firebaseapp.com",
+    "projectId": "clearn-application",
+    "storageBucket": "clearn-application.firebasestorage.app",
+    "messagingSenderId": "577600506522",
+    "appId": "1:577600506522:web:5ee9e7f12f999a7a51ad23",
+    "measurementId": "G-6ZMW6FYQ7M",
+}
 
 @app.route("/protected", methods=["POST"])
 def protected():
@@ -38,19 +49,11 @@ def protected():
 
 @app.route("/api/firebase/web-config")
 def firebase_web_config():
-    """Expose Firebase Web SDK config from environment variables."""
-    config = {
-        "apiKey": get_config_var("FIREBASE_WEB_API_KEY", "FIREBASE_API_KEY"),
-        "authDomain": get_config_var("FIREBASE_WEB_AUTH_DOMAIN", "FIREBASE_AUTH_DOMAIN"),
-        "projectId": get_config_var("FIREBASE_WEB_PROJECT_ID", "FIREBASE_PROJECT_ID"),
-        "storageBucket": get_config_var("FIREBASE_WEB_STORAGE_BUCKET", "FIREBASE_STORAGE_BUCKET"),
-        "messagingSenderId": get_config_var("FIREBASE_WEB_MESSAGING_SENDER_ID", "FIREBASE_MESSAGING_SENDER_ID"),
-        "appId": get_config_var("FIREBASE_WEB_APP_ID", "FIREBASE_APP_ID"),
-    }
-    missing = [k for k, v in config.items() if not v and k in ("apiKey", "authDomain", "projectId", "appId")]
+    """Expose fixed Firebase Web SDK config for clearn-application."""
+    missing = [k for k, v in FIREBASE_WEB_CONFIG.items() if not v and k in ("apiKey", "authDomain", "projectId", "appId")]
     if missing:
         return jsonify({"ok": False, "message": f"Missing Firebase web config values: {', '.join(missing)}"}), 500
-    return jsonify({"ok": True, "config": config})
+    return jsonify({"ok": True, "config": FIREBASE_WEB_CONFIG})
 
 
 @app.route("/api/auth/firebase-session", methods=["POST"])
@@ -75,9 +78,6 @@ def firebase_session_login():
     if not email:
         return jsonify({"ok": False, "message": "Firebase account has no email."}), 400
 
-    if not decoded.get("email_verified"):
-        return jsonify({"ok": False, "message": "Email is not verified yet. Please verify your email first."}), 403
-
     profile = USERS.get(email, {})
     session["user_email"] = email
     session["user_fullname"] = profile.get("fullname") or decoded.get("name") or email.split("@")[0]
@@ -91,15 +91,12 @@ def firebase_session_login():
 
 # In-memory stores for local development.
 # Replace with a database in production.
-PENDING_SIGNUPS = {}
 USERS = {}
 # Explicitly clear runtime signup data on startup for a clean session.
-PENDING_SIGNUPS.clear()
 USERS.clear()
 
 FULL_NAME_REGEX = re.compile(r"^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$")
 EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
-OTP_REGEX = re.compile(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6}$")
 PHONE_REGEX = re.compile(r"^\+?[0-9]{7,15}$")
 
 WINDOWS_USER_ENV = None
@@ -424,15 +421,97 @@ def build_search_index():
     return records
 
 
-def generate_otp_code(length=6):
-    """Generate an alphanumeric OTP with at least one letter and one digit."""
-    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    digits = "0123456789"
-    alpha_num = letters + digits
-    chars = [random.choice(letters), random.choice(digits)]
-    chars.extend(random.choice(alpha_num) for _ in range(length - 2))
-    random.shuffle(chars)
-    return "".join(chars)
+def get_site_grounded_ai_reply(message):
+    """Fallback assistant response constrained to CLearn site capabilities/content."""
+    lower_message = (message or "").strip().lower()
+
+    if re.search(r"(category|categories|skill|skills|career path|choose)", lower_message):
+        return (
+            "Start with /category to compare Technology, Healthcare, and Business tracks. "
+            "Open a skill page to view overview, education pathways, careers, global opportunities, and references."
+        )
+
+    if re.search(r"(country|cameroon|usa|canada|germany|uk|singapore|australia|uae|abroad)", lower_message):
+        return (
+            "Use each skill page's Global Opportunities section and country detail pages "
+            "to compare demand, required education, and pathway differences by country."
+        )
+
+    if re.search(r"(resource|book|course|certification|training)", lower_message):
+        return (
+            "Check /resources for tools, books, and references, then open the selected skill page's "
+            "References & Learning Path section for curated next steps."
+        )
+
+    if re.search(r"(school|university|college|where to study)", lower_message):
+        return (
+            "Open a skill > country page to review recommended schools and institution details. "
+            "You can compare countries first from /category before choosing where to study."
+        )
+
+    if re.search(r"(new|beginner|where do i start|how to start|how do i use)", lower_message):
+        return (
+            "Quick path: 1) /category 2) pick a skill 3) read overview and education section "
+            "4) compare countries 5) use /resources for tools and references."
+        )
+
+    return (
+        "I can help using CLearn content. Ask about skills, countries, education levels, resources, "
+        "or how to navigate pages like /category, /resources, /topics, and skill pages."
+    )
+
+
+def call_external_ai_assistant(message):
+    """
+    Call configurable chat-completions API.
+    Expected response shape: {'choices': [{'message': {'content': '...'}}]}.
+    """
+    api_key = get_config_var("REAL_API_KEY", "AI_ASSIST_API_KEY", "OPENAI_API_KEY")
+    if not api_key:
+        return None
+
+    endpoint = get_config_var("AI_ASSIST_API_URL") or "https://api.openai.com/v1/chat/completions"
+    model = get_config_var("AI_ASSIST_MODEL") or "gpt-4o-mini"
+    timeout_seconds = int(get_config_var("AI_ASSIST_TIMEOUT_SECONDS") or "20")
+
+    system_prompt = (
+        "You are CLearn AI assistant. Answer using CLearn site scope first: categories, skills, country comparison, "
+        "education pathways, resources, and navigation. Keep responses concise, factual, and user-oriented. "
+        "If unsure, suggest where in CLearn to check."
+    )
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": message},
+        ],
+        "temperature": 0.3,
+        "max_tokens": 350,
+    }
+    body = json.dumps(payload).encode("utf-8")
+
+    req = Request(
+        endpoint,
+        data=body,
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}",
+        },
+        method="POST",
+    )
+
+    try:
+        with urlopen(req, timeout=timeout_seconds) as response:
+            raw = response.read().decode("utf-8")
+        parsed = json.loads(raw)
+        return (
+            parsed.get("choices", [{}])[0]
+            .get("message", {})
+            .get("content", "")
+            .strip()
+        )
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, KeyError, IndexError):
+        return None
 
 
 def send_email(to_email, subject, body):
@@ -465,11 +544,6 @@ def send_email(to_email, subject, body):
         return True, None
     except Exception as exc:
         return False, f"Failed to send email: {exc}"
-
-
-def allow_dev_otp_fallback():
-    """Allow OTP flow without SMTP for local development."""
-    return (get_config_var("ALLOW_DEV_OTP_FALLBACK") or "false").lower() == "true"
 
 
 def validate_signup_payload(
@@ -510,8 +584,7 @@ def validate_signup_payload(
 
 def find_duplicate_signup_field(fullname, email, phone_number, password):
     """
-    Enforce uniqueness for email, phone, full name, and password
-    across existing users and pending signups.
+    Enforce uniqueness for email, phone, full name, and password.
     """
     name_key = fullname.strip().lower()
     email_key = email.strip().lower()
@@ -528,19 +601,6 @@ def find_duplicate_signup_field(fullname, email, phone_number, password):
         if existing_name and existing_name == name_key:
             return "This full name is already in use."
         if check_password_hash(user.get("password_hash", ""), password):
-            return "This password is already in use. Please choose a different password."
-
-    for pending_email, pending in PENDING_SIGNUPS.items():
-        pending_name = (pending.get("fullname") or "").strip().lower()
-        pending_phone = normalize_phone_number(pending.get("phone_number") or "")
-
-        if pending_email == email_key:
-            return "This email already has a pending signup. Verify OTP or use another email."
-        if pending_phone and pending_phone == phone_key:
-            return "This phone number already has a pending signup."
-        if pending_name and pending_name == name_key:
-            return "This full name already has a pending signup."
-        if check_password_hash(pending.get("password_hash", ""), password):
             return "This password is already in use. Please choose a different password."
 
     return None
@@ -680,15 +740,9 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/verify-otp")
-def verify_otp():
-    """OTP verification page"""
-    return render_template("otp_verification.html")
-
-
-@app.route("/api/signup/request-otp", methods=["POST"])
-def request_signup_otp():
-    """Validate signup payload, generate OTP, and send it via email."""
+@app.route("/api/signup", methods=["POST"])
+def create_signup():
+    """Create account directly and register in Firebase Authentication."""
     data = request.get_json(silent=True) or {}
     fullname = (data.get("fullname") or "").strip()
     email = (data.get("email") or "").strip().lower()
@@ -716,126 +770,38 @@ def request_signup_otp():
     if duplicate_error:
         return jsonify({"ok": False, "message": duplicate_error}), 409
 
-    otp_code = generate_otp_code(6)
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=10)
-    PENDING_SIGNUPS[email] = {
-        "fullname": fullname,
-        "raw_password": password,
-        "password_hash": generate_password_hash(password),
-        "present_skill_career": present_skill,
-        "school": school,
-        "country": country,
-        "phone_number": phone_number,
-        "otp_code": otp_code,
-        "expires_at": expires_at,
-    }
-
-    body = (
-        f"Hello {fullname},\n\n"
-        f"Your CLearn OTP verification code is: {otp_code}\n"
-        "This code will expire in 10 minutes.\n\n"
-        "If you did not request this, ignore this email."
-    )
-    sent, error = send_email(email, "CLearn OTP Verification Code", body)
-    if not sent:
-        return jsonify(
-            {
-                "ok": True,
-                "message": "Email service is unavailable. Use the displayed OTP fallback to continue signup.",
-                "devOtp": otp_code,
-                "delivery": "onscreen_fallback",
-                "emailError": error,
-            }
-        )
-
-    return jsonify({"ok": True, "message": "OTP sent to your email."})
-
-
-@app.route("/api/signup/resend-otp", methods=["POST"])
-def resend_signup_otp():
-    """Resend OTP to an existing pending signup email."""
-    data = request.get_json(silent=True) or {}
-    email = (data.get("email") or "").strip().lower()
-
-    if not EMAIL_REGEX.match(email):
-        return jsonify({"ok": False, "message": "Invalid email address."}), 400
-
-    pending = PENDING_SIGNUPS.get(email)
-    if not pending:
-        return jsonify({"ok": False, "message": "No pending signup found. Submit signup form again."}), 404
-
-    otp_code = generate_otp_code(6)
-    pending["otp_code"] = otp_code
-    pending["expires_at"] = datetime.now(timezone.utc) + timedelta(minutes=10)
-
-    body = (
-        f"Hello {pending['fullname']},\n\n"
-        f"Your new CLearn OTP verification code is: {otp_code}\n"
-        "This code will expire in 10 minutes.\n\n"
-        "If you did not request this, ignore this email."
-    )
-    sent, error = send_email(email, "CLearn OTP Verification Code (Resent)", body)
-    if not sent:
-        return jsonify(
-            {
-                "ok": True,
-                "message": "Email service is unavailable. Use the displayed OTP fallback.",
-                "devOtp": otp_code,
-                "delivery": "onscreen_fallback",
-                "emailError": error,
-            }
-        )
-
-    return jsonify({"ok": True, "message": "A new OTP has been sent to your registered email."})
-
-
-@app.route("/api/signup/verify-otp", methods=["POST"])
-def verify_signup_otp():
-    """Verify OTP and complete account creation."""
-    data = request.get_json(silent=True) or {}
-    email = (data.get("email") or "").strip().lower()
-    otp_code = (data.get("otp") or "").strip().upper()
-
-    if not EMAIL_REGEX.match(email):
-        return jsonify({"ok": False, "message": "Invalid email address."}), 400
-    if not OTP_REGEX.match(otp_code):
-        return jsonify({"ok": False, "message": "OTP must be 6 letters/numbers with both types."}), 400
-
-    pending = PENDING_SIGNUPS.get(email)
-    if not pending:
-        return jsonify({"ok": False, "message": "No pending signup found. Request a new OTP."}), 404
-
-    if datetime.now(timezone.utc) > pending["expires_at"]:
-        PENDING_SIGNUPS.pop(email, None)
-        return jsonify({"ok": False, "message": "OTP expired. Request a new OTP."}), 400
-
-    if otp_code != pending["otp_code"]:
-        return jsonify({"ok": False, "message": "Invalid OTP code."}), 400
-
-    firebase_result = create_firebase_user(
-        email,
-        pending.get("raw_password", ""),
-        pending["fullname"],
-        pending["phone_number"],
-    )
+    firebase_result = create_firebase_user(email, password, fullname, phone_number)
     if not firebase_result.get("ok"):
         message = firebase_result.get("error") or "Unable to create Firebase account."
         status = 409 if "already exists" in message.lower() else 500
         return jsonify({"ok": False, "message": message}), status
 
     USERS[email] = {
-        "fullname": pending["fullname"],
-        "password_hash": pending["password_hash"],
-        "present_skill_career": pending["present_skill_career"],
-        "school": pending["school"],
-        "country": pending["country"],
-        "phone_number": pending["phone_number"],
+        "fullname": fullname,
+        "password_hash": generate_password_hash(password),
+        "present_skill_career": present_skill,
+        "school": school,
+        "country": country,
+        "phone_number": phone_number,
         "firebase_uid": firebase_result.get("uid"),
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
-    PENDING_SIGNUPS.pop(email, None)
+    return jsonify({"ok": True, "message": "Account created successfully. You can now log in.", "redirectTo": "/login"})
 
-    return jsonify({"ok": True, "message": "Account verified and created successfully in Firebase Authentication."})
+
+@app.route("/api/ai-assist", methods=["POST"])
+def ai_assist():
+    """AI assistant endpoint with external-provider support and site-grounded fallback."""
+    data = request.get_json(silent=True) or {}
+    message = (data.get("message") or "").strip()
+    if not message:
+        return jsonify({"ok": False, "message": "Message is required."}), 400
+
+    external_reply = call_external_ai_assistant(message)
+    if external_reply:
+        return jsonify({"ok": True, "reply": external_reply, "source": "external_api"})
+
+    return jsonify({"ok": True, "reply": get_site_grounded_ai_reply(message), "source": "site_fallback"})
 
 
 @app.route("/api/login", methods=["POST"])
@@ -865,7 +831,6 @@ def api_login():
 @app.route("/api/admin/clear-signup-data", methods=["POST"])
 def clear_signup_data():
     """Clear all in-memory signup data stores."""
-    PENDING_SIGNUPS.clear()
     USERS.clear()
     session.pop("user_email", None)
     session.pop("user_fullname", None)
