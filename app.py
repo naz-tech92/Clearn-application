@@ -269,6 +269,15 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "location": "Yaounde, Centre Region, Cameroon",
                 "website": "https://www.uy1.uninet.cm/",
             },
+            {
+                "name": "National Advanced School of Engineering Yaounde (ENSPY)",
+                "brief_details": "Top engineering school with strong computing, networks, and systems programs.",
+                "year_founded": "1961",
+                "founded_by": "Government of Cameroon",
+                "goals_focus": "Engineering excellence, digital infrastructure skills, and applied innovation.",
+                "location": "Yaounde, Centre Region, Cameroon",
+                "website": "https://polytechnique.cm/",
+            },
         ],
         "health": [
             {
@@ -289,6 +298,24 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "location": "Buea, South West Region, Cameroon",
                 "website": "https://www.ubuea.cm/",
             },
+            {
+                "name": "St Louise University Institute of Health and Biomedical Sciences",
+                "brief_details": "Private health-focused institute in Cameroon supporting nursing and biomedical training.",
+                "year_founded": "2000s",
+                "founded_by": "Private educational promoters in Cameroon",
+                "goals_focus": "Professional healthcare training, practical clinical skills, and community service.",
+                "location": "Douala, Littoral Region, Cameroon",
+                "website": "https://stlouiseuniversityinstitute.com/",
+            },
+            {
+                "name": "Universite des Montagnes",
+                "brief_details": "Recognized medical and health sciences institution with strong practical training.",
+                "year_founded": "2000",
+                "founded_by": "Academic and medical founders in Cameroon",
+                "goals_focus": "Medical education, nursing pathways, and health service impact.",
+                "location": "Bangangte, West Region, Cameroon",
+                "website": "https://udm.aed-cm.org/",
+            },
         ],
         "business": [
             {
@@ -308,6 +335,15 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "goals_focus": "Ethical leadership, managerial excellence, and responsible enterprise.",
                 "location": "Yaounde, Centre Region, Cameroon",
                 "website": "https://www.ucac-icy.net/",
+            },
+            {
+                "name": "Pan African Institute for Development - West Africa (PAID-WA)",
+                "brief_details": "Professional institute with business, management, and development-focused programs.",
+                "year_founded": "1965",
+                "founded_by": "Pan-African educational development initiative",
+                "goals_focus": "Management capacity, entrepreneurship, and practical business leadership.",
+                "location": "Buea, South West Region, Cameroon",
+                "website": "https://www.paidafrica.org/",
             },
         ],
     },

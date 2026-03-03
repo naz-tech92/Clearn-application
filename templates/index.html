@@ -549,19 +549,19 @@
     <section class="hero-fullwidth">
         <div class="carousel">
             <div class="carousel-container">
-                <div class="carousel-slide active" style="background-image: url('{{ url_for('static', filename='images/skills/tech-software-engineering.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-cybersecurity.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-data-science.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-cloud-computing.png') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-ai-ml.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-networking.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/tech-devops.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/health-nursing.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/health-public-health.jpeg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/health-med-lab.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/business-accounting.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/business-digital-marketing.jpg') }}');"></div>
-                <div class="carousel-slide" style="background-image: url('{{ url_for('static', filename='images/skills/business-international-business.jpg') }}');"></div>
+                <div class="carousel-slide active" data-bg="{{ url_for('static', filename='images/skills/tech-software-engineering.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-cybersecurity.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-data-science.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-cloud-computing.png') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-ai-ml.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-networking.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-devops.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-nursing.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-public-health.jpeg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-med-lab.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-accounting.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-digital-marketing.jpg') }}"></div>
+                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-international-business.jpg') }}"></div>
                 
             </div>
 
@@ -883,6 +883,12 @@
     </script>
     <script>
         let currentSlideIndex = 0;
+        document.querySelectorAll('.carousel-slide[data-bg]').forEach((slide) => {
+            const bg = slide.getAttribute('data-bg');
+            if (bg) {
+                slide.style.backgroundImage = `url('${bg}')`;
+            }
+        });
         initializeCarouselDots();
 
         function changeSlide(n) {

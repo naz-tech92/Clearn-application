@@ -46,7 +46,7 @@
             display: inline-block;
             margin-top: 10px;
             margin-right: 10px;
-            color: #ffffff;
+            color: #ffffff !important;
             background: #1d4ed8;
             border: 1px solid #1d4ed8;
             border-radius: 8px;
@@ -92,6 +92,11 @@
         body.light-theme .school-recommend-card p {
             color: #334155 !important;
             text-shadow: none !important;
+        }
+
+        body.light-theme .school-recommend-card a,
+        body.light-theme .school-map-btn {
+            color: #ffffff !important;
         }
 
         body.light-theme .school-recommend-card:hover {
@@ -302,7 +307,8 @@
                                 <button
                                     class="school-map-btn"
                                     type="button"
-                                    onclick='openSchoolMap({{ school.name|tojson }}, {{ school.location|tojson }})'>
+                                    data-school-name="{{ school.name|e }}"
+                                    data-school-location="{{ school.location|e }}">
                                     View on Map
                                 </button>
                                 <a href="{{ school.website }}" target="_blank" rel="noopener noreferrer">Visit official website</a>
@@ -448,6 +454,14 @@
 
         window.openSchoolMap = openSchoolMap;
         window.closeSchoolMap = closeSchoolMap;
+
+        document.querySelectorAll('.school-map-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const schoolName = btn.getAttribute('data-school-name') || '';
+                const schoolLocation = btn.getAttribute('data-school-location') || '';
+                openSchoolMap(schoolName, schoolLocation);
+            });
+        });
     </script>
 </body>
 </html>
