@@ -1,6 +1,8 @@
 import json
 import os
 from typing import Optional
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 try:
     import firebase_admin
@@ -73,8 +75,6 @@ def verify_firebase_token(id_token):
     """
     if not id_token:
         return None
-    if not _init_firebase():
-        return None
 
     token = str(id_token).strip()
     if token.lower().startswith("bearer "):
@@ -82,19 +82,66 @@ def verify_firebase_token(id_token):
     if not token:
         return None
 
+    if _init_firebase():
+        try:
+            decoded = auth.verify_id_token(token)
+            provider = (
+                decoded.get("firebase", {}).get("sign_in_provider")
+                if isinstance(decoded.get("firebase"), dict)
+                else ""
+            )
+            return {
+                "uid": decoded.get("uid"),
+                "email": decoded.get("email"),
+                "name": decoded.get("name") or "",
+                "email_verified": bool(decoded.get("email_verified", False)),
+                "provider": provider or "",
+            }
+        except Exception:
+            pass
+
+    return _verify_token_via_rest(token)
+
+
+def _verify_token_via_rest(token):
+    api_key = (
+        (os.environ.get("FIREBASE_WEB_API_KEY") or "").strip()
+        or "AIzaSyDMw-DDATn4Iq2J1s7Ya9k-NPW7qMCHtw8"
+    )
+    if not api_key:
+        return None
+    endpoint = f"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={api_key}"
+    payload = json.dumps({"idToken": token}).encode("utf-8")
+    req = Request(
+        endpoint,
+        data=payload,
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
     try:
-        decoded = auth.verify_id_token(token)
+        with urlopen(req, timeout=12) as response:
+            raw = response.read().decode("utf-8")
+        parsed = json.loads(raw)
+        users = parsed.get("users") or []
+        if not users:
+            return None
+        user = users[0]
+        provider = ""
+        provider_info = user.get("providerUserInfo") or []
+        if provider_info and isinstance(provider_info[0], dict):
+            provider = provider_info[0].get("providerId") or ""
         return {
-            "uid": decoded.get("uid"),
-            "email": decoded.get("email"),
-            "name": decoded.get("name") or "",
-            "email_verified": bool(decoded.get("email_verified", False)),
+            "uid": user.get("localId"),
+            "email": user.get("email"),
+            "name": user.get("displayName") or "",
+            "email_verified": bool(user.get("emailVerified", False)),
+            "provider": provider or "password",
         }
-    except Exception:
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, KeyError, IndexError):
         return None
 
 
-def create_firebase_user(email, password, full_name, phone_number):
+def create_firebase_user(email, password, full_name, phone_number, disabled=False):
     """
     Create user using Firebase Admin SDK.
     """
@@ -110,6 +157,7 @@ def create_firebase_user(email, password, full_name, phone_number):
             "email": email,
             "password": password,
             "display_name": full_name or None,
+            "disabled": bool(disabled),
         }
         if clean_phone:
             kwargs["phone_number"] = clean_phone
@@ -134,3 +182,27 @@ def create_firebase_user(email, password, full_name, phone_number):
         if "invalid phone number" in lowered:
             return {"ok": False, "error": "Invalid phone number format for Firebase.", "uid": None}
         return {"ok": False, "error": f"Firebase signup failed: {msg}", "uid": None}
+
+
+def update_firebase_user(uid, **kwargs):
+    if not uid:
+        return {"ok": False, "error": "Missing Firebase uid."}
+    if not _init_firebase():
+        return {"ok": False, "error": _FIREBASE_INIT_ERROR or "Firebase not initialized."}
+    try:
+        auth.update_user(uid, **kwargs)
+        return {"ok": True}
+    except Exception as exc:
+        return {"ok": False, "error": f"Firebase update failed: {exc}"}
+
+
+def delete_firebase_user(uid):
+    if not uid:
+        return {"ok": True}
+    if not _init_firebase():
+        return {"ok": False, "error": _FIREBASE_INIT_ERROR or "Firebase not initialized."}
+    try:
+        auth.delete_user(uid)
+        return {"ok": True}
+    except Exception as exc:
+        return {"ok": False, "error": f"Firebase delete failed: {exc}"}

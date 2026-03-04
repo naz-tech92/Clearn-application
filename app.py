@@ -1,21 +1,258 @@
-﻿from flask import Flask, render_template, jsonify, request, session
+from flask import Flask, render_template, jsonify, request, session, g, send_from_directory
 import json
 import os
 import re
+import html
+import base64
+import secrets
 import smtplib
+import sqlite3
 import threading
 from datetime import datetime, timezone, timedelta
 from email.mime.text import MIMEText
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from werkzeug.security import generate_password_hash, check_password_hash
-from firebase_config import create_firebase_user, verify_firebase_token
+from firebase_config import (
+    create_firebase_user,
+    delete_firebase_user,
+    update_firebase_user,
+    verify_firebase_token,
+)
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+DATABASE_PATH = os.path.join(DATA_DIR, "cyberlearn.db")
+
+
+def _utc_now_iso():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def init_database():
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with sqlite3.connect(DATABASE_PATH) as conn:
+        conn.executescript(
+            """
+            PRAGMA foreign_keys = ON;
+
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                fullname TEXT NOT NULL,
+                fullname_normalized TEXT NOT NULL UNIQUE,
+                email TEXT NOT NULL UNIQUE,
+                password_hash TEXT NOT NULL,
+                present_skill_career TEXT NOT NULL,
+                school TEXT NOT NULL,
+                country TEXT NOT NULL,
+                phone_number TEXT NOT NULL UNIQUE,
+                firebase_uid TEXT,
+                auth_provider TEXT NOT NULL DEFAULT 'password',
+                email_verified INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS login_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                email TEXT NOT NULL,
+                ip_address TEXT,
+                user_agent TEXT,
+                provider TEXT NOT NULL DEFAULT 'password',
+                status TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                email TEXT,
+                channel TEXT NOT NULL,
+                user_message TEXT NOT NULL,
+                assistant_reply TEXT,
+                source TEXT,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS pending_verifications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL UNIQUE,
+                fullname TEXT NOT NULL,
+                present_skill_career TEXT NOT NULL,
+                school TEXT NOT NULL,
+                country TEXT NOT NULL,
+                phone_number TEXT NOT NULL,
+                password_hash TEXT NOT NULL,
+                firebase_uid TEXT NOT NULL,
+                code_hash TEXT NOT NULL,
+                attempts INTEGER NOT NULL DEFAULT 0,
+                expires_at TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
+            """
+        )
+        _ensure_column(conn, "users", "auth_provider", "TEXT NOT NULL DEFAULT 'password'")
+        _ensure_column(conn, "users", "email_verified", "INTEGER NOT NULL DEFAULT 0")
+        _ensure_column(conn, "login_events", "provider", "TEXT NOT NULL DEFAULT 'password'")
+        conn.commit()
+
+
+def _ensure_column(conn, table_name, column_name, definition):
+    existing = conn.execute(f"PRAGMA table_info({table_name})").fetchall()
+    if any(row[1] == column_name for row in existing):
+        return
+    conn.execute(f"ALTER TABLE {table_name} ADD COLUMN {column_name} {definition}")
+
+
+def get_db():
+    db = getattr(g, "_db_conn", None)
+    if db is None:
+        db = sqlite3.connect(DATABASE_PATH)
+        db.row_factory = sqlite3.Row
+        db.execute("PRAGMA foreign_keys = ON")
+        g._db_conn = db
+    return db
+
+
+@app.teardown_appcontext
+def close_db_connection(error):
+    db = getattr(g, "_db_conn", None)
+    if db is not None:
+        db.close()
+
+
+def get_user_by_email(email):
+    return get_db().execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+
+
+def log_login_event(email, status, user_id=None, provider="password"):
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO login_events (user_id, email, ip_address, user_agent, provider, status, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            user_id,
+            email,
+            request.headers.get("X-Forwarded-For", request.remote_addr),
+            (request.headers.get("User-Agent") or "")[:350],
+            (provider or "password")[:60],
+            status,
+            _utc_now_iso(),
+        ),
+    )
+    db.commit()
+
+
+def log_message(email, user_message, assistant_reply, source):
+    db = get_db()
+    user = get_user_by_email(email) if email else None
+    db.execute(
+        """
+        INSERT INTO messages (user_id, email, channel, user_message, assistant_reply, source, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            user["id"] if user else None,
+            email or None,
+            "ai_assist",
+            user_message,
+            assistant_reply,
+            source,
+            _utc_now_iso(),
+        ),
+    )
+    db.commit()
+
+
+def _generate_verification_code():
+    return f"{secrets.randbelow(1000000):06d}"
+
+
+def _verification_expiry_iso(minutes=15):
+    return (datetime.now(timezone.utc) + timedelta(minutes=minutes)).isoformat()
+
+
+def _store_pending_verification(
+    email,
+    fullname,
+    present_skill,
+    school,
+    country,
+    phone_number,
+    password,
+    firebase_uid,
+    code,
+):
+    db = get_db()
+    db.execute(
+        """
+        INSERT INTO pending_verifications (
+            email, fullname, present_skill_career, school, country,
+            phone_number, password_hash, firebase_uid, code_hash, attempts, expires_at, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)
+        ON CONFLICT(email) DO UPDATE SET
+            fullname=excluded.fullname,
+            present_skill_career=excluded.present_skill_career,
+            school=excluded.school,
+            country=excluded.country,
+            phone_number=excluded.phone_number,
+            password_hash=excluded.password_hash,
+            firebase_uid=excluded.firebase_uid,
+            code_hash=excluded.code_hash,
+            attempts=0,
+            expires_at=excluded.expires_at,
+            created_at=excluded.created_at
+        """,
+        (
+            email,
+            fullname,
+            present_skill,
+            school,
+            country,
+            phone_number,
+            generate_password_hash(password),
+            firebase_uid,
+            generate_password_hash(code),
+            _verification_expiry_iso(),
+            _utc_now_iso(),
+        ),
+    )
+    db.commit()
+
+
+def _get_pending_verification(email):
+    return get_db().execute(
+        "SELECT * FROM pending_verifications WHERE email = ?",
+        ((email or "").strip().lower(),),
+    ).fetchone()
+
+
+def _delete_pending_verification(email):
+    get_db().execute("DELETE FROM pending_verifications WHERE email = ?", ((email or "").strip().lower(),))
+    get_db().commit()
+
+
+def _refresh_pending_verification_code(email, code):
+    db = get_db()
+    db.execute(
+        """
+        UPDATE pending_verifications
+        SET code_hash = ?, attempts = 0, expires_at = ?, created_at = ?
+        WHERE email = ?
+        """,
+        (generate_password_hash(code), _verification_expiry_iso(), _utc_now_iso(), (email or "").strip().lower()),
+    )
+    db.commit()
 
 def _local_firebase_project_id():
     env_project_id = (os.environ.get("FIREBASE_WEB_PROJECT_ID") or os.environ.get("FIREBASE_PROJECT_ID") or "").strip()
@@ -143,9 +380,19 @@ def firebase_session_login():
     if not email:
         return jsonify({"ok": False, "message": "Firebase account has no email."}), 400
 
-    profile = USERS.get(email, {})
+    provider = (decoded.get("provider") or "password").strip() or "password"
+    if provider == "password" and not decoded.get("email_verified"):
+        log_login_event(email, "failed_unverified_email", provider=provider)
+        return jsonify({"ok": False, "message": "Email not verified. Complete email verification first."}), 403
+    profile = get_user_by_email(email)
     session["user_email"] = email
-    session["user_fullname"] = profile.get("fullname") or decoded.get("name") or email.split("@")[0]
+    session["user_fullname"] = (
+        (profile["fullname"] if profile else None) or decoded.get("name") or email.split("@")[0]
+    )
+    if profile:
+        log_login_event(email, "success", profile["id"], provider=provider)
+    else:
+        log_login_event(email, "success_unlinked_profile", None, provider=provider)
     return jsonify({"ok": True, "message": f"Welcome back, {session['user_fullname']}.", "redirectTo": "/"})
 
 
@@ -153,12 +400,6 @@ def firebase_session_login():
 
 
     
-
-# In-memory stores for local development.
-# Replace with a database in production.
-USERS = {}
-# Explicitly clear runtime signup data on startup for a clean session.
-USERS.clear()
 
 FULL_NAME_REGEX = re.compile(r"^[A-Z][A-Za-z'-]*(\s+[A-Z][A-Za-z'-]*)+$")
 EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
@@ -215,6 +456,9 @@ def get_config_var(*names):
         if value and str(value).strip():
             return str(value).strip()
     return None
+
+
+init_database()
 
 
 def normalize_phone_number(value):
@@ -576,6 +820,12 @@ def get_site_grounded_ai_reply(message):
     """Fallback assistant response constrained to CLearn site capabilities/content."""
     lower_message = (message or "").strip().lower()
 
+    if re.search(r"(draw|generate image|make image|create image|illustration|poster|logo)", lower_message):
+        return (
+            "I can generate a basic preview image for your idea in this chat. "
+            "Tell me the style and topic, for example: 'generate image for cybersecurity roadmap'."
+        )
+
     if re.search(r"(category|categories|skill|skills|career path|choose)", lower_message):
         return (
             "Start with /category to compare Technology, Healthcare, and Business tracks. "
@@ -606,10 +856,51 @@ def get_site_grounded_ai_reply(message):
             "4) compare countries 5) use /resources for tools and references."
         )
 
+    if re.search(r"(visa|immigration|work permit|relocate|abroad)", lower_message):
+        return (
+            "Use country pages to compare pathways and demand by location, then validate official immigration sites. "
+            "I can help you structure a country-by-country checklist."
+        )
+
+    if re.search(r"(cv|resume|interview|job application|cover letter)", lower_message):
+        return (
+            "I can help you draft a beginner CV and interview prep plan based on your selected skill. "
+            "Share your target role and country."
+        )
+
     return (
         "I can help using CLearn content. Ask about skills, countries, education levels, resources, "
         "or how to navigate pages like /category, /resources, /topics, and skill pages."
     )
+
+
+def _should_generate_basic_image(message):
+    text = (message or "").strip().lower()
+    return bool(re.search(r"(draw|generate image|make image|create image|illustration|poster|logo)", text))
+
+
+def _build_basic_image_data_url(prompt):
+    clean = re.sub(r"\s+", " ", (prompt or "").strip())[:120] or "CLearn Visual"
+    safe = html.escape(clean)
+    subtitle = html.escape("AI basic preview")
+    svg = f"""<svg xmlns='http://www.w3.org/2000/svg' width='960' height='540' viewBox='0 0 960 540'>
+<defs>
+<linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#0ea5e9'/>
+<stop offset='55%' stop-color='#22d3ee'/>
+<stop offset='100%' stop-color='#38bdf8'/>
+</linearGradient>
+</defs>
+<rect width='960' height='540' fill='url(#bg)'/>
+<circle cx='790' cy='120' r='84' fill='rgba(255,255,255,0.22)'/>
+<circle cx='180' cy='430' r='110' fill='rgba(2,132,199,0.28)'/>
+<rect x='72' y='88' rx='22' ry='22' width='816' height='364' fill='rgba(2,23,44,0.28)'/>
+<text x='100' y='180' fill='#f8fafc' font-size='28' font-family='Segoe UI, Arial, sans-serif' font-weight='700'>CLearn Concept</text>
+<text x='100' y='228' fill='#e2e8f0' font-size='22' font-family='Segoe UI, Arial, sans-serif'>{safe}</text>
+<text x='100' y='272' fill='#dbeafe' font-size='18' font-family='Segoe UI, Arial, sans-serif'>{subtitle}</text>
+</svg>"""
+    encoded = base64.b64encode(svg.encode("utf-8")).decode("ascii")
+    return f"data:image/svg+xml;base64,{encoded}"
 
 
 def call_external_ai_assistant(message):
@@ -742,17 +1033,17 @@ def find_duplicate_signup_field(fullname, email, phone_number, password):
     email_key = email.strip().lower()
     phone_key = normalize_phone_number(phone_number)
 
-    for existing_email, user in USERS.items():
-        existing_name = (user.get("fullname") or "").strip().lower()
-        existing_phone = normalize_phone_number(user.get("phone_number") or "")
+    db = get_db()
+    if db.execute("SELECT 1 FROM users WHERE email = ? LIMIT 1", (email_key,)).fetchone():
+        return "This email is already in use."
+    if db.execute("SELECT 1 FROM users WHERE phone_number = ? LIMIT 1", (phone_key,)).fetchone():
+        return "This phone number is already in use."
+    if db.execute("SELECT 1 FROM users WHERE fullname_normalized = ? LIMIT 1", (name_key,)).fetchone():
+        return "This full name is already in use."
 
-        if existing_email == email_key:
-            return "This email is already in use."
-        if existing_phone and existing_phone == phone_key:
-            return "This phone number is already in use."
-        if existing_name and existing_name == name_key:
-            return "This full name is already in use."
-        if check_password_hash(user.get("password_hash", ""), password):
+    hashes = db.execute("SELECT password_hash FROM users").fetchall()
+    for row in hashes:
+        if check_password_hash(row["password_hash"], password):
             return "This password is already in use. Please choose a different password."
 
     return None
@@ -762,6 +1053,12 @@ def find_duplicate_signup_field(fullname, email, phone_number, password):
 def home():
     """Home page"""
     return render_template("index.html")
+
+
+@app.route("/images/<path:filename>")
+def project_images(filename):
+    """Serve project image assets from the local images folder."""
+    return send_from_directory(os.path.join(BASE_DIR, "images"), filename)
 
 
 @app.route("/topics")
@@ -894,7 +1191,7 @@ def signup():
 
 @app.route("/api/signup", methods=["POST"])
 def create_signup():
-    """Create account directly and register in Firebase Authentication."""
+    """Start signup: create disabled Firebase account and send email verification code."""
     data = request.get_json(silent=True) or {}
     fullname = (data.get("fullname") or "").strip()
     email = (data.get("email") or "").strip().lower()
@@ -903,7 +1200,7 @@ def create_signup():
     present_skill = (data.get("presentSkillCareer") or "").strip()
     school = (data.get("school") or "").strip()
     country = (data.get("country") or "").strip()
-    phone_number = (data.get("phoneNumber") or "").strip()
+    phone_number = normalize_phone_number((data.get("phoneNumber") or "").strip())
 
     is_valid, validation_error = validate_signup_payload(
         fullname,
@@ -918,27 +1215,163 @@ def create_signup():
     if not is_valid:
         return jsonify({"ok": False, "message": validation_error}), 400
 
+    existing_pending = _get_pending_verification(email)
+    if existing_pending:
+        expires_at = datetime.fromisoformat(existing_pending["expires_at"])
+        if datetime.now(timezone.utc) > expires_at:
+            delete_firebase_user(existing_pending["firebase_uid"])
+            _delete_pending_verification(email)
+        else:
+            code = _generate_verification_code()
+            _refresh_pending_verification_code(email, code)
+            email_sent, email_error = send_email(
+                email,
+                "CLearn Verification Code (Resent)",
+                (
+                    f"Hello {existing_pending['fullname']},\n\n"
+                    f"Your new CLearn verification code is: {code}\n"
+                    "This code expires in 15 minutes."
+                ),
+            )
+            if not email_sent:
+                return jsonify({"ok": False, "message": email_error or "Could not resend verification email."}), 500
+            return jsonify(
+                {
+                    "ok": True,
+                    "requiresVerification": True,
+                    "email": email,
+                    "message": "A new verification code was sent to your email.",
+                }
+            )
+
     duplicate_error = find_duplicate_signup_field(fullname, email, phone_number, password)
     if duplicate_error:
         return jsonify({"ok": False, "message": duplicate_error}), 409
 
-    firebase_result = create_firebase_user(email, password, fullname, phone_number)
+    firebase_result = create_firebase_user(email, password, fullname, phone_number, disabled=True)
     if not firebase_result.get("ok"):
         message = firebase_result.get("error") or "Unable to create Firebase account."
         status = 409 if "already exists" in message.lower() else 500
         return jsonify({"ok": False, "message": message}), status
 
-    USERS[email] = {
-        "fullname": fullname,
-        "password_hash": generate_password_hash(password),
-        "present_skill_career": present_skill,
-        "school": school,
-        "country": country,
-        "phone_number": phone_number,
-        "firebase_uid": firebase_result.get("uid"),
-        "created_at": datetime.now(timezone.utc).isoformat(),
-    }
-    return jsonify({"ok": True, "message": "Account created successfully. You can now log in.", "redirectTo": "/login"})
+    verification_code = _generate_verification_code()
+    _store_pending_verification(
+        email=email,
+        fullname=fullname,
+        present_skill=present_skill,
+        school=school,
+        country=country,
+        phone_number=phone_number,
+        password=password,
+        firebase_uid=firebase_result.get("uid"),
+        code=verification_code,
+    )
+
+    email_sent, email_error = send_email(
+        email,
+        "CLearn Email Verification Code",
+        (
+            f"Hello {fullname},\n\n"
+            f"Your CLearn verification code is: {verification_code}\n"
+            "This code expires in 15 minutes.\n\n"
+            "If you did not request this signup, you can ignore this email."
+        ),
+    )
+    if not email_sent:
+        delete_firebase_user(firebase_result.get("uid"))
+        _delete_pending_verification(email)
+        return jsonify({"ok": False, "message": email_error or "Could not send verification email."}), 500
+
+    return jsonify(
+        {
+            "ok": True,
+            "requiresVerification": True,
+            "email": email,
+            "message": "Verification code sent. Please check your email and complete verification.",
+        }
+    )
+
+
+@app.route("/api/signup/verify", methods=["POST"])
+def verify_signup_code():
+    """Finalize signup by verifying one-time code."""
+    data = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
+    code = (data.get("code") or "").strip()
+
+    if not EMAIL_REGEX.match(email):
+        return jsonify({"ok": False, "message": "Enter a valid email address."}), 400
+    if not re.fullmatch(r"\d{6}", code):
+        return jsonify({"ok": False, "message": "Verification code must be 6 digits."}), 400
+
+    pending = _get_pending_verification(email)
+    if not pending:
+        return jsonify({"ok": False, "message": "No pending verification found. Please sign up again."}), 404
+
+    expires_at = datetime.fromisoformat(pending["expires_at"])
+    if datetime.now(timezone.utc) > expires_at:
+        delete_firebase_user(pending["firebase_uid"])
+        _delete_pending_verification(email)
+        return jsonify({"ok": False, "message": "Verification code expired. Please sign up again."}), 410
+
+    if pending["attempts"] >= 5:
+        delete_firebase_user(pending["firebase_uid"])
+        _delete_pending_verification(email)
+        return jsonify({"ok": False, "message": "Too many invalid attempts. Please sign up again."}), 429
+
+    if not check_password_hash(pending["code_hash"], code):
+        db = get_db()
+        db.execute(
+            "UPDATE pending_verifications SET attempts = attempts + 1 WHERE email = ?",
+            (email,),
+        )
+        db.commit()
+        return jsonify({"ok": False, "message": "Invalid verification code."}), 401
+
+    update_result = update_firebase_user(
+        pending["firebase_uid"],
+        disabled=False,
+        email_verified=True,
+    )
+    if not update_result.get("ok"):
+        return jsonify({"ok": False, "message": update_result.get("error") or "Failed to activate account."}), 500
+
+    db = get_db()
+    try:
+        db.execute(
+            """
+            INSERT INTO users (
+                fullname, fullname_normalized, email, password_hash,
+                present_skill_career, school, country, phone_number,
+                firebase_uid, auth_provider, email_verified, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'password', 1, ?)
+            """,
+            (
+                pending["fullname"],
+                pending["fullname"].strip().lower(),
+                email,
+                pending["password_hash"],
+                pending["present_skill_career"],
+                pending["school"],
+                pending["country"],
+                pending["phone_number"],
+                pending["firebase_uid"],
+                _utc_now_iso(),
+            ),
+        )
+        db.execute("DELETE FROM pending_verifications WHERE email = ?", (email,))
+        db.commit()
+    except sqlite3.IntegrityError:
+        _delete_pending_verification(email)
+        return jsonify({"ok": False, "message": "Account already exists. Please log in."}), 409
+
+    return jsonify(
+        {
+            "ok": True,
+            "message": "Email verified. Your account is now active.",
+            "redirectTo": "/login",
+        }
+    )
 
 
 @app.route("/api/ai-assist", methods=["POST"])
@@ -949,11 +1382,32 @@ def ai_assist():
     if not message:
         return jsonify({"ok": False, "message": "Message is required."}), 400
 
+    image_data_url = ""
+    if _should_generate_basic_image(message):
+        image_data_url = _build_basic_image_data_url(message)
+
     external_reply = call_external_ai_assistant(message)
     if external_reply:
-        return jsonify({"ok": True, "reply": external_reply, "source": "external_api"})
+        log_message((session.get("user_email") or "").strip().lower(), message, external_reply, "external_api")
+        return jsonify(
+            {
+                "ok": True,
+                "reply": external_reply,
+                "source": "external_api",
+                "imageDataUrl": image_data_url,
+            }
+        )
 
-    return jsonify({"ok": True, "reply": get_site_grounded_ai_reply(message), "source": "site_fallback"})
+    fallback_reply = get_site_grounded_ai_reply(message)
+    log_message((session.get("user_email") or "").strip().lower(), message, fallback_reply, "site_fallback")
+    return jsonify(
+        {
+            "ok": True,
+            "reply": fallback_reply,
+            "source": "site_fallback",
+            "imageDataUrl": image_data_url,
+        }
+    )
 
 
 @app.route("/api/login", methods=["POST"])
@@ -964,16 +1418,20 @@ def api_login():
     password = data.get("password") or ""
 
     if not EMAIL_REGEX.match(email):
+        log_login_event(email, "failed_invalid_email", provider="password")
         return jsonify({"ok": False, "message": "Enter a valid email address."}), 400
     if not password:
+        log_login_event(email, "failed_missing_password", provider="password")
         return jsonify({"ok": False, "message": "Password is required."}), 400
 
-    user = USERS.get(email)
+    user = get_user_by_email(email)
     if not user or not check_password_hash(user["password_hash"], password):
+        log_login_event(email, "failed_invalid_credentials", user["id"] if user else None, provider="password")
         return jsonify({"ok": False, "message": "Invalid email or password."}), 401
 
     session["user_email"] = email
     session["user_fullname"] = user["fullname"]
+    log_login_event(email, "success", user["id"], provider="password")
 
     # Best-effort login alert email.
     send_email(email, "CLearn Login Alert", "A login to your CLearn account was just detected.")
@@ -982,11 +1440,16 @@ def api_login():
 
 @app.route("/api/admin/clear-signup-data", methods=["POST"])
 def clear_signup_data():
-    """Clear all in-memory signup data stores."""
-    USERS.clear()
+    """Clear all persisted auth and messaging data."""
+    db = get_db()
+    db.execute("DELETE FROM login_events")
+    db.execute("DELETE FROM messages")
+    db.execute("DELETE FROM pending_verifications")
+    db.execute("DELETE FROM users")
+    db.commit()
     session.pop("user_email", None)
     session.pop("user_fullname", None)
-    return jsonify({"ok": True, "message": "All signup data has been cleared."})
+    return jsonify({"ok": True, "message": "All signup, login, and message records have been cleared."})
 
 
 @app.route("/api/topics")

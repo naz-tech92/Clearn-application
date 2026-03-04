@@ -83,6 +83,19 @@
             transition: all 0.3s ease;
         }
 
+        .form-group input,
+        .form-group input:focus {
+            caret-color: #ffffff;
+        }
+
+        .form-group input:-webkit-autofill,
+        .form-group input:-webkit-autofill:hover,
+        .form-group input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff;
+            box-shadow: 0 0 0 1000px rgba(15, 23, 42, 0.9) inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
         .form-group input:focus {
             outline: none;
             border-color: #60a5fa;
@@ -92,6 +105,13 @@
 
         .form-group input::placeholder {
             color: #64748b;
+        }
+
+        textarea,
+        textarea:focus,
+        input,
+        input:focus {
+            color: #ffffff;
         }
 
         .password-requirements {
@@ -189,6 +209,56 @@
         .login-link a {
             color: #60a5fa;
             text-decoration: none;
+            font-weight: 600;
+        }
+
+        .verification-box {
+            display: none;
+            margin-top: 20px;
+            padding: 16px;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .verification-box.active {
+            display: block;
+        }
+
+        .verification-box h4 {
+            color: #93c5fd;
+            margin-bottom: 8px;
+        }
+
+        .verification-box p {
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            font-size: 0.92em;
+        }
+
+        .verification-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .verification-actions input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #3b82f6;
+            background: rgba(15, 23, 42, 0.9);
+            color: #ffffff;
+            letter-spacing: 0.2em;
+            text-align: center;
+        }
+
+        .verify-btn {
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: none;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: #fff;
+            cursor: pointer;
             font-weight: 600;
         }
 
@@ -297,6 +367,14 @@
 
                         <button type="submit" class="submit-btn">Create Account</button>
                     </form>
+                    <div class="verification-box" id="verificationBox">
+                        <h4>Email Verification Required</h4>
+                        <p id="verificationHint">Enter the 6-digit code sent to your email.</p>
+                        <div class="verification-actions">
+                            <input type="text" id="verificationCode" placeholder="000000" maxlength="6" inputmode="numeric">
+                            <button type="button" class="verify-btn" onclick="handleVerifyCode()">Verify</button>
+                        </div>
+                    </div>
 
                     <div class="login-link">
                         Already have an account? <a href="/login">Sign in here</a>
@@ -362,6 +440,10 @@
         const passwordInput = document.getElementById('password');
         const confirmPasswordInput = document.getElementById('confirm-password');
         const signupForm = document.querySelector('form[onsubmit="handleSignup(event)"]');
+        const verificationBox = document.getElementById('verificationBox');
+        const verificationCodeInput = document.getElementById('verificationCode');
+        const verificationHint = document.getElementById('verificationHint');
+        let pendingVerificationEmail = '';
 
         const passwordRequirementItems = {
             length: document.getElementById('req-length'),
@@ -527,6 +609,16 @@
                     return;
                 }
 
+                if (result.requiresVerification) {
+                    pendingVerificationEmail = result.email || email;
+                    verificationHint.textContent = `Enter the 6-digit code sent to ${pendingVerificationEmail}.`;
+                    verificationBox.classList.add('active');
+                    signupForm.querySelectorAll('input, button').forEach((el) => {
+                        el.disabled = true;
+                    });
+                    return;
+                }
+
                 alert(result.message || 'Account created successfully.');
                 signupForm.reset();
                 updatePasswordRequirementUI();
@@ -535,6 +627,30 @@
                 alert(error.message || 'Unable to create account right now.');
             }
         }
+
+        window.handleVerifyCode = async function handleVerifyCode() {
+            const code = (verificationCodeInput.value || '').trim();
+            if (!/^\d{6}$/.test(code)) {
+                alert('Enter a valid 6-digit verification code.');
+                return;
+            }
+            try {
+                const response = await fetch('/api/signup/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: pendingVerificationEmail, code })
+                });
+                const result = await parseApiResponse(response);
+                if (!response.ok || !result.ok) {
+                    alert(result.message || 'Verification failed.');
+                    return;
+                }
+                alert(result.message || 'Verification successful.');
+                window.location.href = result.redirectTo || '/login';
+            } catch (error) {
+                alert(error.message || 'Unable to verify code right now.');
+            }
+        };
     </script>
 </body>
 </html>

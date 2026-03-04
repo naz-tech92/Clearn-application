@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEnlighteningFeatures();
     setupSiteLanguageTranslation();
     setupSkillAdvantageCardStyling();
+    setupSolidHeroSections();
     setupFooterSocialIcons();
 });
 
@@ -269,16 +270,44 @@ function setupAIChatToggle() {
         messagesContainer.appendChild(typingIndicator);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-        const minWaitMs = greetingOnly ? 900 : 350;
+        const minWaitMs = greetingOnly ? 180 : 120;
         try {
-            const aiResponseText = await requestAIResponse(message);
+            const aiResult = await withTimeout(
+                requestAIResponse(message),
+                5000,
+                { text: getAIResponse(message), imageDataUrl: '' }
+            );
             await wait(minWaitMs);
             typingIndicator.remove();
 
             const aiResponse = document.createElement('div');
             aiResponse.className = 'ai-message';
-            aiResponse.textContent = aiResponseText;
+            aiResponse.textContent = aiResult.text || '';
             messagesContainer.appendChild(aiResponse);
+            if (aiResult.imageDataUrl) {
+                const imageWrap = document.createElement('div');
+                imageWrap.className = 'ai-message';
+                const img = document.createElement('img');
+                img.src = aiResult.imageDataUrl;
+                img.alt = 'Generated preview';
+                img.style.width = '100%';
+                img.style.maxWidth = '360px';
+                img.style.borderRadius = '10px';
+                img.style.border = '1px solid rgba(59,130,246,0.35)';
+                img.style.display = 'block';
+                imageWrap.appendChild(img);
+
+                const download = document.createElement('a');
+                download.href = aiResult.imageDataUrl;
+                download.download = 'clearn-ai-image.svg';
+                download.textContent = 'Download image';
+                download.style.display = 'inline-block';
+                download.style.marginTop = '8px';
+                download.style.color = '#93c5fd';
+                download.style.fontSize = '0.86rem';
+                imageWrap.appendChild(download);
+                messagesContainer.appendChild(imageWrap);
+            }
         } catch (error) {
             typingIndicator.remove();
             const aiResponse = document.createElement('div');
@@ -333,6 +362,7 @@ function positionChatPanelNearToggle(toggle, panel) {
         panel.style.left = '50%';
         panel.style.top = '50%';
         panel.style.right = 'auto';
+        panel.style.bottom = 'auto';
         panel.style.transform = 'translate(-50%, -50%)';
         return;
     }
@@ -352,6 +382,7 @@ function positionChatPanelNearToggle(toggle, panel) {
 
     panel.style.left = leftPos + 'px';
     panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
     panel.style.top = topPos + 'px';
     panel.style.transform = 'none';
 }
@@ -365,6 +396,37 @@ function createTypingIndicator() {
 
 function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function withTimeout(promise, timeoutMs, fallbackValue) {
+    let settled = false;
+    return new Promise((resolve) => {
+        const timeoutId = setTimeout(() => {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            resolve(fallbackValue);
+        }, timeoutMs);
+
+        promise
+            .then((value) => {
+                if (settled) {
+                    return;
+                }
+                settled = true;
+                clearTimeout(timeoutId);
+                resolve(value);
+            })
+            .catch(() => {
+                if (settled) {
+                    return;
+                }
+                settled = true;
+                clearTimeout(timeoutId);
+                resolve(fallbackValue);
+            });
+    });
 }
 
 function isGreetingMessage(message) {
@@ -495,23 +557,27 @@ async function requestAIResponseFromServer(message) {
     if (!response.ok || !payload.ok) {
         throw new Error(payload.message || 'AI service unavailable');
     }
-    return payload.reply || '';
+    return {
+        text: payload.reply || '',
+        imageDataUrl: payload.imageDataUrl || ''
+    };
 }
 
 async function requestAIResponse(message) {
     try {
-        return await requestAIResponseFromFirebase(message);
+        const text = await requestAIResponseFromFirebase(message);
+        return { text, imageDataUrl: '' };
     } catch (firebaseError) {
         try {
             const serverReply = await requestAIResponseFromServer(message);
-            if (serverReply) {
+            if (serverReply && (serverReply.text || serverReply.imageDataUrl)) {
                 return serverReply;
             }
         } catch (serverError) {
             // Fall through to local deterministic helper.
         }
     }
-    return getAIResponse(message);
+    return { text: getAIResponse(message), imageDataUrl: '' };
 }
 /**
  * Make floating control elements draggable and persist their position.
@@ -611,6 +677,10 @@ function getAIResponse(message) {
     const sitePaths = "Useful site pages: /category, /topics, /resources, /about, /contact.";
     const externalBlock = "External resources you can check: Coursera, edX, LinkedIn Learning, Cisco Skills for All, Google Career Certificates.";
 
+    if (/(draw|generate image|make image|create image|illustration|poster|logo)/.test(lowerMessage)) {
+        return "I can generate a basic preview image in this chat. Try: 'generate image for AI career roadmap'.";
+    }
+
     if (/(category|categories|skill|skills|career path|which skill|choose)/.test(lowerMessage)) {
         return "Start from /category to compare Technology, Health, and Business paths. Then open a skill and check the country cards for demand and education requirements. Suggested search: 'cybersecurity vs data science beginner path'.";
     }
@@ -635,6 +705,14 @@ function getAIResponse(message) {
         return "Quick start: 1) /category 2) select one skill 3) open country cards 4) compare education and certifications 5) check /resources for deeper learning.";
     }
 
+    if (/(visa|immigration|work permit|relocate|abroad)/.test(lowerMessage)) {
+        return "Use skill-country pages to compare pathways and demand, then verify official visa sources. I can also build a country comparison checklist for you.";
+    }
+
+    if (/(cv|resume|interview|cover letter|job application)/.test(lowerMessage)) {
+        return "I can help structure a beginner CV and interview prep plan by skill and country. Share your target role and level.";
+    }
+
     return "I can answer using this site content and suggest off-site learning resources. Ask me about a skill, a country, certifications, schools, or job demand. " + sitePaths;
 }
 
@@ -642,19 +720,36 @@ function getAIResponse(message) {
  * Setup auto-scroll indicator
  */
 function setupAutoScrollIndicator() {
+    if (window.location.pathname !== '/') {
+        return;
+    }
     const scrollIndicator = document.createElement('button');
     scrollIndicator.className = 'scroll-indicator';
     scrollIndicator.innerHTML = ' Scroll to Explore';
     document.body.appendChild(scrollIndicator);
 
     // Show/hide based on scroll position
-    window.addEventListener('scroll', function() {
+    let tick = false;
+    const syncVisibility = () => {
         if (window.scrollY < 100) {
             scrollIndicator.classList.add('visible');
         } else {
             scrollIndicator.classList.remove('visible');
         }
-    });
+        tick = false;
+    };
+    window.addEventListener(
+        'scroll',
+        function() {
+            if (tick) {
+                return;
+            }
+            tick = true;
+            window.requestAnimationFrame(syncVisibility);
+        },
+        { passive: true }
+    );
+    syncVisibility();
 
     // Auto-scroll functionality
     scrollIndicator.addEventListener('click', function() {
@@ -741,44 +836,81 @@ function setupSkillAdvantageCardStyling() {
     });
 }
 
+function setupSolidHeroSections() {
+    const path = window.location.pathname || '';
+    const isTargetPage =
+        path === '/category' ||
+        path.startsWith('/skill/') ||
+        path.startsWith('/country/');
+
+    if (!isTargetPage) {
+        return;
+    }
+
+    document
+        .querySelectorAll('.hero, .country-hero')
+        .forEach((section) => section.classList.add('page-hero-solid'));
+}
+
 function setupFooterSocialIcons() {
-    const sections = Array.from(document.querySelectorAll('.footer-section'));
-    const target = sections.find((section) => {
-        const heading = section.querySelector('h4');
-        return heading && (heading.textContent || '').trim().toLowerCase() === 'get in touch';
-    });
-    if (!target) {
-        return;
-    }
+    const footers = document.querySelectorAll('footer');
+    footers.forEach((footer) => {
+        const sections = Array.from(footer.querySelectorAll('.footer-section'));
+        const accountSection = sections.find((section) => {
+            const heading = section.querySelector('h4');
+            return heading && (heading.textContent || '').trim().toLowerCase() === 'account';
+        });
+        const touchSection = sections.find((section) => {
+            const heading = section.querySelector('h4');
+            return heading && (heading.textContent || '').trim().toLowerCase() === 'get in touch';
+        });
 
-    const list = target.querySelector('ul');
-    if (!list) {
-        return;
-    }
-
-    list.classList.add('footer-social-links');
-    const links = list.querySelectorAll('a[href]');
-    links.forEach((link) => {
-        const href = (link.getAttribute('href') || '').toLowerCase();
-        let label = '';
-        let icon = '';
-
-        if (href.includes('facebook.com')) {
-            label = 'Facebook';
-            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 8.5V6.7c0-.8.5-1.2 1.2-1.2h1.8V2.1h-2.8c-3.1 0-4.8 1.9-4.8 4.7v1.7H6v3.6h2.9v9h3.9v-9h3l.5-3.6h-3.8z"/></svg>';
-        } else if (href.includes('linkedin.com')) {
-            label = 'LinkedIn';
-            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.2A2.2 2.2 0 1 1 6.9 3.8a2.2 2.2 0 0 1 0 4.4zM5 20.2V9.7h3.9v10.5H5zm6.1 0V9.7h3.7v1.4h.1c.5-.9 1.8-1.8 3.6-1.8 3.9 0 4.6 2.6 4.6 5.9v5h-3.9v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3v4.5h-3.9z"/></svg>';
-        } else if (href.includes('instagram.com')) {
-            label = 'Instagram';
-            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9zm9.7 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>';
-        } else {
+        if (!touchSection) {
             return;
         }
 
-        link.classList.add('footer-social-link');
-        link.setAttribute('aria-label', label);
-        link.innerHTML = `<span class="footer-social-icon">${icon}</span>`;
+        const list = touchSection.querySelector('ul');
+        if (!list) {
+            return;
+        }
+
+        list.classList.add('footer-social-links');
+        const links = list.querySelectorAll('a[href]');
+        links.forEach((link) => {
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            let label = '';
+            let icon = '';
+
+            if (href.includes('facebook.com')) {
+                label = 'Facebook';
+                icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 8.5V6.7c0-.8.5-1.2 1.2-1.2h1.8V2.1h-2.8c-3.1 0-4.8 1.9-4.8 4.7v1.7H6v3.6h2.9v9h3.9v-9h3l.5-3.6h-3.8z"/></svg>';
+            } else if (href.includes('linkedin.com')) {
+                label = 'LinkedIn';
+                icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.2A2.2 2.2 0 1 1 6.9 3.8a2.2 2.2 0 0 1 0 4.4zM5 20.2V9.7h3.9v10.5H5zm6.1 0V9.7h3.7v1.4h.1c.5-.9 1.8-1.8 3.6-1.8 3.9 0 4.6 2.6 4.6 5.9v5h-3.9v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3v4.5h-3.9z"/></svg>';
+            } else if (href.includes('instagram.com')) {
+                label = 'Instagram';
+                icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9zm9.7 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>';
+            } else {
+                return;
+            }
+
+            link.classList.add('footer-social-link');
+            link.setAttribute('aria-label', label);
+            link.innerHTML = `<span class="footer-social-icon">${icon}</span>`;
+        });
+
+        if (accountSection) {
+            const legacyIcons = accountSection.querySelector('.account-social-icons');
+            if (legacyIcons) {
+                legacyIcons.remove();
+            }
+            const inlineLabel = document.createElement('p');
+            inlineLabel.className = 'footer-touch-inline-label';
+            inlineLabel.textContent = 'Get in Touch';
+            accountSection.appendChild(inlineLabel);
+            accountSection.appendChild(list);
+            touchSection.remove();
+        }
     });
 }
 
@@ -864,6 +996,12 @@ function setupKnowledgeHub() {
  * Setup enlightening features and animations
  */
 function setupEnlighteningFeatures() {
+    if (window.location.pathname !== '/') {
+        return;
+    }
+    if (document.querySelector('.quote-slideshow')) {
+        return;
+    }
     // Create continuous quote slideshow
     const quotes = [
         {
@@ -933,13 +1071,24 @@ function setupEnlighteningFeatures() {
     }
 
     // Add tooltips to important information
-    const infoElements = document.querySelectorAll('.feature-card h3, .topic-card h2');
-    infoElements.forEach(element => {
-        const tooltip = document.createElement('span');
-        tooltip.className = 'info-tooltip';
-        tooltip.innerHTML = '<span class="tooltip-text">Click to explore more about this topic and discover related resources.</span>';
-        element.appendChild(tooltip);
-    });
+    const infoElements = Array.from(document.querySelectorAll('.feature-card h3, .topic-card h2')).slice(0, 14);
+    const attachTooltips = () => {
+        infoElements.forEach(element => {
+            if (element.querySelector('.info-tooltip')) {
+                return;
+            }
+            const tooltip = document.createElement('span');
+            tooltip.className = 'info-tooltip';
+            tooltip.innerHTML = '<span class="tooltip-text">Click to explore more about this topic and discover related resources.</span>';
+            element.appendChild(tooltip);
+        });
+    };
+
+    if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(attachTooltips, { timeout: 900 });
+    } else {
+        setTimeout(attachTooltips, 120);
+    }
 }
 
 /**
