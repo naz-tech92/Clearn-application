@@ -3,7 +3,8 @@ import json
 import os
 import re
 import smtplib
-from datetime import datetime, timezone
+import threading
+from datetime import datetime, timezone, timedelta
 from email.mime.text import MIMEText
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -16,15 +17,69 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-me")
 
-FIREBASE_WEB_CONFIG = {
-    "apiKey": "AIzaSyClwTmYQaeHZv79EklocgR7xuBd1aixfU8",
-    "authDomain": "clearn-application.firebaseapp.com",
-    "projectId": "clearn-application",
-    "storageBucket": "clearn-application.firebasestorage.app",
-    "messagingSenderId": "577600506522",
-    "appId": "1:577600506522:web:5ee9e7f12f999a7a51ad23",
-    "measurementId": "G-6ZMW6FYQ7M",
-}
+def _local_firebase_project_id():
+    env_project_id = (os.environ.get("FIREBASE_WEB_PROJECT_ID") or os.environ.get("FIREBASE_PROJECT_ID") or "").strip()
+    if env_project_id:
+        return env_project_id
+
+    local_key_path = os.path.join(os.path.dirname(__file__), "serviceAccountKey.json")
+    if not os.path.exists(local_key_path):
+        return ""
+    try:
+        with open(local_key_path, "r", encoding="utf-8") as fh:
+            payload = json.load(fh)
+        return (payload.get("project_id") or "clearn-96c81").strip()
+    except Exception:
+        return ""
+
+
+def build_firebase_web_config():
+    def _compact(value):
+        return "".join(str(value or "").split())
+
+    def _clean(value):
+        return str(value or "").strip()
+
+    project_id = _local_firebase_project_id()
+    if not project_id:
+        project_id = "clearn-96c81"
+    project_id = _compact(project_id)
+
+    default_config = {
+        "apiKey": "AIzaSyDMw-DDATn4Iq2J1s7Ya9k-NPW7qMCHtw8",
+        "authDomain": "clearn-96c81.firebaseapp.com",
+        "projectId": "clearn-96c81",
+        "storageBucket": "clearn-96c81.firebasestorage.app",
+        "messagingSenderId": "623690790532",
+        "appId": "1:623690790532:web:bfb5431f7edf98ed9334d1",
+        "measurementId": "G-HWPD3DRHDZ",
+    }
+
+    auth_domain = _clean(os.environ.get("FIREBASE_WEB_AUTH_DOMAIN"))
+    if not auth_domain and project_id:
+        auth_domain = f"{project_id}.firebaseapp.com"
+    auth_domain = _compact(auth_domain)
+
+    storage_bucket = _clean(os.environ.get("FIREBASE_WEB_STORAGE_BUCKET"))
+    if not storage_bucket and project_id:
+        storage_bucket = f"{project_id}.firebasestorage.app"
+    storage_bucket = _compact(storage_bucket)
+
+    return {
+        "apiKey": _compact(os.environ.get("FIREBASE_WEB_API_KEY") or default_config["apiKey"]),
+        "authDomain": auth_domain or default_config["authDomain"],
+        "projectId": project_id,
+        "storageBucket": storage_bucket or default_config["storageBucket"],
+        "messagingSenderId": _compact(
+            os.environ.get("FIREBASE_WEB_MESSAGING_SENDER_ID")
+            or default_config["messagingSenderId"]
+        ),
+        "appId": _compact(os.environ.get("FIREBASE_WEB_APP_ID") or default_config["appId"]),
+        "measurementId": _compact(
+            os.environ.get("FIREBASE_WEB_MEASUREMENT_ID")
+            or default_config["measurementId"]
+        ),
+    }
 
 @app.route("/protected", methods=["POST"])
 def protected():
@@ -49,11 +104,21 @@ def protected():
 
 @app.route("/api/firebase/web-config")
 def firebase_web_config():
-    """Expose fixed Firebase Web SDK config for clearn-application."""
-    missing = [k for k, v in FIREBASE_WEB_CONFIG.items() if not v and k in ("apiKey", "authDomain", "projectId", "appId")]
+    """Expose Firebase Web SDK config from environment/service-account project."""
+    config = build_firebase_web_config()
+    missing = [k for k in ("apiKey", "authDomain", "projectId", "appId") if not config.get(k)]
     if missing:
-        return jsonify({"ok": False, "message": f"Missing Firebase web config values: {', '.join(missing)}"}), 500
-    return jsonify({"ok": True, "config": FIREBASE_WEB_CONFIG})
+        return jsonify(
+            {
+                "ok": False,
+                "message": (
+                    "Missing Firebase web config values: "
+                    f"{', '.join(missing)}. Set FIREBASE_WEB_API_KEY, FIREBASE_WEB_APP_ID, "
+                    "FIREBASE_WEB_MESSAGING_SENDER_ID, and optional web config vars in environment."
+                ),
+            }
+        ), 500
+    return jsonify({"ok": True, "config": config})
 
 
 @app.route("/api/auth/firebase-session", methods=["POST"])
@@ -100,6 +165,10 @@ EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 PHONE_REGEX = re.compile(r"^\+?[0-9]{7,15}$")
 
 WINDOWS_USER_ENV = None
+DATA_REFRESH_HOURS = 72
+DATA_REFRESH_INTERVAL = timedelta(hours=DATA_REFRESH_HOURS)
+DATA_CACHE_LOCK = threading.Lock()
+DATA_CACHE = {}
 
 
 def _load_windows_user_env():
@@ -157,21 +226,49 @@ def normalize_phone_number(value):
 
 
 def load_topics():
-    """Load topics from JSON file"""
-    try:
-        with open("data/topics.json", "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []
+    """Load topics from JSON file with 72-hour cache refresh."""
+    return _load_json_with_refresh("topics", "data/topics.json", [])
 
 
 def load_countries():
-    """Load countries from JSON file"""
+    """Load countries from JSON file with 72-hour cache refresh."""
+    return _load_json_with_refresh("countries", "data/countries.json", {"countries": {}})
+
+
+def _read_json_file(path, fallback):
     try:
-        with open("data/countries.json", "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return {"countries": {}}
+        return fallback
+
+
+def _load_json_with_refresh(cache_key, path, fallback):
+    now = datetime.now(timezone.utc)
+    with DATA_CACHE_LOCK:
+        entry = DATA_CACHE.get(cache_key)
+        if entry:
+            refreshed_at = entry.get("refreshed_at")
+            if isinstance(refreshed_at, datetime) and (now - refreshed_at) < DATA_REFRESH_INTERVAL:
+                return entry.get("data", fallback)
+
+        data = _read_json_file(path, fallback)
+        DATA_CACHE[cache_key] = {"data": data, "refreshed_at": now}
+        return data
+
+
+def _get_refresh_state():
+    now = datetime.now(timezone.utc)
+    with DATA_CACHE_LOCK:
+        refreshed_times = [
+            entry.get("refreshed_at")
+            for entry in DATA_CACHE.values()
+            if isinstance(entry.get("refreshed_at"), datetime)
+        ]
+
+    last_updated = max(refreshed_times) if refreshed_times else now
+    next_refresh = last_updated + DATA_REFRESH_INTERVAL
+    return last_updated, next_refresh
 
 
 TECH_SKILLS = {
@@ -278,6 +375,15 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "location": "Yaounde, Centre Region, Cameroon",
                 "website": "https://polytechnique.cm/",
             },
+            {
+                "name": "St Louise University Institute of Cameroon",
+                "brief_details": "Private institute offering practical, career-focused ICT and professional programs.",
+                "year_founded": "2000s",
+                "founded_by": "Private educational promoters in Cameroon",
+                "goals_focus": "Applied digital skills, employability, and industry-ready training.",
+                "location": "Douala, Littoral Region, Cameroon",
+                "website": "https://stlouiseuniversityinstitute.com/",
+            },
         ],
         "health": [
             {
@@ -299,7 +405,7 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "website": "https://www.ubuea.cm/",
             },
             {
-                "name": "St Louise University Institute of Health and Biomedical Sciences",
+                "name": "St Louise University Institute of Cameroon",
                 "brief_details": "Private health-focused institute in Cameroon supporting nursing and biomedical training.",
                 "year_founded": "2000s",
                 "founded_by": "Private educational promoters in Cameroon",
@@ -344,6 +450,15 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "goals_focus": "Management capacity, entrepreneurship, and practical business leadership.",
                 "location": "Buea, South West Region, Cameroon",
                 "website": "https://www.paidafrica.org/",
+            },
+            {
+                "name": "St Louise University Institute of Cameroon",
+                "brief_details": "Private institute with business-oriented programs and professional training pathways.",
+                "year_founded": "2000s",
+                "founded_by": "Private educational promoters in Cameroon",
+                "goals_focus": "Business fundamentals, entrepreneurship, and practical workplace readiness.",
+                "location": "Douala, Littoral Region, Cameroon",
+                "website": "https://stlouiseuniversityinstitute.com/",
             },
         ],
     },
@@ -512,7 +627,8 @@ def call_external_ai_assistant(message):
 
     system_prompt = (
         "You are CLearn AI assistant. Answer using CLearn site scope first: categories, skills, country comparison, "
-        "education pathways, resources, and navigation. Keep responses concise, factual, and user-oriented. "
+        "education pathways, resources, and navigation. "
+        "Keep responses concise, factual, and user-oriented. "
         "If unsure, suggest where in CLearn to check."
     )
     payload = {
@@ -883,6 +999,20 @@ def api_topics():
 def api_search_index():
     """Universal search index for home page intelligent search."""
     return jsonify({"ok": True, "items": build_search_index()})
+
+
+@app.route("/api/site-refresh-status")
+def site_refresh_status():
+    """Expose current 72-hour information refresh window."""
+    last_updated, next_refresh = _get_refresh_state()
+    return jsonify(
+        {
+            "ok": True,
+            "refresh_hours": DATA_REFRESH_HOURS,
+            "last_updated": last_updated.isoformat(),
+            "next_refresh": next_refresh.isoformat(),
+        }
+    )
 
 
 @app.errorhandler(404)

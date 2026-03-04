@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEnlighteningFeatures();
     setupSiteLanguageTranslation();
     setupSkillAdvantageCardStyling();
+    setupFooterSocialIcons();
 });
 
 function setupGlobalNavbarBrandAndLanguage() {
@@ -186,7 +187,10 @@ function setupAIChatToggle() {
     chatPanel.innerHTML = `
         <div class="ai-chat-header">
             <h3>AI Assistant</h3>
-            <button class="ai-chat-close" title="Close Chat">&times;</button>
+            <div class="ai-chat-header-actions">
+                <button class="ai-chat-expand" title="Expand Chat" aria-label="Expand chat">&#9974;</button>
+                <button class="ai-chat-close" title="Close Chat" aria-label="Close chat">&times;</button>
+            </div>
         </div>
         <div class="ai-chat-messages">
             <div class="ai-message">Hello! I'm your AI assistant. Ask me about CLearn skills, countries, education paths, resources, and navigation.</div>
@@ -208,10 +212,27 @@ function setupAIChatToggle() {
 
     // Close chat panel
     const closeButton = chatPanel.querySelector('.ai-chat-close');
+    const expandButton = chatPanel.querySelector('.ai-chat-expand');
     closeButton.addEventListener('click', function(e) {
         e.stopPropagation();
         chatPanel.classList.remove('active');
+        chatPanel.classList.remove('expanded');
         aiChatButton.classList.remove('active');
+        expandButton.innerHTML = '&#9974;';
+        expandButton.title = 'Expand Chat';
+        expandButton.setAttribute('aria-label', 'Expand chat');
+    });
+
+    expandButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        chatPanel.classList.toggle('expanded');
+        const isExpanded = chatPanel.classList.contains('expanded');
+        expandButton.innerHTML = isExpanded ? '&#11197;' : '&#9974;';
+        expandButton.title = isExpanded ? 'Shrink Chat' : 'Expand Chat';
+        expandButton.setAttribute('aria-label', isExpanded ? 'Shrink chat' : 'Expand chat');
+        if (!isExpanded) {
+            positionChatPanelNearToggle(aiChatButton, chatPanel);
+        }
     });
 
     // Handle message sending
@@ -224,25 +245,51 @@ function setupAIChatToggle() {
         if (!message) {
             return;
         }
+        const greetingOnly = isGreetingMessage(message);
+        const complexPrompt = isComplexPrompt(message);
 
         const userMessage = document.createElement('div');
         userMessage.className = 'user-message';
         userMessage.textContent = message;
         messagesContainer.appendChild(userMessage);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        if (complexPrompt && !chatPanel.classList.contains('expanded')) {
+            chatPanel.classList.add('expanded');
+            expandButton.innerHTML = '&#11197;';
+            expandButton.title = 'Shrink Chat';
+            expandButton.setAttribute('aria-label', 'Shrink chat');
+        }
 
         textarea.value = '';
         sendButton.disabled = true;
         sendButton.textContent = '...';
 
-        const aiResponseText = await requestAIResponseFromServer(message);
-        const aiResponse = document.createElement('div');
-        aiResponse.className = 'ai-message';
-        aiResponse.textContent = aiResponseText;
-        messagesContainer.appendChild(aiResponse);
-
-        sendButton.disabled = false;
-        sendButton.textContent = 'Send';
+        const typingIndicator = createTypingIndicator();
+        messagesContainer.appendChild(typingIndicator);
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        const minWaitMs = greetingOnly ? 900 : 350;
+        try {
+            const aiResponseText = await requestAIResponse(message);
+            await wait(minWaitMs);
+            typingIndicator.remove();
+
+            const aiResponse = document.createElement('div');
+            aiResponse.className = 'ai-message';
+            aiResponse.textContent = aiResponseText;
+            messagesContainer.appendChild(aiResponse);
+        } catch (error) {
+            typingIndicator.remove();
+            const aiResponse = document.createElement('div');
+            aiResponse.className = 'ai-message';
+            aiResponse.textContent = 'I could not process that right now. Please try again.';
+            messagesContainer.appendChild(aiResponse);
+        } finally {
+            sendButton.disabled = false;
+            sendButton.textContent = 'Send';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
     }
 
     sendButton.addEventListener('click', sendMessage);
@@ -282,6 +329,14 @@ function setupAIChatToggle() {
  * Position chat panel beside the AI toggle button.
  */
 function positionChatPanelNearToggle(toggle, panel) {
+    if (panel.classList.contains('expanded')) {
+        panel.style.left = '50%';
+        panel.style.top = '50%';
+        panel.style.right = 'auto';
+        panel.style.transform = 'translate(-50%, -50%)';
+        return;
+    }
+
     const rect = toggle.getBoundingClientRect();
     const panelWidth = panel.offsetWidth || 300;
     const panelHeight = panel.offsetHeight || 400;
@@ -301,21 +356,162 @@ function positionChatPanelNearToggle(toggle, panel) {
     panel.style.transform = 'none';
 }
 
-async function requestAIResponseFromServer(message) {
-    try {
-        const response = await fetch('/api/ai-assist', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message })
-        });
-        const payload = await response.json();
-        if (!response.ok || !payload.ok) {
-            throw new Error(payload.message || 'AI service unavailable');
-        }
-        return payload.reply || getAIResponse(message);
-    } catch (error) {
-        return getAIResponse(message);
+function createTypingIndicator() {
+    const bubble = document.createElement('div');
+    bubble.className = 'ai-message ai-typing';
+    bubble.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    return bubble;
+}
+
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isGreetingMessage(message) {
+    const m = String(message || '').trim().toLowerCase();
+    return /^(hi|hello|hey|yo|good morning|good afternoon|good evening|greetings|what's up|whats up)\b[!.?]*$/.test(m);
+}
+
+function isComplexPrompt(message) {
+    const m = String(message || '').trim().toLowerCase();
+    if (m.length >= 120) {
+        return true;
     }
+    const signals = [
+        'explain',
+        'compare',
+        'difference',
+        'roadmap',
+        'step by step',
+        'detailed',
+        'comprehensive',
+        'career path',
+        'requirements',
+        'how do i',
+        'what should i do'
+    ];
+    return signals.some((token) => m.includes(token));
+}
+
+let firebaseAIModelPromise = null;
+
+async function getFirebaseWebConfig() {
+    const response = await fetch('/api/firebase/web-config');
+    const payload = await response.json();
+    if (!response.ok || !payload.ok || !payload.config) {
+        throw new Error(payload.message || 'Firebase web config unavailable.');
+    }
+    return payload.config;
+}
+
+async function loadFirebaseModulePair() {
+    const versions = ['12.4.0', '11.10.0', '10.14.1'];
+    let lastError = null;
+
+    for (const version of versions) {
+        try {
+            const appMod = await import(`https://www.gstatic.com/firebasejs/${version}/firebase-app.js`);
+            const aiMod = await import(`https://www.gstatic.com/firebasejs/${version}/firebase-ai.js`);
+            return { appMod, aiMod };
+        } catch (err) {
+            lastError = err;
+        }
+    }
+    throw (lastError || new Error('Unable to load Firebase AI SDK modules.'));
+}
+
+function extractGeneratedText(result) {
+    const directText = result?.response?.text;
+    if (typeof directText === 'function') {
+        const out = directText.call(result.response);
+        if (typeof out === 'string' && out.trim()) {
+            return out.trim();
+        }
+    }
+    if (typeof directText === 'string' && directText.trim()) {
+        return directText.trim();
+    }
+    const altText = result?.text;
+    if (typeof altText === 'string' && altText.trim()) {
+        return altText.trim();
+    }
+    return '';
+}
+
+async function getFirebaseAIModel() {
+    if (firebaseAIModelPromise) {
+        return firebaseAIModelPromise;
+    }
+
+    firebaseAIModelPromise = (async () => {
+        const config = await getFirebaseWebConfig();
+        const { appMod, aiMod } = await loadFirebaseModulePair();
+        const {
+            initializeApp,
+            getApp,
+            getApps
+        } = appMod;
+        const {
+            getAI,
+            getGenerativeModel,
+            GoogleAIBackend
+        } = aiMod;
+
+        const firebaseApp = getApps().length ? getApp() : initializeApp(config);
+        const ai = getAI(firebaseApp, { backend: new GoogleAIBackend() });
+        const modelName = window.CLEARN_GEMINI_MODEL || 'gemini-3-flash-preview';
+        return getGenerativeModel(ai, { model: modelName });
+    })().catch((error) => {
+        firebaseAIModelPromise = null;
+        throw error;
+    });
+
+    return firebaseAIModelPromise;
+}
+
+async function requestAIResponseFromFirebase(message) {
+    const model = await getFirebaseAIModel();
+    const prompt = [
+        'You are CLearn AI assistant.',
+        'Focus on CLearn categories, skills, countries, education pathways, and resources.',
+        'Keep answers concise and practical.',
+        `User question: ${message}`
+    ].join(' ');
+    const result = await model.generateContent(prompt);
+    const text = extractGeneratedText(result);
+    if (!text) {
+        throw new Error('Empty response from Firebase AI.');
+    }
+    return text;
+}
+
+async function requestAIResponseFromServer(message) {
+    const response = await fetch('/api/ai-assist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+        throw new Error(payload.message || 'AI service unavailable');
+    }
+    return payload.reply || '';
+}
+
+async function requestAIResponse(message) {
+    try {
+        return await requestAIResponseFromFirebase(message);
+    } catch (firebaseError) {
+        try {
+            const serverReply = await requestAIResponseFromServer(message);
+            if (serverReply) {
+                return serverReply;
+            }
+        } catch (serverError) {
+            // Fall through to local deterministic helper.
+        }
+    }
+    return getAIResponse(message);
 }
 /**
  * Make floating control elements draggable and persist their position.
@@ -473,8 +669,7 @@ function setupAutoScrollIndicator() {
  * Setup auto-refresh functionality
  */
 function setupAutoRefresh() {
-    // Auto-refresh button removed as requested
-    // This function is kept for future use if needed
+    // Refresh policy remains active server-side; no visible window badge.
 }
 
 /**
@@ -543,6 +738,47 @@ function setupSkillAdvantageCardStyling() {
                 node.classList.add('skill-ad-text');
             });
         });
+    });
+}
+
+function setupFooterSocialIcons() {
+    const sections = Array.from(document.querySelectorAll('.footer-section'));
+    const target = sections.find((section) => {
+        const heading = section.querySelector('h4');
+        return heading && (heading.textContent || '').trim().toLowerCase() === 'get in touch';
+    });
+    if (!target) {
+        return;
+    }
+
+    const list = target.querySelector('ul');
+    if (!list) {
+        return;
+    }
+
+    list.classList.add('footer-social-links');
+    const links = list.querySelectorAll('a[href]');
+    links.forEach((link) => {
+        const href = (link.getAttribute('href') || '').toLowerCase();
+        let label = '';
+        let icon = '';
+
+        if (href.includes('facebook.com')) {
+            label = 'Facebook';
+            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 8.5V6.7c0-.8.5-1.2 1.2-1.2h1.8V2.1h-2.8c-3.1 0-4.8 1.9-4.8 4.7v1.7H6v3.6h2.9v9h3.9v-9h3l.5-3.6h-3.8z"/></svg>';
+        } else if (href.includes('linkedin.com')) {
+            label = 'LinkedIn';
+            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.9 8.2A2.2 2.2 0 1 1 6.9 3.8a2.2 2.2 0 0 1 0 4.4zM5 20.2V9.7h3.9v10.5H5zm6.1 0V9.7h3.7v1.4h.1c.5-.9 1.8-1.8 3.6-1.8 3.9 0 4.6 2.6 4.6 5.9v5h-3.9v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3v4.5h-3.9z"/></svg>';
+        } else if (href.includes('instagram.com')) {
+            label = 'Instagram';
+            icon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 1.8A3.7 3.7 0 0 0 3.8 7.5v9a3.7 3.7 0 0 0 3.7 3.7h9a3.7 3.7 0 0 0 3.7-3.7v-9a3.7 3.7 0 0 0-3.7-3.7h-9zm9.7 1.4a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4z"/></svg>';
+        } else {
+            return;
+        }
+
+        link.classList.add('footer-social-link');
+        link.setAttribute('aria-label', label);
+        link.innerHTML = `<span class="footer-social-icon">${icon}</span>`;
     });
 }
 

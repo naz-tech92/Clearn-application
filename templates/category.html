@@ -32,6 +32,11 @@
             color: #e2e8f0 !important;
             text-shadow: 0 2px 8px rgba(2, 6, 23, 0.4);
         }
+
+        .explore-link {
+            color: inherit;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -77,8 +82,8 @@
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;"> Explore by Different Views</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> By Country</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Explore skills available in specific countries</p>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"><a class="explore-link" href="/country/cameroon"> By Country</a></h3>
+                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;"><a class="explore-link" href="/country/cameroon">Explore skills available in specific countries</a></p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                             <a href="/country/united_states" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> US</a>
                             <a href="/country/canada" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;"> Canada</a>
@@ -87,8 +92,8 @@
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> By Education Level</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Find skills matching your educational background</p>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"><a class="explore-link" href="/education/bachelor"> By Education Level</a></h3>
+                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;"><a class="explore-link" href="/education/bachelor">Find skills matching your educational background</a></p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                             <a href="/education/bachelor" style="background: rgba(245, 87, 108, 0.2); color: #f5576c; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">Bachelor's</a>
                             <a href="/education/master" style="background: rgba(245, 87, 108, 0.2); color: #f5576c; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">Master's</a>
@@ -97,12 +102,12 @@
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <h3 style="color: #93c5fd; margin-bottom: 15px;"> Quick Stats</h3>
-                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;">Platform overview</p>
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;"><a class="explore-link" href="/topics"> Quick Stats</a></h3>
+                        <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 0.9em;"><a class="explore-link" href="/topics">Platform overview</a></p>
                         <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
-                            <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; font-size: 0.8em;">13 Skills</span>
-                            <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; font-size: 0.8em;">8 Countries</span>
-                            <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; font-size: 0.8em;">Global Access</span>
+                            <a href="/topics" style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">13 Skills</a>
+                            <a href="/category#techSkills" style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">8 Countries</a>
+                            <a href="/resources" style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 6px 12px; border-radius: 15px; text-decoration: none; font-size: 0.8em;">Global Access</a>
                         </div>
                     </div>
                 </div>

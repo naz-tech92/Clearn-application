@@ -1254,7 +1254,7 @@
 
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -1278,9 +1278,24 @@ async function ensureFirebase() {
     throw new Error(firebaseInitError);
   }
 
-  const app = initializeApp(payload.config);
+  const raw = payload.config || {};
+  const config = {
+    apiKey: String(raw.apiKey || '').trim(),
+    authDomain: String(raw.authDomain || '').trim(),
+    projectId: String(raw.projectId || '').trim(),
+    storageBucket: String(raw.storageBucket || '').trim(),
+    messagingSenderId: String(raw.messagingSenderId || '').trim(),
+    appId: String(raw.appId || '').trim(),
+    measurementId: String(raw.measurementId || '').trim()
+  };
+  if (!config.apiKey || !config.appId || !config.authDomain || !config.projectId) {
+    firebaseInitError = 'Firebase configuration is incomplete.';
+    throw new Error(firebaseInitError);
+  }
+
+  const app = getApps().length ? getApp() : initializeApp(config);
   firebaseAuth = getAuth(app);
-  if (payload.config.measurementId) {
+  if (config.measurementId) {
     getAnalytics(app);
   }
   firebaseReady = true;

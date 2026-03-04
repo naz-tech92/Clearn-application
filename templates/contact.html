@@ -93,6 +93,23 @@
         .info-card p {
             color: #cbd5e1;
         }
+
+        .contact-hero {
+            min-height: 330px !important;
+            background:
+                linear-gradient(135deg, rgba(2, 6, 23, 0.62), rgba(8, 47, 73, 0.58)),
+                url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=1800&h=900&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #3b82f6 !important;
+            overflow: hidden;
+        }
+
+        .contact-hero .carousel-overlay {
+            background: rgba(2, 6, 23, 0.15);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+        }
     </style>
 </head>
 <body>
@@ -119,26 +136,11 @@
     </nav>
 
     <div class="container">
-        <!-- HERO SECTION WITH CAROUSEL -->
-        <section class="hero">
-            <div class="carousel">
-                <div class="carousel-container">
-                    <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=1200&h=400&fit=crop');"></div>
-                    <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1200&h=400&fit=crop');"></div>
-                    
-                    <div class="carousel-overlay no-blur">
-                        <h2> Get In Touch</h2>
-                        <p>Have questions? We'd love to hear from you!</p>
-                    </div>
-                </div>
-
-                <button class="carousel-prev" onclick="changeSlide(-1)"></button>
-                <button class="carousel-next" onclick="changeSlide(1)"></button>
-
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" onclick="currentSlide(0)"></span>
-                    <span class="carousel-dot" onclick="currentSlide(1)"></span>
-                </div>
+        <!-- HERO SECTION -->
+        <section class="hero contact-hero">
+            <div class="carousel-overlay no-blur">
+                <h2> Get In Touch</h2>
+                <p>Have questions? We'd love to hear from you!</p>
             </div>
         </section>
 
@@ -242,38 +244,6 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script>
-        let currentSlideIndex = 0;
-
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-
-            if (n >= slides.length) {
-                currentSlideIndex = 0;
-            }
-            if (n < 0) {
-                currentSlideIndex = slides.length - 1;
-            }
-
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            slides[currentSlideIndex].classList.add('active');
-            dots[currentSlideIndex].classList.add('active');
-        }
-
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -297,4 +267,3 @@
     </script>
 </body>
 </html>
-

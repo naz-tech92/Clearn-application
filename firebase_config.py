@@ -1,109 +1,136 @@
 import json
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+import os
+from typing import Optional
+
+try:
+    import firebase_admin
+    from firebase_admin import auth, credentials
+except Exception:
+    firebase_admin = None
+    auth = None
+    credentials = None
 
 
-FIREBASE_WEB_API_KEY = "AIzaSyClwTmYQaeHZv79EklocgR7xuBd1aixfU8"
+_FIREBASE_INIT_ERROR = None
 
 
-def _post_json(url, payload, timeout=20):
-    body = json.dumps(payload).encode("utf-8")
-    req = Request(
-        url,
-        data=body,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-    with urlopen(req, timeout=timeout) as response:
-        raw = response.read().decode("utf-8")
-    return json.loads(raw)
+def _service_account_payload() -> Optional[dict]:
+    """Load service-account JSON from env first, then local file."""
+    inline_json = (os.environ.get("FIREBASE_SERVICE_ACCOUNT_JSON") or "").strip()
+    if inline_json:
+        try:
+            return json.loads(inline_json)
+        except json.JSONDecodeError:
+            return None
+
+    path = (os.environ.get("FIREBASE_SERVICE_ACCOUNT_PATH") or "").strip()
+    if path and os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+
+    local_path = os.path.join(os.path.dirname(__file__), "serviceAccountKey.json")
+    if os.path.exists(local_path):
+        with open(local_path, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+    return None
 
 
-def _parse_firebase_error(exc):
-    """Extract Firebase REST error message when available."""
+def _init_firebase():
+    global _FIREBASE_INIT_ERROR
+    if firebase_admin is None or auth is None or credentials is None:
+        _FIREBASE_INIT_ERROR = "firebase-admin is not installed."
+        return False
+
     try:
-        raw = exc.read().decode("utf-8")
-        payload = json.loads(raw)
-        return payload.get("error", {}).get("message") or str(exc)
-    except Exception:
-        return str(exc)
+        firebase_admin.get_app()
+        _FIREBASE_INIT_ERROR = None
+        return True
+    except ValueError:
+        pass
+
+    payload = _service_account_payload()
+    if not payload:
+        _FIREBASE_INIT_ERROR = (
+            "Firebase service account not found. Set FIREBASE_SERVICE_ACCOUNT_JSON "
+            "or FIREBASE_SERVICE_ACCOUNT_PATH, or provide serviceAccountKey.json."
+        )
+        return False
+
+    try:
+        cred = credentials.Certificate(payload)
+        firebase_admin.initialize_app(cred)
+        _FIREBASE_INIT_ERROR = None
+        return True
+    except Exception as exc:
+        _FIREBASE_INIT_ERROR = f"Firebase init failed: {exc}"
+        return False
 
 
 def verify_firebase_token(id_token):
     """
-    Validate Firebase ID token via Identity Toolkit lookup endpoint.
+    Validate Firebase ID token via Firebase Admin SDK.
     Returns a dict compatible with app.py expectations, or None.
     """
     if not id_token:
         return None
+    if not _init_firebase():
+        return None
 
-    url = f"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={FIREBASE_WEB_API_KEY}"
+    token = str(id_token).strip()
+    if token.lower().startswith("bearer "):
+        token = token[7:].strip()
+    if not token:
+        return None
+
     try:
-        payload = _post_json(url, {"idToken": id_token}, timeout=20)
-        users = payload.get("users") or []
-        if not users:
-            return None
-        user = users[0]
+        decoded = auth.verify_id_token(token)
         return {
-            "uid": user.get("localId"),
-            "email": user.get("email"),
-            "name": user.get("displayName") or "",
-            "email_verified": bool(user.get("emailVerified", False)),
+            "uid": decoded.get("uid"),
+            "email": decoded.get("email"),
+            "name": decoded.get("name") or "",
+            "email_verified": bool(decoded.get("email_verified", False)),
         }
-    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError):
+    except Exception:
         return None
 
 
 def create_firebase_user(email, password, full_name, phone_number):
     """
-    Create user using Firebase Auth REST API.
-    Works even when firebase_admin SDK is unavailable/outdated.
+    Create user using Firebase Admin SDK.
     """
-    signup_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={FIREBASE_WEB_API_KEY}"
+    if not _init_firebase():
+        return {"ok": False, "error": _FIREBASE_INIT_ERROR or "Firebase not initialized.", "uid": None}
+
+    clean_phone = (phone_number or "").strip()
+    if clean_phone and not clean_phone.startswith("+"):
+        clean_phone = ""
+
     try:
-        signup_payload = {
+        kwargs = {
             "email": email,
             "password": password,
-            "returnSecureToken": True,
+            "display_name": full_name or None,
         }
-        created = _post_json(signup_url, signup_payload, timeout=20)
-        uid = created.get("localId")
-        id_token = created.get("idToken")
+        if clean_phone:
+            kwargs["phone_number"] = clean_phone
 
-        # Best-effort profile update with display name.
-        if id_token and full_name:
-            update_url = f"https://identitytoolkit.googleapis.com/v1/accounts:update?key={FIREBASE_WEB_API_KEY}"
-            update_payload = {
-                "idToken": id_token,
-                "displayName": full_name,
-                "returnSecureToken": False,
-            }
-            try:
-                _post_json(update_url, update_payload, timeout=20)
-            except Exception:
-                pass
-
-        return {"ok": True, "uid": uid}
-    except HTTPError as exc:
-        code = _parse_firebase_error(exc)
-        if code == "EMAIL_EXISTS":
+        user = auth.create_user(**kwargs)
+        return {"ok": True, "uid": user.uid}
+    except Exception as exc:
+        msg = str(exc)
+        lowered = msg.lower()
+        if "email_exists" in lowered or "already exists" in lowered:
             return {
                 "ok": False,
                 "error": "A Firebase account already exists for this email.",
                 "uid": None,
             }
-        if code == "OPERATION_NOT_ALLOWED":
-            return {
-                "ok": False,
-                "error": "Email/password sign-in is disabled in Firebase Authentication.",
-                "uid": None,
-            }
-        if code == "WEAK_PASSWORD : Password should be at least 6 characters":
+        if "password should be at least" in lowered or "weak password" in lowered:
             return {
                 "ok": False,
                 "error": "Firebase password must be at least 6 characters.",
                 "uid": None,
             }
-        return {"ok": False, "error": f"Firebase signup failed: {code}", "uid": None}
-    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
-        return {"ok": False, "error": f"Firebase signup failed: {exc}", "uid": None}
+        if "invalid phone number" in lowered:
+            return {"ok": False, "error": "Invalid phone number format for Firebase.", "uid": None}
+        return {"ok": False, "error": f"Firebase signup failed: {msg}", "uid": None}

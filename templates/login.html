@@ -13,8 +13,10 @@
         }
 
         .auth-hero {
-            min-height: 300px !important;
-            background-image: url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1600&h=700&fit=crop');
+            min-height: 330px !important;
+            background:
+                linear-gradient(135deg, rgba(2, 6, 23, 0.62), rgba(30, 58, 138, 0.58)),
+                url('https://images.unsplash.com/photo-1516321318423-f06f70259b51?w=1800&h=900&fit=crop');
             background-size: cover;
             background-position: center;
             border: 2px solid #3b82f6 !important;
@@ -22,9 +24,9 @@
         }
 
         .auth-hero .carousel-overlay {
-            background: transparent;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
+            background: rgba(2, 6, 23, 0.15);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
         }
 
         .auth-card {
@@ -67,7 +69,7 @@
             border: 1px solid #3b82f6;
             border-radius: 6px;
             background: rgba(15, 23, 42, 0.9);
-            color: #e2e8f0;
+            color: #ffffff;
             font-family: inherit;
             font-size: 1em;
             transition: all 0.3s ease;
@@ -334,7 +336,7 @@
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { initializeApp, getApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
         // Mobile menu toggle
@@ -375,7 +377,22 @@
                 throw new Error(firebaseInitError);
             }
 
-            const app = initializeApp(payload.config);
+            const raw = payload.config || {};
+            const config = {
+                apiKey: String(raw.apiKey || '').trim(),
+                authDomain: String(raw.authDomain || '').trim(),
+                projectId: String(raw.projectId || '').trim(),
+                storageBucket: String(raw.storageBucket || '').trim(),
+                messagingSenderId: String(raw.messagingSenderId || '').trim(),
+                appId: String(raw.appId || '').trim(),
+                measurementId: String(raw.measurementId || '').trim()
+            };
+            if (!config.apiKey || !config.appId || !config.authDomain || !config.projectId) {
+                firebaseInitError = 'Firebase configuration is incomplete.';
+                throw new Error(firebaseInitError);
+            }
+
+            const app = getApps().length ? getApp() : initializeApp(config);
             firebaseAuth = getAuth(app);
             return firebaseAuth;
         }
@@ -439,7 +456,11 @@
                 event.target.reset();
                 window.location.href = result.redirectTo || '/';
             } catch (error) {
-                alert(error.message || 'Unable to log in right now. Please try again.');
+                const raw = String(error?.message || '').toLowerCase();
+                const message = raw.includes('invalid-credential')
+                    ? 'Invalid email or password.'
+                    : (error.message || 'Unable to log in right now. Please try again.');
+                alert(message);
             }
         };
     </script>
