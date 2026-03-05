@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize all features
     setupGlobalNavbarBrandAndLanguage();
+    setupScrollRevealHeader();
     setupSmoothScrolling();
     setupScrollAnimations();
     setupBrightnessToggle();
@@ -17,10 +18,66 @@ document.addEventListener('DOMContentLoaded', function() {
     setupKnowledgeHub();
     setupEnlighteningFeatures();
     setupSiteLanguageTranslation();
+    setupGoogleTranslateHeaderOffset();
     setupSkillAdvantageCardStyling();
     setupSolidHeroSections();
     setupFooterSocialIcons();
 });
+
+function setupGoogleTranslateHeaderOffset() {
+    function syncBannerState() {
+        const frame = document.querySelector('.goog-te-banner-frame.skiptranslate');
+        const visible = !!(
+            frame &&
+            window.getComputedStyle(frame).display !== 'none' &&
+            window.getComputedStyle(frame).visibility !== 'hidden'
+        );
+        document.body.classList.toggle('gt-banner-visible', visible);
+    }
+
+    syncBannerState();
+    window.addEventListener('load', syncBannerState);
+    setInterval(syncBannerState, 600);
+}
+
+
+function setupScrollRevealHeader() {
+    const nav = document.querySelector('nav');
+    if (!nav) {
+        return;
+    }
+
+    let lastScrollY = window.scrollY || 0;
+    const threshold = 6;
+    const hideAfter = 90;
+
+    window.addEventListener(
+        'scroll',
+        function() {
+            const currentY = window.scrollY || 0;
+            const navMenu = document.querySelector('.nav-menu');
+            const menuOpen = !!(navMenu && navMenu.classList.contains('active'));
+
+            if (currentY <= 10 || menuOpen) {
+                document.body.classList.remove('nav-hidden');
+                document.body.classList.remove('nav-reveal');
+                lastScrollY = currentY;
+                return;
+            }
+
+            if (currentY > lastScrollY + threshold && currentY > hideAfter) {
+                document.body.classList.add('nav-hidden');
+                document.body.classList.remove('nav-reveal');
+            } else if (currentY < lastScrollY - threshold) {
+                document.body.classList.remove('nav-hidden');
+                document.body.classList.add('nav-reveal');
+            }
+
+            lastScrollY = currentY;
+        },
+        { passive: true }
+    );
+}
 
 function setupGlobalNavbarBrandAndLanguage() {
     const logos = document.querySelectorAll('.nav-logo');

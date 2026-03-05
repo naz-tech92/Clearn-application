@@ -345,7 +345,7 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "founded_by": "Private educational promoters in Cameroon",
                 "goals_focus": "Applied digital skills, employability, and industry-ready training.",
                 "location": "Douala, Littoral Region, Cameroon",
-                "website": "https://stlouiseuniversityinstitute.com/",
+                "website": "https://www.slui.org/",
             },
         ],
         "health": [
@@ -374,7 +374,7 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "founded_by": "Private educational promoters in Cameroon",
                 "goals_focus": "Professional healthcare training, practical clinical skills, and community service.",
                 "location": "Douala, Littoral Region, Cameroon",
-                "website": "https://stlouiseuniversityinstitute.com/",
+                "website": "https://www.slui.org/",
             },
             {
                 "name": "Universite des Montagnes",
@@ -421,7 +421,7 @@ RECOMMENDED_SCHOOL_CATALOG = {
                 "founded_by": "Private educational promoters in Cameroon",
                 "goals_focus": "Business fundamentals, entrepreneurship, and practical workplace readiness.",
                 "location": "Douala, Littoral Region, Cameroon",
-                "website": "https://stlouiseuniversityinstitute.com/",
+                "website": "https://www.slui.org/",
             },
         ],
     },

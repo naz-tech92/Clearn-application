@@ -179,6 +179,15 @@
             text-decoration: none;
             display: block;
         }
+
+        .skill-title a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .skill-title a:hover {
+            color: #667eea;
+        }
         
         .level-number {
             font-size: 2em;
@@ -346,7 +355,11 @@
                 <div class="skill-education-card">
                     <div class="skill-header">
                         <div>
-                            <h3 class="skill-title">{{ skill_info.skill_name|title|replace('_', ' ') }}</h3>
+                            <h3 class="skill-title">
+                                <a href="/skill/{{ skill_info.skill_name }}/country/{{ skill_info.country.name.lower().replace(' ', '_').replace('united_', '').replace('arab_emirates', 'uae') }}">
+                                    {{ skill_info.skill_name|title|replace('_', ' ') }}
+                                </a>
+                            </h3>
                             <div class="country-flag">{{ skill_info.country.flag }}</div>
                         </div>
                     </div>

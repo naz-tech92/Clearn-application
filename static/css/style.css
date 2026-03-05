@@ -10,6 +10,30 @@ body {
     color: #f1f5f9;
     line-height: 1.7;
     min-height: 100vh;
+    padding-top: 70px;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* When Google Translate is active, shift header/content below its top banner */
+body.translated-ltr,
+body.translated-rtl {
+    padding-top: 110px;
+}
+
+body.translated-ltr nav,
+body.translated-rtl nav {
+    top: 40px;
+}
+
+body.gt-banner-visible {
+    padding-top: 110px;
+}
+
+body.gt-banner-visible nav {
+    top: 40px;
 }
 
 /* NAVBAR STYLES */
@@ -17,10 +41,34 @@ nav {
     background: rgba(15, 23, 42, 0.95);
     border-bottom: 2px solid #3b82f6;
     padding: 0;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+    will-change: transform;
+}
+
+body.nav-hidden nav {
+    transform: translateY(-110%);
+}
+
+body.nav-reveal nav {
+    transform: translateY(0);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.45);
+    animation: navPopIn 0.24s ease-out;
+}
+
+@keyframes navPopIn {
+    from {
+        transform: translateY(-110%);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 .nav-container {
@@ -554,6 +602,7 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
@@ -618,6 +667,15 @@ footer .footer-bottom a:hover {
     color: #60a5fa !important;
 }
 
+footer .footer-bottom::after {
+    content: "Designed with ❤️ by PIERROTECH VISION";
+    display: block;
+    margin-top: 6px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+}
+
 .hero.page-hero-solid,
 .country-hero.page-hero-solid {
     background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 45%, #22d3ee 100%) !important;
@@ -637,7 +695,7 @@ footer .footer-bottom a:hover {
 
 .footer-bottom {
     border-top: 1px solid #3b82f6;
-    padding-top: 20px;
+    padding-top: 12px;
 }
 
 .account-social-icons {
@@ -877,6 +935,37 @@ footer .footer-bottom a:hover {
 
     .footer-section a:hover {
         margin-left: 0;
+    }
+
+    /* Keep light-theme mobile header identical to dark theme for visibility */
+    body.light-theme nav {
+        background: rgba(15, 23, 42, 0.95);
+        border-bottom-color: #3b82f6;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body.light-theme .nav-menu {
+        background-color: rgba(15, 23, 42, 0.98);
+    }
+
+    body.light-theme .nav-link {
+        color: #cbd5e1;
+    }
+
+    body.light-theme .nav-link:hover,
+    body.light-theme .nav-link.active {
+        color: #60a5fa;
+        background: rgba(59, 130, 246, 0.1);
+    }
+
+    body.light-theme .nav-language-select {
+        color: #0f172a;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 6px;
+    }
+
+    body.light-theme .hamburger span {
+        background: #60a5fa;
     }
 }
 
@@ -1338,6 +1427,14 @@ body.light-theme .footer-social-icon {
 
 body.light-theme .footer-social-text {
     color: #cbd5e1;
+}
+
+body.light-theme .footer-section a {
+    color: #ffffff;
+}
+
+body.light-theme .footer-section a:hover {
+    color: #60a5fa;
 }
 
 body.light-theme .knowledge-hub {
@@ -1826,6 +1923,15 @@ body.light-theme .skill-quick-nav a {
 
 body.light-theme .skill-quick-nav a:hover {
     color: #1e40af;
+}
+
+body.light-theme .skill-sidebar .footer-section a {
+    color: #374151;
+}
+
+body.light-theme .skill-sidebar .footer-section a:hover {
+    color: #1e40af;
+    margin-left: 0;
 }
 
 body.light-theme .skill-stat-label {
@@ -2898,7 +3004,8 @@ iframe {
         font-size: 0.9em;
     }
 
+    .footer-content,
     .footer-section {
-        text-align: left;
+        text-align: center;
     }
 }

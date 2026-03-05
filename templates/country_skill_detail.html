@@ -219,31 +219,31 @@
                 <div class="skill-main-content">
                     <!-- 1. OVERVIEW -->
                     <div class="skill-info-section" id="overview">
-                        <h3> 1 Country Overview</h3>
+                        <h3> Country Overview</h3>
                         <p>{{ skill_data.overview }}</p>
                     </div>
 
                     <!-- 2. LANGUAGE REQUIREMENTS -->
                     <div class="skill-info-section" id="language">
-                        <h3> 2 Language Requirements</h3>
+                        <h3> Language Requirements</h3>
                         <p>{{ skill_data.language_requirements }}</p>
                     </div>
 
                     <!-- 3. SKILL DEMAND -->
                     <div class="skill-info-section" id="demand">
-                        <h3> 3 Skill Demand & Level</h3>
+                        <h3> Skill Demand & Level</h3>
                         <p>{{ skill_data.skill_demand_level }}</p>
                     </div>
 
                     <!-- 4. EDUCATION REQUIREMENTS -->
                     <div class="skill-info-section" id="education">
-                        <h3> 4 Required Education</h3>
+                        <h3> Required Education</h3>
                         <p>{{ skill_data.required_education }}</p>
                     </div>
 
                     <!-- 5. CERTIFICATIONS -->
                     <div class="skill-info-section" id="certifications">
-                        <h3> 5 Recommended Certifications</h3>
+                        <h3> Recommended Certifications</h3>
                         <ul>
                         {% for cert in skill_data.certifications %}
                             <li>{{ cert }}</li>
@@ -253,7 +253,7 @@
 
                     <!-- 6. ADVANTAGES -->
                     <div class="skill-info-section" id="advantages">
-                        <h3> 6 Advantages</h3>
+                        <h3> Advantages</h3>
                         <ul>
                         {% for advantage in skill_data.advantages %}
                             <li>{{ advantage }}</li>
@@ -263,7 +263,7 @@
 
                     <!-- 7. LIMITATIONS -->
                     <div class="skill-info-section" id="limitations">
-                        <h3> 7 Limitations</h3>
+                        <h3> Limitations</h3>
                         <ul>
                         {% for limitation in skill_data.limitations %}
                             <li>{{ limitation }}</li>
@@ -273,7 +273,7 @@
 
                     <!-- 8. REFERENCES -->
                     <div class="skill-info-section" id="references">
-                        <h3> 8 References & Resources</h3>
+                        <h3> References & Resources</h3>
                         <ul>
                         {% for ref in skill_data.references %}
                             <li>{{ ref }}</li>
@@ -283,7 +283,7 @@
 
                     <!-- 9. STUDY PATHS -->
                     <div class="skill-info-section" id="study-paths">
-                        <h3> 9 Study Paths & Career Progression</h3>
+                        <h3> Study Paths & Career Progression</h3>
                         <ul>
                         {% for path in skill_data.study_paths %}
                             <li>{{ path }}</li>
@@ -293,7 +293,7 @@
 
                     <!-- 10. RECOMMENDED SCHOOLS -->
                     <div class="skill-info-section" id="recommended-schools">
-                        <h3> 10 Recommended Schools for this Career</h3>
+                        <h3> Recommended Schools for this Career</h3>
                         {% if recommended_schools %}
                         <div class="school-recommend-grid">
                             {% for school in recommended_schools %}
@@ -465,3 +465,4 @@
     </script>
 </body>
 </html>
+
