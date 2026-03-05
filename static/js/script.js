@@ -214,6 +214,8 @@ function setupAIChatToggle() {
     // Close chat panel
     const closeButton = chatPanel.querySelector('.ai-chat-close');
     const expandButton = chatPanel.querySelector('.ai-chat-expand');
+    const chatHeader = chatPanel.querySelector('.ai-chat-header');
+    enableDraggableChat(chatPanel, chatHeader);
     closeButton.addEventListener('click', function(e) {
         e.stopPropagation();
         chatPanel.classList.remove('active');
@@ -385,6 +387,65 @@ function positionChatPanelNearToggle(toggle, panel) {
     panel.style.bottom = 'auto';
     panel.style.top = topPos + 'px';
     panel.style.transform = 'none';
+}
+
+function enableDraggableChat(panel, handle) {
+    if (!panel || !handle) {
+        return;
+    }
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    function onMove(event) {
+        if (!dragging) {
+            return;
+        }
+
+        const panelWidth = panel.offsetWidth || 300;
+        const panelHeight = panel.offsetHeight || 400;
+        const minLeft = 8;
+        const minTop = 8;
+        const maxLeft = Math.max(minLeft, window.innerWidth - panelWidth - 8);
+        const maxTop = Math.max(minTop, window.innerHeight - panelHeight - 8);
+
+        const nextLeft = Math.min(maxLeft, Math.max(minLeft, event.clientX - offsetX));
+        const nextTop = Math.min(maxTop, Math.max(minTop, event.clientY - offsetY));
+
+        panel.style.left = nextLeft + 'px';
+        panel.style.top = nextTop + 'px';
+        panel.style.right = 'auto';
+        panel.style.bottom = 'auto';
+        panel.style.transform = 'none';
+    }
+
+    function stopDrag() {
+        dragging = false;
+        handle.classList.remove('dragging');
+        document.removeEventListener('pointermove', onMove);
+        document.removeEventListener('pointerup', stopDrag);
+    }
+
+    handle.addEventListener('pointerdown', function(event) {
+        if (event.button !== 0) {
+            return;
+        }
+        if (event.target.closest('button')) {
+            return;
+        }
+        if (panel.classList.contains('expanded')) {
+            return;
+        }
+
+        const rect = panel.getBoundingClientRect();
+        dragging = true;
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
+        handle.classList.add('dragging');
+        document.addEventListener('pointermove', onMove);
+        document.addEventListener('pointerup', stopDrag);
+    });
 }
 
 function createTypingIndicator() {

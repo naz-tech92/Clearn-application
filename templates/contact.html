@@ -33,10 +33,21 @@
             border: 1px solid #3b82f6;
             border-radius: 5px;
             background: rgba(15, 23, 42, 0.8);
-            color: #e2e8f0;
+            color: #ffffff;
+            caret-color: #ffffff;
             font-family: inherit;
             font-size: 1em;
             transition: all 0.3s ease;
+        }
+
+        .form-group input:-webkit-autofill,
+        .form-group input:-webkit-autofill:hover,
+        .form-group input:-webkit-autofill:focus,
+        .form-group textarea:-webkit-autofill,
+        .form-group textarea:-webkit-autofill:hover,
+        .form-group textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: #ffffff;
+            box-shadow: 0 0 0 1000px rgba(15, 23, 42, 0.9) inset;
         }
 
         .form-group input:focus,

@@ -6,8 +6,6 @@
     <title>CLearn - Digital Orientation Platform</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeCFH0sAAAAAI8fNbENuduV3TC2d51vCtpSnAiP"></script>
-
     <style>
         .home-skill-image {
             width: 100%;
@@ -51,6 +49,21 @@
             background: rgba(30, 41, 59, 0.8);
             color: #e2e8f0;
             font-size: 1em;
+        }
+
+        .career-dev-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .career-dev-links a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
+        .career-dev-links li {
+            color: #cbd5e1;
         }
 
         .welcome-modal-overlay {
@@ -267,9 +280,9 @@
             background:
                 radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 100%),
                 radial-gradient(circle at 82% 25%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 100%),
-                linear-gradient(120deg, rgba(8, 47, 134, 0.55), rgba(14, 116, 144, 0.36));
+                linear-gradient(120deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.28));
             background-size: 120px 120px, 160px 160px, auto;
-            z-index: 4;
+            z-index: 14;
             pointer-events: none;
         }
 
@@ -856,13 +869,13 @@
             <section style="margin-bottom: 40px;">
                 <h2 style="color: #60a5fa; text-align: center; margin-bottom: 30px;">Career Development Resources</h2>
                 <div style="background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 8px; border: 1px solid #3b82f6;">
-                    <ul style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
-                        <li> LinkedIn Learning - Professional development courses across all industries</li>
-                        <li> Coursera - University-level courses from top institutions worldwide</li>
-                        <li> Glassdoor - Salary insights and company reviews for career planning</li>
-                        <li> Indeed Career Guide - Comprehensive career advice and job search tools</li>
-                        <li> UNESCO Career Development - International education and career guidance</li>
-                        <li> World Bank Skills Reports - Global labor market trends and opportunities</li>
+                    <ul class="career-dev-links" style="color: #cbd5e1; line-height: 2; font-size: 1.05em;">
+                        <li><a href="https://www.linkedin.com/learning" target="_blank" rel="noopener noreferrer">LinkedIn Learning</a> - Professional development courses across all industries</li>
+                        <li><a href="https://www.coursera.org" target="_blank" rel="noopener noreferrer">Coursera</a> - University-level courses from top institutions worldwide</li>
+                        <li><a href="https://www.glassdoor.com" target="_blank" rel="noopener noreferrer">Glassdoor</a> - Salary insights and company reviews for career planning</li>
+                        <li><a href="https://www.indeed.com/career-advice" target="_blank" rel="noopener noreferrer">Indeed Career Guide</a> - Comprehensive career advice and job search tools</li>
+                        <li><a href="https://www.unesco.org/en/education" target="_blank" rel="noopener noreferrer">UNESCO Career Development</a> - International education and career guidance</li>
+                        <li><a href="https://www.worldbank.org/en/topic/education" target="_blank" rel="noopener noreferrer">World Bank Skills Reports</a> - Global labor market trends and opportunities</li>
                     </ul>
                 </div>
             </section>
@@ -917,14 +930,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script>
-  function onClick(e) {
-    e.preventDefault();
-    grecaptcha.enterprise.ready(async () => {
-      const token = await grecaptcha.enterprise.execute('6LeCFH0sAAAAAI8fNbENuduV3TC2d51vCtpSnAiP', {action: 'LOGIN'});
-    });
-  }
-    </script>
     <script>
         let currentSlideIndex = 0;
         document.querySelectorAll('.carousel-slide[data-bg]').forEach((slide) => {
