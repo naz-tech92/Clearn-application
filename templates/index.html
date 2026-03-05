@@ -292,7 +292,7 @@
             background:
                 radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 100%),
                 radial-gradient(circle at 82% 25%, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 100%),
-                linear-gradient(120deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.28));
+                linear-gradient(120deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.12));
             background-size: 120px 120px, 160px 160px, auto;
             z-index: 14;
             pointer-events: none;
@@ -614,20 +614,14 @@
     <section class="hero-fullwidth">
         <div class="carousel">
             <div class="carousel-container">
-                <div class="carousel-slide active" data-bg="{{ url_for('static', filename='images/skills/tech-software-engineering.jpg') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-cybersecurity.jpg') }}"></div>
+                <div class="carousel-slide active" data-bg="{{ url_for('static', filename='images/skills/tech-cybersecurity.jpg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-data-science.jpg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-cloud-computing.png') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-ai-ml.jpg') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-networking.jpg') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/tech-devops.jpg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-nursing.jpg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-public-health.jpeg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/health-med-lab.jpg') }}"></div>
                 <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-accounting.jpg') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-digital-marketing.jpg') }}"></div>
-                <div class="carousel-slide" data-bg="{{ url_for('static', filename='images/skills/business-international-business.jpg') }}"></div>
-                
+
             </div>
 
             <button class="carousel-prev" onclick="changeSlide(-1)">&#10094;</button>

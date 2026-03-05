@@ -901,6 +901,22 @@ footer .footer-bottom::after {
         padding: 15px;
     }
 
+    .nav-logo,
+    .nav-link,
+    .nav-language-select {
+        color: #ffffff !important;
+    }
+
+    .nav-language-select {
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 6px;
+        padding: 7px 10px;
+    }
+
+    .hamburger span {
+        background: #ffffff;
+    }
+
     header h1 {
         font-size: 1.8em;
     }
@@ -949,7 +965,7 @@ footer .footer-bottom::after {
     }
 
     body.light-theme .nav-link {
-        color: #cbd5e1;
+        color: #ffffff;
     }
 
     body.light-theme .nav-link:hover,
@@ -959,13 +975,14 @@ footer .footer-bottom::after {
     }
 
     body.light-theme .nav-language-select {
-        color: #0f172a;
-        background: rgba(255, 255, 255, 0.92);
+        color: #ffffff;
+        background: transparent;
         border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
     }
 
     body.light-theme .hamburger span {
-        background: #60a5fa;
+        background: #ffffff;
     }
 }
 

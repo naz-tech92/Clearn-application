@@ -48,11 +48,11 @@ def build_firebase_web_config():
         "measurementId": "G-HWPD3DRHDZ",
     }
 
-    auth_domain = (os.environ.get("clearn-96c81.firebaseapp.com").strip())
+    auth_domain = (os.environ.get("FIREBASE_WEB_AUTH_DOMAIN") or "").strip()
     if not auth_domain and project_id:
         auth_domain = f"{project_id}.firebaseapp.com"
 
-    storage_bucket = (os.environ.get( "clearn-96c81.firebasestorage.app").strip())
+    storage_bucket = (os.environ.get("FIREBASE_WEB_STORAGE_BUCKET") or "").strip()
     if not storage_bucket and project_id:
         storage_bucket = f"{project_id}.firebasestorage.app"
 
